@@ -46,7 +46,7 @@ Desenvolver uma interface moderna, funcional e responsiva que permita:
 ###Como rodar o Projeto
 
 # Clone o repositório
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone https://github.com/felipinx7/topfitnes
 
 # Acesse a pasta do projeto
 cd nome-do-projeto
