@@ -1,1 +1,0 @@
-console.log("Cuida codar clã do backend");
