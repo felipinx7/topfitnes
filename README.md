@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏋️ Sistema de Gerenciamento de Academia — Front-end
 
-## Getting Started
+Este é o front-end de uma aplicação web desenvolvida com **Next.js** e **Tailwind CSS**, voltada para o gerenciamento de uma academia. A interface permite que **admins**, **personais** e **alunos** tenham acesso às funcionalidades de forma clara, responsiva e organizada.
 
-First, run the development server:
+## 🎯 Objetivo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+Desenvolver uma interface moderna, funcional e responsiva que permita:
+
+- A gestão de usuários (alunos e personais)
+- O cadastro e controle de treinos e exercícios
+- A visualização e interação dos alunos com seus treinos
+- Uma boa experiência de navegação entre os diferentes perfis
+
+## 💻 Tecnologias Utilizadas
+
+- [Next.js](https://nextjs.org/) (App Router)
+- [React](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Zod](https://zod.dev/) + [React Hook Form](https://react-hook-form.com/) – Validação de formulários
+- [Axios](https://axios-http.com/) – Comunicação com a API (back-end)
+
+## 🔐 Funcionalidades Implementadas
+
+### Personal Trainer
+
+- Login
+- Dashboard com visão geral
+- CRUD de treinos e exercícios
+- CRUD de alunos
+- Atribuição de treinos aos alunos
+- Adição de dicas personalizadas
+- Visualização de treinos por aluno
+
+### Aluno
+
+- Login
+- Visualização de seus treinos
+- Marcar os dias em que realizou o treino (calendário)
+
+### Admin
+
+- Login
+- Cadastro, edição e exclusão de **personais** e **alunos**
+
+###Como rodar o Projeto
+
+# Clone o repositório
+git clone https://github.com/seu-usuario/seu-repositorio.git
+
+# Acesse a pasta do projeto
+cd nome-do-projeto
+
+# Instale as dependências
+pnpm install
+
+# Rode o servidor de desenvolvimento
 pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📁 Estrutura do Projeto
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+A estrutura do projeto foi organizada seguindo boas práticas de escalabilidade e separação por responsabilidade, com foco na clareza e manutenção do código.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
