@@ -1,19 +1,40 @@
 import type { Metadata } from "next";
 import { Goldman, Poppins } from "next/font/google";
 import "../config/globals.css";
+import localFont from "next/font/local";
 
-const poppins = Poppins({
-  subsets: ["latin"],
+const poppins = localFont({
+  src: [
+    {
+      path: "../assets/fonts/Poppins-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../assets/fonts/Poppins-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
   variable: "--font-poppins",
   display: "swap",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
-const goldaman = Goldman({
-  subsets: ["latin"],
+const goldman = localFont({
+  src: [
+    {
+      path: "../assets/fonts/Goldman-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../assets/fonts/Goldman-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
   variable: "--font-goldman",
   display: "swap",
-  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -60,8 +81,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${poppins.variable} ${goldaman.variable} antialiased`}>
+    <html lang="pt-br">
+      <body className={`${poppins.variable} ${goldman.variable} antialiased`}>
         {children}
       </body>
     </html>
