@@ -8,7 +8,8 @@ import imagefundologin from "./imagem-backgroun-login.svg";
 import imageconcluido from "./imagem-concluido.svg";
 import imagemhomemulher from "./imagem-home-mulher.svg";
 import mulhersectionespaco from "./mulher-section-espaco-ideal.svg";
-import imagebackgroundsectionhero from "./imagem-background-section-hero.svg";
+import imagebackgroundsectionhero from "./img-fundo-main.png";
+import imagebackgroundsectionheromobile from "./image-background-section-hero-mobile.svg";
 
 export {
   banner,
@@ -21,5 +22,6 @@ export {
   imageconcluido,
   imagemhomemulher,
   mulhersectionespaco,
-    imagebackgroundsectionhero,
+  imagebackgroundsectionhero,
+  imagebackgroundsectionheromobile,
 };
