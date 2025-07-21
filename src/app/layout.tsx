@@ -1,41 +1,7 @@
 import type { Metadata } from "next";
-import { Goldman, Poppins } from "next/font/google";
-import "../config/globals.css";
-import localFont from "next/font/local";
+import "./globals.css";
 
-const poppins = localFont({
-  src: [
-    {
-      path: "../assets/fonts/Poppins-Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../assets/fonts/Poppins-Bold.ttf",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  variable: "--font-poppins",
-  display: "swap",
-});
 
-const goldman = localFont({
-  src: [
-    {
-      path: "../assets/fonts/Goldman-Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../assets/fonts/Goldman-Bold.ttf",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  variable: "--font-goldman",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "TOPFITNES | ACADEMIA",
@@ -82,7 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className={`${poppins.variable} ${goldman.variable} antialiased`}>
+      <body className={` antialiased`}>
         {children}
       </body>
     </html>

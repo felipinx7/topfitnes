@@ -30,7 +30,7 @@ export default function SectionHero() {
 
         {/* Container de Textos da section hero */}
         <div className="w-[100%] h-[100%] py-46 max-md:p-0 max-md:px-1 gap-4 px-6 flex flex-col items-start max-md:justify-end max-md:text-center justify-center">
-          <h1 className="font-[family-name:var(--font-goldman)] leading-12  text-[3.2rem] max-md:text-[2.3rem] w-[80%] max-md:w-full">
+          <h1 className="font-GoldMan leading-12  text-[3.2rem] max-md:text-[2.3rem] w-[80%] max-md:w-full">
             Liberta o teu potencial! <br />
             <span className="text-verde-100">
               junta-se a nós{" "}
