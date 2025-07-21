@@ -42,7 +42,7 @@ export default function SectionHero() {
           </p>
           <div className="w-full flex items-center justify-start max-md:justify-center">
             <div className="w-[40%] max-md:w-[80%]">
-              <BotaoTreinarAgora />
+              <BotaoTreinarAgora text="QUERO TREINAR AGORA"/>
             </div>
           </div>
         </div>

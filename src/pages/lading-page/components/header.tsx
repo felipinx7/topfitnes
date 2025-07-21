@@ -15,17 +15,17 @@ export default function Header() {
         <a
           key={link.titulo}
           href="#"
-          className="relative text-white text-[1.1rem] font-[600] hover:text-[var(--verde-primario)] transition-colors after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[var(--verde-primario)] after:transition-all after:duration-300 hover:after:w-full"
+          className="relative text-white text-[1.1rem] font-[600] hover:text-[var(--color-verde-100)] transition-colors after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[var(--color-verde-100)] after:transition-all after:duration-300 hover:after:w-full"
         >
           {link.titulo}
         </a>
       ))}
       {/* Botões de Ação */}
       <div className="flex items-center gap-4">
-        <button aria-label="Botão de Acessar o sistema" className="border-1 p-2 cursor-pointer w-auto rounded-[0.5rem] text-[1rem] ease-in duration-[0.3s] hover:bg-[var(--verde-primario)] font-[600] px-8 border-[var(--verde-primario)]">
+        <button aria-label="Botão de Acessar o sistema" className="border-1 p-2 cursor-pointer w-auto rounded-[0.5rem] text-[1rem] ease-in duration-[0.3s] hover:bg-[var(--color-verde-100)] font-[600] px-8 border-[var(--color-verde-100)]">
           ACESSAR
         </button>
-        <button aria-label="Entrar em Contato com a Academia" className="cursor-pointer bg-[var(--verde-primario)] p-2 rounded-[.5rem] text-[1rem] font-[600] hover:bg-[var(--hover-verde-primario)] transition-colors duration-75">
+        <button aria-label="Entrar em Contato com a Academia" className="cursor-pointer bg-[var(--color-verde-100)] p-2 rounded-[.5rem] text-[1rem] font-[600] hover:bg-[var(--color-verde-400)] transition-colors duration-500">
           ENTRAR EM CONTATO
         </button>
       </div>

@@ -12,7 +12,7 @@ export default function HeaderMobile() {
   // Estado para controlar o menu toggle
   const [isMenuOpen, setisMenuOpen] = useState(false);
 
-  //   função responsavel para alternar o menu
+  // Função responsavel para alternar o menu
   const handleToggleMenu = () => {
     setisMenuOpen((prev) => !prev);
   };
@@ -45,7 +45,7 @@ export default function HeaderMobile() {
             <Link
               key={link.titulo}
               href="#"
-              className="relative text-white text-[1.3rem] font-[600] hover:text-[var(--verde-primario)] transition-colors"
+              className="relative text-white text-[1.3rem] font-[600] hover:text-[var(--color-verde-100)] transition-colors"
             >
               {link.titulo}
             </Link>
@@ -55,13 +55,13 @@ export default function HeaderMobile() {
         <div className="flex flex-col w-[70%] max-sm:w-full items-center gap-4">
           <button
             aria-label="Botão de Acessar o sistema"
-            className="border p-4 cursor-pointer w-full rounded-[0.5rem] text-[1rem] ease-in duration-[0.3s] hover:bg-[var(--verde-primario)] font-[600] px-8 border-[var(--verde-primario)]"
+            className="border p-4 cursor-pointer w-full rounded-[0.5rem] text-[1rem] ease-in duration-[0.3s] hover:bg-[var(--color-verde-100)] font-[600] px-8 border-[var(--color-verde-100)]"
           >
             ACESSAR
           </button>
           <button
             aria-label="Entrar em Contato com a Academia"
-            className="cursor-pointer w-full bg-[var(--verde-primario)] p-4 rounded-[.5rem] text-[1rem] font-[600] hover:bg-[var(--hover-verde-primario)] transition-colors duration-75"
+            className="cursor-pointer w-full bg-[var(--color-verde-100)] p-4 rounded-[.5rem] text-[1rem] font-[600] hover:bg-[var(--color-verde-400)] transition-colors duration-75"
           >
             ENTRAR EM CONTATO
           </button>
@@ -69,4 +69,5 @@ export default function HeaderMobile() {
       </div>
     </header>
   );
+  
 }
