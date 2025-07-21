@@ -4,7 +4,7 @@ import {
 } from "@/assets/image";
 import Header from "@/pages/lading-page/components/header";
 import HeaderMobile from "@/pages/lading-page/components/headermobile";
-import BotaoTreinarAgora from "../components/botaoquerotreinaragora";
+import BotaoTreinarAgora from "../components/botao-quero-treinar-agora";
 
 export default function SectionHero() {
   return (
