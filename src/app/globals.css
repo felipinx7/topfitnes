@@ -17,10 +17,12 @@
   --color-neutras-200: #555555;
   --color-neutras-100: #262626;
   --color-neutras-300: #ffffff;
-  --color-neutras-400: #171717;
+  --color-neutras-400: #101010;
 
   --font-Poppins: 'Poppins', sans-serif;
   --font-GoldMan: 'GoldMan', sans-serif;
+  --font-GoldMan-Bold: 'GoldMan-Bold', sans-serif;
+
 }
 
 @font-face {
@@ -36,6 +38,14 @@
   font-weight: 400;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'GoldMan-Bold';
+  src: url('../assets/fonts/Goldman-Bold.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
 
 
 

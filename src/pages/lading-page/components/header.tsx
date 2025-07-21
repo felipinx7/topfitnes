@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="w-full p-4 z-20 h-[80px] flex items-center justify-between mt-4 max-lg:hidden">
+    <header className="w-full p-4 z-20 h-[80px] flex items-center   justify-between mt-4 max-lg:hidden">
       {/* Logo */}
       <Link href={"/"}>
         <Image src={logo} alt="logo" width={70} />
@@ -15,7 +15,7 @@ export default function Header() {
         <a
           key={link.titulo}
           href="#"
-          className="relative text-white text-[1.1rem] font-[600] hover:text-[var(--color-verde-100)] transition-colors after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[var(--color-verde-100)] after:transition-all after:duration-300 hover:after:w-full"
+          className="relative text-white text-[1.1rem] font-[600] hover:text-verde-100 transition-colors after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[var(--color-verde-100)] after:transition-all after:duration-300 hover:after:w-full"
         >
           {link.titulo}
         </a>
