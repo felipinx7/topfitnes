@@ -1,8 +1,10 @@
-import { Icon } from "next/dist/lib/metadata/types/metadata-types";
+import { Icon } from "@/types/type-icon";
 
 export interface DataCardsLadingPage {
   titulo: string;
   subtitulo?: string;
-  descricao: string;
+  descricao?: string;
   icone: Icon;
+  listaDescricao?: {text: string}[]
+  span?: string
 }

@@ -10,6 +10,7 @@ import imagemhomemulher from "./imagem-home-mulher.svg";
 import mulhersectionespaco from "./mulher-section-espaco-ideal.svg";
 import imagebackgroundsectionhero from "./img-fundo-main.png";
 import imagebackgroundsectionheromobile from "./image-background-section-hero-mobile.svg";
+import texturalinhas from "./Textura-quadrados.png";
 
 export {
   banner,
@@ -24,4 +25,5 @@ export {
   mulhersectionespaco,
   imagebackgroundsectionhero,
   imagebackgroundsectionheromobile,
+  texturalinhas,
 };
