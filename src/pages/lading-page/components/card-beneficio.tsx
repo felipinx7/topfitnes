@@ -2,7 +2,7 @@ import { DataCardsLadingPage } from "@/dto/data-cards-lading-page";
 
 export default function CardBeneficios(props: DataCardsLadingPage) {
   return (
-    <article className="flex flex-col items-start justify-start gap-2 z-20 p-4 bg-verde-100 rounded-2xl">
+    <article className="flex flex-col hover:scale-105 transition-all duration-[0.5s] ease-in-out items-start justify-start gap-2 z-20 p-4 bg-verde-100 rounded-2xl">
       {/* Icone do Card  */}
       <div>{<props.icone />}</div>
 

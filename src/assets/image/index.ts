@@ -11,6 +11,7 @@ import mulhersectionespaco from "./mulher-section-espaco-ideal.svg";
 import imagebackgroundsectionhero from "./img-fundo-main.png";
 import imagebackgroundsectionheromobile from "./image-background-section-hero-mobile.svg";
 import texturalinhas from "./Textura-quadrados.png";
+import imagemfundosectionpassos from "./imagem-fundo-section-passos.svg";
 
 export {
   banner,
@@ -26,4 +27,5 @@ export {
   imagebackgroundsectionhero,
   imagebackgroundsectionheromobile,
   texturalinhas,
+  imagemfundosectionpassos,
 };

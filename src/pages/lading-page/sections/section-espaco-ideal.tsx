@@ -27,7 +27,7 @@ export default function SectionEspacoIdeial() {
       </div>
 
       {/* container informações principais  */}
-      <div className="w-full flex max-md:p-4 px-4 items-center justify-center">
+      <div className="w-full flex max-md:p-4 px-4 mb-20 items-center justify-center">
         <div className="max-w-[1280px] w-[100%] max-lg:gap-18 m-0 flex items-center justify-center max-lg:flex-col">
           {/* Container Textos e Beneficios  */}
           <div className="flex flex-col w-[50%] max-lg:w-full">
