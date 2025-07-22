@@ -2,6 +2,7 @@ import SectionEquipamento from "./sections/section-equipamentos";
 import SectionEspacoIdeial from "./sections/section-espaco-ideal";
 import SectionHero from "./sections/section-hero";
 import SectionPasso from "./sections/section-passo";
+import SectionPlanosAcademia from "./sections/section-planos-academia";
 
 export default function LadingPage() {
   return (
@@ -10,6 +11,7 @@ export default function LadingPage() {
       <SectionEspacoIdeial />
       <SectionPasso />
       <SectionEquipamento />
+      <SectionPlanosAcademia />
     </main>
   );
 }
