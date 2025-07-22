@@ -1,5 +1,7 @@
 import SectionEquipamento from "./sections/section-equipamentos";
 import SectionEspacoIdeial from "./sections/section-espaco-ideal";
+import SectionFooter from "./sections/section-footer";
+import SectionFormulario from "./sections/section-formulario";
 import SectionHero from "./sections/section-hero";
 import SectionPasso from "./sections/section-passo";
 import SectionPlanosAcademia from "./sections/section-planos-academia";
@@ -12,6 +14,8 @@ export default function LadingPage() {
       <SectionPasso />
       <SectionEquipamento />
       <SectionPlanosAcademia />
+      <SectionFormulario />
+      <SectionFooter />
     </main>
   );
 }

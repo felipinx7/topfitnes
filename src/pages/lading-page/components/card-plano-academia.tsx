@@ -1,6 +1,6 @@
 import { IconeCorreto } from "@/assets/icons/icone-correto";
 import { DataCardsLadingPage } from "@/dto/data-cards-lading-page";
-import BotaoTreinarAgora from "./botao-quero-treinar-agora";
+import ComponentBotaoProps from "./componente-button";
 
 export default function CardPlanoAcademia(props: DataCardsLadingPage) {
   return (
@@ -30,7 +30,7 @@ export default function CardPlanoAcademia(props: DataCardsLadingPage) {
         ))}
       </div>
       <div className="relative w-full">
-        <BotaoTreinarAgora text="QUERO TREINAR AGORA" />
+        <ComponentBotaoProps text="QUERO TREINAR AGORA" />
       </div>
     </article>
   );

@@ -4,7 +4,7 @@ import {
 } from "@/assets/image";
 import Header from "@/pages/lading-page/components/header";
 import HeaderMobile from "@/pages/lading-page/components/headermobile";
-import BotaoTreinarAgora from "../components/botao-quero-treinar-agora";
+import ComponentBotaoProps from "../components/componente-button";
 
 export default function SectionHero() {
   return (
@@ -48,7 +48,7 @@ export default function SectionHero() {
           </p>
           <div className="w-full flex items-center justify-start max-md:justify-center">
             <div className="w-[40%] max-md:w-[80%]">
-              <BotaoTreinarAgora text="QUERO TREINAR AGORA"/>
+              <ComponentBotaoProps text="QUERO TREINAR AGORA"/>
             </div>
           </div>
         </div>
