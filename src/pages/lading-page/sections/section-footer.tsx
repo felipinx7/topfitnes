@@ -12,7 +12,7 @@ export default function SectionFooter() {
         {/* Sobre a Academia */}
         <div className="w-[33.33%]  max-md:w-full flex flex-col gap-4">
           <Image src={logo} width={70} alt="Logo da TopFitness" />
-          <p className="font-GoldMan text-sm leading-relaxed text-left">
+          <p className="font-GoldMan text-[0.7rem] leading-relaxed text-left">
             A TOPFITNES É A ACADEMIA PARA QUEM BUSCA RESULTADO MAIS RÁPIDO E
             EFICIENTE. COM UMA ESTRUTURA MODERNA E COMPLETA, OFERECE OS MELHORES
             APARELHOS TREINOS PERSONALIZADOS PARA ATENDER ÀS SUAS NECESSIDADES.

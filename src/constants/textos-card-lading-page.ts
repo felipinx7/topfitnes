@@ -1,8 +1,10 @@
 import { IconeCardeno } from "@/assets/icons/icone-cardeno";
 import { IconeContrato } from "@/assets/icons/icone-contrato";
+import { IconeGrafico } from "@/assets/icons/icone-grafico";
 import { IconeOk } from "@/assets/icons/icone-ok";
 import { IconePeso } from "@/assets/icons/icone-peso";
 import { IconeRelogio } from "@/assets/icons/icone-relogio";
+import { IconeResultado } from "@/assets/icons/icone-resultado";
 import { DataCardsLadingPage } from "@/dto/data-cards-lading-page";
 
 export const TextosCardBeneficios: DataCardsLadingPage[] = [
@@ -67,7 +69,7 @@ export const TextosCardPassos: DataCardsLadingPage[] = [
     ],
   },
   {
-    icone: IconeCardeno,
+    icone: IconeGrafico,
     subtitulo: "2° PASSO",
     titulo: "AVALIAÇÃO",
     listaDescricao: [
@@ -78,7 +80,7 @@ export const TextosCardPassos: DataCardsLadingPage[] = [
     ],
   },
   {
-    icone: IconeCardeno,
+    icone: IconeResultado,
     subtitulo: "3° PASSO",
     titulo: "RESULTADO",
     listaDescricao: [
