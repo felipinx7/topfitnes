@@ -1,4 +1,4 @@
-import { DataCardsLadingPage } from "@/dto/data-cards-lading-page";
+import { DataCardsLadingPage } from "@/dto/data-cards-lading-page-DTO";
 
 export default function CardEspacoIdeal(props: DataCardsLadingPage) {
   return (

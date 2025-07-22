@@ -5,7 +5,7 @@ import { IconeOk } from "@/assets/icons/icone-ok";
 import { IconePeso } from "@/assets/icons/icone-peso";
 import { IconeRelogio } from "@/assets/icons/icone-relogio";
 import { IconeResultado } from "@/assets/icons/icone-resultado";
-import { DataCardsLadingPage } from "@/dto/data-cards-lading-page";
+import { DataCardsLadingPage } from "@/dto/data-cards-lading-page-DTO";
 
 export const TextosCardBeneficios: DataCardsLadingPage[] = [
   {

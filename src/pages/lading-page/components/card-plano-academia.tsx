@@ -1,5 +1,5 @@
 import { IconeCorreto } from "@/assets/icons/icone-correto";
-import { DataCardsLadingPage } from "@/dto/data-cards-lading-page";
+import { DataCardsLadingPage } from "@/dto/data-cards-lading-page-DTO";
 import ComponentBotaoProps from "./componente-button";
 
 export default function CardPlanoAcademia(props: DataCardsLadingPage) {
