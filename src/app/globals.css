@@ -21,6 +21,9 @@
   --color-neutras-50: #00000066;
 
   --font-Poppins: 'Poppins', sans-serif;
+  --font-Poppins-Medium: 'Poppins-Medium', sans-serif;
+  --font-Poppins-Bold: 'Poppins-Bold', sans-serif;
+  
   --font-GoldMan: 'GoldMan', sans-serif;
   --font-GoldMan-Bold: 'GoldMan-Bold', sans-serif;
 
@@ -29,6 +32,20 @@
 @font-face {
   font-family: 'Poppins';
   src: url('../assets/fonts/Poppins-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins-Bold';
+  src: url('../assets/fonts/Poppins-Bold.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins-Medium';
+  src: url('../assets/fonts/Poppins-Medium.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }

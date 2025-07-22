@@ -1,8 +1,8 @@
 export const IconeCadeado = () => {
   return (
     <svg
-      width="44"
-      height="43"
+      width="32"
+      height="32"
       viewBox="0 0 44 43"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
