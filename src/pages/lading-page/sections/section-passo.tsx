@@ -5,16 +5,16 @@ import CardPasso from "../components/card-passos-a-passo";
 
 export default function SectionPasso() {
   return (
-    <section className="relative w-full bg-neutras-400 flex min-h-[100vh] items-center justify-center">
+    <section className="relative w-full min-h-[100vh] bg-neutras-400 flex items-center justify-center">
       {/* imagem fundo da section  */}
       <Image
         src={imagemfundosectionpassos}
-        className="absolute w-full opacity-40 h-screen object-cover top-0"
+        className="absolute w-full opacity-40 h-[100%] object-cover top-0"
         alt="Fundo da Seção de Passos"
       />
 
       {/* container Informações principais  */}
-      <div className="max-w-[1280px] w-[100%] px-4 h-screen flex flex-col m-0 gap-20 items-start justify-start">
+      <div className="max-w-[1280px] w-[100%] px-4 py-12 flex flex-col m-0 gap-20 items-start justify-start">
         {/* container textos de cima  */}
         <div className="pt-12 w-full flex flex-col items-center leading-8 gap-4 justify-center">
           <div className="text-center leading-8">
@@ -30,7 +30,7 @@ export default function SectionPasso() {
         </div>
 
         {/* container cards de passos  */}
-        <div className="w-full object-center grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-10">
+        <div className="w-full grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-10">
           {/* renderização dos cards de passos a passos  */}
           {TextosCardPassos.map((card, index) => (
             <CardPasso key={index} {...card} />

@@ -8,7 +8,7 @@ import BotaoTreinarAgora from "../components/botao-quero-treinar-agora";
 
 export default function SectionHero() {
   return (
-    <main className="w-full min-h-[100vh] pb-8 flex items-start justify-center relative overflow-hidden">
+    <section className="w-full min-h-[100vh] pb-8 flex items-start justify-center relative overflow-hidden">
       
       {/*Sombras da hero */}
       <div className="w-full absolute h-40 top-0 bg-gradient-to-b from-30% from-neutras-400/80 to-transparent z-5"></div>
@@ -53,6 +53,6 @@ export default function SectionHero() {
           </div>
         </div>
       </div>
-    </main>
+    </section>
   );
 }
