@@ -9,11 +9,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { formularioLadingPageSchema } from "@/schemas/schema-formulario-lading-page";
 import { FormatarNumero } from "@/utils/formatar-numero-telefone";
 import { useState } from "react";
+import { api } from "@/config/axios.config";
 
 export default function SectionFormulario() {
   // Estado para formatar o numero de telefone
   const [telefone, setTelefone] = useState("");
-
+  // Está enviando o formulario
+  const [isSubmiting, setIsSubmiting] = useState(false);
   // Função de Formatação
   FormatarNumero(telefone);
 
@@ -21,7 +23,7 @@ export default function SectionFormulario() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     reset,
   } = useForm<DataFormularioLadingPage>({
     resolver: zodResolver(formularioLadingPageSchema),
@@ -31,19 +33,24 @@ export default function SectionFormulario() {
     console.log(data);
   }
 
+  // Função para enviar o formulário
   async function OnSubmit(data: DataFormularioLadingPage) {
     try {
-      const response = await funçãoDeEnvio(data);
+      const response = await api.post("localhost//soks", data);
       console.log("Dados enviados com sucesso!");
-      isSubmitting;
+      setIsSubmiting(true);
       reset();
+      setTelefone("");
       return response;
     } catch (error) {
       console.log("Error ao enviar os dados!");
+    } finally {
+      setIsSubmiting(false);
     }
+
+    setIsSubmiting(false);
   }
 
-  // Função para enviar o formulário
   return (
     <section className="w-full relative flex items-center justify-between min-h-[100vh]">
       {/* imagem de fundo da seção  */}
@@ -132,21 +139,17 @@ export default function SectionFormulario() {
               <input
                 type="tel"
                 inputMode="numeric"
-                value={telefone}
                 id="telefone"
-                maxLength={11}
-                placeholder="( xx ) xxxxx - xxxx"
+                value={telefone}
+                maxLength={15}
+                placeholder="(xx) xxxxx-xxxx"
                 className="w-full bg-white rounded-[10px] p-3 text-[#333] text-[1rem] placeholder:text-[1rem] placeholder:font-medium outline-none focus:border-[3.5px] focus:border-verde-100 transition-all duration-500 ease-in-out focus:scale-105"
-                {...(register("telefone"),
-                {
-                  onChange: (e) => {
-                    const numeroDigitado = e.target.value;
-                    const numeroFormatado = FormatarNumero(numeroDigitado);
-                    setTelefone(numeroFormatado);
-                    e.target.value = numeroFormatado;
-                    register("telefone").onChange?.(e);
-                  },
-                })}
+                {...register("telefone")}
+                onChange={(e) => {
+                  const valorDigitado = e.target.value;
+                  const formatado = FormatarNumero(valorDigitado);
+                  setTelefone(formatado);
+                }}
               />
               {errors && (
                 <div className="flex w-full items-start justify-start">
@@ -162,7 +165,7 @@ export default function SectionFormulario() {
           <div className="w-[100%] flex items-center justify-center max-md:w-full mt-4">
             <ComponentBotao
               text="ENVIAR INFORMAÇÕES"
-              isSubmiting={isSubmitting}
+              isSubmiting={isSubmiting}
             />
           </div>
         </form>
