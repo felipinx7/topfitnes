@@ -17,7 +17,7 @@ export default function HeaderMobile() {
     setisMenuOpen((prev) => !prev);
   };
   return (
-    <header className="lg:hidden w-full p-4 px-6 z-100 h-[80px] flex items-center justify-between mt-4">
+    <header className="lg:hidden w-full p-4 px-6 z-[99999] h-[80px] flex items-center justify-between mt-4">
       {/* Logo */}
       <Link href={"/"}>
         <Image src={logo} alt="logo" width={70} />

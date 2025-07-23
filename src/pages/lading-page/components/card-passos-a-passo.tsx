@@ -3,7 +3,7 @@ import { DataCardsLadingPage } from "@/dto/data-cards-lading-page-DTO";
 
 export default function CardPasso(props: DataCardsLadingPage) {
   return (
-    <article className="flex relative w-auto h-auto hover:scale-105 transition-all duration-[0.5s] ease-in-out p-8 flex-col justify-center items-center bg-neutras-50 border border-neutras-100 backdrop-blur-[10px] gap-8 z-20 rounded-2xl">
+    <article className="flex relative w-auto h-auto hover:scale-105 transition-all duration-[0.5s] ease-in-out p-8 flex-col justify-center items-center bg-neutras-50 border border-neutras-100 backdrop-blur-[10px] gap-8 z-1 rounded-2xl">
       <div className="flex flex-col gap-3 w-full items-center justify-center max-md:items-start leading-7">
         {/* Icone do Card  */}
         <div>{<props.icone />}</div>

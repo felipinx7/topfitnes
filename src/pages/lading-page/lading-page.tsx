@@ -8,7 +8,7 @@ import SectionPlanosAcademia from "./sections/section-planos-academia";
 
 export default function LadingPage() {
   return (
-    <main className="bg-neutras-50 w-full text-white font-Poppins">
+    <main className="bg-neutras-400 w-full text-white font-Poppins">
       <SectionHero />
       <SectionEspacoIdeial />
       <SectionPasso />
