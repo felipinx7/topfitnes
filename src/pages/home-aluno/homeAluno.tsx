@@ -28,8 +28,8 @@ export function HomeAluno(){
 
     return(
         <main className="w-screen h-screen bg-neutras-300 flex">
-           <div className="w-1/5 h-full"> <SideBar setId={setSection} id={section} ></SideBar></div>
-           <div className="w-4/5 h-full"> {RenderSection(section)}</div>       
+           <div className="w-1/5 min-w-[350px] h-full"> <SideBar setId={setSection} id={section} ></SideBar></div>
+           <div className="w-full h-full"> {RenderSection(section)}</div>       
         </main>
     )
 }

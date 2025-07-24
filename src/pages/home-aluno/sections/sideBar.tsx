@@ -41,7 +41,7 @@ const Botoes = [
 
 
     return(
-        <div className="w-full h-full flex flex-col min-w-[350px] justify-between bg-neutras-300 px-8 shadow-2xl shadow-neutras-100/25 font-Poppins py-8">
+        <div className="w-full h-full flex flex-col  justify-between bg-neutras-300 px-8 shadow-2xl shadow-neutras-100/25 font-Poppins py-8">
           <div className="w-full flex">
 
             <div style={{backgroundImage: `url(#)`, backgroundSize: "cover"}} className="h-14 w-14 rounded-full bg-verde-100"></div>
@@ -55,7 +55,7 @@ const Botoes = [
           <div className="flex flex-col justify-center items-start gap-1">
            
             {Botoes.map((botao) => (
-               <div onClick={() => setId(botao.id)} className={`text-neutras-100  ${id == botao.id ? "text-verde-200 bg-verde-300" : "hover:bg-neutras-200/10"} duration-300 rounded-xl w-full p-2 text-xl font-Poppins-Medium flex justify-start cursor-pointer `}>
+               <div key={botao.id} onClick={() => setId(botao.id)} className={`text-neutras-100  ${id == botao.id ? "text-verde-200 bg-verde-300" : "hover:bg-neutras-200/10"} duration-300 rounded-xl w-full p-2 text-xl font-Poppins-Medium flex justify-start cursor-pointer `}>
                  <div className="h-8 w-8">{botao.icon}</div> <h1 className="ml-2">{botao.nome}</h1>
                </div>
             ))
