@@ -28,6 +28,7 @@
   --color-verde-200: #057333;
   --color-verde-300: #b9f6c5;
   --color-verde-400: #07b335;
+  --color-verde-500: #8FF1A6;
 
   --color-neutras-200: #555555;
   --color-neutras-100: #262626;
@@ -37,6 +38,7 @@
 
   --font-Poppins: 'Poppins', sans-serif;
   --font-Poppins-Medium: 'Poppins-Medium', sans-serif;
+  --font-Poppins-Semibold: 'Poppins-Semibold', sans-serif;
   --font-Poppins-Bold: 'Poppins-Bold', sans-serif;
   
   --font-GoldMan: 'GoldMan', sans-serif;
@@ -52,18 +54,27 @@
 }
 
 @font-face {
+  font-family: 'Poppins-Medium';
+  src: url('../assets/fonts/Poppins-Medium.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins-Semibold';
+  src: url('../assets/fonts/Poppins-SemiBold.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Poppins-Bold';
   src: url('../assets/fonts/Poppins-Bold.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 
-@font-face {
-  font-family: 'Poppins-Medium';
-  src: url('../assets/fonts/Poppins-Medium.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
+
 
 @font-face {
   font-family: 'GoldMan';
