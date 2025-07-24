@@ -1,3 +1,1 @@
-import { JSX } from "react";
-
-export type SectionType = JSX.Element | "personal" | "clientes" | "notificacao";
+export type SectionType = | "personal" | "clientes" | "notificacao";

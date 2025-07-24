@@ -1,10 +1,16 @@
-export const IconeSair = () => {
+interface IconeSairProps {
+  className?: string;
+}
+
+export const IconeSair = ({ className }: IconeSairProps) => {
   return (
     <svg
-      className=" w-full h-full"
+      width={27}
+      height={27}
       viewBox="0 0 27 27"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={`${className || ""}`}
     >
       <path
         fillRule="evenodd"

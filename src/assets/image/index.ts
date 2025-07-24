@@ -13,6 +13,7 @@ import imagebackgroundsectionheromobile from "./image-background-section-hero-mo
 import texturalinhas from "./Textura-quadrados.png";
 import imagemfundosectionpassos from "./imagem-fundo-section-passos.svg";
 import imagemfundosectionformulario from "./imagem-fundo-section-formulario.svg";
+import avatarneutroanimado from "./foto-avatar-notificação.svg";
 
 export {
   banner,
@@ -30,4 +31,5 @@ export {
   texturalinhas,
   imagemfundosectionpassos,
   imagemfundosectionformulario,
+  avatarneutroanimado,
 };

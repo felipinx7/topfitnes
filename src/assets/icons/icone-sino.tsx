@@ -7,6 +7,7 @@ export const IconeSino = ({ className }: IconeSinoProps) => {
     <svg
 
       className="w-full h-full p-1"
+
       viewBox="0 0 31 34"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
