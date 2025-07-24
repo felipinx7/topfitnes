@@ -118,13 +118,13 @@ export default function SectionFormulario() {
           <div className="w-full flex gap-3 flex-col">
             {/* Campo de Input Nome e Sobrenome */}
             <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="Nome" className="font-[700] text-[1.1rem]">
+              <label htmlFor="nome" className="font-[700] text-[1.1rem]">
                 Nome
               </label>
               <input
                 type="text"
                 {...register("nome")}
-                id="Nome"
+                id="nome"
                 placeholder="Digite seu nome e sobrenome"
                 className="w-full bg-white rounded-[10px] p-3 text-[#333] text-[1rem] placeholder:text-[1rem] placeholder:font-medium outline-none focus:border-[3.5px] focus:border-verde-100 transition-all duration-500 ease-in-out focus:scale-105"
               />
@@ -139,13 +139,13 @@ export default function SectionFormulario() {
 
             {/* Campo de Input Email  */}
             <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="Email" className="font-[700] text-[1.1rem]">
+              <label htmlFor="email" className="font-[700] text-[1.1rem]">
                 Email
               </label>
               <input
                 type="text"
                 {...register("email")}
-                id="Email"
+                id="email"
                 placeholder="Informe seu email"
                 className="w-full bg-white rounded-[10px] p-3 text-[#333] text-[1rem] placeholder:text-[1rem] placeholder:font-medium outline-none focus:border-[3.5px] focus:border-verde-100 transition-all duration-500 ease-in-out focus:scale-105"
               />

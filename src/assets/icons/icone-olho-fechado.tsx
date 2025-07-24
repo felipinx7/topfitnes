@@ -1,14 +1,18 @@
-export const OlhoFechado = () => {
+interface IconeOlhoFechadoProps {
+  className?: string;
+}
+
+export const OlhoFechado = ({ className }: IconeOlhoFechadoProps) => {
   return (
     <svg
-    width="32"
-    height="32"
+      width="32"
+      height="32"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="size-6"
+      className={`size-6 ${className || ""}`}
     >
       <path
         strokeLinecap="round"
