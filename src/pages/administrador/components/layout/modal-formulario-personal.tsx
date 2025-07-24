@@ -13,7 +13,7 @@ export default function ModalFormularioPersonal({
   return (
     // Container global
     <section
-      className={`${OpenModal ? "absolute" : "hidden"} w-full min-h-[calc(100vh-187.29px)] bg-[#F1F1F1] top-[187.29px] flex justify-center`}
+      className={`${OpenModal ? "absolute" : "hidden"} w-full min-h-[calc(100vh-187.29px)] max-lg:min-h-[calc(100vh-158px)] max-lg:top-0 bg-[#F1F1F1] top-[187.29px] flex justify-center`}
     >
       {/* container informações principais  */}
       <div className="max-w-[1280px] w-[100%] m-0 p-8 flex gap-16 flex-col">

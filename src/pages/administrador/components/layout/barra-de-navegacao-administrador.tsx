@@ -3,7 +3,6 @@
 import { TypeBarraNavegacao } from "@/types/type-barra-navegacao";
 import { Icon } from "@/types/type-icon";
 import ModalFormularioCliente from "./modal-formulario-cliente";
-import { useState } from "react";
 import ModalFormularioPersonal from "./modal-formulario-personal";
 
 interface BarraDeNavegacaoAdministradorProps {
@@ -25,7 +24,7 @@ export default function BarraDeNavegacaoAdministrador({
 }: BarraDeNavegacaoAdministradorProps) {
   return (
     // Container Global da Barra de Navegação
-    <section className="w-full px-4 flex pt-5 items-center justify-center">
+    <section className="w-full max-lg:hidden px-4 flex pt-5 items-center justify-center">
       {/* Modais de Formulario do Clientes e Personais  */}
       <ModalFormularioCliente
         OpenModal={openModalFormularioCliente}

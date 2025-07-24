@@ -13,7 +13,7 @@ export default function ModalFormularioCliente({
   return (
     // Container global
     <section
-      className={`${OpenModal ? "absolute" : "hidden"} w-full min-h-[calc(100vh-187.29px)] bg-[#F1F1F1] top-[187.29px] flex justify-center`}
+      className={`${OpenModal ? "absolute" : "hidden"} w-full min-h-[calc(100vh-187.29px)]  max-lg:min-h-[calc(100vh-158px)] max-lg:top-0 bg-[#F1F1F1] top-[187.29px] flex justify-center`}
     >
       {/* container informações principais  */}
       <div className="max-w-[1280px] w-[100%] m-0 p-8 flex gap-16 flex-col">
@@ -228,7 +228,7 @@ export default function ModalFormularioCliente({
               <input
                 id="data_matricula"
                 type="date"
-                className="bg-[#DBDBDB] text-[#1E1E1E] font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
+                className="bg-[#DBDBDB] text-[#1E1E1E] w-full font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
               />
             </div>
 

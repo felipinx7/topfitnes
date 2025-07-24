@@ -1,8 +1,9 @@
 "use client";
 
 import { IconePersonal } from "@/assets/icons/icone-personal";
-import BarraDeNavegacaoAdministrador from "../components/barra-de-navegacao-administrador";
+import BarraDeNavegacaoAdministrador from "../components/layout/barra-de-navegacao-administrador";
 import { useState } from "react";
+import BarraDeNavagacaoAdministradorMobile from "../components/layout/barra-de-navegacao-administrador-mobile";
 
 export default function SectionPersonal() {
   // Etados Utilizado no componente
@@ -15,6 +16,7 @@ export default function SectionPersonal() {
   }
   return (
     <section className="bg-white w-full min-h-[calc(100vh-187.29px)]">
+      {/* Barra de navegação desktop e mobile */}
       <BarraDeNavegacaoAdministrador
         Icone={IconePersonal}
         nomeSection="Personal"
@@ -22,6 +24,13 @@ export default function SectionPersonal() {
           handleVisibilityModalFormularioPersonal
         }
         openModalFormularioPersonal={openModalFormularioPersonal}
+      />
+      <BarraDeNavagacaoAdministradorMobile
+        SectionName="personal"
+        openModalFormularioPersonal={openModalFormularioPersonal}
+        handleVisibilityModalFormularioPersonal={
+          handleVisibilityModalFormularioPersonal
+        }
       />
     </section>
   );

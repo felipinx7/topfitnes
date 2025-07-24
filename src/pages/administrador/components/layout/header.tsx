@@ -8,6 +8,7 @@ import { useState } from "react";
 import ModalSair from "./modal-sair";
 import ModalInformacoesAdministrador from "./modal-informacoes-administrador";
 import { SectionType } from "@/types/type-section-header-administrativo";
+import CardFotoEspera from "@/components/ui/card-foto-espera";
 
 interface HeaderAdministradorProps {
   sectionSelected: SectionType;
@@ -88,7 +89,6 @@ export default function HeaderAdministrador({
 
           {/* container de navegação  */}
           <div className="flex items-center justify-center gap-6">
-
             {/* Renderização dos botões de navegação  */}
             {linksHeaderAdministrador.map((link) => (
               <button
