@@ -38,7 +38,7 @@ TOPFITNESS!</h1>
             {/* Dados Gerais*/}
             <div className="w-full flex-col flex mt-12">
              <h1 className="w-full text-xl text-verde-200 font-Poppins-Medium px-1">Dados Gerais</h1>
-             <div className="w-full p-3 border-2 border-verde-500 rounded-xl">
+             <div className="w-full p-3 border-2 border-verde-500 rounded-xl flex gap-2 flex-col">
                   <DadosComponent titulo="Vencimento de seu plano" icon={<IconeCalendario/>} valor="06/09/2026"></DadosComponent>
 
              </div>

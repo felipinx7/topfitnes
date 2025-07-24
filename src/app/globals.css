@@ -29,12 +29,13 @@
   --color-verde-300: #b9f6c5;
   --color-verde-400: #07b335;
   --color-verde-500: #8FF1A6;
+  --color-verde-600: #F0FCEC;
 
   --color-neutras-200: #555555;
   --color-neutras-100: #262626;
   --color-neutras-300: #ffffff;
   --color-neutras-400: #101010;
-  --color-neutras-50: #00000066;
+  --color-neutras-50: #000000;
 
   --font-Poppins: 'Poppins', sans-serif;
   --font-Poppins-Medium: 'Poppins-Medium', sans-serif;

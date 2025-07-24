@@ -5,6 +5,7 @@ import { useState } from "react"
 import { SideBar } from "./sections/sideBar"
 
 import { Inicio } from "./sections/Inicio";
+import { Treinos } from "./sections/Treinos";
 
 export function HomeAluno(){
     const [section,setSection] = useState(1);
@@ -14,7 +15,7 @@ export function HomeAluno(){
     case 1:
       return <Inicio/>;
     case 2:
-      return <div>Seção 2</div>;
+      return <Treinos/>;
     case 3:
       return <div>Seção 3</div>;
     case 4:
@@ -27,7 +28,7 @@ export function HomeAluno(){
     }
 
     return(
-        <main className="w-screen h-screen bg-neutras-300 flex">
+        <main className="w-screen h-screen bg-neutras-300 flex overflow-hidden">
            <div className="w-1/5 min-w-[350px] h-full"> <SideBar setId={setSection} id={section} ></SideBar></div>
            <div className="w-full h-full"> {RenderSection(section)}</div>       
         </main>
