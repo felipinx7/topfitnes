@@ -15,7 +15,7 @@ interface ModalInformacoesAdministradorProps<DataAdministradorDTO> {
 
 export default function ModalInformacoesAdministrador({data, isOpenModalInformacoes, onceClose}: ModalInformacoesAdministradorProps<DataAdministradorDTO>) {
   // Estados Utilizados no componente
-  const [isEditando, setIsEditando] = useState(true);
+  const [isEditando, setIsEditando] = useState(false);
   const [viwewPassword, setViewPassword] = useState(false);
 
   // Funções utilizadas no componente

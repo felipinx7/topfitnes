@@ -1,4 +1,4 @@
-import type { DadosInicio } from "@/types/type-DataIncioComponent";
+import type { DadosInicio } from "@/types/type-data-incio-component";
 
 export function DadosComponent({titulo , icon , valor}: DadosInicio) {
   return (
