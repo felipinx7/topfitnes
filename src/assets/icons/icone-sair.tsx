@@ -5,7 +5,6 @@ interface IconeSairProps {
 export const IconeSair = ({ className }: IconeSairProps) => {
   return (
     <svg
-
       className=" w-full h-full"
       viewBox="0 0 27 27"
       fill="none"

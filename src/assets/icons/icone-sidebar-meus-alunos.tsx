@@ -3,6 +3,8 @@ export const IconeSidebarMeusAlunos = () => {
     <svg
       className="w-full h-full"
 
+      className="w-full h-full"
+
       viewBox="0 0 30 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
