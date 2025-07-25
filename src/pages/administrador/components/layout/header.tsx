@@ -8,7 +8,6 @@ import { useState } from "react";
 import ModalSair from "./modal-sair";
 import ModalInformacoesAdministrador from "./modal-informacoes-administrador";
 import { SectionType } from "@/types/type-section-header-administrativo";
-import CardFotoEspera from "@/components/ui/card-foto-espera";
 
 interface HeaderAdministradorProps {
   sectionSelected: SectionType;
@@ -98,7 +97,7 @@ export default function HeaderAdministrador({
               >
                 {
                   <link.Icone
-                    className={`${sectionSelected === link.id ? "text-white" : "text-[#4F4F4F]"} transition-all duration-500 ease-in-out group-hover:translate-x-1 group-hover:text-white`}
+                    className={`${sectionSelected === link.id ? "text-white" : "text-[#4F4F4F]"} w-[39px] h-[40px] transition-all duration-500 ease-in-out group-hover:translate-x-1 group-hover:text-white`}
                   />
                 }
                 <p

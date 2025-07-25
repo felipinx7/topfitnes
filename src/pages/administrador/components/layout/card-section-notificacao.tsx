@@ -3,6 +3,11 @@ import { DataCardNotificao } from "@/dto/data-card-notificacao-DTO";
 import Image from "next/image";
 
 export default function CardSectionNotificacao(props: DataCardNotificao) {
+  // Tratamento do numero
+  const telefone = props.telefone.replace(/\D/g, "");
+  const mensagem =
+    "Olá! Aqui é o Jailson da academia. Vi que você teve interesse em treinar na nossa academia pelo site e quero te dar as boas-vindas. Se quiser mais informações sobre, pode perguntar — fico à disposição!";
+
   return (
     // container card section Notificação
     <article className="w-full flex items-center justify-between bg-[#D8FFE2] p-3 rounded-[0.4rem]">
@@ -32,11 +37,7 @@ export default function CardSectionNotificacao(props: DataCardNotificao) {
           type="button"
           className="bg-verde-100 cursor-pointer hover:bg-verde-400 ease-in-out duration-500 transition-all hover:scale-105  p-2 text-white font-Poppins-Semibold rounded-[10px]"
         >
-          <a
-            href={`https://wa.me/${props.telefone}?text=Ol%C3%A1%21%20Aqui%20%C3%A9%20o%20Jailson%20da%20academia.%20Vi%20que%20voc%C3%AA%20teve%20interesse%20em%20treinar%20na%20nossa%20academia%20pelo%20site%20e%20quero%20te%20dar%20as%20boas-vindas.%20Se%20quiser%20mais%20informa%C3%A7%C3%B5es%20sobre%2C%20pode%20perguntar%20%E2%80%94%20fico%20%C3%A0%20disposi%C3%A7%C3%A3o%21%20%F0%9F%92%AA`}
-          >
-            conversar
-          </a>
+          <a target="_blank" href={`https://wa.me/${telefone}?text=${mensagem}`}>conversar</a>
         </button>
       </div>
     </article>
