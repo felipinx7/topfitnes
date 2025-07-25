@@ -11,7 +11,7 @@ export interface DataAluno {
   peso: number;
   altura: number;
   idade: number;
-  data_matricula: Date;
+  data_matricula: string;
   email: string;
   senha: string;
   telefone: string;

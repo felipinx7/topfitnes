@@ -1,16 +1,22 @@
 import { IconeSetaEsquerda } from "@/assets/icons/icone-seta-esquerda";
 import FotoInputComponente from "@/components/ui/foto-input-componente";
 import { DataAluno } from "@/dto/data-aluno";
+import { BaseUrlFoto } from "@/utils/base-url-foto";
 
 interface ModalFormularioCardClienteProps {
   OpenModal: boolean;
   handleVisibilityModal: () => void;
+  data: DataAluno;
 }
 
 export default function ModalFormularioCardCliente({
   OpenModal,
   handleVisibilityModal,
+  data,
 }: ModalFormularioCardClienteProps) {
+  // Estados e varivaeis utilizadas no componente
+  const foto = BaseUrlFoto(data.foto);
+
   return (
     <section
       className={`overflow-hidden transition-all duration-500 ease-in-out w-full bg-transparent 
@@ -23,7 +29,7 @@ export default function ModalFormularioCardCliente({
           <div className="flex items-start max-lg:flex-col gap-8 justify-between">
             {/* Coluna 1: Foto, Nome, Sobrenome */}
             <div className="flex flex-col w-full items-center gap-4">
-              <FotoInputComponente />
+              <FotoInputComponente initialPhotoUrl={foto} />
 
               <div className="flex mt-16 flex-col w-full">
                 <label
@@ -34,6 +40,7 @@ export default function ModalFormularioCardCliente({
                 </label>
                 <input
                   id="nome"
+                  defaultValue={data.nome}
                   type="text"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100 transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
                 />
@@ -48,6 +55,7 @@ export default function ModalFormularioCardCliente({
                 </label>
                 <input
                   id="sobrenome"
+                  defaultValue={data.sobrenome}
                   type="text"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100 transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
                 />
@@ -66,6 +74,7 @@ export default function ModalFormularioCardCliente({
 
                 <input
                   id="telefone"
+                  defaultValue={data.telefone}
                   type="tel"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100 transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
                 />
@@ -80,6 +89,7 @@ export default function ModalFormularioCardCliente({
                 </label>
                 <input
                   id="email"
+                  defaultValue={data.email}
                   type="email"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100 transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
                 />
@@ -94,6 +104,7 @@ export default function ModalFormularioCardCliente({
                 </label>
                 <input
                   id="senha"
+                  defaultValue={data.senha}
                   type="password"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100 transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
                 />
@@ -108,6 +119,7 @@ export default function ModalFormularioCardCliente({
                 </label>
                 <select
                   id="sexo"
+                  defaultValue={data.sexo}
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100 transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
                 >
                   <option value="MASCULINO">Masculino</option>
@@ -139,6 +151,7 @@ export default function ModalFormularioCardCliente({
                 </label>
                 <input
                   id="peso"
+                  defaultValue={data.peso}
                   type="number"
                   step="0.1"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100 transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
@@ -153,6 +166,7 @@ export default function ModalFormularioCardCliente({
                   Altura:
                 </label>
                 <input
+                  defaultValue={data.altura}
                   id="altura"
                   type="number"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100 transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
@@ -171,6 +185,7 @@ export default function ModalFormularioCardCliente({
                 </label>
                 <input
                   id="idade"
+                  defaultValue={data.idade}
                   type="number"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100 transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
                 />
@@ -184,6 +199,7 @@ export default function ModalFormularioCardCliente({
                   Data de Matrícula:
                 </label>
                 <input
+                  defaultValue={data.data_matricula}
                   id="data_matricula"
                   type="date"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100 transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
@@ -199,6 +215,7 @@ export default function ModalFormularioCardCliente({
                 </label>
                 <input
                   id="treino_dias"
+                  defaultValue={data.treino_dias_por_semana}
                   type="number"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100 transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
                 />
@@ -212,6 +229,7 @@ export default function ModalFormularioCardCliente({
                   Foco do Treino:
                 </label>
                 <select
+                  defaultValue={data.foco_treino}
                   id="foco_treino"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100 transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
                 >
@@ -229,6 +247,7 @@ export default function ModalFormularioCardCliente({
                   Foco no Corpo:
                 </label>
                 <select
+                  defaultValue={data.foco_corpo}
                   id="foco_corpo"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100 transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
                 >
@@ -248,6 +267,7 @@ export default function ModalFormularioCardCliente({
                   Plano:
                 </label>
                 <select
+                  defaultValue={data.plano}
                   id="plano"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100 transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
                 >
@@ -261,7 +281,9 @@ export default function ModalFormularioCardCliente({
           </div>
 
           <div className="w-full flex mt-4 items-center justify-center">
-            <button className="bg-verde-100 p-3 w-[50%] rounded-2xl hover:bg-verde-400 cursor-pointer transition-all duration-500 ease-in-out">Atualizar dados</button>
+            <button className="bg-verde-100 p-3 w-[50%] rounded-2xl hover:bg-verde-400 cursor-pointer transition-all duration-500 ease-in-out">
+              Atualizar dados
+            </button>
           </div>
         </form>
       </div>

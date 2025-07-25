@@ -1,6 +1,4 @@
-"use client";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IconeCamera } from "@/assets/icons/icone-camera";
 import { imagefotoinput } from "@/assets/image";
 import Image from "next/image";
@@ -8,10 +6,21 @@ import Image from "next/image";
 interface FotoInputComponenteProps {
   onFileChange?: (file: File) => void;
   submitedPhoto?: boolean;
+  initialPhotoUrl?: string;
 }
 
-export default function FotoInputComponente({onFileChange, submitedPhoto}: FotoInputComponenteProps) {
-  const [fotoPreview, setFotoPreview] = useState<string | null>(null);
+export default function FotoInputComponente({
+  onFileChange,
+  submitedPhoto,
+  initialPhotoUrl,
+}: FotoInputComponenteProps) {
+  const [fotoPreview, setFotoPreview] = useState<string | null>(
+    initialPhotoUrl || null
+  );
+
+  useEffect(() => {
+    setFotoPreview(initialPhotoUrl || null);
+  }, [initialPhotoUrl]);
 
   const handleFotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -27,10 +36,9 @@ export default function FotoInputComponente({onFileChange, submitedPhoto}: FotoI
 
   return (
     <div className="w-[250px] relative h-[290px] rounded-full flex flex-col gap-4 items-center justify-center">
-      {/* Foto de perfil padrão ou selecionada */}
       <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center">
-        <Image
-          src={fotoPreview || imagefotoinput}
+        <img
+          src={fotoPreview || imagefotoinput.src}
           alt="Foto do usuário"
           className="w-full h-full object-cover"
           width={200}
@@ -38,7 +46,6 @@ export default function FotoInputComponente({onFileChange, submitedPhoto}: FotoI
         />
       </div>
 
-      {/* Ícone de câmera + input de arquivo */}
       <div className="absolute cursor-pointer overflow-hidden bg-[#e6e6e6] hover:scale-105 ease-in-out duration-300 transition-all hover:bg-[#c8c6c6] w-[60px] right-0 translate-x-[-0.3rem] translate-y-[-3rem] bottom-0 h-[60px] flex rounded-full items-center justify-center">
         <div className="relative w-[40px] h-[40px]">
           <IconeCamera />
@@ -53,7 +60,9 @@ export default function FotoInputComponente({onFileChange, submitedPhoto}: FotoI
       </div>
 
       <div>
-        <p className="text-neutras-100 font-[600] text-[1.2rem]">Foto do Perfil</p>
+        <p className="text-neutras-100 font-[600] text-[1.2rem]">
+          Foto do Perfil
+        </p>
       </div>
     </div>
   );

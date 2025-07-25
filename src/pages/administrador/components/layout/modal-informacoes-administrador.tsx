@@ -5,6 +5,7 @@ import { IconeOlhoAberto } from "@/assets/icons/icone-olho-aberto";
 import { OlhoFechado } from "@/assets/icons/icone-olho-fechado";
 import FotoInputComponente from "@/components/ui/foto-input-componente";
 import { DataAdministradorDTO } from "@/dto/data-administrador-DTO";
+import { BaseUrlFoto } from "@/utils/base-url-foto";
 import { useState } from "react";
 
 interface ModalInformacoesAdministradorProps<DataAdministradorDTO> {
@@ -15,6 +16,7 @@ interface ModalInformacoesAdministradorProps<DataAdministradorDTO> {
 
 export default function ModalInformacoesAdministrador({data, isOpenModalInformacoes, onceClose}: ModalInformacoesAdministradorProps<DataAdministradorDTO>) {
   // Estados Utilizados no componente
+  const foto = BaseUrlFoto(data.foto)
   const [isEditando, setIsEditando] = useState(false);
   const [viwewPassword, setViewPassword] = useState(false);
 

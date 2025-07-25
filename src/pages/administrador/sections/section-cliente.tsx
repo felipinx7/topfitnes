@@ -58,9 +58,8 @@ export default function SectionCliente() {
               <p>Edição</p>
             </div>
             <hr className="w-full border-1 border-[#575757]" />
-            <div className="w-full"></div>
           </div>
-          {clientes?.map((aluno) => <CardInformacaoAluno {...aluno} />)}
+          {clientes?.map((aluno) => <CardInformacaoAluno key={aluno.id} {...aluno} />)}
         </div>
       </div>
     </section>
