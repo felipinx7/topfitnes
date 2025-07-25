@@ -26,7 +26,7 @@ export function HomeAluno() {
   }
 
   return (
-    <main className="w-screen h-screen bg-neutras-300 flex overflow-hidden">
+    <main className="w-screen h-screen bg-neutras-300 relative flex overflow-hidden">
       <div className="w-1/5 min-w-[350px] h-full">
         {" "}
         <SideBar setId={setSection} id={section}></SideBar>

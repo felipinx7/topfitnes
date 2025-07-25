@@ -4,11 +4,11 @@ export type TreinoDTO = {
     name: string,
     description: string,
     bodyPartsAfected: string,
-    exercises: Exercicio[],
+    exercises: ExercicioDTO[],
   //  photo: string,
 }
 
-export type Exercicio = {
+export type ExercicioDTO = {
     name: string,
  //   photo: string,
     reps: number,
