@@ -1,24 +1,21 @@
-export const IconeLiixeira = () => {
+interface IconeLapisProps {
+  className?: string;
+}
+
+export const IconeLiixeira = ({ className }: IconeLapisProps) => {
   return (
     <svg
-      width="39"
-      height="39"
-      viewBox="0 0 39 39"
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={2}
+      stroke="currentColor"
+      className={`size-6 ${className || ""}`}
     >
-      <rect
-        x="1.14826"
-        y="1.20465"
-        width="36.6928"
-        height="36.6928"
-        rx="5.58368"
-        stroke="#ECECEC"
-        strokeWidth="1.59534"
-      />
       <path
-        d="M30.6619 6.78845H25.0782L23.4829 5.19312H15.5062L13.9108 6.78845H8.32715V9.97913H30.6619M9.92249 30.7185C9.92249 31.5647 10.2586 32.3763 10.857 32.9747C11.4554 33.573 12.2669 33.9092 13.1132 33.9092H25.8759C26.7221 33.9092 27.5336 33.573 28.132 32.9747C28.7304 32.3763 29.0665 31.5647 29.0665 30.7185V11.5745H9.92249V30.7185Z"
-        fill="black"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
       />
     </svg>
   );
