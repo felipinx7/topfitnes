@@ -109,7 +109,7 @@ export function Treinos() {
       </div>
 
 
-      {openModal ?(  <ModalTreino treino={modalTreino} OpenModal={setOpenModal}></ModalTreino> ) : ''}
+      <ModalTreino treino={modalTreino} OpenModal={setOpenModal} open={openModal}></ModalTreino>
     </div>
   );
 }
