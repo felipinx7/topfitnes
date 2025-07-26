@@ -21,19 +21,14 @@ export function SideBar({ id, setId }: SiderBar) {
     },
 
     {
-      nome: "Notificações",
-      icon: <IconeSino />,
-      id: 3,
-    },
-    {
       nome: "Meu Personal",
       icon: <IconeSidebarMeusAlunos />,
-      id: 4,
+      id: 3,
     },
     {
       nome: "Personais",
       icon: <IconePesquisar />,
-      id: 5,
+      id: 4,
     },
   ];
 

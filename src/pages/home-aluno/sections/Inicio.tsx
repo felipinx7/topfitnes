@@ -3,8 +3,10 @@ import Running from "../../../assets/image/Homen-Correndo.png";
 import Aparelho from "../../../assets/image/Aparelho.png";
 
 import { IconeCalendario } from "@/assets/icons/icone-calendario";
+import { IconePerigo } from "@/assets/icons/icone-perigo";
 
 import { DadosComponent } from "../components/Dados";
+
 
 export function Inicio() {
   return (
@@ -50,6 +52,13 @@ export function Inicio() {
             icon={<IconeCalendario />}
             valor="06/09/2026"
           ></DadosComponent>
+
+          <DadosComponent
+          icon={<IconePerigo/>}
+          titulo="Faltam 5 dias para seu plano expirar"
+          valor="">
+
+          </DadosComponent>
         </div>
       </div>
     </div>
