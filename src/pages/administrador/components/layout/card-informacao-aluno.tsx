@@ -42,7 +42,7 @@ export default function CardInformacaoAluno(props: DataAluno) {
           </div>
           <div className="flex flex-col">
             <h4 className="text-black font-Poppins-Semibold text-[1.2rem]">
-              {props.nome}
+              {props.nome} {props.sobrenome}
             </h4>
             <p className="text-black">{props.email}</p>
           </div>
