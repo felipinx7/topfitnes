@@ -30,7 +30,7 @@ export default function ModalInformacoesAdministrador({data, isOpenModalInformac
 
   return (
     // Container Global do Modal
-    <div className={`${isOpenModalInformacoes ? "absolute" : "hidden"} w-full min-h-[calc(100vh-187.29px)] max-lg:min-h-[calc(100vh-158px)] max-lg:top-[5.9rem] bg-[#CFCFCF] top-[187.29px] flex justify-center`}>
+    <div className={`${isOpenModalInformacoes ? "absolute" : "hidden"} w-full min-h-[calc(100vh-187.29px)] z-[99999] max-lg:min-h-[calc(100vh-158px)] max-lg:top-[5.9rem] bg-[#CFCFCF] top-[187.29px] flex justify-center`}>
       {/* Modal de Informações do Administrador */}
       <div className="max-w-[1280px] w-[100%] m-0 p-8 flex gap-16 max-lg:gap-3 flex-col">
         {/* Container Fechar Informações */}

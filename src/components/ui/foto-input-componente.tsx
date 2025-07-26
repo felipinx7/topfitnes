@@ -51,7 +51,7 @@ export default function FotoInputComponente({
           <IconeCamera />
           <input
             type="file"
-            required
+            required={initialPhotoUrl ? false : true}
             accept="image/*"
             className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer z-10"
             onChange={handleFotoChange}
