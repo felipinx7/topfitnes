@@ -9,14 +9,21 @@ import { IconeOlhoAberto } from "@/assets/icons/icone-olho-aberto";
 import { OlhoFechado } from "@/assets/icons/icone-olho-fechado";
 import { useState } from "react";
 
+
 import { loginDTO } from "@/dto/loginDTO";
 
 import { Auth } from "@/services/routes/login/auth";
+import { useRouter } from "next/navigation";
 
 export function Login() {
+
+    const router = useRouter();
+
+
+
   const [visible, setVisible] = useState(false);
 
-  function LoginSubmit(e: React.FormEvent<HTMLFormElement>) {
+ async function LoginSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
@@ -27,8 +34,19 @@ export function Login() {
     const data : loginDTO = { emailTel, password };
     console.log("data:",  data)
 
-    const response = Auth(data);
+    const response = await Auth(data);
     console.log(response);
+
+        if(response.userRole == "ADMINISTRADOR"){
+      router.push("/administrador")
+    }else if(response.userRole == "ALUNO"){
+      router.push("/home-aluno")
+    }// else if(response.userRole == "PERSONAL"){
+     // router.push("/home-personal")
+   // }
+
+
+
   }
 
   return (

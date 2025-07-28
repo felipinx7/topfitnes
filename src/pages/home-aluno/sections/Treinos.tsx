@@ -98,7 +98,7 @@ export function Treinos() {
         </div>
       </div>
       {/*Treinos */}
-      <div className="w-full h-full grid grid-cols-1 gap-4 place-content-start pt-4 place-items-center">
+      <div className="w-full h-full grid overflow-auto grid-cols-1 gap-4 place-content-start pt-4 place-items-center">
         {treinos.map((treino: TreinoDTO) => (
           <Treino
             treino={treino}
