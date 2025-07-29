@@ -6,6 +6,8 @@ import { SideBar } from "./sections/sideBar";
 
 import { Inicio } from "./sections/Inicio";
 import { Treinos } from "./sections/Treinos";
+import { PesquisaPersonais } from "./sections/Pesquisa";
+import { MeuPersonal } from "./sections/MeuPersonal";
 
 export function HomeAluno() {
   const [section, setSection] = useState(1);
@@ -17,11 +19,10 @@ export function HomeAluno() {
       case 2:
         return <Treinos />;
       case 3:
-        return <div>Seção 3</div>;
+        return <MeuPersonal/>;
       case 4:
-        return <div>Seção 4</div>;
-      case 5:
-        return <div>Seção 5</div>;
+        return <PesquisaPersonais/>;
+
     }
   }
 

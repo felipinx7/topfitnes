@@ -4,13 +4,15 @@ import { loginDTO } from "@/dto/loginDTO";
 import { emailSchema } from "@/schemas/schema-Login";
 
 import { FormatarNumero } from "@/utils/formatar-numero-telefone";
+
+
 import { email } from "zod";
 
 export async function Auth({ emailTel, password }: loginDTO) {
 
+
   let userLogin;
 
-  const formData = new FormData();
   if (emailSchema.safeParse(emailTel).success) {
     const telefone = FormatarNumero(emailTel.toString());
 
@@ -34,5 +36,7 @@ export async function Auth({ emailTel, password }: loginDTO) {
   });
   
   console.log(res);
-  return res;
+
+
+  return res.data;
 }
