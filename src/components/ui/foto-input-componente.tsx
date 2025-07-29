@@ -18,6 +18,8 @@ export default function FotoInputComponente({
     initialPhotoUrl || null
   );
 
+  const [fotoFile, setFotoFile] = useState<File | null>(null);
+
   useEffect(() => {
     setFotoPreview(initialPhotoUrl || null);
   }, [initialPhotoUrl]);
@@ -27,15 +29,16 @@ export default function FotoInputComponente({
     if (file) {
       const imageURL = URL.createObjectURL(file);
       setFotoPreview(imageURL);
+      setFotoFile(file); // armazenar o arquivo selecionado
 
       if (onFileChange) {
-        onFileChange(file);
+        onFileChange(file); // envia o arquivo para o pai
       }
     }
   };
 
   return (
-    <div className="w-[250px] relative h-[290px] rounded-full flex flex-col gap-4 items-center justify-center">
+    <div className="w-[250px] relative h-[290px] z-0 rounded-full flex flex-col gap-4 items-center justify-center">
       <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center">
         <img
           src={fotoPreview || imagefotoinput.src}

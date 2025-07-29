@@ -7,10 +7,6 @@ import PutClienteAdministrador from "@/services/routes/administrador/put/put-cli
 import { BaseUrlFoto } from "@/utils/base-url-foto";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { string } from "zod";
-import { FormatarNumero } from "@/utils/formatar-numero-telefone";
-import { fa } from "zod/locales";
-
 interface ModalFormularioCardClienteProps {
   OpenModal: boolean;
   handleVisibilityModal: () => void;
@@ -32,6 +28,7 @@ export default function ModalFormularioCardCliente({
     return d.toISOString().substring(0, 10);
   }
 
+
   const dataMatriculaFormatada = formatarDataISO(data.data_matricula);
 
   const {
@@ -45,14 +42,13 @@ export default function ModalFormularioCardCliente({
 
   async function OnSubmit(data: AlunoSchemaDTO) {
     try {
-      console.log("OnSubmit")
+      console.log("OnSubmit");
       const response = await PutClienteAdministrador(data.id, data);
       return response;
     } catch (error) {
       console.log("Error ao atualizar dados", error);
     }
   }
-
 
   useEffect(() => {
     if (data) {
@@ -228,7 +224,9 @@ export default function ModalFormularioCardCliente({
                 </label>
                 <input
                   id="treino_dias_por_semana"
-                  {...register("treino_dias_por_semana", { valueAsNumber: true })}
+                  {...register("treino_dias_por_semana", {
+                    valueAsNumber: true,
+                  })}
                   type="number"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100
                   transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"

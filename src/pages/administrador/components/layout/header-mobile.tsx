@@ -17,7 +17,7 @@ export default function HeaderMobileAdministrador({
     onSelectedSection(id);
   }
   return (
-    <header className="hidden max-lg:flex fixed bottom-0 w-full items-center bg-[#e3dfdf] justify-center">
+    <header className="hidden max-lg:flex fixed bottom-0 w-full items-center bg-[#e3dfdf] z-[4] justify-center">
       {/* Container Global  */}
       <nav className="max-w-[1280px] gap-4 flex w-full p-2 m-0 items-center justify-between">
         {/* Renderização dos botões de navegação  */}

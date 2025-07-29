@@ -18,22 +18,19 @@
 //   PERNAS = "PERNAS",
 // }
 
-export interface DataAluno {
-  id: string;
-  nome?: string;
-  treino_dias_por_semana?: number;
-  sobrenome?: string;
-  foto?: string;
-  sexo?: string;
-  foco_treino?: string;
-  peso?: number;
-  altura?: number;
-  idade?: number;
-  data_matricula?: string;
-  email?: string;
-  senha?: string;
-  telefone?: string;
-  foco_corpo?: string;
-  plano?: string;
-  dia_pagamento?: string;
+export interface DataAlunoForm {
+  nome: string;
+  treino_dias_por_semana: number;
+  sobrenome: string;
+  sexo: string;
+  foco_treino: string;
+  peso: number;
+  altura: number;
+  idade: number;
+  data_matricula: string;
+  email: string;
+  senha: string;
+  telefone: string;
+  foco_corpo: string;
+  plano: string;
 }

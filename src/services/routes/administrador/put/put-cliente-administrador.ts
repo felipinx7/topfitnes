@@ -7,16 +7,22 @@ export default async function PutClienteAdministrador(
   try {
     const formData = new FormData();
 
-    // Transforma os dados do objeto em FormData
     Object.entries(data).forEach(([key, value]) => {
-      formData.append(key, value);
+      if (value instanceof File) {
+        formData.append(key, value);
+      } else if (value !== undefined && value !== null) {
+        formData.append(key, String(value));
+      }
     });
 
-    const response = await api.put(`/student/${id}`, formData);
+    const response = await api.put(`/student/${id}`, formData, {
+      withCredentials: true,
+    });
 
     console.log("Dados atualizados com sucesso", response);
     return response;
   } catch (error) {
     console.log("Erro ao atualizar dados", error);
+    throw error;
   }
 }

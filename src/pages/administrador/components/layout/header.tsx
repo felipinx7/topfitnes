@@ -5,9 +5,9 @@ import { logo } from "@/assets/image";
 import { linksHeaderAdministrador } from "@/constants/links-header-adiministrador";
 import Image from "next/image";
 import { useState } from "react";
-import ModalSair from "./modal-sair";
 import ModalInformacoesAdministrador from "./modal-informacoes-administrador";
 import { SectionType } from "@/types/type-section-header-administrativo";
+import ModalConfirmar from "./modal-confirmar";
 
 interface HeaderAdministradorProps {
   sectionSelected: SectionType;
@@ -48,9 +48,10 @@ export default function HeaderAdministrador({
   return (
     <header className="max-lg:hidden">
       {/* modal sair do sistema */}
-      <ModalSair
+      <ModalConfirmar
+        text="Você realmente deseja sair do sistema?"
         isOppen={isModalOpen}
-        LogoutSistem={handleVisibilityModal}
+        handleActionComponente={handleVisibilityModal}
         handleCloseModal={handleVisibilityModal}
       />
 
