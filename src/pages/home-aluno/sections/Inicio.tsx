@@ -6,9 +6,25 @@ import { IconeCalendario } from "@/assets/icons/icone-calendario";
 import { IconePerigo } from "@/assets/icons/icone-perigo";
 
 import { DadosComponent } from "../components/Dados";
+import { formatarDataISO } from "@/utils/formatar-data";
 
 
-export function Inicio() {
+type props = {
+  date?: string
+}
+
+export function Inicio( {date}: props) {
+
+  const vencimento = formatarDataISO(date)
+
+  const hojeString = new Date().toISOString();
+
+  const data = date ? new Date(date) : new Date()
+  const hoje = new Date(hojeString)
+
+  const faltamDias = Math.ceil(data.getTime() - hoje.getTime() / (1000 * 60 * 60 * 24))
+
+
   return (
     <div className="w-full h-full flex-col p-8">
       {/*Banner */}
@@ -50,15 +66,16 @@ export function Inicio() {
           <DadosComponent
             titulo="Vencimento de seu plano"
             icon={<IconeCalendario />}
-            valor="06/09/2026"
+            valor={vencimento}
           ></DadosComponent>
 
-          <DadosComponent
+         { faltamDias < 8 ?( <DadosComponent
           icon={<IconePerigo/>}
-          titulo="Faltam 5 dias para seu plano expirar"
+          titulo={`Faltam ${faltamDias}} dias para seu plano expirar`}
           valor="">
 
-          </DadosComponent>
+          </DadosComponent>) : ""
+          }
         </div>
       </div>
     </div>

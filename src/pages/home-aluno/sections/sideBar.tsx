@@ -5,9 +5,20 @@ import { IconeSino } from "@/assets/icons/icone-sino";
 import { IconePesquisar } from "@/assets/icons/icone-pesquisar";
 import { IconeSair } from "@/assets/icons/icone-sair";
 
-import { SiderBar } from "@/types/type-Sidebar";
+import { SiderBarAluno } from "@/types/type-Sidebar";
+import { BaseUrlFoto } from "@/utils/base-url-foto";
+import { Logout } from "@/services/routes/login/logout";
+import { useRouter } from "next/navigation";
 
-export function SideBar({ id, setId }: SiderBar) {
+
+
+export function SideBar({ id, setId, aluno }: SiderBarAluno) {
+
+  const router = useRouter();
+
+  const foto = BaseUrlFoto(aluno?.foto)
+
+
   const Botoes = [
     {
       nome: "Início",
@@ -36,12 +47,12 @@ export function SideBar({ id, setId }: SiderBar) {
     <div className="w-full h-full flex flex-col min-w-[350px] justify-between bg-neutras-300 px-8 shadow-2xl shadow-neutras-100/25 font-Poppins py-8">
       <div className="w-full flex">
         <div
-          style={{ backgroundImage: `url(#)`, backgroundSize: "cover" }}
+          style={{ backgroundImage: `url(${foto ? foto : "#"})`, backgroundSize: "cover" }}
           className="h-14 w-14 rounded-full bg-verde-100"
         ></div>
         <div className="flex flex-col justify-center items-start ml-2">
           <h1 className="text-xl font-Poppins-Bold text-verde-200">
-            Piroco Limeiston
+            {aluno?.nome}
           </h1>
           <h1 className="text-base font-Poppins text-neutras-100">Aluno</h1>
         </div>
@@ -64,7 +75,9 @@ export function SideBar({ id, setId }: SiderBar) {
         ))}
       </div>
 
-      <button className="text-verde-200 hover:bg-verde-100/60 duration-300 bg-verde-300 cursor-pointer shadow- shadow-neutras-100/50 rounded-xl flex items-center justify-center w-full p-1">
+      <button onClick={() =>{ Logout()
+        router.push("/")
+      }} className="text-verde-200 hover:bg-verde-100/60 duration-300 bg-verde-300 cursor-pointer shadow- shadow-neutras-100/50 rounded-xl flex items-center justify-center w-full p-1">
         <div className="p-1 h-8">
           <IconeSair />{" "}
         </div>{" "}
