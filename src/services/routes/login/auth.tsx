@@ -29,7 +29,7 @@ export async function Auth({ emailTel, password }: loginDTO) {
 
   const json = JSON.stringify(userLogin)
   console.log("JSON",json)
-  const res = await api.post('/login', json, {
+  const res = await api.post('/login', json, { withCredentials: true,
     headers: {
       "Content-Type": "application/json"
     }

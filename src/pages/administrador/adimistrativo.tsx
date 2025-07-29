@@ -19,6 +19,7 @@ export default function Adimistrativo() {
   //Estado para controlar a seção selecionada
   const [sectionSelected, setSectionSelected] =
     useState<SectionType>("personal");
+
   return (
     <main className="bg-white w-full min-h-[100vh]">
       <HeaderAdministrador

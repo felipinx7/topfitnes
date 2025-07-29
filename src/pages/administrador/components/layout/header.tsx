@@ -4,10 +4,13 @@ import { IconeSair } from "@/assets/icons/icone-sair";
 import { logo } from "@/assets/image";
 import { linksHeaderAdministrador } from "@/constants/links-header-adiministrador";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalInformacoesAdministrador from "./modal-informacoes-administrador";
 import { SectionType } from "@/types/type-section-header-administrativo";
 import ModalConfirmar from "./modal-confirmar";
+import { DataAdministrador } from "@/dto/data-administrador";
+import { GetDadosAdministrador } from "@/services/routes/administrador/get/get-dados-administrador";
+import { LogoutSistema } from "@/services/routes/administrador/delete/logout-sistema";
 
 interface HeaderAdministradorProps {
   sectionSelected: SectionType;
@@ -18,91 +21,135 @@ export default function HeaderAdministrador({
   onSelectedSection,
   sectionSelected,
 }: HeaderAdministradorProps) {
-  // Estado utilizado no componente
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isOpenModalInformacoes, setIsOpenModalInformacoes] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal sair
+  const [isOpenModalInformacoes, setIsOpenModalInformacoes] = useState(false); // Modal info admin
+  const [adminData, setAdminData] = useState<DataAdministrador | null>(null);
 
-  //Funções utilizadas no componente
   function handleVisibilityModal() {
     setIsModalOpen((prev) => !prev);
   }
+
   function handleSelectedButton(id: SectionType) {
     onSelectedSection(id);
   }
-  function handleOpenModalInformacoes() {
+
+  function openModalInformacoes() {
     setIsOpenModalInformacoes((prev) => !prev);
   }
 
-  const data = [
-    {
-      id: "1",
-      nome: "Administrador",
-      sobrenome: "Exemplo",
-      foto: "/path/to/foto.jpg",
-      telefone: "1234567890",
-      senha: "senha123",
-      email: "flimalimafelipek@gmail.com",
-    },
-  ];
+  function closeModalInformacoes() {
+    setIsOpenModalInformacoes(false);
+  }
+
+  async function DeslogarSistema() {
+    const response = await LogoutSistema();
+  }
+
+  useEffect(() => {
+    async function fetchAdmin() {
+      try {
+        const id = localStorage.getItem("token");
+        if (!id) return;
+
+        const response = await GetDadosAdministrador(id);
+        if (response) setAdminData(response);
+      } catch (error) {
+        console.error("Erro ao buscar dados do administrador", error);
+      }
+    }
+
+    fetchAdmin();
+  }, []);
+
+  // Fallback para evitar erro de undefined no modal
+  const fallbackAdminData: DataAdministrador = {
+    id: "",
+    nome: "Administrador",
+    sobrenome: "",
+    email: "",
+    telefone: "",
+    senha: "",
+    foto: "",
+  };
 
   return (
     <header className="max-lg:hidden">
-      {/* modal sair do sistema */}
+      {/* Modal confirmação sair */}
       <ModalConfirmar
         text="Você realmente deseja sair do sistema?"
         isOppen={isModalOpen}
-        handleActionComponente={handleVisibilityModal}
+        handleActionComponente={DeslogarSistema}
         handleCloseModal={handleVisibilityModal}
       />
 
-      {/* Modal de Informações do Administrador  */}
+      {/* Modal informações do administrador */}
       <ModalInformacoesAdministrador
-        onceClose={handleOpenModalInformacoes}
         isOpenModalInformacoes={isOpenModalInformacoes}
-        data={data[0]}
+        onceClose={closeModalInformacoes}
+        data={adminData || fallbackAdminData}
       />
 
-      {/* Container Parte de Cima logo  */}
+      {/* Logo */}
       <div className="w-full bg-neutras-100 p-2 flex items-center justify-center">
         <Image src={logo} width={80} alt="logo da academia" />
       </div>
 
-      {/* container Parte de baixo menu de navegação */}
+      {/* Navegação */}
       <nav className="w-full flex items-center px-4 justify-center bg-[#CBCBCB]">
-        <div className="max-w-[1280px] w-[100%] py-3 flex items-center justify-between gap-4">
-          {/* container do perfil do adimistrador */}
+        <div className="max-w-[1280px] w-full py-3 flex items-center justify-between gap-4">
+          {/* Perfil do administrador - clique abre modal */}
           <div
-            onClick={handleOpenModalInformacoes}
-            className="flex items-center gap-4 cursor-pointer"
+            onClick={openModalInformacoes}
+            className="flex items-center gap-4 cursor-pointer select-none"
           >
             <Image
-              src={logo}
-              alt="Foto do usuário"
-              className={`transition-all ease-in-out duration-500 ${isOpenModalInformacoes ? "border-verde-100" : "border-[#4F4F4F]"} w-[70px] h-[70px] border-4 rounded-full bg-[#CBCBCB]`}
+              src={adminData?.foto || logo}
+              alt="Foto do administrador"
+              width={70}
+              height={70}
+              className={`transition-all duration-500 ${
+                isOpenModalInformacoes ? "border-verde-100" : "border-[#4F4F4F]"
+              } w-[70px] h-[70px] border-4 rounded-full bg-[#CBCBCB] object-cover`}
             />
             <h1
-              className={`transition-all ease-in-out duration-500 ${isOpenModalInformacoes ? "text-white bg-verde-100 p-1 px-3 rounded-4xl" : "text-[#4F4F4F] bg-transparent"} text-[1.2rem] font-[500]`}
+              className={`transition-all duration-500 ${
+                isOpenModalInformacoes
+                  ? "text-white bg-verde-100 p-1 px-3 rounded-4xl"
+                  : "text-[#4F4F4F]"
+              } text-[1.2rem] font-[500]`}
             >
-              Olá, <span className="font-Poppins-Bold">Administrador!</span>
+              Olá,{" "}
+              <span className="font-Poppins-Bold">
+                {adminData?.nome || "Administrador"}!
+              </span>
             </h1>
           </div>
 
-          {/* container de navegação  */}
+          {/* Botões de navegação */}
           <div className="flex items-center justify-center gap-6">
-            {/* Renderização dos botões de navegação  */}
             {linksHeaderAdministrador.map((link) => (
               <button
-                onClick={() => handleSelectedButton(link.id as SectionType)}
-                className={`${sectionSelected === link.id ? "bg-verde-100" : "bg-transparent"} flex items-center ease-in-out duration-300 transition-all p-2 px-4 rounded-2xl group hover:bg-verde-100 justify-center gap-3`}
                 key={link.id}
+                onClick={() => handleSelectedButton(link.id as SectionType)}
+                className={`${
+                  sectionSelected === link.id
+                    ? "bg-verde-100"
+                    : "bg-transparent"
+                } flex items-center p-2 px-4 rounded-2xl group hover:bg-verde-100 gap-3 transition-all duration-300`}
               >
-                {
-                  <link.Icone
-                    className={`${sectionSelected === link.id ? "text-white" : "text-[#4F4F4F]"} w-[39px] h-[40px] transition-all duration-500 ease-in-out group-hover:translate-x-1 group-hover:text-white`}
-                  />
-                }
+                <link.Icone
+                  className={`${
+                    sectionSelected === link.id
+                      ? "text-white"
+                      : "text-[#4F4F4F]"
+                  } w-[39px] h-[40px] group-hover:text-white group-hover:translate-x-1 transition-all duration-500`}
+                />
                 <p
-                  className={`${sectionSelected === link.id ? "text-white" : "text-[#4F4F4F]"} group-hover:text-white hover:translate-x-1 transition-all duration-500 ease-in-out font-[600] text-[1.1rem]`}
+                  className={`${
+                    sectionSelected === link.id
+                      ? "text-white"
+                      : "text-[#4F4F4F]"
+                  } group-hover:text-white transition-all duration-500 text-[1.1rem] font-[600]`}
                 >
                   {link.nome}
                 </p>
@@ -110,15 +157,13 @@ export default function HeaderAdministrador({
             ))}
           </div>
 
-          {/* container sair do sistema */}
+          {/* Botão sair */}
           <div>
             <button
               onClick={handleVisibilityModal}
-              className="flex items-center justify-center gap-4 text-white font-bold text-[1.2rem] group hover:bg-verde-400 transition-all ease-in-out duration-300 cursor-pointer bg-[#AAACAB] p-2 px-4 rounded-2xl"
+              className="flex items-center gap-4 text-white font-bold text-[1.2rem] group hover:bg-verde-400 transition-all bg-[#AAACAB] p-2 px-4 rounded-2xl"
             >
-              <div>
-                <IconeSair />
-              </div>
+              <IconeSair />
               Sair
             </button>
           </div>
