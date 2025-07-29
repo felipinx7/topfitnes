@@ -13,7 +13,7 @@ export function HomePersonal() {
             case 1:
                 return <Inicio />
             case 2:
-                return <Treinos open={true} close={false}/>
+                return <Treinos/>
             case 3:
                 return <div> isso ai 3</div>
             case 4:

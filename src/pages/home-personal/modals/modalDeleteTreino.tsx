@@ -20,7 +20,12 @@ export function ModalDeleteTreino({ open, close, onDelete }: ModalDeleteTreinoPr
                     <h2 className="font-albert font-medium text-[14px] text-white text-primary-200">Você tem certeza que deseja deletar esse treino?</h2>
                 </div>
                 <div className="w-full items-center h-1/5 flex justify-center pt-5">
-                    <button onClick={onDelete} className="flex items-center justify-center w-3/5 py-1 font-poppins font-semibold text-white bg-red-500 cursor-pointer hover:bg-red-600 duration-500 text-[18px] rounded-lg ">Deletar</button>
+                    <button
+                        onClick={() => {
+                            onDelete?.()
+                            close()
+                        }}
+                        className="flex items-center justify-center w-3/5 py-1 font-poppins font-semibold text-white bg-red-500 cursor-pointer hover:bg-red-600 duration-500 text-[18px] rounded-lg ">Deletar</button>
                 </div>
 
                 <button onClick={close} className="absolute w-fit h-fit top-2 right-1 hover:text-red-500 text-white duration-500 cursor-pointer">

@@ -9,7 +9,7 @@ import ReactDOM from "react-dom"
 import { useForm } from "react-hook-form"
 import userProfile from "../../../assets/image/userProfile.svg"
 
-export function ModalCreateTreino({ open, close }: ModalCreateTreinoProps) {
+export function ModalCreateTreino({ open, close, create }: ModalCreateTreinoProps) {
     const [previewImage, setPreviewImage] = useState<string | null>(null);
 
     const {
@@ -22,11 +22,15 @@ export function ModalCreateTreino({ open, close }: ModalCreateTreinoProps) {
     });
 
     function onSubmit(data: TrainingSchemaDTO) {
+        console.log(data)
         const file = data.foto?.[0];
         const finalData = {
             ...data,
-            foto: file || null
+            foto: file || null,
+            id: String(new Date())
         }
+
+        create(finalData)
         reset()
         setPreviewImage(null)
         close()

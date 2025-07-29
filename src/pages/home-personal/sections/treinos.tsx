@@ -1,20 +1,46 @@
 'use client'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Search } from "../components/search"
 import { TreinoComponent } from "../components/treinoComponent"
 import { ModalCreateTreino } from "../modals/modalCreateTreino"
 import { ModalUpdateTreino } from "../modals/modalUpdateTreino"
 import { TrainingSchemaDTO } from "@/schemas/schema-treino"
 import { ModalDeleteTreino } from "../modals/modalDeleteTreino"
+import { ModalSendTreino } from "../modals/modalSendTreino"
+import { ModalSeeTreino } from "../modals/modalSeeTreino"
+
 
 export function Treinos() {
+    // visialização dos modals
     const [visibleModalCreate, setVisibleModalCreate] = useState(false)
     const [visibleModalUpdate, setVisibleModalUpdate] = useState(false)
     const [visibleModalDelete, setVisibleModalDelete] = useState(false)
+    const [visibleModalSendTraining, setVisibleModalSendTraining] = useState(false)
+    const [visibleModalSeeTraining, setVisibleModalSeeTraining] = useState(false)
+
+    // Array dos trainings
+    const [trainings, setTrainings] = useState<TrainingSchemaDTO[]>([]);
+    const [trainingToEdit, setTrainingToEdit] = useState<TrainingSchemaDTO | null>(null);
+
+    // SearchTerm
+    const [searchTerm, setSearchTerm] = useState("");
+    const filteredTranings = trainings.filter(t => t.nome.toLowerCase().includes(searchTerm.toLowerCase()))
+
+    function createTraining(newTraining: TrainingSchemaDTO) {
+        setTrainings((prev: TrainingSchemaDTO[]) => [...prev, newTraining])
+    }
+
+    function updateTraining(updateTraining: TrainingSchemaDTO){
+        setTrainings(prev => prev.map(t => t.id === trainingToEdit?.id ? updateTraining : t))
+    }
+
+    function deleteTraining(){
+        setTrainings(prev => prev.filter(t => t.id !== trainingToEdit?.id))
+    }
 
     return (
         <div className="w-full h-full flex-col p-8 flex items-center">
-            <Search />
+            <Search onChange={setSearchTerm} value={searchTerm}/>
             <div className="flex w-full h-fit justify-between mt-4 border-b-2 border-b-gray-200">
                 <h1 className="text-verde-200 font-Poppins text-xl mt-1.5"> Treinos Criados </h1>
                 <button
@@ -23,15 +49,59 @@ export function Treinos() {
                     + Novo Treino
                 </button>
             </div>
-            <div className="flex w-full flex-col space-y-3 mt-3">
-                <TreinoComponent 
-                    update={() => setVisibleModalUpdate(prev => !prev)}
-                    delete={() => setVisibleModalDelete(prev => !prev)} />
+            <div className="flex w-full flex-col space-y-3 mt-3 overflow-y-auto">
+                {filteredTranings.map((item, idx) => (
+                    <TreinoComponent
+                        key={item.id ? item.id.toString() : idx}
+                        update={() => {
+                            setTrainingToEdit(item)
+                            setVisibleModalUpdate(prev => !prev)
+                        }}
+                        delete={() => {
+                            setTrainingToEdit(item)
+                            setVisibleModalDelete(prev => !prev)
+                        }}
+                        send={() => {
+                            setTrainingToEdit(item)
+                            setVisibleModalSendTraining(prev => !prev)
+                        }}
+                        see={() => {
+                            setTrainingToEdit(item)
+                            setVisibleModalSeeTraining(prev => !prev)
+                        }}
+                        nomeTreino={item.nome}
+                        descricaoTreino={item.descricao} 
+                        foto={item.foto}/>
+                ))}
             </div>
 
-            <ModalCreateTreino open={visibleModalCreate} close={() => setVisibleModalCreate(prev => !prev)} />
-            <ModalUpdateTreino open={visibleModalUpdate} close={() => setVisibleModalUpdate(prev => !prev)} />
-            <ModalDeleteTreino open={visibleModalDelete} close={() => setVisibleModalDelete(prev => !prev)} />
+            <ModalCreateTreino
+                open={visibleModalCreate}
+                close={() => setVisibleModalCreate(prev => !prev)}
+                create={createTraining}
+            />
+            <ModalUpdateTreino 
+                open={visibleModalUpdate} 
+                close={() => setVisibleModalUpdate(prev => !prev)} 
+                trainingToEdit={trainingToEdit}
+                updateTreino={updateTraining}
+                />
+                
+            <ModalDeleteTreino 
+                open={visibleModalDelete} 
+                close={() => setVisibleModalDelete(prev => !prev)}
+                onDelete={deleteTraining} />
+
+            <ModalSendTreino 
+                open={visibleModalSendTraining}
+                close={() => setVisibleModalSendTraining(prev => !prev)}
+            />
+
+            <ModalSeeTreino 
+                open={visibleModalSeeTraining}
+                close={() => setVisibleModalSeeTraining(prev => !prev)}
+                dataTraining={trainingToEdit}
+            />
         </div>
     )
 }

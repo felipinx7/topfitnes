@@ -11,6 +11,7 @@ import userProfile from "../../../assets/image/userProfile.svg"
 
 export function ModalUpdateTreino({ open, close, trainingToEdit, updateTreino }: ModalUPdateTreinoProps) {
     const [previewImage, setPreviewImage] = useState<string | null>(null);
+    const previewFoto = trainingToEdit?.foto ? URL.createObjectURL(trainingToEdit.foto) : 'url(#)';
 
     const { register, handleSubmit, reset } = useForm<TrainingSchemaDTO>({
     resolver: zodResolver(trainingSchema),
@@ -29,7 +30,7 @@ export function ModalUpdateTreino({ open, close, trainingToEdit, updateTreino }:
         setPreviewImage(trainingToEdit.foto)
       }
     }
-  }, [trainingToEdit, reset])
+  }, [trainingToEdit, reset, open])
 
   function onSubmit(data: TrainingSchemaDTO) {
     const file = data.foto?.[0] ?? null
@@ -77,7 +78,7 @@ export function ModalUpdateTreino({ open, close, trainingToEdit, updateTreino }:
                     <div className="flex flex-col w-[70%] items-center justify-center">
                         <div className=" aspect-square rounded-full w-[50%] relative bg-[#131313] duration-500 ease-in-out transition-all hover:scale-105">
                             <img
-                                src={previewImage ?? userProfile}
+                                src={previewImage ?? previewFoto}
                                 alt="preview"
                                 className="aspect-square w-full object-cover rounded-full duration-500 hover:border-white hover:scale-105"
                             />
