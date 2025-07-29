@@ -1,15 +1,15 @@
 'use client'
 import { IconeCloseModal } from "@/assets/icons/icone-closeModal-treino"
-import { focoCorpoEnum, trainingSchema, TrainingSchemaDTO } from "@/schemas/schema-treino"
-import { ModalCreateTreinoProps } from "@/types/type-ModalTreino-Props"
 import { PreviewImage } from "@/utils/previewImagem"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
 import { useForm } from "react-hook-form"
-import userProfile from "../../../assets/image/userProfile.svg"
+import userProfile from "../../../../assets/image/userProfile.svg"
+import { ModalUpdateExercicioProps } from "@/types/type-ModalExercise-Props"
+import { exerciseDTO, exerciseDTOInput, exerciseSchema } from "@/schemas/schema-exercicio"
 
-export function ModalCreateTreino({ open, close, create }: ModalCreateTreinoProps) {
+export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExercise }: ModalUpdateExercicioProps) {
     const [previewImage, setPreviewImage] = useState<string | null>(null);
 
     const {
@@ -17,22 +17,33 @@ export function ModalCreateTreino({ open, close, create }: ModalCreateTreinoProp
         handleSubmit,
         formState: { errors },
         reset,
-    } = useForm<TrainingSchemaDTO>({
-        resolver: zodResolver(trainingSchema)
+    } = useForm<exerciseDTOInput>({
+        resolver: zodResolver(exerciseSchema)
     });
 
-    function onSubmit(data: TrainingSchemaDTO) {
-        console.log(data)
+    useEffect(() => {
+        if (exerciseToEdit && open){
+            reset({
+                nome: exerciseToEdit.nome,
+                repeticoes: exerciseToEdit.repeticoes,
+                execucoes: exerciseToEdit.execucoes,
+                descricao: exerciseToEdit.descricao,
+                foto: undefined
+            })
+
+            if (typeof exerciseToEdit.foto === 'string') setPreviewImage(exerciseToEdit.foto)
+        }
+    }, [exerciseToEdit, open, reset])
+
+    function onSubmit(data: exerciseDTO) {
         const file = data.foto?.[0];
         const finalData = {
             ...data,
             foto: file || null,
-            id: String(new Date())
+            id: new Date()
         }
 
-        create(finalData)
-        reset()
-        setPreviewImage(null)
+        if(updateExercise) updateExercise(finalData)
         close()
     };
 
@@ -46,8 +57,8 @@ export function ModalCreateTreino({ open, close, create }: ModalCreateTreinoProp
                 {/* Cabeçalho */}
                 <div className="w-full bg-[#F0F0F0] rounded-t-xl flex justify-between items-center px-2 py-3">
                     <div className="flex flex-col text-neutras-100 pl-3 -space-y-1 ">
-                        <h1 className="font-Poppins-Medium text-xl">Criação do Treino</h1>
-                        <h2 className="font-poppins font-light text-[12px]">Preencha as informações abaixo para criar um novo treino</h2>
+                        <h1 className="font-Poppins-Medium text-xl">Atualização do Exercício</h1>
+                        <h2 className="font-poppins font-light text-[12px]">Preencha as informações abaixo para atualizar o exercício</h2>
                     </div>
                     <button
                         onClick={() => {
@@ -87,7 +98,7 @@ export function ModalCreateTreino({ open, close, create }: ModalCreateTreinoProp
                                 </p>
                             )}
                         </div>
-                        <h1 className="mt-3 font-Poppins-Medium text-neutras-50"> Foto do Treino </h1>
+                        <h1 className="mt-3 font-Poppins-Medium text-neutras-50"> Foto do Exercicio </h1>
                     </div>
 
                     {/* Campos*/}
@@ -105,19 +116,27 @@ export function ModalCreateTreino({ open, close, create }: ModalCreateTreinoProp
                             {errors.nome && <p className="text-red-500 text-sm">{errors.nome.message}</p>}
                         </div>
 
-                        {/* Parte Afetada */}
-                        <div className="w-4/5 border-1 border-neutras-100/40 flex items-center p-2 rounded-xl">
-                            <label className="text-[#242424] font-Poppins-Semibold whitespace-nowrap text-[14px]"> Parte Afetada: </label>
-                            <select
-                                {...register("foco_corpo")}
-                                className="outline-none appearance-none w-full text-sm text-[#242424] pl-2 placeholder:text-neutras-200/60 text-[15px]"
-                            >
-                                <option value="">Selecione a parte afetada</option>
-                                {focoCorpoEnum.options.map((opt) => (
-                                    <option key={opt} value={opt}>{opt}</option>
-                                ))}
-                            </select>
-                            {errors.foco_corpo && <p className="text-red-500 text-sm">Opção inválida</p>}
+                        {/* repetições e exercuções */}
+                        <div className="w-4/5 flex space-x-2">
+                            <div className="border border-neutras-100/40 flex items-center justify-between p-2 rounded-xl gap-4">
+                                <label className="text-[#242424] font-Poppins-Semibold text-[14px]">Repetições:</label>
+                                <input
+                                    className="outline-none text-[#242424] w-full pl-2 placeholder:text-neutras-200/60 text-[15px]"
+                                    placeholder="ex. 12"
+                                    type="text"
+                                    {...register("repeticoes")}
+                                />
+                            </div>
+
+                            <div className="border border-neutras-100/40 flex items-center justify-between p-2 rounded-xl gap-4">
+                                <label className="text-[#242424] font-Poppins-Semibold text-[14px]">Execuções:</label>
+                                <input
+                                    className="outline-none text-[#242424] w-full pl-2 placeholder:text-neutras-200/60 text-[15px]"
+                                    placeholder="ex. 3"
+                                    type="text"
+                                    {...register("execucoes")}
+                                />
+                            </div>
                         </div>
 
                         {/* Descrição */}
@@ -133,7 +152,7 @@ export function ModalCreateTreino({ open, close, create }: ModalCreateTreinoProp
                     </div>
                     {/* Button */}
                     <button type="submit" className="w-[75%] bg-verde-100 text-white font-Poppins-Bold text-lg rounded-xl p-0.5 hover:bg-verde-200 duration-500 cursor-pointer">
-                        Criar Treino
+                        Atualizar informações
                     </button>
                 </form>
             </div>

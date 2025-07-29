@@ -11,7 +11,7 @@ export function InfoTreino({previewFoto, data}: infoTreino ) {
         <div className="flex flex-col space-y-2 w-[40%] p-2 rounded-bl-lg h-full">
             {/* foto treino */}
             <div className="flex flex-col w-full space-y-2 items-center">
-                <h1 className="font-Poppins-Medium text-xl text-neutras-100 text-sm">Treino</h1>
+                <h1 className="font-Poppins-Medium text-xl text-neutras-100">Treino</h1>
                 <div
                     className="h-44 w-44 rounded-full bg-neutras-100"
                     style={{
@@ -37,8 +37,8 @@ export function InfoTreino({previewFoto, data}: infoTreino ) {
 
                 <div className="flex flex-col space-y-2 w-4/5 font-poppins font-bold text-black/90 text-sm">
                     <h1>Descrição:</h1>
-                    <div className="w-full h-20 px-3 py-1 text-center font-poppins font-bold text-gray-500 rounded-sm border border-black/20 shadow shadow-black/20 text-sm">
-                        {data.dataTraining?.descricao}
+                    <div className="w-full h-20 px-3 py-1 text-center font-poppins font-bold text-gray-500 rounded-sm border border-black/20 shadow shadow-black/20 text-sm break-words">
+                        {data.dataTraining?.descricao.length > 50 ? data.dataTraining.descricao.slice(0,50) + '...' : data.dataTraining.descricao}
                     </div>
                 </div>
             </div>

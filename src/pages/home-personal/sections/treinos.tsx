@@ -2,12 +2,12 @@
 import { useEffect, useState } from "react"
 import { Search } from "../components/search"
 import { TreinoComponent } from "../components/treinoComponent"
-import { ModalCreateTreino } from "../modals/modalCreateTreino"
-import { ModalUpdateTreino } from "../modals/modalUpdateTreino"
+import { ModalCreateTreino } from "../modals/treinos/modalCreateTreino"
+import { ModalUpdateTreino } from "../modals/treinos/modalUpdateTreino"
 import { TrainingSchemaDTO } from "@/schemas/schema-treino"
-import { ModalDeleteTreino } from "../modals/modalDeleteTreino"
-import { ModalSendTreino } from "../modals/modalSendTreino"
-import { ModalSeeTreino } from "../modals/modalSeeTreino"
+import { ModalDeleteTreino } from "../modals/treinos/modalDeleteTreino"
+import { ModalSendTreino } from "../modals/treinos/modalSendTreino"
+import { ModalSeeTreino } from "../modals/treinos/modalSeeTreino"
 
 
 export function Treinos() {
@@ -90,7 +90,9 @@ export function Treinos() {
             <ModalDeleteTreino 
                 open={visibleModalDelete} 
                 close={() => setVisibleModalDelete(prev => !prev)}
-                onDelete={deleteTraining} />
+                onDelete={deleteTraining} 
+                texto="treino"
+                />
 
             <ModalSendTreino 
                 open={visibleModalSendTraining}

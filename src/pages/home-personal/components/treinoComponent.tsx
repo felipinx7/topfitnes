@@ -21,16 +21,16 @@ export function TreinoComponent(data: functionButtons) {
         <div className="w-full bg-verde-600 p-3 flex items-center shadow shadow-black/30 rounded-lg justify-between border border-black/30">
             <div className="flex">
                 <div
-                    style={{ 
-                        backgroundImage: `url(${previewFoto})`, 
+                    style={{
+                        backgroundImage: `url(${previewFoto})`,
                         backgroundSize: "cover",
                         backgroundPosition: 'center'
-                     }}
+                    }}
                     className="h-14 w-14 rounded-full bg-white-100 border-3 border-verde-100"
                 ></div>
                 <div className="flex-col flex  justify-center font-Poppins font-bold pl-3 text-verde-200 -space-y-1.5">
                     <h1 className="text-lg font-Poppins-Bold ">{data.nomeTreino}</h1>
-                    <h2 className="font font-light text-[11px] pl-0.5">{data.descricaoTreino}</h2>
+                    <h2 className="font font-light text-[11px] pl-0.5">{data.descricaoTreino.length > 50 ? data.descricaoTreino.slice(0, 50) + '...' : data.descricaoTreino}</h2>
                 </div>
             </div>
 

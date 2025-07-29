@@ -16,7 +16,8 @@ export type ModalUPdateTreinoProps = {
 export type ModalDeleteTreinoProps = {
     open: boolean
     close: () => void
-    onDelete?: () => void
+    onDelete?: () => void,
+    texto: string
 }
 
 export type ModalSendTreinoProps = {
