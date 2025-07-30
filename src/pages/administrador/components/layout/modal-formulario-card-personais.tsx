@@ -206,21 +206,7 @@ export default function ModalFormularioCardPersonais({
                   className="input-padrao"
                 />
               </div>
-
-              <div className="flex flex-col">
-                <label
-                  htmlFor="senha"
-                  className="text-[#333] font-Poppins-Bold mb-1"
-                >
-                  Senha:
-                </label>
-                <input
-                  {...register("senha")}
-                  id="senha"
-                  type="password"
-                  className="input-padrao"
-                />
-              </div>
+              
             </div>
           </div>
 

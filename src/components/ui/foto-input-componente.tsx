@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { IconeCamera } from "@/assets/icons/icone-camera";
 import { imagefotoinput } from "@/assets/image";
-import Image from "next/image";
 
 interface FotoInputComponenteProps {
-  onFileChange?: (file: File) => void;
+  onFileChange?: (base64: string) => void; // agora espera uma string base64
   submitedPhoto?: boolean;
   initialPhotoUrl?: string;
 }
@@ -18,23 +17,25 @@ export default function FotoInputComponente({
     initialPhotoUrl || null
   );
 
-  const [fotoFile, setFotoFile] = useState<File | null>(null);
-
   useEffect(() => {
     setFotoPreview(initialPhotoUrl || null);
   }, [initialPhotoUrl]);
 
   const handleFotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (file) {
-      const imageURL = URL.createObjectURL(file);
-      setFotoPreview(imageURL);
-      setFotoFile(file); // armazenar o arquivo selecionado
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64String = reader.result as string;
+      setFotoPreview(base64String);
 
       if (onFileChange) {
-        onFileChange(file); // envia o arquivo para o pai
+        onFileChange(base64String); // envia como string
       }
-    }
+    };
+
+    reader.readAsDataURL(file); // converte em base64
   };
 
   return (

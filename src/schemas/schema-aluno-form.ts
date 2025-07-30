@@ -6,15 +6,23 @@ export const schemaAlunoForm = z.object({
   treino_dias_por_semana: z.number(),
   sexo: z.string(),
   foco_treino: z.string(),
+  foto: z.any().optional(),
   peso: z.number(),
   altura: z.number(),
   idade: z.number(),
-  data_matricula: z.string(),
+  data_matricula: z
+    .string()
+    .optional()
+    .refine((val) => !val || /^\d{4}-\d{2}-\d{2}$/.test(val), {
+      message: "Data deve estar no formato yyyy-MM-dd",
+    }),
+
   email: z.email("E-mail inválido"),
-  senha: z.string().min(6, "Senha deve ter no mínimo 6 caracteres"),
+  senha: z.string().min(8, "Senha deve ter no mínimo 8 caracteres"),
   telefone: z.string(),
   foco_corpo: z.string(),
-  plano: z.string(),
+  planoId: z.string(),
+  role: z.string().default("ALUNO"),
 });
 
 export type AlunoSchemaDTO = z.infer<typeof schemaAlunoForm>;

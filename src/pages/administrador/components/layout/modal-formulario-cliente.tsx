@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { IconeSetaEsquerda } from "@/assets/icons/icone-seta-esquerda";
-import FotoInputComponente from "@/components/ui/foto-input-componente";
 import { PostCadastrarAluno } from "@/services/routes/administrador/post/post-cadastrar-aluno";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -16,7 +15,6 @@ export default function ModalFormularioCliente({
   OpenModal,
   handleOpenFormulario,
 }: ModalFormularioClienteProps) {
-  // Config do react-hook-form
   const {
     register,
     handleSubmit,
@@ -26,56 +24,68 @@ export default function ModalFormularioCliente({
     resolver: zodResolver(schemaAlunoForm),
   });
 
-  // Estado para armazenar o arquivo da foto
   const [fotoArquivo, setFotoArquivo] = useState<File | null>(null);
 
-  // Recebe o arquivo enviado pelo componente de foto
   function onFotoChange(file: File) {
     setFotoArquivo(file);
   }
 
-  // Função criar aluno
   async function onSubmit(data: DataAlunoForm) {
-    console.log("Chamou o submit ✅", data);
+    // Validar se foto foi selecionada
+    if (!fotoArquivo) {
+      alert("Foto obrigatória");
+      return;
+    }
+
+    // Converter data_matricula para Date válido
+    const dataMatriculaValida = new Date(data.data_matricula ?? "");
+
+    if (
+      isNaN(dataMatriculaValida.getTime()) || // data inválida
+      dataMatriculaValida.getFullYear() < 1900 // ano inválido (antes de 1900)
+    ) {
+      alert(
+        "Data de matrícula inválida! Informe uma data válida a partir de 1900."
+      );
+      return;
+    }
+
+    // Criar FormData para envio multipart/form-data
     const formData = new FormData();
 
-    // Adiciona todos os campos do formulário ao FormData
+    // Adicionar os dados ao FormData (convertendo data_matricula para ISO string)
     for (const [key, value] of Object.entries(data)) {
       if (value !== undefined && value !== null) {
-        formData.append(key, String(value));
+        if (key === "data_matricula") {
+          formData.append(key, dataMatriculaValida.toISOString());
+        } else {
+          formData.append(key, String(value));
+        }
       }
     }
 
-    // Adiciona a imagem se houver
-    if (fotoArquivo) {
-      formData.append("foto", fotoArquivo);
-    }
-
-    // Debug: Verifica tudo que está sendo enviado
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}:`, value);
-    }
+    // Adicionar foto ao FormData
+    formData.append("foto", fotoArquivo);
 
     try {
+      console.log("Enviando dados para backend...");
       await PostCadastrarAluno(formData);
-      console.log("Enviado com sucesso!");
+      alert("Aluno cadastrado com sucesso!");
       reset();
       setFotoArquivo(null);
     } catch (error) {
       console.error("Erro ao enviar dados:", error);
+      alert("Erro ao cadastrar aluno");
     }
   }
 
   return (
-    // Container global
     <section
       className={`${
         OpenModal ? "absolute" : "hidden"
-      } w-full min-h-[calc(100vh-187.29px)]  max-lg:min-h-[calc(100vh-158px)] max-lg:top-0 bg-[#F1F1F1] top-[187.29px] z-20 flex justify-center`}
+      } w-full min-h-[calc(100vh-187.29px)] max-lg:min-h-[calc(100vh-158px)] max-lg:top-0 bg-[#F1F1F1] top-[187.29px] z-20 flex justify-center`}
     >
-      {/* container informações principais  */}
       <div className="max-w-[1280px] w-[100%] m-0 p-8 flex gap-16 flex-col">
-        {/* container parte fechar formulario  */}
         <div className="w-full flex items-center gap-3">
           <div
             onClick={handleOpenFormulario}
@@ -88,17 +98,42 @@ export default function ModalFormularioCliente({
           </p>
         </div>
 
-        {/* container parte formulario */}
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col items-start max-lg:flex-col gap-8 justify-between"
           encType="multipart/form-data"
         >
           <div className="flex w-full gap-10 max-lg:flex-col">
-            {/* inputs Nome , sobrenome, foto de perfil e botão de enviar  */}
             <div className="flex flex-col w-full items-center gap-4">
               {/* Foto de Perfil */}
-              <FotoInputComponente onFileChange={onFotoChange} />
+              <div className="w-full flex flex-col items-center gap-2 mt-4">
+                {fotoArquivo && (
+                  <img
+                    src={URL.createObjectURL(fotoArquivo)}
+                    alt="Pré-visualização"
+                    className="w-32 h-32 rounded-full object-cover border"
+                  />
+                )}
+
+                <label
+                  htmlFor="fotoInput"
+                  className="cursor-pointer bg-[#DBDBDB] hover:bg-[#cfcfcf] text-[#1E1E1E] font-Poppins-Medium px-4 py-2 rounded transition-all"
+                >
+                  {fotoArquivo ? "Trocar Foto" : "Selecionar Foto"}
+                </label>
+
+                <input
+                  id="fotoInput"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    if (e.target.files && e.target.files[0]) {
+                      onFotoChange(e.target.files[0]);
+                    }
+                  }}
+                  className="hidden"
+                />
+              </div>
 
               {/* Nome */}
               <div className="flex mt-16 flex-col w-full">
@@ -135,7 +170,7 @@ export default function ModalFormularioCliente({
               </div>
             </div>
 
-            {/* inputs telefone, email, senha, sexo, dia pagamento, peso, altura  */}
+            {/* Coluna do meio */}
             <div className="flex flex-col w-full gap-4">
               {/* Telefone */}
               <div className="flex flex-col w-full">
@@ -208,7 +243,6 @@ export default function ModalFormularioCliente({
                 </select>
               </div>
 
-              
               {/* Peso */}
               <div className="flex flex-col w-full">
                 <label
@@ -236,8 +270,8 @@ export default function ModalFormularioCliente({
                   Altura (cm):
                 </label>
                 <input
-                  {...register("altura", { valueAsNumber: true })}
                   id="altura"
+                  {...register("altura", { valueAsNumber: true })}
                   type="number"
                   placeholder="Ex: 170"
                   className="bg-[#DBDBDB] text-[#1E1E1E] placeholder:text-[#1e1e1e7d] font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
@@ -274,9 +308,9 @@ export default function ModalFormularioCliente({
                   Data de Matrícula:
                 </label>
                 <input
-                  {...register("data_matricula")}
-                  id="data_matricula"
                   type="date"
+                  max={new Date().toISOString().slice(0, 10)}
+                  {...register("data_matricula")}
                   className="bg-[#DBDBDB] text-[#1E1E1E] w-full font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
                 />
               </div>
@@ -354,7 +388,7 @@ export default function ModalFormularioCliente({
                 </label>
                 <select
                   id="plano_id"
-                  {...register("plano")}
+                  {...register("planoId")}
                   className="bg-[#DBDBDB] max-lg:mb-6 text-[#1E1E1E] font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
                 >
                   <option value="">Selecione um plano</option>
@@ -374,8 +408,8 @@ export default function ModalFormularioCliente({
               </div>
             </div>
           </div>
+
           <div className="w-full flex items-center justify-center">
-            {/* button de enviar */}
             <button
               type="submit"
               onClick={() => console.log("Clicou no botão")}
@@ -386,6 +420,7 @@ export default function ModalFormularioCliente({
           </div>
         </form>
       </div>
+      <pre className="text-black">{JSON.stringify(errors, null, 2)}</pre>
     </section>
   );
 }

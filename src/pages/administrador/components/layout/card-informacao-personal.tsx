@@ -38,8 +38,9 @@ export default function CardInformacaoPersonal(props: DataCadastroPersonal) {
 
       // Exclui o aluno
       await DeletePersonaleAdministrador(props.id);
-      console.log("Personal excluído com sucesso!");
+      console.log("Personal excluído com sucesso!", props.id);
     } catch (error) {
+      console.log(props.id);
       console.error("Erro ao excluir o Personal:", error);
     } finally {
       handleVisibilityModalConfirmation();

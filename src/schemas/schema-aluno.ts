@@ -16,7 +16,7 @@ export const schemaAluno = z.object({
   telefone: z.string().optional(),
   foco_corpo: z.string().optional(),
   plano: z.string().optional(),
-  foto: z.string().optional(), // Foto é opcional
+  foto: z.string().optional(),
 });
 
 export type AlunoSchemaDTO = z.infer<typeof schemaAluno>;

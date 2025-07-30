@@ -23,7 +23,7 @@ export interface DataAluno {
   nome?: string;
   treino_dias_por_semana?: number;
   sobrenome?: string;
-  foto?: string;
+  // foto?: string;
   sexo?: string;
   foco_treino?: string;
   peso?: number;
