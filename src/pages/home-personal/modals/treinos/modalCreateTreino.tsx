@@ -1,48 +1,62 @@
 'use client'
 import { IconeCloseModal } from "@/assets/icons/icone-closeModal-treino"
 import { focoCorpoEnum, trainingSchema, TrainingSchemaDTO } from "@/schemas/schema-treino"
-import { ModalUPdateTreinoProps } from "@/types/type-ModalTreino-Props"
+import { ModalCreateTreinoProps } from "@/types/type-ModalTreino-Props"
 import { PreviewImage } from "@/utils/previewImagem"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
 import { useForm } from "react-hook-form"
-import userProfile from "../../../assets/image/userProfile.svg"
+import userProfile from "../../../../assets/image/userProfile.svg"
+import { createTreino } from "@/services/routes/treinos/createTreino"
+import { GetPersonal } from "@/services/routes/personal/getPersonal"
+import { toast } from "react-toastify"
 
-export function ModalUpdateTreino({ open, close, trainingToEdit, updateTreino }: ModalUPdateTreinoProps) {
+export function ModalCreateTreino({ open, close, create, personal }: ModalCreateTreinoProps) {
     const [previewImage, setPreviewImage] = useState<string | null>(null);
-    const previewFoto = trainingToEdit?.foto ? URL.createObjectURL(trainingToEdit.foto) : 'url(#)';
 
-    const { register, handleSubmit, reset } = useForm<TrainingSchemaDTO>({
-    resolver: zodResolver(trainingSchema),
-  })
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm<TrainingSchemaDTO>({
+        resolver: zodResolver(trainingSchema)
+    });
 
-   useEffect(() => {
-    if (trainingToEdit && open) {
-      reset({
-        nome: trainingToEdit.nome,
-        descricao: trainingToEdit.descricao,
-        foco_corpo: trainingToEdit.foco_corpo,
-        foto: undefined,
-      })
+    async function onSubmit(data: TrainingSchemaDTO) {
+        const file = data.foto?.[0];
+        const finalData = {
+            ...data,
+            foto: file || null,
+        }
 
-      if (typeof trainingToEdit.foto === 'string') {
-        setPreviewImage(trainingToEdit.foto)
-      }
-    }
-  }, [trainingToEdit, reset, open])
+        const dataToBack = {
+            ...data,
+            foto: file
+        }
 
-  function onSubmit(data: TrainingSchemaDTO) {
-    const file = data.foto?.[0] ?? null
+        toast.success("O treino foi criado com sucesso!")
+        create(finalData)
+        reset()
 
-    const finalData = {
-      ...data,
-      foto: file || trainingToEdit?.foto,
-    }
+        setPreviewImage(null)
+        close()
 
-    if (updateTreino) updateTreino(finalData)
-    close()
-  }
+        await createTreino(dataToBack)
+    };
+
+    useEffect(() => {
+        if (errors.nome) {
+            toast.error(errors.nome.message);
+        }
+        if (errors.descricao) {
+            toast.error(errors.descricao.message);
+        }
+        if (errors.foco_corpo) {
+            toast.error("Selecione um foco de treino.");
+        }
+    }, [errors]);
 
     return ReactDOM.createPortal(
         <div
@@ -54,8 +68,8 @@ export function ModalUpdateTreino({ open, close, trainingToEdit, updateTreino }:
                 {/* Cabeçalho */}
                 <div className="w-full bg-[#F0F0F0] rounded-t-xl flex justify-between items-center px-2 py-3">
                     <div className="flex flex-col text-neutras-100 pl-3 -space-y-1 ">
-                        <h1 className="font-Poppins-Medium text-xl">Edição do Treino</h1>
-                        <h2 className="font-poppins font-light text-[12px]">Atualize as informações desejadas do treino</h2>
+                        <h1 className="font-Poppins-Medium text-xl">Criação do Treino</h1>
+                        <h2 className="font-poppins font-light text-[12px]">Preencha as informações abaixo para criar um novo treino</h2>
                     </div>
                     <button
                         onClick={() => {
@@ -78,7 +92,7 @@ export function ModalUpdateTreino({ open, close, trainingToEdit, updateTreino }:
                     <div className="flex flex-col w-[70%] items-center justify-center">
                         <div className=" aspect-square rounded-full w-[50%] relative bg-[#131313] duration-500 ease-in-out transition-all hover:scale-105">
                             <img
-                                src={previewImage ?? previewFoto}
+                                src={previewImage ?? userProfile}
                                 alt="preview"
                                 className="aspect-square w-full object-cover rounded-full duration-500 hover:border-white hover:scale-105"
                             />
@@ -89,6 +103,11 @@ export function ModalUpdateTreino({ open, close, trainingToEdit, updateTreino }:
                                 {...register("foto")}
                                 onChange={(e) => PreviewImage(e, setPreviewImage)}
                             />
+                            {errors.foto && (
+                                <p className="text-red-500 text-sm">
+                                    {errors.foto.message as string}
+                                </p>
+                            )}
                         </div>
                         <h1 className="mt-3 font-Poppins-Medium text-neutras-50"> Foto do Treino </h1>
                     </div>
@@ -105,6 +124,7 @@ export function ModalUpdateTreino({ open, close, trainingToEdit, updateTreino }:
                                 type="text"
                                 {...register("nome")}
                             />
+                            {errors.nome && <p className="text-red-500 text-sm">{errors.nome.message}</p>}
                         </div>
 
                         {/* Parte Afetada */}
@@ -119,6 +139,7 @@ export function ModalUpdateTreino({ open, close, trainingToEdit, updateTreino }:
                                     <option key={opt} value={opt}>{opt}</option>
                                 ))}
                             </select>
+                            {errors.foco_corpo && <p className="text-red-500 text-sm">Opção inválida</p>}
                         </div>
 
                         {/* Descrição */}
@@ -129,11 +150,12 @@ export function ModalUpdateTreino({ open, close, trainingToEdit, updateTreino }:
                                 placeholder="Digite aqui:"
                                 {...register("descricao")}
                             />
+                            {errors.descricao && <p className="text-red-500 text-sm">Descrição inválida</p>}
                         </div>
                     </div>
                     {/* Button */}
                     <button type="submit" className="w-[75%] bg-verde-100 text-white font-Poppins-Bold text-lg rounded-xl p-0.5 hover:bg-verde-200 duration-500 cursor-pointer">
-                        Atualizar informações
+                        Criar Treino
                     </button>
                 </form>
             </div>

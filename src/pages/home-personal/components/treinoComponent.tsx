@@ -1,7 +1,10 @@
+'use client'
 import { IconeExcluirTreino } from "@/assets/icons/icon-excluir-treino";
 import { IconeAtualizarTreino } from "@/assets/icons/icone-atualizar-treino";
 import { IconeEnviarTreino } from "@/assets/icons/icone-enviar-treino";
 import { IconeVisualizarTreino } from "@/assets/icons/icone-visualiar-treino";
+import { BaseUrlFoto } from "@/utils/base-url-foto";
+import { useEffect, useState } from "react";
 
 type functionButtons = {
     update: () => void,
@@ -15,22 +18,33 @@ type functionButtons = {
 
 
 export function TreinoComponent(data: functionButtons) {
-    const previewFoto = data.foto ? URL.createObjectURL(data.foto) : 'url(#)';
+    const [previewFoto, setPreviewFoto] = useState<string>("");
+
+    useEffect(() => {
+    if (data.foto instanceof File) {
+      const objectUrl = URL.createObjectURL(data.foto);
+      setPreviewFoto(objectUrl);
+
+      return () => URL.revokeObjectURL(objectUrl);
+    } else {
+      setPreviewFoto(BaseUrlFoto(String(data.foto)));
+    }
+  }, [data.foto]);
 
     return (
         <div className="w-full bg-verde-600 p-3 flex items-center shadow shadow-black/30 rounded-lg justify-between border border-black/30">
             <div className="flex">
                 <div
-                    style={{ 
-                        backgroundImage: `url(${previewFoto})`, 
+                    style={{
+                        backgroundImage: `url(${previewFoto})`,
                         backgroundSize: "cover",
                         backgroundPosition: 'center'
-                     }}
+                    }}
                     className="h-14 w-14 rounded-full bg-white-100 border-3 border-verde-100"
                 ></div>
                 <div className="flex-col flex  justify-center font-Poppins font-bold pl-3 text-verde-200 -space-y-1.5">
                     <h1 className="text-lg font-Poppins-Bold ">{data.nomeTreino}</h1>
-                    <h2 className="font font-light text-[11px] pl-0.5">{data.descricaoTreino}</h2>
+                    <h2 className="font font-light text-[11px] pl-0.5">{data.descricaoTreino.length > 50 ? data.descricaoTreino.slice(0, 50) + '...' : data.descricaoTreino}</h2>
                 </div>
             </div>
 

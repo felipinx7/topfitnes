@@ -1,7 +1,7 @@
 import { IconeCloseModal } from "@/assets/icons/icone-closeModal-treino";
 import { ModalSendTreinoProps } from "@/types/type-ModalTreino-Props";
 import ReactDOM from "react-dom"
-import { SendTreinoComponent } from "../components/sendTrainingToStudent";
+import { SendTreinoComponent } from "../../components/sendTrainingToStudent";
 
 export function ModalSendTreino(data: ModalSendTreinoProps) {
     return ReactDOM.createPortal(

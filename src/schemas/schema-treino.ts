@@ -10,7 +10,7 @@ export const focoCorpoEnum = z.enum([
 ]);
 
 export const trainingSchema = z.object({
-  id: z.date().optional(),
+  id: z.string().optional(),
   nome: z.string().min(1, "O nome é obrigatório"),
   descricao: z.string(),
   foco_corpo: focoCorpoEnum,

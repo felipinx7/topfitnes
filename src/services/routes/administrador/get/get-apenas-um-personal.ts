@@ -1,8 +1,8 @@
 import { api } from "@/config/axios.config";
 
-export async function GetUmPersonal(id: string) {
+export async function GetUmPersonal(id: string | undefined) {
   try {
-    const response = await api.get(`/personal/:${id}`);
+    const response = api.get(`/personal/:${id}`);
     console.log("Personal Encontrado", response);
     return response;
   } catch (error) {
