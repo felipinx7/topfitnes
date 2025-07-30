@@ -1,5 +1,11 @@
 # 🏋️ Sistema de Gerenciamento de Academia — Front-end
 
+## 🔍 Preview do Projeto
+
+![Preview da interface](<img width="1920" height="960" alt="Thumbnail" src="https://github.com/user-attachments/assets/350b683f-195d-4d94-8f35-3e803aa35c74" />
+"")
+
+
 Este é o front-end de uma aplicação web desenvolvida com **Next.js** e **Tailwind CSS**, voltada para o gerenciamento de uma academia. A interface permite que **admins**, **personais** e **alunos** tenham acesso às funcionalidades de forma clara, responsiva e organizada.
 
 ## 🎯 Objetivo
