@@ -7,42 +7,67 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
 import { useForm } from "react-hook-form"
-import userProfile from "../../../assets/image/userProfile.svg"
+import { BaseUrlFoto } from "@/utils/base-url-foto"
+import { axiosUpdateTreino } from "@/services/routes/treinos/updateTreino"
+import { toast } from "react-toastify"
 
 export function ModalUpdateTreino({ open, close, trainingToEdit, updateTreino }: ModalUPdateTreinoProps) {
+    const photo = BaseUrlFoto(trainingToEdit?.foto || "")
+
     const [previewImage, setPreviewImage] = useState<string | null>(null);
-    const previewFoto = trainingToEdit?.foto ? URL.createObjectURL(trainingToEdit.foto) : 'url(#)';
+    const previewFoto = trainingToEdit?.foto ? photo : 'url(#)';
 
-    const { register, handleSubmit, reset } = useForm<TrainingSchemaDTO>({
-    resolver: zodResolver(trainingSchema),
-  })
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<TrainingSchemaDTO>({
+        resolver: zodResolver(trainingSchema),
+    })
 
-   useEffect(() => {
-    if (trainingToEdit && open) {
-      reset({
-        nome: trainingToEdit.nome,
-        descricao: trainingToEdit.descricao,
-        foco_corpo: trainingToEdit.foco_corpo,
-        foto: undefined,
-      })
+    useEffect(() => {
+        if (trainingToEdit && open) {
+            reset({
+                nome: trainingToEdit.nome,
+                descricao: trainingToEdit.descricao,
+                foco_corpo: trainingToEdit.foco_corpo,
+                foto: undefined,
+            })
 
-      if (typeof trainingToEdit.foto === 'string') {
-        setPreviewImage(trainingToEdit.foto)
-      }
+            if (typeof trainingToEdit.foto === 'string') {
+                setPreviewImage(photo)
+            }
+        }
+    }, [trainingToEdit, reset, open])
+
+    async function onSubmit(data: TrainingSchemaDTO) {
+
+        const file = data.foto?.[0] ?? null
+        const finalData = {
+            ...data,
+            foto: file || trainingToEdit?.foto,
+        }
+       
+        if (file && file.size > 2 * 1024 * 1024) {
+            toast.error("A imagem é muito grande. Envie uma com até 2MB.");
+            return;
+        }
+
+        toast.success(`O ${data.nome} foi atualizado com sucesso!`)
+        if (updateTreino) updateTreino(finalData)
+        close()
+
+        if (!trainingToEdit?.id) return;
+        await axiosUpdateTreino(trainingToEdit.id, finalData);
     }
-  }, [trainingToEdit, reset, open])
 
-  function onSubmit(data: TrainingSchemaDTO) {
-    const file = data.foto?.[0] ?? null
-
-    const finalData = {
-      ...data,
-      foto: file || trainingToEdit?.foto,
-    }
-
-    if (updateTreino) updateTreino(finalData)
-    close()
-  }
+    useEffect(() => {
+        if (errors.nome) {
+            toast.error(errors.nome.message);
+        }
+        if (errors.descricao) {
+            toast.error(errors.descricao.message);
+        }
+        if (errors.foco_corpo) {
+            toast.error("Selecione um foco de treino.");
+        }
+    }, [errors]);
 
     return ReactDOM.createPortal(
         <div

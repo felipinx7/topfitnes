@@ -8,9 +8,10 @@ import { TrainingSchemaDTO } from "@/schemas/schema-treino"
 import { ModalDeleteTreino } from "../modals/treinos/modalDeleteTreino"
 import { ModalSendTreino } from "../modals/treinos/modalSendTreino"
 import { ModalSeeTreino } from "../modals/treinos/modalSeeTreino"
+import { getAllTreino } from "@/services/routes/treinos/getAllTreino"
 
 
-export function Treinos() {
+export function Treinos({ personal }: any) {
     // visialização dos modals
     const [visibleModalCreate, setVisibleModalCreate] = useState(false)
     const [visibleModalUpdate, setVisibleModalUpdate] = useState(false)
@@ -30,17 +31,26 @@ export function Treinos() {
         setTrainings((prev: TrainingSchemaDTO[]) => [...prev, newTraining])
     }
 
-    function updateTraining(updateTraining: TrainingSchemaDTO){
+    function updateTraining(updateTraining: TrainingSchemaDTO) {
         setTrainings(prev => prev.map(t => t.id === trainingToEdit?.id ? updateTraining : t))
     }
 
-    function deleteTraining(){
+    function deleteTraining() {
         setTrainings(prev => prev.filter(t => t.id !== trainingToEdit?.id))
     }
 
+    useEffect(() => {
+        async function getAllTraining() {
+            const trainings = await getAllTreino();
+            setTrainings(trainings)
+        }
+
+        getAllTraining();
+    }, []);
+
     return (
         <div className="w-full h-full flex-col p-8 flex items-center">
-            <Search onChange={setSearchTerm} value={searchTerm}/>
+            <Search onChange={setSearchTerm} value={searchTerm} />
             <div className="flex w-full h-fit justify-between mt-4 border-b-2 border-b-gray-200">
                 <h1 className="text-verde-200 font-Poppins text-xl mt-1.5"> Treinos Criados </h1>
                 <button
@@ -70,8 +80,8 @@ export function Treinos() {
                             setVisibleModalSeeTraining(prev => !prev)
                         }}
                         nomeTreino={item.nome}
-                        descricaoTreino={item.descricao} 
-                        foto={item.foto}/>
+                        descricaoTreino={item.descricao}
+                        foto={item.foto} />
                 ))}
             </div>
 
@@ -79,27 +89,30 @@ export function Treinos() {
                 open={visibleModalCreate}
                 close={() => setVisibleModalCreate(prev => !prev)}
                 create={createTraining}
+                personal={personal}
             />
-            <ModalUpdateTreino 
-                open={visibleModalUpdate} 
-                close={() => setVisibleModalUpdate(prev => !prev)} 
+            <ModalUpdateTreino
+                open={visibleModalUpdate}
+                close={() => setVisibleModalUpdate(prev => !prev)}
                 trainingToEdit={trainingToEdit}
                 updateTreino={updateTraining}
-                />
-                
-            <ModalDeleteTreino 
-                open={visibleModalDelete} 
-                close={() => setVisibleModalDelete(prev => !prev)}
-                onDelete={deleteTraining} 
-                texto="treino"
-                />
+            />
 
-            <ModalSendTreino 
+            <ModalDeleteTreino
+                open={visibleModalDelete}
+                close={() => setVisibleModalDelete(prev => !prev)}
+                onDelete={deleteTraining}
+                texto="treino"
+                training={trainingToEdit}
+                isPersonal={true}
+            />
+
+            <ModalSendTreino
                 open={visibleModalSendTraining}
                 close={() => setVisibleModalSendTraining(prev => !prev)}
             />
 
-            <ModalSeeTreino 
+            <ModalSeeTreino
                 open={visibleModalSeeTraining}
                 close={() => setVisibleModalSeeTraining(prev => !prev)}
                 dataTraining={trainingToEdit}

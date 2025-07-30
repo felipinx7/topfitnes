@@ -1,14 +1,16 @@
+"use client"
 import { IconeSidebarInicio } from "@/assets/icons/icone-sidebar-inicio";
 import { IconeSidebarMeusAlunos } from "@/assets/icons/icone-sidebar-meus-alunos";
 import { IconeSidebarPeso } from "@/assets/icons/icone-sidebar-peso";
 import { IconeAlunoPreto } from "@/assets/icons/icone-aluno-preto";
 import { IconePesquisar } from "@/assets/icons/icone-pesquisar";
 import { IconeSair } from "@/assets/icons/icone-sair";
-
 import { SiderBar } from "@/types/type-Sidebar";
 import { IconeSidebarRelatorio } from "@/assets/icons/icone-sidebar-relatorio";
+import { BaseUrlFoto } from "@/utils/base-url-foto";
+import { useEffect } from "react";
 
-export function SideBar({ id, setId }: SiderBar) {
+export function SideBar({ id, setId, personal }: SiderBar) {
     const Botoes = [
         {
             nome: "Início",
@@ -38,18 +40,25 @@ export function SideBar({ id, setId }: SiderBar) {
         }
     ];
 
+    useEffect(() => {
+        if (personal) {
+            personal
+        }
+    }, [personal]);
+
+    const photo = BaseUrlFoto(personal.foto)
     return (
         <div className="w-full h-full flex flex-col min-w-[350px] justify-between bg-neutras-300 px-8 shadow-2xl shadow-neutras-100/25 font-Poppins py-8">
             <div className="w-full flex">
                 <div
-                    style={{ backgroundImage: `url(#)`, backgroundSize: "cover" }}
+                    style={{ backgroundImage: `url(${photo})`, backgroundSize: "cover", backgroundPosition: 'center' }}
                     className="h-14 w-14 rounded-full bg-verde-100"
                 ></div>
                 <div className="flex flex-col justify-center items-start ml-2">
                     <h1 className="text-xl font-Poppins-Bold text-verde-200">
-                        Piroco Limeiston
+                        {personal.nome}
                     </h1>
-                    <h1 className="text-base font-Poppins text-neutras-100">Aluno</h1>
+                    <h1 className="text-base font-Poppins text-neutras-100">Personal</h1>
                 </div>
             </div>
 
@@ -59,8 +68,8 @@ export function SideBar({ id, setId }: SiderBar) {
                         key={botao.id}
                         onClick={() => setId(botao.id)}
                         className={`text-neutras-100  ${id == botao.id
-                                ? "text-verde-200 bg-verde-300"
-                                : "hover:bg-neutras-200/10"
+                            ? "text-verde-200 bg-verde-300"
+                            : "hover:bg-neutras-200/10"
                             } duration-300 rounded-xl w-full p-2 text-xl font-Poppins-Medium flex justify-start cursor-pointer `}
                     >
                         <div className="h-8 w-8">{botao.icon}</div>{" "}
