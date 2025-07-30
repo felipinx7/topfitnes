@@ -13,9 +13,7 @@ export function HomePersonal() {
     useEffect(() => {
         async function getPersonal() {
             const data = await GetPersonal();
-            if (data) {
-                setPersonal(data);
-            }
+            if (data) setPersonal(data);
         }
 
         getPersonal();

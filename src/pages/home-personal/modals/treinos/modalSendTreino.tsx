@@ -2,8 +2,26 @@ import { IconeCloseModal } from "@/assets/icons/icone-closeModal-treino";
 import { ModalSendTreinoProps } from "@/types/type-ModalTreino-Props";
 import ReactDOM from "react-dom"
 import { SendTreinoComponent } from "../../components/sendTrainingToStudent";
+import { useEffect, useState } from "react";
+import { AlunoSchemaDTO } from "@/schemas/schema-aluno-form";
+import { GetTodosClientes } from "@/services/routes/administrador/get/get-todos-clientes";
 
 export function ModalSendTreino(data: ModalSendTreinoProps) {
+    const [alunos, setAlunos] = useState([]);
+
+    useEffect(() => {
+        async function getAllAlunos() {
+            const response = await GetTodosClientes();
+            console.log(JSON.stringify(response.data, null, 2));
+
+            if (response) setAlunos(response)
+        }
+
+        getAllAlunos();
+    }, [])
+
+
+
     return ReactDOM.createPortal(
         <div
             onClick={data.close}
@@ -27,7 +45,9 @@ export function ModalSendTreino(data: ModalSendTreinoProps) {
 
                 {/* Alunos */}
                 <div className="w-[95%] mt-2 h-full overflow-y-auto flex flex-col items-center space-y-2">
-                    <SendTreinoComponent />
+                    {alunos.map((item) => (
+                        <SendTreinoComponent dataAluno={item} key={item.id} training={data.trainingToEdit} />
+                    ))}
                 </div>
             </div>
         </div>,

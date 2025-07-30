@@ -49,7 +49,7 @@ export function ModalUpdateTreino({ open, close, trainingToEdit, updateTreino }:
             return;
         }
 
-        toast.success(`O ${data.nome} foi atualizado com sucesso!`)
+        toast.info(`O ${data.nome} foi atualizado com sucesso!`)
         if (updateTreino) updateTreino(finalData)
         close()
 

@@ -27,7 +27,8 @@ export type ModalDeleteTreinoProps = {
 export type ModalSendTreinoProps = {
     open: boolean,
     close: () => void,
-    send?: () => void
+    send?: () => void,
+    trainingToEdit: TrainingSchemaDTO | null
 }
 
 export type ModalSeeTreinoProps = {
