@@ -13,7 +13,6 @@ export const schemaCadastroPersonal = z.object({
   registro_profissional: z.string().min(3, "Registro inválido"),
   especialidade: z.string().min(2, "Especialidade obrigatória"),
   disponibilidade: z.string().min(2, "Informe a disponibilidade"),
-  senha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
   email: z.email("Email inválido"),
 });
 

@@ -6,6 +6,7 @@ import PutClienteAdministrador from "@/services/routes/administrador/put/put-cli
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { logo } from "@/assets/image";
+import { BaseUrlFoto } from "@/utils/base-url-foto";
 
 interface ModalFormularioCardClienteProps {
   OpenModal: boolean;
@@ -22,16 +23,9 @@ export default function ModalFormularioCardCliente({
   if (!data) return null;
 
   // Foto padrão (altere o caminho para sua imagem padrão)
-  const fotoPadrao = logo;
+  const baseUrl = BaseUrlFoto(data.foto || "");
 
   const [fotoArquivo, setFotoArquivo] = useState<File | null>(null);
-  const [foto, setFoto] = useState<string>(fotoPadrao);
-
-  // Atualiza foto para padrão no load e sempre que data mudar
-  useEffect(() => {
-    setFoto(fotoPadrao);
-    setFotoArquivo(null);
-  }, [data]);
 
   function formatarDataISO(data: Date | string | undefined): string {
     if (!data) return "";
@@ -49,28 +43,16 @@ export default function ModalFormularioCardCliente({
     resolver: zodResolver(schemaAluno),
   });
 
-  function onFotoChange(base64: string) {
-    if (!base64) {
-      setFotoArquivo(null);
-      setFoto(fotoPadrao);
-      return;
+  function base64ToFile(base64String: string, filename: string): File {
+    const arr = base64String.split(",");
+    const mime = arr[0].match(/:(.*?);/)?.[1] || "";
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
     }
-
-    function base64ToFile(base64String: string, filename: string): File {
-      const arr = base64String.split(",");
-      const mime = arr[0].match(/:(.*?);/)?.[1] || "";
-      const bstr = atob(arr[1]);
-      let n = bstr.length;
-      const u8arr = new Uint8Array(n);
-      while (n--) {
-        u8arr[n] = bstr.charCodeAt(n);
-      }
-      return new File([u8arr], filename, { type: mime });
-    }
-
-    const file = base64ToFile(base64, "foto-upload.jpg");
-    setFotoArquivo(file);
-    setFoto(base64);
+    return new File([u8arr], filename, { type: mime });
   }
 
   async function OnSubmit(formData: AlunoSchemaDTO) {
@@ -120,8 +102,6 @@ export default function ModalFormularioCardCliente({
     }
   }, [data, reset]);
 
-  
-
   return (
     <section
       className={`overflow-hidden transition-all duration-500 ease-in-out w-full bg-transparent 
@@ -139,10 +119,10 @@ export default function ModalFormularioCardCliente({
           <div className="flex items-start max-lg:flex-col gap-8 justify-between">
             {/* Coluna 1 */}
             <div className="flex flex-col w-full items-center gap-4">
-              <FotoInputComponente
-                initialPhotoUrl={foto}
-                onFileChange={onFotoChange}
-              />
+              {/* container imagem  */}
+              <div className="w-65 h-65 rounded-full">
+                <img src={baseUrl} className="rounded-full" alt={`Foto do aluno(a) ${data.nome}`} />
+              </div>
               <div className="flex mt-16 flex-col w-full">
                 <label
                   htmlFor="nome"

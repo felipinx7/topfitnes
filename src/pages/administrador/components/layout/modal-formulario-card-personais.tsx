@@ -1,9 +1,4 @@
-import { useEffect } from "react";
-import { IconeSetaEsquerda } from "@/assets/icons/icone-seta-esquerda";
-import FotoInputComponente from "@/components/ui/foto-input-componente";
-import { DataAluno } from "@/dto/data-aluno";
-import { AlunoSchemaDTO, schemaAluno } from "@/schemas/schema-aluno";
-import PutClienteAdministrador from "@/services/routes/administrador/put/put-cliente-administrador";
+import { useEffect, useState } from "react";
 import { BaseUrlFoto } from "@/utils/base-url-foto";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -13,6 +8,7 @@ import {
   SchemaPersonal,
 } from "@/schemas/schema-personais";
 import PutPersonalAdministrador from "@/services/routes/administrador/put/put-personal-administrador";
+
 interface ModalFormularioCardClienteProps {
   OpenModal: boolean;
   handleVisibilityModal: () => void;
@@ -24,40 +20,55 @@ export default function ModalFormularioCardPersonais({
   handleVisibilityModal,
   data,
 }: ModalFormularioCardClienteProps) {
-  // estados e variaveis utilizadas no componente
-  const foto = BaseUrlFoto(data.foto);
-  const telefoneFormatado = data.telefone;
-  function formatarDataISO(data: Date | string | undefined): string {
-    if (!data) return "";
-    const d = new Date(data);
-    if (isNaN(d.getTime())) return "";
-    return d.toISOString().substring(0, 10);
-  }
-
   const {
     register,
     handleSubmit,
     reset,
-    watch,
     setValue,
-    formState: { errors, isSubmitted },
+    formState: { errors },
   } = useForm<SchemaPersonal>({
     resolver: zodResolver(schemaCadastroPersonal),
   });
 
+  const [fotoFile, setFotoFile] = useState<File | null>(null);
+  const [fotoPreview, setFotoPreview] = useState<string>("");
+
+  // Preenche formulário ao abrir
   useEffect(() => {
     if (data) {
       reset(data);
+      if (data.foto) {
+        const baseUrl = BaseUrlFoto(data.foto);
+        setFotoPreview(baseUrl);
+      }
     }
   }, [data, reset]);
 
+  // Atualiza preview ao escolher novo arquivo
+  useEffect(() => {
+    if (!fotoFile) return;
+    const objectUrl = URL.createObjectURL(fotoFile);
+    setFotoPreview(objectUrl);
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [fotoFile]);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setFotoFile(file);
+      setValue("foto", file as any); // força tipagem
+    }
+  };
+
   async function OnSubmit(data: SchemaPersonal) {
     try {
-      console.log("OnSubmit");
+      if (fotoFile) {
+        data.foto = fotoFile as any;
+      }
       const response = await PutPersonalAdministrador(data.id, data);
       return response;
     } catch (error) {
-      console.log("Error ao atualizar dados", error);
+      console.log("Erro ao atualizar dados", error);
     }
   }
 
@@ -71,18 +82,34 @@ export default function ModalFormularioCardPersonais({
         <form
           method="POST"
           onSubmit={handleSubmit(OnSubmit)}
+          encType="multipart/form-data"
           className="flex flex-col w-full"
         >
           <div className="flex items-start max-lg:flex-col gap-8 justify-between">
             {/* Coluna 1 */}
             <div className="flex flex-col w-full items-center gap-4">
-              <FotoInputComponente
-                initialPhotoUrl={watch("foto")}
-                onFileChange={(file) => setValue("foto", file)}
-                submitedPhoto={isSubmitted}
+              <div className="w-40 h-40 rounded-full overflow-hidden border">
+                {fotoPreview ? (
+                  <img
+                    src={fotoPreview}
+                    className="w-full h-full object-cover"
+                    alt={`Foto do profissional ${data.nome}`}
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-gray-200 text-sm text-gray-500">
+                    Sem foto
+                  </div>
+                )}
+              </div>
+
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="text-sm mt-2"
               />
 
-              <div className="flex mt-16 flex-col w-full">
+              <div className="flex mt-4 flex-col w-full">
                 <label
                   htmlFor="nome"
                   className="text-[#333] font-Poppins-Semibold mb-1"
@@ -95,6 +122,11 @@ export default function ModalFormularioCardPersonais({
                   type="text"
                   className="input-padrao"
                 />
+                {errors.nome && (
+                  <span className="text-red-500 text-sm">
+                    {errors.nome.message}
+                  </span>
+                )}
               </div>
 
               <div className="flex flex-col mb-6 w-full">
@@ -109,6 +141,11 @@ export default function ModalFormularioCardPersonais({
                   id="sobrenome"
                   className="input-padrao"
                 />
+                {errors.sobrenome && (
+                  <span className="text-red-500 text-sm">
+                    {errors.sobrenome.message}
+                  </span>
+                )}
               </div>
             </div>
 
@@ -206,7 +243,6 @@ export default function ModalFormularioCardPersonais({
                   className="input-padrao"
                 />
               </div>
-              
             </div>
           </div>
 

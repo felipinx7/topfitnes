@@ -1,5 +1,6 @@
 export interface DataCadastroPersonal {
   id?: string;
+  
   nome: string;
   sobrenome: string;
   foto?: string;
@@ -10,4 +11,5 @@ export interface DataCadastroPersonal {
   disponibilidade: string;
   senha: string;
   email: string;
+  usuario_id?: string;
 }

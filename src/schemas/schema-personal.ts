@@ -2,6 +2,7 @@ import z from "zod";
 
 export const schemaPersonal = z.object({
   id: z.string().optional(),
+  usuario_id: z.string().optional(),
   nome: z.string().min(1, "Nome muito curto"),
   sobrenome: z.string().min(1, "Sobrenome muito curto"),
   formacao: z.string().min(2, "Formação inválida"),

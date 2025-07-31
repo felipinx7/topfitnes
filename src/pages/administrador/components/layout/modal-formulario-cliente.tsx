@@ -111,7 +111,7 @@ export default function ModalFormularioCliente({
                   <img
                     src={URL.createObjectURL(fotoArquivo)}
                     alt="Pré-visualização"
-                    className="w-32 h-32 rounded-full object-cover border"
+                    className="w-60 h-60 rounded-full object-cover border"
                   />
                 )}
 
@@ -123,6 +123,7 @@ export default function ModalFormularioCliente({
                 </label>
 
                 <input
+                  required
                   id="fotoInput"
                   type="file"
                   accept="image/*"
@@ -144,6 +145,7 @@ export default function ModalFormularioCliente({
                   Nome:
                 </label>
                 <input
+                  required
                   id="nome"
                   {...register("nome")}
                   type="text"
@@ -161,6 +163,7 @@ export default function ModalFormularioCliente({
                   Sobrenome:
                 </label>
                 <input
+                  required
                   {...register("sobrenome")}
                   id="sobrenome"
                   type="text"
@@ -181,6 +184,7 @@ export default function ModalFormularioCliente({
                   Telefone:
                 </label>
                 <input
+                  required
                   {...register("telefone")}
                   id="telefone"
                   type="tel"
@@ -198,6 +202,7 @@ export default function ModalFormularioCliente({
                   Email:
                 </label>
                 <input
+                  required
                   {...register("email")}
                   id="email"
                   type="email"
@@ -215,6 +220,7 @@ export default function ModalFormularioCliente({
                   Senha:
                 </label>
                 <input
+                  required
                   id="senha"
                   {...register("senha")}
                   type="password"
@@ -252,6 +258,7 @@ export default function ModalFormularioCliente({
                   Peso (kg):
                 </label>
                 <input
+                  required
                   id="peso"
                   {...register("peso", { valueAsNumber: true })}
                   type="number"
@@ -270,6 +277,7 @@ export default function ModalFormularioCliente({
                   Altura (cm):
                 </label>
                 <input
+                  required
                   id="altura"
                   {...register("altura", { valueAsNumber: true })}
                   type="number"
@@ -290,6 +298,7 @@ export default function ModalFormularioCliente({
                   Idade:
                 </label>
                 <input
+                  required
                   {...register("idade", { valueAsNumber: true })}
                   id="idade"
                   type="number"
@@ -308,6 +317,7 @@ export default function ModalFormularioCliente({
                   Data de Matrícula:
                 </label>
                 <input
+                  required
                   type="date"
                   max={new Date().toISOString().slice(0, 10)}
                   {...register("data_matricula")}
@@ -324,6 +334,7 @@ export default function ModalFormularioCliente({
                   Dias de Treino por Semana:
                 </label>
                 <input
+                  required
                   id="treino_dias"
                   {...register("treino_dias_por_semana", {
                     valueAsNumber: true,

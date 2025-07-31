@@ -9,7 +9,7 @@ import { useState } from "react";
 import { GetUmAluno } from "@/services/routes/administrador/get/get-apenas-um-aluno";
 
 export default function CardInformacaoAluno(props: DataAluno) {
-  const foto = BaseUrlFoto(props.foto);
+  const foto = BaseUrlFoto(props.foto || "");
 
   const [informacoesUsuario, setInformacoesUsuario] =
     useState<DataAluno | null>(null);
@@ -59,7 +59,7 @@ export default function CardInformacaoAluno(props: DataAluno) {
           </div>
           <div className="flex flex-col">
             <h4 className="text-black font-Poppins-Semibold text-[1.2rem]">
-              {props.nome} {props.sobrenome} {props.id}
+              {props.nome} {props.sobrenome}
             </h4>
             <p className="text-black">{props.email}</p>
           </div>
@@ -100,4 +100,3 @@ export default function CardInformacaoAluno(props: DataAluno) {
     </article>
   );  
 }
-
