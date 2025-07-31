@@ -8,9 +8,15 @@ import { useForm } from "react-hook-form"
 import userProfile from "../../../../assets/image/userProfile.svg"
 import { ModalUpdateExercicioProps } from "@/types/type-ModalExercise-Props"
 import { exerciseDTO, exerciseDTOInput, exerciseSchema } from "@/schemas/schema-exercicio"
+import { UpdateExercise } from "@/services/routes/exercises/updateExercise"
+import { toast } from "react-toastify"
+import { BaseUrlFoto } from "@/utils/base-url-foto"
 
 export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExercise }: ModalUpdateExercicioProps) {
+    const photo = BaseUrlFoto(exerciseToEdit?.foto || "")
+
     const [previewImage, setPreviewImage] = useState<string | null>(null);
+    const previewFoto = exerciseToEdit?.foto ? photo : 'url(#)';
 
     const {
         register,
@@ -22,7 +28,7 @@ export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExerci
     });
 
     useEffect(() => {
-        if (exerciseToEdit && open){
+        if (exerciseToEdit && open) {
             reset({
                 nome: exerciseToEdit.nome,
                 repeticoes: exerciseToEdit.repeticoes,
@@ -35,16 +41,20 @@ export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExerci
         }
     }, [exerciseToEdit, open, reset])
 
-    function onSubmit(data: exerciseDTO) {
+    async function onSubmit(data: exerciseDTO) {
         const file = data.foto?.[0];
         const finalData = {
             ...data,
             foto: file || null,
-            id: new Date()
         }
 
-        if(updateExercise) updateExercise(finalData)
+        console.log("teste")
+        if (updateExercise) updateExercise(finalData)
+        toast.info("O Exercicio foi atualizado com sucesso!")
         close()
+
+        if (!exerciseToEdit?.id) return;
+        await UpdateExercise(finalData, exerciseToEdit.id);
     };
 
     return ReactDOM.createPortal(
@@ -81,7 +91,7 @@ export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExerci
                     <div className="flex flex-col w-[70%] items-center justify-center">
                         <div className=" aspect-square rounded-full w-[50%] relative bg-[#131313] duration-500 ease-in-out transition-all hover:scale-105">
                             <img
-                                src={previewImage ?? userProfile}
+                                src={previewImage ?? previewFoto}
                                 alt="preview"
                                 className="aspect-square w-full object-cover rounded-full duration-500 hover:border-white hover:scale-105"
                             />

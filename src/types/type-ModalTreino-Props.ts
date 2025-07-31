@@ -4,7 +4,6 @@ export type ModalCreateTreinoProps = {
     open: boolean,
     close: () => void,
     create: (data: TrainingSchemaDTO) => void,
-    personal: any
 }
 
 export type ModalUPdateTreinoProps = {

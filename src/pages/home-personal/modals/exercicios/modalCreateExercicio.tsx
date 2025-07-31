@@ -2,14 +2,16 @@
 import { IconeCloseModal } from "@/assets/icons/icone-closeModal-treino"
 import { PreviewImage } from "@/utils/previewImagem"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
 import { useForm } from "react-hook-form"
 import userProfile from "../../../../assets/image/userProfile.svg"
 import { ModalCreateExercicioProps } from "@/types/type-ModalExercise-Props"
 import { exerciseDTO, exerciseDTOInput, exerciseSchema } from "@/schemas/schema-exercicio"
+import { CreateExercise } from "@/services/routes/exercises/createExercise"
+import { toast } from "react-toastify"
 
-export function ModalCreateExercicio({ open, close, create }: ModalCreateExercicioProps) {
+export function ModalCreateExercicio({ open, close, create, treinoId }: ModalCreateExercicioProps) {
     const [previewImage, setPreviewImage] = useState<string | null>(null);
 
     const {
@@ -21,18 +23,22 @@ export function ModalCreateExercicio({ open, close, create }: ModalCreateExercic
         resolver: zodResolver(exerciseSchema)
     });
 
-    function onSubmit(data: exerciseDTO) {
+    async function onSubmit(data: exerciseDTO) {
         const file = data.foto?.[0];
         const finalData = {
             ...data,
             foto: file || null,
-            id: new Date()
         }
 
         create(finalData)
+        toast.success("Exercicio criado com sucesso!")
+
         reset()
         setPreviewImage(null)
         close()
+
+        const dataBack = { ...data, foto: file, treino_id: treinoId, intervalo_descanso: 30 }
+        await CreateExercise(dataBack)
     };
 
     return ReactDOM.createPortal(

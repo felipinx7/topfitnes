@@ -17,9 +17,13 @@ type props ={
 
 export function Treinos({treinos} : props) {
   const [openModal,setOpenModal] = useState(false);
+  const [searchTerm, setSearchTem] = useState<string>("")
   const [modalTreino,setModalTreino] = useState<TreinoDTO | undefined>()
 
-  console.log(treinos)
+  
+  const filteredTranings = treinos?.filter(t => t.treino.nome.toLowerCase().includes(searchTerm.toLowerCase()))
+
+
   return (
     <div className="w-full h-full p-8">
       {/* Área de pesquisa*/}
@@ -33,6 +37,7 @@ export function Treinos({treinos} : props) {
             className="w-full bg-verde-500 text-base p-3 pl-12 outline-0 text-verde-200 rounded-full placeholder:text-verde-200/70"
             placeholder="Pesquisar por nome..."
             type="text"
+            onChange={(e)=> setSearchTem(e.target.value)}
           />
         </div>
 
@@ -44,7 +49,7 @@ export function Treinos({treinos} : props) {
       </div>
       {/*Treinos */}
       <div className="w-full h-full grid overflow-auto grid-cols-1 gap-4 place-content-start pt-4 place-items-center">
-        {treinos?.map((treino: AlunoTreino) => (
+        {filteredTranings?.map((treino: AlunoTreino) => (
           <Treino
             treino={treino.treino}
             OpenModal={setOpenModal}
