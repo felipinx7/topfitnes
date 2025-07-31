@@ -1,12 +1,12 @@
 import { z } from "zod";
 
 export const exerciseSchema = z.object({
-  id: z.date().optional(),
+  id: z.string().optional(),
   nome: z.string(),
   foto: z.any().optional(),
   descricao: z.string(),
-  repeticoes: z.coerce.number().int(),
-  execucoes: z.coerce.number().int(), 
+  repeticoes: z.string(),
+  execucoes: z.string() 
 });
 
 export type exerciseDTO = z.infer<typeof exerciseSchema>;

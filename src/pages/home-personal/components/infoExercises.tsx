@@ -2,14 +2,14 @@ import { exerciseDTO } from "@/schemas/schema-exercicio";
 import { ExercicioComponent } from "./exercicioComponent";
 
 type infoExerciesProps = {
-    setIsExercises: (exercise: exerciseDTO) => void, 
-    setVisibleModalDelete: (value: boolean | ((prev: boolean) => boolean)) => void, 
-    setVisibleModalCreate: (value: boolean | ((prev: boolean) => boolean)) => void, 
+    setIsExercises: (exercise: exerciseDTO) => void,
+    setVisibleModalDelete: (value: boolean | ((prev: boolean) => boolean)) => void,
+    setVisibleModalCreate: (value: boolean | ((prev: boolean) => boolean)) => void,
     setVisibleModalUpdate: (value: boolean | ((prev: boolean) => boolean)) => void,
-    exercises: exerciseDTO[] 
+    exercises: exerciseDTO[]
 }
 
-export function InfoExercises({setIsExercises, setVisibleModalDelete, setVisibleModalCreate, setVisibleModalUpdate, exercises }: infoExerciesProps) {
+export function InfoExercises({ setIsExercises, setVisibleModalDelete, setVisibleModalCreate, setVisibleModalUpdate, exercises }: infoExerciesProps) {
     return (
         <div className="w-full h-full border-l border-gray-400">
             <div className="flex justify-between px-4 py-1 font-poppins-Medium ">
@@ -21,31 +21,36 @@ export function InfoExercises({setIsExercises, setVisibleModalDelete, setVisible
                 </button>
             </div>
             {/* Exercicios */}
-            <div className="flex-col flex items-center w-full overflow-y-auto mt-6 space-y-4">
-                {exercises.map((item, idx) => {
-                    const mappedItem = {
-                        ...item,
-                        name: item?.nome,
-                        reps: item?.repeticoes,
-                        series: item?.execucoes,
-                        description: item.descricao,
-                    };
-                    return (
-                        <ExercicioComponent
-                            key={item.id ? item.id.toString() : idx}
-                            delete={() => {
-                                setIsExercises(item)
-                                setVisibleModalDelete(prev => !prev)
-                            }}
-                            update={() => {
-                                setIsExercises(item)
-                                setVisibleModalUpdate(prev => !prev)
-                            }}
-                            dataExercise={mappedItem} 
-                            foto={item.foto}
+            <div className="flex-1 flex-col flex items-center w-full overflow-y-auto mt-6 space-y-4">
+                {(exercises || []).length > 0 ? (
+                    (exercises || []).map((item, idx) => {
+                        const mappedItem = {
+                            ...item,
+                            name: item?.nome,
+                            reps: Number(item?.repeticoes),
+                            series: Number(item?.execucoes),
+                            description: item.descricao,
+                        };
+                        return (
+                            <ExercicioComponent
+                                key={item.id ? item.id.toString() : idx}
+                                delete={() => {
+                                    setIsExercises(item)
+                                    setVisibleModalDelete(prev => !prev)
+                                }}
+                                update={() => {
+                                    setIsExercises(item)
+                                    setVisibleModalUpdate(prev => !prev)
+                                }}
+                                dataExercise={mappedItem}
+                                foto={item.foto}
                             />
-                    );
-                })}
+                        );
+                    })
+                ) : (
+                    <p className="text-gray-500 mt-4 font-poppins-Medium">Não há exercícios.</p>
+                )}
+
             </div>
         </div>
     )

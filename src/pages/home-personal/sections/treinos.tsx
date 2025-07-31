@@ -82,6 +82,7 @@ export function Treinos({ personal }: any) {
                         nomeTreino={item.nome}
                         descricaoTreino={item.descricao}
                         foto={item.foto} />
+                        
                 ))}
             </div>
 
@@ -89,7 +90,6 @@ export function Treinos({ personal }: any) {
                 open={visibleModalCreate}
                 close={() => setVisibleModalCreate(prev => !prev)}
                 create={createTraining}
-                personal={personal}
             />
             <ModalUpdateTreino
                 open={visibleModalUpdate}

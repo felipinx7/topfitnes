@@ -1,7 +1,9 @@
+'use client'
 import { IconeExcluirTreino } from "@/assets/icons/icon-excluir-treino";
 import { IconeAtualizarTreino } from "@/assets/icons/icone-atualizar-treino";
 import { ExercicioDTO } from "@/types/type-Treino";
-import { useEffect } from "react";
+import { BaseUrlFoto } from "@/utils/base-url-foto";
+import { useEffect, useState } from "react";
 
 type functionButtons = {
     update?: () => void,
@@ -12,11 +14,19 @@ type functionButtons = {
 
 
 export function ExercicioComponent(data: functionButtons) {
-    const previewFoto = data.foto ? URL.createObjectURL(data.foto) : 'url(#)';
+    const [previewFoto, setPreviewFoto] = useState<string>("");
+    
+        useEffect(() => {
+        if (data.foto instanceof File) {
+          const objectUrl = URL.createObjectURL(data.foto);
+          setPreviewFoto(objectUrl);
+    
+          return () => URL.revokeObjectURL(objectUrl);
+        } else {
+          setPreviewFoto(BaseUrlFoto(String(data.foto)));
+        }
+      }, [data.foto]);
 
-    useEffect(() => {
-        console.log("previewFoto: ", previewFoto)
-    }, [previewFoto])
     return (
         <div className="w-[95%] max-w-[95%] max-h-28 overflow-hidden overflow-x-hidden bg-verde-600 p-3 h-28 py flex items-center shadow shadow-black/30 rounded-lg justify-between border border-black/30">
             <div className="flex">
