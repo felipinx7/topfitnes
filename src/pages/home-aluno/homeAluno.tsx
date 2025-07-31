@@ -26,7 +26,7 @@ export function HomeAluno() {
       case 1:
         return <Inicio date={aluno?.data_validade_plano}/>;
       case 2:
-        return <Treinos />;
+        return <Treinos treinos={aluno?.treinos_aluno} />;
       case 3:
         return <MeuPersonal/>;
       case 4:
@@ -38,7 +38,7 @@ export function HomeAluno() {
  async function GetMe(){
        const res = await api.get("/student/", { withCredentials: true })
        setAluno(res.data.aluno)
-       console.log(res)     
+       console.log(res)
   }
 
   useEffect(() =>{

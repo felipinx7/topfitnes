@@ -8,73 +8,18 @@ import { Treino } from "../components/Treino";
 import { ModalTreino } from "../components/TreinoModal";
 
 import { useState } from "react";
+import { AlunoTreino } from "@/dto/data-aluno-Home";
 
-export function Treinos() {
+type props ={
+  treinos?: AlunoTreino[]
+}
+
+
+export function Treinos({treinos} : props) {
   const [openModal,setOpenModal] = useState(false);
   const [modalTreino,setModalTreino] = useState<TreinoDTO | undefined>()
 
-
-  const treinos: TreinoDTO[] = [
-    {
-      name: "Treino de Peito e Tríceps",
-      description: "Foco em hipertrofia para parte superior do corpo.",
-      bodyPartsAfected: "Peito, Tríceps",
-      exercises: [
-        {
-          name: "Supino Reto com Barra",
-          reps: 10,
-          series: 4,
-          description:
-            "Deite no banco e empurre a barra para cima com controle.",
-        },
-        {
-          name: "Tríceps Testa",
-          reps: 12,
-          series: 3,
-          description: "Use uma barra ou halteres para focar nos tríceps.",
-        },
-      ],
-    },
-    {
-      name: "Treino de Pernas",
-      description: "Foco em força e resistência para os membros inferiores.",
-      bodyPartsAfected: "Pernas, Glúteos",
-      exercises: [
-        {
-          name: "Agachamento Livre",
-          reps: 8,
-          series: 4,
-          description: "Mantenha a postura reta e agache até 90 graus.",
-        },
-        {
-          name: "Leg Press",
-          reps: 10,
-          series: 3,
-          description: "Empurre a plataforma com os pés na largura dos ombros.",
-        },
-      ],
-    },
-    {
-      name: "Treino de Costas e Bíceps",
-      description: "Trabalho de puxada para parte posterior superior.",
-      bodyPartsAfected: "Costas, Bíceps",
-      exercises: [
-        {
-          name: "Puxada Frontal na Polia",
-          reps: 12,
-          series: 3,
-          description: "Segure a barra com pegada aberta e puxe até o peito.",
-        },
-        {
-          name: "Rosca Direta com Barra",
-          reps: 10,
-          series: 4,
-          description: "Execute com controle para máxima ativação dos bíceps.",
-        },
-      ],
-    },
-  ];
-
+  console.log(treinos)
   return (
     <div className="w-full h-full p-8">
       {/* Área de pesquisa*/}
@@ -99,9 +44,9 @@ export function Treinos() {
       </div>
       {/*Treinos */}
       <div className="w-full h-full grid overflow-auto grid-cols-1 gap-4 place-content-start pt-4 place-items-center">
-        {treinos.map((treino: TreinoDTO) => (
+        {treinos?.map((treino: AlunoTreino) => (
           <Treino
-            treino={treino}
+            treino={treino.treino}
             OpenModal={setOpenModal}
             SetTreino={setModalTreino}
           ></Treino>

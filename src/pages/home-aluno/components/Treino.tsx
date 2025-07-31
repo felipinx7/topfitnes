@@ -21,11 +21,11 @@ export function Treino({ treino, OpenModal, SetTreino }: TreinoComponent) {
         <div className="flex flex-col h-16 items-start justify-center">
           <h1 className="text-verde-200 text-xl font-Poppins-Bold w-full">
             {" "}
-            {treino.name}
+            {treino.nome}
           </h1>
           <h1 className=" text-verde-200 text-sm font-Poppins w-full">
             {" "}
-            {treino.bodyPartsAfected}
+            {treino.foco_corpo}
           </h1>
         </div>
       </div>

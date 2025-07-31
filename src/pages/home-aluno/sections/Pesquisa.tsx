@@ -5,61 +5,20 @@ import { TreinoDTO } from "@/types/type-Treino";
 import { IconePesquisar } from "@/assets/icons/icone-pesquisar";
 
 import { PersonalPesquisa } from "../components/personalPesquisa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { personalPesquisaDTO } from "@/dto/data-personal";
+import { GetTodosPersonais } from "@/services/routes/administrador/get/get-todos-personais"; 
 
 export function PesquisaPersonais() {
 
-const personais = [
-  {
-    nome: "Ana Souza",
-    preco: 120,
-    email: "ana.souza@example.com",
-    telefone: "(11) 91234-5678",
-  },
-  {
-    nome: "Carlos Silva",
-    preco: 150,
-    email: "carlos.silva@example.com",
-    telefone: "(21) 99876-5432",
-  },
-    {
-    nome: "Carlos Silva",
-    preco: 150,
-    email: "carlos.silva@example.com",
-    telefone: "(21) 99876-5432",
-  },
-    {
-    nome: "Carlos Silva",
-    preco: 150,
-    email: "carlos.silva@example.com",
-    telefone: "(21) 99876-5432",
-  },
-    {
-    nome: "Carlos Silva",
-    preco: 150,
-    email: "carlos.silva@example.com",
-    telefone: "(21) 99876-5432",
-  },
-    {
-    nome: "Carlos Silva",
-    preco: 150,
-    email: "carlos.silva@example.com",
-    telefone: "(21) 99876-5432",
-  },
-  {
-    nome: "Fernanda Lima",
-    preco: 100,
-    email: "fernanda.lima@example.com",
-    telefone: "(31) 98765-4321",
-  },
-  {
-    nome: "João Pereira",
-    preco: 130,
-    email: "joao.pereira@example.com",
-    telefone: "(41) 97654-3210",
-  },
-];
+  const [personais, setPersonais] = useState<personalPesquisaDTO[]>()
+
+  useEffect(()=> {
+  const res = GetTodosPersonais();
+  //setPersonais(res)
+  console.log(res)
+  
+  })
 
 
   return (
@@ -86,7 +45,7 @@ const personais = [
       </div>
       {/*Treinos */}
       <div className="w-full h-full overflow-y-auto overflow-x-hidden grid pb-40 grid-cols-1 gap-4 relative place-content-start pt-4 place-items-center">
-        {personais.map((personal : personalPesquisaDTO) => (
+        {personais?.map((personal : personalPesquisaDTO) => (
           <PersonalPesquisa
                {...personal}
           ></PersonalPesquisa>

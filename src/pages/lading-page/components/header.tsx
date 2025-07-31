@@ -1,9 +1,15 @@
+"use client"
+
 import { logo } from "@/assets/image";
 import { linksHeader } from "@/constants/links-header";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Header() {
+
+  const router = useRouter();
+
   return (
     <header className="w-full p-4 z-20 h-[80px] flex items-center   justify-between mt-4 max-lg:hidden">
       {/* Logo */}
@@ -22,7 +28,7 @@ export default function Header() {
       ))}
       {/* Botões de Ação */}
       <div className="flex items-center gap-4">
-        <button aria-label="Botão de Acessar o sistema" className="border-1 p-2 cursor-pointer w-auto rounded-[0.5rem] text-[1rem] ease-in duration-[0.3s] hover:bg-[var(--color-verde-100)] font-[600] px-8 border-[var(--color-verde-100)]">
+        <button onClick={() => router.push("/login")} aria-label="Botão de Acessar o sistema" className="border-1 p-2 cursor-pointer w-auto rounded-[0.5rem] text-[1rem] ease-in duration-[0.3s] hover:bg-[var(--color-verde-100)] font-[600] px-8 border-[var(--color-verde-100)]">
           ACESSAR
         </button>
         <button aria-label="Entrar em Contato com a Academia" className="cursor-pointer bg-[var(--color-verde-100)] p-2 rounded-[.5rem] text-[1rem] font-[600] hover:bg-[var(--color-verde-400)] transition-colors duration-500">

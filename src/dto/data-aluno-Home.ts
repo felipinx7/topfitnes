@@ -1,3 +1,5 @@
+import { TreinoDTO } from "@/types/type-Treino";
+
 export interface DataAlunoHome {
   id: string;
   nome?: string;
@@ -22,4 +24,32 @@ export interface DataAlunoHome {
   criado_em?: string;
   personal_id?: string | null;
   usuario_id?: string;
+  treinos_aluno?: AlunoTreino[]; 
+
 }
+
+export interface AlunoTreino {
+  id: string;
+  aluno_id: string;
+  treino_id: string;
+  concluido: boolean;
+  treino: TreinoDTO;
+  dias_semana: AlunoTreinoDiaSemana[];
+}
+
+export enum DiaSemana {
+  DOMINGO = "DOMINGO",
+  SEGUNDA = "SEGUNDA",
+  TERCA = "TERCA",
+  QUARTA = "QUARTA",
+  QUINTA = "QUINTA",
+  SEXTA = "SEXTA",
+  SABADO = "SABADO",
+}
+
+export interface AlunoTreinoDiaSemana {
+  id: string;
+  alunoTreinoId: string;
+  diaSemana: DiaSemana;
+}
+

@@ -41,12 +41,12 @@ export function ModalTreino({ treino, OpenModal, open }: TreinoModalComponent) {
           <div className="w-1/3 h-full p-5 pr-7 gap-2 border-r-2 border-neutras-200/10 flex flex-col items-center justify-start text-xl text-neutras-400">
             <div
               className="w-48  h-48 bg-verde-100 rounded-full"
-              style={{ backgroundImage: `url(#)`, backgroundSize: "cover" }}
+              style={{ backgroundImage: `url(${treino?.foto})`, backgroundSize: "cover" }}
             ></div>
             <div className="w-full flex flex-col justify-center items-center">
 
               <h1 className="w-full text-neutras-100 h-10 font-Poppins-Semibold text-xl flex justify-center items-center rounded-lg border border-neutras-200/30">
-                {treino?.name}
+                {treino?.nome}
               </h1>
             </div>
             <div className="w-full flex flex-col justify-center items-center">
@@ -54,7 +54,7 @@ export function ModalTreino({ treino, OpenModal, open }: TreinoModalComponent) {
                 Partes afetadas
               </h1>
               <h1 className="w-full h-10 font-Poppins-Medium text-neutras-100/80 p-1 flex text-base justify-start items-center rounded-lg border border-neutras-200/30">
-                {treino?.bodyPartsAfected}
+                {treino?.foco_corpo}
               </h1>
             </div>
             <div className="w-full flex flex-col justify-center items-center">
@@ -62,7 +62,7 @@ export function ModalTreino({ treino, OpenModal, open }: TreinoModalComponent) {
                 Descrição
               </h1>
               <h1 className="w-full h-36 text-neutras-100/80 text-base font-Poppins-Medium p-1 flex justify-start items-start rounded-lg border border-neutras-200/30">
-                {treino?.description}
+                {treino?.descricao}
               </h1>
             </div>
           </div>
@@ -75,7 +75,7 @@ export function ModalTreino({ treino, OpenModal, open }: TreinoModalComponent) {
               </h1>
             </div>
             <div className="w-full h-full grid grid-cols-1 gap-4 place-content-start pt-4 place-items-center">
-              {treino?.exercises.map((exercicio: ExercicioDTO) => (
+              {treino?.exercicios?.map((exercicio: ExercicioDTO) => (
                 <Exercicio {...exercicio} />
               ))}
             </div>

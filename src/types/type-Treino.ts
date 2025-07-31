@@ -1,17 +1,17 @@
 
 
 export type TreinoDTO = {
-    name: string,
-    description: string,
-    bodyPartsAfected: string,
-    exercises: ExercicioDTO[],
-  //  photo: string,
+    nome: string,
+    descricao: string,
+    foco_corpo: string,
+    exercicios: ExercicioDTO[],
+    foto: string,
 }
 
 export type ExercicioDTO = {
-    name: string,
- //   photo: string,
-    reps: number,
-    series: number,
-    description: string
+    nome: string,
+    foto: string,
+    repeticoes: number,
+    execucoes: number,
+    descricao: string
 }

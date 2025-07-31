@@ -40,9 +40,9 @@ export function Login() {
       router.push("/administrador")
     }else if(response.userRole == "ALUNO"){
       router.push("/home-aluno")
-    }// else if(response.userRole == "PERSONAL"){
-     // router.push("/home-personal")
-   // }
+    } else if(response.userRole == "PERSONAL"){
+      router.push("/home-personal")
+    }
 
 
 

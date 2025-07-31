@@ -63,7 +63,7 @@ export function SideBar({ id, setId, aluno }: SiderBarAluno) {
           <div
             key={botao.id}
             onClick={() => setId(botao.id)}
-            className={`text-neutras-100  ${
+            className={`text-neutras-100 items-center  ${
               id == botao.id
                 ? "text-verde-200 bg-verde-300"
                 : "hover:bg-neutras-200/10"
