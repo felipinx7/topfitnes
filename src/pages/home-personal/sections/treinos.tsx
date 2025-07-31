@@ -110,6 +110,7 @@ export function Treinos({ personal }: any) {
             <ModalSendTreino
                 open={visibleModalSendTraining}
                 close={() => setVisibleModalSendTraining(prev => !prev)}
+                trainingToEdit={trainingToEdit}
             />
 
             <ModalSeeTreino
