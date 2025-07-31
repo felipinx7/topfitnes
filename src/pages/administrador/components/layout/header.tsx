@@ -25,6 +25,8 @@ export default function HeaderAdministrador({
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal sair
   const [isOpenModalInformacoes, setIsOpenModalInformacoes] = useState(false); // Modal info admin
   const [adminData, setAdminData] = useState<DataAdministrador | null>(null);
+  const [informacaoAdmin, setInformacaoAdmin] =
+    useState<DataAdministrador | null>(null);
   const router = useRouter();
 
   function handleVisibilityModal() {
@@ -48,21 +50,10 @@ export default function HeaderAdministrador({
     router.push("/login");
   }
 
-  useEffect(() => {
-    async function fetchAdmin() {
-      try {
-        const id = localStorage.getItem("token");
-        if (!id) return;
-
-        const response = await GetDadosAdministrador(id);
-        if (response) setAdminData(response);
-      } catch (error) {
-        console.error("Erro ao buscar dados do administrador", error);
-      }
-    }
-
-    fetchAdmin();
-  }, []);
+  async function pegarUser(id: string) {
+    const response = await GetDadosAdministrador(id);
+    setInformacaoAdmin(response);
+  }
 
   // Fallback para evitar erro de undefined no modal
   const fallbackAdminData: DataAdministrador = {
@@ -74,6 +65,18 @@ export default function HeaderAdministrador({
     senha: "",
     foto: "",
   };
+
+  useEffect(() => {
+    const allKeys = { ...localStorage };
+    console.log("Todas as chaves do localStorage:", allKeys);
+
+    const token = localStorage.getItem("token");
+    console.log("O token pegado é ", token);
+
+    if (token) {
+      pegarUser(token);
+    }
+  }, []);
 
   return (
     <header className="max-lg:hidden">

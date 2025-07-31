@@ -30,11 +30,13 @@ export default function CardInformacaoAluno(props: DataAluno) {
     try {
       // Pega os dados atualizados do aluno antes de excluir
       const alunoCompletoResponse = await GetUmAluno(props.id);
-      const alunoCompleto = alunoCompletoResponse?.data as DataAluno | undefined;
+      const alunoCompleto = alunoCompletoResponse?.data as
+        | DataAluno
+        | undefined;
       setInformacoesUsuario(alunoCompleto ?? null);
 
       // Exclui o aluno
-      await DeleteClienteAdministrador(props.id);
+      await DeleteClienteAdministrador(props.usuario_id);
       console.log("Aluno excluído com sucesso!");
     } catch (error) {
       console.error("Erro ao excluir o aluno:", error);
@@ -43,9 +45,23 @@ export default function CardInformacaoAluno(props: DataAluno) {
     }
   }
 
+  function planoVencido() {
+    if (!props.data_validade_plano) return false;
+
+    const data_vecimento_plano = new Date(
+      props.data_validade_plano
+    ).toISOString();
+    const dataHoje = new Date().toISOString();
+
+    return dataHoje >= data_vecimento_plano;
+  }
+
+  const validadePlano = planoVencido();
+  console.log("Plano vencido?", validadePlano);
+
   return (
     <article
-      className={`w-full ease-in-out h-auto rounded-2xl bg-[#d8ffe2] transition-all duration-500 p-4 flex flex-col gap-0 ${openModal ? "gap-4" : "gap-0"}`}
+      className={`w-full ease-in-out h-auto rounded-2xl ${validadePlano ? "bg-[#f5b7b7]" : "bg-[#d8ffe2]"} transition-all duration-500 p-4 flex flex-col gap-0 ${openModal ? "gap-4" : "gap-0"}`}
     >
       {/* Linha principal */}
       <div className="w-full flex items-center justify-between">
@@ -65,16 +81,23 @@ export default function CardInformacaoAluno(props: DataAluno) {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between gap-2">
+          <div className="pr-3">
+            <article
+              className={`${validadePlano ? "bg-[rgba(255,76,70,0.39)]" : "bg-verde-500"} font-Poppins-Bold p-2 px-5 rounded-2xl text-[1rem]`}
+            >
+              {validadePlano ? "Inativo" : "Ativo"}
+            </article>
+          </div>
           <button
             onClick={handleVisibilityModal}
-            className="group cursor-pointer hover:bg-verde-100 transition-all duration-300 rounded-[5.97px] p-2 flex items-center justify-center"
+            className={`group cursor-pointer ${validadePlano ? "hover:bg-[rgba(255,76,70,0.39)]" : "hover:bg-verde-100"} transition-all duration-300 rounded-[5.97px] p-2 flex items-center justify-center`}
           >
             <IconeLapis className="text-black group-hover:text-white" />
           </button>
           <button
             onClick={handleVisibilityModalConfirmation}
-            className="group cursor-pointer hover:bg-verde-100 transition-all duration-300 rounded-[5.97px] p-2 flex items-center justify-center"
+            className={`group cursor-pointer ${validadePlano ? "hover:bg-[rgba(255,76,70,0.39)]" : "hover:bg-verde-100"} transition-all duration-300 rounded-[5.97px] p-2 flex items-center justify-center`}
           >
             <IconeLiixeira className="text-black group-hover:text-white" />
           </button>
@@ -92,11 +115,11 @@ export default function CardInformacaoAluno(props: DataAluno) {
       <ModalConfirmar
         isOppen={openModalConfirmation}
         handleActionComponente={async () => {
-          await handleConfirmDelete()
+          await handleConfirmDelete();
         }}
         handleCloseModal={handleVisibilityModalConfirmation}
         text={`Você realmente deseja excluir o aluno ${props.nome}?`}
       />
     </article>
-  );  
+  );
 }

@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import FotoInputComponente from "@/components/ui/foto-input-componente";
 import { DataAluno } from "@/dto/data-aluno";
 import { AlunoSchemaDTO, schemaAluno } from "@/schemas/schema-aluno";
 import PutClienteAdministrador from "@/services/routes/administrador/put/put-cliente-administrador";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { logo } from "@/assets/image";
 import { BaseUrlFoto } from "@/utils/base-url-foto";
 
 interface ModalFormularioCardClienteProps {
@@ -63,18 +61,14 @@ export default function ModalFormularioCardCliente({
 
       const dataToSend = {
         ...formData,
-        data_matricula: dataMatricula,
+        data_matricula: dataMatricula?.toISOString(), // <- CORREÇÃO AQUI
       };
 
       if (fotoArquivo) {
         const formDataToSend = new FormData();
         Object.entries(dataToSend).forEach(([key, value]) => {
           if (value === undefined || value === null) return;
-          if (value instanceof Date) {
-            formDataToSend.append(key, value.toISOString());
-          } else {
-            formDataToSend.append(key, String(value));
-          }
+          formDataToSend.append(key, String(value));
         });
 
         formDataToSend.append("foto", fotoArquivo);
@@ -121,7 +115,11 @@ export default function ModalFormularioCardCliente({
             <div className="flex flex-col w-full items-center gap-4">
               {/* container imagem  */}
               <div className="w-65 h-65 rounded-full">
-                <img src={baseUrl} className="rounded-full" alt={`Foto do aluno(a) ${data.nome}`} />
+                <img
+                  src={baseUrl}
+                  className="rounded-full"
+                  alt={`Foto do aluno(a) ${data.nome}`}
+                />
               </div>
               <div className="flex mt-16 flex-col w-full">
                 <label
