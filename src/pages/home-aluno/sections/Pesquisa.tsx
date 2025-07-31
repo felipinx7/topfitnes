@@ -9,17 +9,16 @@ import { useEffect, useState } from "react";
 import { personalPesquisaDTO } from "@/dto/data-personal";
 import { GetTodosPersonais } from "@/services/routes/administrador/get/get-todos-personais"; 
 
-export function PesquisaPersonais() {
+type props ={
+  personais: personalPesquisaDTO[] | undefined
+}
 
-  const [personais, setPersonais] = useState<personalPesquisaDTO[]>()
+export function PesquisaPersonais({personais}: props) {
 
-  useEffect(()=> {
-  const res = GetTodosPersonais();
-  //setPersonais(res)
-  console.log(res)
-  
-  })
+  const [searchTerm,setSearchTem] = useState<string>("")
 
+    const filteredPersonais = personais?.filter(t => t.nome.toLowerCase().includes(searchTerm.toLowerCase()))
+ 
 
   return (
     <div className="w-full h-full p-8">
@@ -34,6 +33,7 @@ export function PesquisaPersonais() {
             className="w-full bg-verde-500 text-base p-3 pl-12 outline-0 text-verde-200 rounded-full placeholder:text-verde-200/70"
             placeholder="Pesquisar por nome..."
             type="text"
+            onChange={(e)=>setSearchTem(e.target.value)}
           />
         </div>
 
@@ -45,7 +45,7 @@ export function PesquisaPersonais() {
       </div>
       {/*Treinos */}
       <div className="w-full h-full overflow-y-auto overflow-x-hidden grid pb-40 grid-cols-1 gap-4 relative place-content-start pt-4 place-items-center">
-        {personais?.map((personal : personalPesquisaDTO) => (
+        {filteredPersonais?.map((personal : personalPesquisaDTO) => (
           <PersonalPesquisa
                {...personal}
           ></PersonalPesquisa>
@@ -53,7 +53,7 @@ export function PesquisaPersonais() {
 
 
       </div>
-              <div className="w-full h-24 bg-gradient-to-t from-white from-40% to-transparent absolute bottom-0"></div>
+        <div className="w-full h-24 bg-gradient-to-t from-white from-40% to-transparent absolute bottom-0"></div>
 
     </div>
   );
