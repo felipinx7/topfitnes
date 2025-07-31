@@ -2,10 +2,12 @@
 
 import { ButtonClose } from "@/assets/icons/icon-button-close"
 import { IconDelete } from "@/assets/icons/icon-excluir-treinoModal"
+import { deleteTreino } from "@/services/routes/treinos/deleteTreino"
 import { ModalDeleteTreinoProps } from "@/types/type-ModalTreino-Props"
 import ReactDOM from "react-dom"
+import { toast } from "react-toastify"
 
-export function ModalDeleteTreino({ open, close, onDelete, texto }: ModalDeleteTreinoProps) {
+export function ModalDeleteTreino({ open, close, onDelete, texto, training, isPersonal }: ModalDeleteTreinoProps) {
     return ReactDOM.createPortal(
         <div
             onClick={close}
@@ -21,9 +23,11 @@ export function ModalDeleteTreino({ open, close, onDelete, texto }: ModalDeleteT
                 </div>
                 <div className="w-full items-center h-1/5 flex justify-center pt-5">
                     <button
-                        onClick={() => {
+                        onClick={async () => {
                             onDelete?.()
+                            toast.success("Treino deletado com sucesso!")
                             close()
+                            isPersonal ? await deleteTreino(training.id) : ""
                         }}
                         className="flex items-center justify-center w-3/5 py-1 font-poppins font-semibold text-white bg-red-500 cursor-pointer hover:bg-red-600 duration-500 text-[18px] rounded-lg ">Deletar</button>
                 </div>

@@ -9,23 +9,24 @@ import { IconeOlhoAberto } from "@/assets/icons/icone-olho-aberto";
 import { OlhoFechado } from "@/assets/icons/icone-olho-fechado";
 import { useState } from "react";
 
+
 import { loginDTO } from "@/dto/loginDTO";
 
 import { Auth } from "@/services/routes/login/auth";
 import { useRouter } from "next/navigation";
-import { useRef } from "react";
 
 export function Login() {
 
     const router = useRouter();
 
+
+
   const [visible, setVisible] = useState(false);
-  const formRef = useRef<HTMLFormElement>(null);
 
-
-  async function LoginSubmit(e: React.FormEvent<HTMLFormElement>) {
+ async function LoginSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+
 
     const emailTel = (formData.get("emailTel") ?? "").toString();
     const password = (formData.get("password") ?? "").toString();
@@ -44,9 +45,10 @@ export function Login() {
       router.push("/home-personal")
     }
 
+    }
 
 
-  }
+  
 
   return (
     <main className="w-screen h-screen flex flex-row max-md:flex-col-reverse">
@@ -64,7 +66,6 @@ export function Login() {
           <div className="bg-gradient-to-tl  from-verde-100/20 absolute bottom-0 right-0 to-transparent to-50% w-2/3 h-2/3"></div>
         </div>{" "}
         <form
-          ref={formRef}
           onSubmit={LoginSubmit}
           action=""
           method="POST"

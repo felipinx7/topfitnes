@@ -1,7 +1,10 @@
+'use client'
 import { IconeExcluirTreino } from "@/assets/icons/icon-excluir-treino";
 import { IconeAtualizarTreino } from "@/assets/icons/icone-atualizar-treino";
 import { IconeEnviarTreino } from "@/assets/icons/icone-enviar-treino";
 import { IconeVisualizarTreino } from "@/assets/icons/icone-visualiar-treino";
+import { BaseUrlFoto } from "@/utils/base-url-foto";
+import { useEffect, useState } from "react";
 
 type functionButtons = {
     update: () => void,
@@ -15,7 +18,18 @@ type functionButtons = {
 
 
 export function TreinoComponent(data: functionButtons) {
-    const previewFoto = data.foto ? URL.createObjectURL(data.foto) : 'url(#)';
+    const [previewFoto, setPreviewFoto] = useState<string>("");
+
+    useEffect(() => {
+    if (data.foto instanceof File) {
+      const objectUrl = URL.createObjectURL(data.foto);
+      setPreviewFoto(objectUrl);
+
+      return () => URL.revokeObjectURL(objectUrl);
+    } else {
+      setPreviewFoto(BaseUrlFoto(String(data.foto)));
+    }
+  }, [data.foto]);
 
     return (
         <div className="w-full bg-verde-600 p-3 flex items-center shadow shadow-black/30 rounded-lg justify-between border border-black/30">

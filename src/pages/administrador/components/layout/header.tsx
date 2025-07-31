@@ -11,6 +11,7 @@ import ModalConfirmar from "./modal-confirmar";
 import { DataAdministrador } from "@/dto/data-administrador";
 import { GetDadosAdministrador } from "@/services/routes/administrador/get/get-dados-administrador";
 import { LogoutSistema } from "@/services/routes/administrador/delete/logout-sistema";
+import { useRouter } from "next/navigation";
 
 interface HeaderAdministradorProps {
   sectionSelected: SectionType;
@@ -24,6 +25,7 @@ export default function HeaderAdministrador({
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal sair
   const [isOpenModalInformacoes, setIsOpenModalInformacoes] = useState(false); // Modal info admin
   const [adminData, setAdminData] = useState<DataAdministrador | null>(null);
+  const router = useRouter();
 
   function handleVisibilityModal() {
     setIsModalOpen((prev) => !prev);
@@ -43,6 +45,7 @@ export default function HeaderAdministrador({
 
   async function DeslogarSistema() {
     const response = await LogoutSistema();
+    router.push("/login");
   }
 
   useEffect(() => {

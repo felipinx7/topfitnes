@@ -36,4 +36,5 @@ export interface DataAluno {
   foco_corpo?: string;
   plano?: string;
   dia_pagamento?: string;
+  usuario_id: string
 }

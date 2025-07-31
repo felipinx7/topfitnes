@@ -9,7 +9,7 @@ import { useState } from "react";
 import { GetUmAluno } from "@/services/routes/administrador/get/get-apenas-um-aluno";
 
 export default function CardInformacaoAluno(props: DataAluno) {
-  const foto = BaseUrlFoto(props.foto);
+  const foto = BaseUrlFoto(props.foto || "");
 
   const [informacoesUsuario, setInformacoesUsuario] =
     useState<DataAluno | null>(null);
@@ -100,4 +100,3 @@ export default function CardInformacaoAluno(props: DataAluno) {
     </article>
   );  
 }
-

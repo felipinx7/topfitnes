@@ -1,16 +1,17 @@
-import { useEffect } from "react";
-import { IconeSetaEsquerda } from "@/assets/icons/icone-seta-esquerda";
+import { useEffect, useState } from "react";
 import FotoInputComponente from "@/components/ui/foto-input-componente";
 import { DataAluno } from "@/dto/data-aluno";
 import { AlunoSchemaDTO, schemaAluno } from "@/schemas/schema-aluno";
 import PutClienteAdministrador from "@/services/routes/administrador/put/put-cliente-administrador";
-import { BaseUrlFoto } from "@/utils/base-url-foto";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { logo } from "@/assets/image";
+import { BaseUrlFoto } from "@/utils/base-url-foto";
+
 interface ModalFormularioCardClienteProps {
   OpenModal: boolean;
   handleVisibilityModal: () => void;
-  data: DataAluno;
+  data?: DataAluno; // opcional
 }
 
 export default function ModalFormularioCardCliente({
@@ -18,18 +19,20 @@ export default function ModalFormularioCardCliente({
   handleVisibilityModal,
   data,
 }: ModalFormularioCardClienteProps) {
-  // estados e variaveis utilizadas no componente
-  const foto = BaseUrlFoto(data.foto);
-  const telefoneFormatado = data.telefone;
+  // Se não tem dados, retorna null para evitar erros
+  if (!data) return null;
+
+  // Foto padrão (altere o caminho para sua imagem padrão)
+  const baseUrl = BaseUrlFoto(data.foto || "");
+
+  const [fotoArquivo, setFotoArquivo] = useState<File | null>(null);
+
   function formatarDataISO(data: Date | string | undefined): string {
     if (!data) return "";
     const d = new Date(data);
     if (isNaN(d.getTime())) return "";
     return d.toISOString().substring(0, 10);
   }
-
-
-  const dataMatriculaFormatada = formatarDataISO(data.data_matricula);
 
   const {
     register,
@@ -40,16 +43,56 @@ export default function ModalFormularioCardCliente({
     resolver: zodResolver(schemaAluno),
   });
 
-  async function OnSubmit(data: AlunoSchemaDTO) {
+  function base64ToFile(base64String: string, filename: string): File {
+    const arr = base64String.split(",");
+    const mime = arr[0].match(/:(.*?);/)?.[1] || "";
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+  }
+
+  async function OnSubmit(formData: AlunoSchemaDTO) {
     try {
-      console.log("OnSubmit");
-      const response = await PutClienteAdministrador(data.id, data);
-      return response;
+      const dataMatricula = formData.data_matricula
+        ? new Date(formData.data_matricula + "T00:00:00.000Z")
+        : undefined;
+
+      const dataToSend = {
+        ...formData,
+        data_matricula: dataMatricula,
+      };
+
+      if (fotoArquivo) {
+        const formDataToSend = new FormData();
+        Object.entries(dataToSend).forEach(([key, value]) => {
+          if (value === undefined || value === null) return;
+          if (value instanceof Date) {
+            formDataToSend.append(key, value.toISOString());
+          } else {
+            formDataToSend.append(key, String(value));
+          }
+        });
+
+        formDataToSend.append("foto", fotoArquivo);
+        const response = await PutClienteAdministrador(
+          formData.id,
+          formDataToSend
+        );
+        return response;
+      } else {
+        const response = await PutClienteAdministrador(formData.id, dataToSend);
+        return response;
+      }
     } catch (error) {
-      console.log("Error ao atualizar dados", error);
+      console.error("Erro ao enviar dados:", error);
     }
   }
 
+  // Sempre reseta o form quando data muda
   useEffect(() => {
     if (data) {
       reset({
@@ -70,11 +113,16 @@ export default function ModalFormularioCardCliente({
           method="POST"
           onSubmit={handleSubmit(OnSubmit)}
           className="flex flex-col w-full"
+          encType="multipart/form-data"
+          noValidate
         >
           <div className="flex items-start max-lg:flex-col gap-8 justify-between">
             {/* Coluna 1 */}
             <div className="flex flex-col w-full items-center gap-4">
-              <FotoInputComponente initialPhotoUrl={foto} />
+              {/* container imagem  */}
+              <div className="w-65 h-65 rounded-full">
+                <img src={baseUrl} className="rounded-full" alt={`Foto do aluno(a) ${data.nome}`} />
+              </div>
               <div className="flex mt-16 flex-col w-full">
                 <label
                   htmlFor="nome"
@@ -161,7 +209,6 @@ export default function ModalFormularioCardCliente({
                 <input
                   {...register("peso", { valueAsNumber: true })}
                   id="peso"
-                  required={false}
                   type="number"
                   step="0.1"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100 transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
@@ -223,10 +270,10 @@ export default function ModalFormularioCardCliente({
                   Dias de Treino por Semana:
                 </label>
                 <input
-                  id="treino_dias_por_semana"
                   {...register("treino_dias_por_semana", {
                     valueAsNumber: true,
                   })}
+                  id="treino_dias_por_semana"
                   type="number"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100
                   transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
@@ -278,8 +325,8 @@ export default function ModalFormularioCardCliente({
                   Plano:
                 </label>
                 <select
-                  id="plano"
                   {...register("plano")}
+                  id="plano"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100
                   transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
                 >

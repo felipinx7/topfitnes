@@ -10,6 +10,7 @@ import { exerciseDTO } from "@/schemas/schema-exercicio";
 import { ModalCreateExercicio } from "../exercicios/modalCreateExercicio";
 import { InfoExercises } from "../../components/infoExercises";
 import { ModalUpdateExercicio } from "../exercicios/modalUpdateExercicio";
+import { BaseUrlFoto } from "@/utils/base-url-foto";
 
 export function ModalSeeTreino(data: ModalSeeTreinoProps) {
     // Visible modals
@@ -34,7 +35,8 @@ export function ModalSeeTreino(data: ModalSeeTreinoProps) {
         setExercises(prev => prev.map(e => e.id === isExercises?.id ? updateExercise : e))
     }
 
-    const previewFoto = data?.dataTraining?.foto ? URL.createObjectURL(data.dataTraining.foto) : 'url(#)';
+    const photo = BaseUrlFoto(data?.dataTraining?.foto || "")
+    const previewFoto = data?.dataTraining?.foto ? photo : 'url(#)';
 
     return ReactDOM.createPortal(
         <div
@@ -77,6 +79,7 @@ export function ModalSeeTreino(data: ModalSeeTreinoProps) {
                 close={() => setVisibleModalDelete(prev => !prev)}
                 onDelete={deleteExercise}
                 texto="exercício"
+                isPersonal={false}
             />
 
             <ModalCreateExercicio

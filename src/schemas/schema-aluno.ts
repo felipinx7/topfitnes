@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { string, z } from "zod";
 
 export const schemaAluno = z.object({
   id: z.string(),
@@ -16,7 +16,8 @@ export const schemaAluno = z.object({
   telefone: z.string().optional(),
   foco_corpo: z.string().optional(),
   plano: z.string().optional(),
-  foto: z.string().optional(), // Foto é opcional
+  foto: z.string().optional(),
+  usuario_id: z.string()
 });
 
 export type AlunoSchemaDTO = z.infer<typeof schemaAluno>;

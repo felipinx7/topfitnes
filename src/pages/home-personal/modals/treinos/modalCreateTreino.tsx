@@ -4,12 +4,15 @@ import { focoCorpoEnum, trainingSchema, TrainingSchemaDTO } from "@/schemas/sche
 import { ModalCreateTreinoProps } from "@/types/type-ModalTreino-Props"
 import { PreviewImage } from "@/utils/previewImagem"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
 import { useForm } from "react-hook-form"
 import userProfile from "../../../../assets/image/userProfile.svg"
+import { createTreino } from "@/services/routes/treinos/createTreino"
+import { GetPersonal } from "@/services/routes/personal/getPersonal"
+import { toast } from "react-toastify"
 
-export function ModalCreateTreino({ open, close, create }: ModalCreateTreinoProps) {
+export function ModalCreateTreino({ open, close, create, personal }: ModalCreateTreinoProps) {
     const [previewImage, setPreviewImage] = useState<string | null>(null);
 
     const {
@@ -21,19 +24,39 @@ export function ModalCreateTreino({ open, close, create }: ModalCreateTreinoProp
         resolver: zodResolver(trainingSchema)
     });
 
-    function onSubmit(data: TrainingSchemaDTO) {
+    async function onSubmit(data: TrainingSchemaDTO) {
         const file = data.foto?.[0];
         const finalData = {
             ...data,
             foto: file || null,
-            id: new Date()
         }
 
+        const dataToBack = {
+            ...data,
+            foto: file
+        }
+
+        toast.success("O treino foi criado com sucesso!")
         create(finalData)
         reset()
+
         setPreviewImage(null)
         close()
+
+        await createTreino(dataToBack)
     };
+
+    useEffect(() => {
+        if (errors.nome) {
+            toast.error(errors.nome.message);
+        }
+        if (errors.descricao) {
+            toast.error(errors.descricao.message);
+        }
+        if (errors.foco_corpo) {
+            toast.error("Selecione um foco de treino.");
+        }
+    }, [errors]);
 
     return ReactDOM.createPortal(
         <div

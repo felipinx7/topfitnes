@@ -1,16 +1,15 @@
 import { IconeLapis } from "@/assets/icons/icone-lapis";
 import { IconeLiixeira } from "@/assets/icons/icone-lixeira";
-import DeletePersonaleAdministrador from "@/services/routes/administrador/delete/delete-cliente-administrador";
 import { BaseUrlFoto } from "@/utils/base-url-foto";
 import ModalConfirmar from "./modal-confirmar";
 import { useState } from "react";
-import { GetUmAluno } from "@/services/routes/administrador/get/get-apenas-um-aluno";
 import { DataCadastroPersonal } from "@/dto/data-cadastro-personal";
 import ModalFormularioCardPersonais from "./modal-formulario-card-personais";
 import { GetUmPersonal } from "@/services/routes/administrador/get/get-apenas-um-personal";
+import DeletePersonalAdministrador from "@/services/routes/administrador/delete/delete-personal-administrador";
 
 export default function CardInformacaoPersonal(props: DataCadastroPersonal) {
-  const foto = BaseUrlFoto(props.foto);
+  const foto = BaseUrlFoto(props.foto || "");
 
   const [informacoesUsuario, setInformacoesUsuario] =
     useState<DataCadastroPersonal | null>(null);
@@ -37,9 +36,12 @@ export default function CardInformacaoPersonal(props: DataCadastroPersonal) {
       setInformacoesUsuario(alunoCompleto ?? null);
 
       // Exclui o aluno
-      await DeletePersonaleAdministrador(props.id);
-      console.log("Personal excluído com sucesso!");
+      await DeletePersonalAdministrador(props.id);
+      console.log("Personal excluído com sucesso!", props.id);
     } catch (error) {
+      console.log(props.id);
+      console.log("O id completo do user", props.id);
+
       console.error("Erro ao excluir o Personal:", error);
     } finally {
       handleVisibilityModalConfirmation();
@@ -62,7 +64,7 @@ export default function CardInformacaoPersonal(props: DataCadastroPersonal) {
           </div>
           <div className="flex flex-col">
             <h4 className="text-black font-Poppins-Semibold text-[1.2rem]">
-              {props.nome} {props.sobrenome}
+              {props.nome} {props.sobrenome} {props.id}
             </h4>
             <p className="text-black">{props.email}</p>
           </div>
