@@ -35,16 +35,16 @@ export function PersonalPesquisa(personal: personalPesquisaDTO) {
           </h1>
         </div>
       </div>
-      <div className="flex gap-4">
+      <div className="flex h-full gap-4 items-center justify-center max-md:flex-col">
 
       <a
         href={`https://wa.me/${telefone}?text=${mensagem}`}
-        className={`${personal.telefone ? "" : "cursor-default bg-neutras-200"}text-base shadow-xl text-neutras-100 bg-neutras-300 duration-300 hover:bg-verde-100/50 cursor-pointer font-Poppins-Semibold  p-2 px-4 rounded-[8px]`}
+        className={`${personal.telefone ? "" : "cursor-default bg-neutras-200"}text-base shadow-xl text-neutras-100 bg-neutras-300 duration-300 hover:bg-verde-100/50 cursor-pointer font-Poppins-Semibold max-md:p-1 max-md:px-3  p-2 px-4 rounded-[8px]`}
       >
         Contatar
       </a>
       <button
-        className={`text-base shadow-xl text-neutras-300 bg-verde-100 duration-300 hover:bg-verde-200 cursor-pointer font-Poppins-Semibold  p-2 px-4 rounded-[8px]`}
+        className={`text-base shadow-xl text-neutras-300 bg-verde-100 duration-300 hover:bg-verde-200 cursor-pointer font-Poppins-Semibold  p-2 px-4 rounded-[8px] max-md:p-1 max-md:px-3`}
       >
         Contratar
       </button>

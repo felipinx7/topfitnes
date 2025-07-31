@@ -50,7 +50,6 @@ export function MeuPersonal({personal,setId}: props) {
          }
 
       </div>
-              <div className="w-full h-24 bg-gradient-to-t from-white from-40% to-transparent absolute bottom-0"></div>
 
     </div>
   );

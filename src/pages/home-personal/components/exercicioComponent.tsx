@@ -1,6 +1,7 @@
 'use client'
 import { IconeExcluirTreino } from "@/assets/icons/icon-excluir-treino";
 import { IconeAtualizarTreino } from "@/assets/icons/icone-atualizar-treino";
+import { exerciseDTO } from "@/schemas/schema-exercicio";
 import { ExercicioDTO } from "@/types/type-Treino";
 import { BaseUrlFoto } from "@/utils/base-url-foto";
 import { useEffect, useState } from "react";
@@ -8,7 +9,7 @@ import { useEffect, useState } from "react";
 type functionButtons = {
     update?: () => void,
     delete: () => void,
-    dataExercise: ExercicioDTO
+    dataExercise: exerciseDTO
     foto?: File
 }
 
@@ -28,7 +29,7 @@ export function ExercicioComponent(data: functionButtons) {
       }, [data.foto]);
 
     return (
-        <div className="w-[95%] max-w-[95%] max-h-28 overflow-hidden overflow-x-hidden bg-verde-600 p-3 h-28 py flex items-center shadow shadow-black/30 rounded-lg justify-between border border-black/30">
+        <div className="w-full overflow-hidden relative  bg-verde-600 p-3 h-28 flex items-center shadow shadow-black/30 rounded-lg justify-between border border-black/30">
             <div className="flex">
                 <div
                     style={{
@@ -39,12 +40,12 @@ export function ExercicioComponent(data: functionButtons) {
                     className="h-20 w-20  aspect-square rounded-full bg-white-100 border-3 mt-1 border-verde-100"
                 ></div>
                 <div className="flex-col flex w-4/5 justify-center font-Poppins font-bold pl-3 text-verde-200 -space-y-1.5">
-                    <h1 className="text-lg font-Poppins-Bold ">{data.dataExercise.name}</h1>
-                    <h2 className="font font-light text-[11px] pl-0.5">{data.dataExercise.series} Séries X {data.dataExercise.reps} Repetições</h2>
+                    <h1 className="text-lg font-Poppins-Bold ">{data.dataExercise.nome}</h1>
+                    <h2 className="font font-light text-[11px] pl-0.5">{data.dataExercise.execucoes} Séries X {data.dataExercise.repeticoes} Repetições</h2>
                     <h1 className="font font-light text-[12px] break-words mt-3 pl-0.5 text-verde-200">
-                        {data.dataExercise.description.length > 50
-                            ? data.dataExercise.description.slice(0, 50) + '...'
-                            : data.dataExercise.description}
+                        {data.dataExercise.descricao.length > 50
+                            ? data.dataExercise.descricao.slice(0, 50) + '...'
+                            : data.dataExercise.descricao}
                     </h1>
                 </div>
             </div>

@@ -54,8 +54,8 @@ export function HomeAluno() {
   }, [token]);
 
   return (
-    <main className="w-screen h-screen bg-neutras-300 relative flex overflow-hidden">
-      <div className="w-1/5 min-w-[350px] h-full">
+    <main className="w-screen h-screen bg-neutras-300 relative flex max-md:flex-col-reverse overflow-hidden">
+      <div className="w-1/5 min-w-[350px] h-full max-md:absolute max-md:w-full max-md:h-20 z-100 max-md:bottom-0 ">
         {" "}
         <SideBar setId={setSection} id={section} aluno={aluno}></SideBar>
       </div>

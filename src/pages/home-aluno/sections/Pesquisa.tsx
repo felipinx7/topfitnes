@@ -53,7 +53,7 @@ export function PesquisaPersonais({personais}: props) {
 
 
       </div>
-        <div className="w-full h-24 bg-gradient-to-t from-white from-40% to-transparent absolute bottom-0"></div>
+        <div className=" max-md:hidden max-md:h-0 max-md:z-0 w-full h-24 bg-gradient-to-t from-white from-40% to-transparent absolute bottom-0"></div>
 
     </div>
   );

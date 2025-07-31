@@ -1,5 +1,6 @@
 import { exerciseDTO } from "@/schemas/schema-exercicio";
 import { ExercicioComponent } from "./exercicioComponent";
+import { ExercicioDTO } from "@/types/type-Treino";
 
 type infoExerciesProps = {
     setIsExercises: (exercise: exerciseDTO) => void,
@@ -11,8 +12,8 @@ type infoExerciesProps = {
 
 export function InfoExercises({ setIsExercises, setVisibleModalDelete, setVisibleModalCreate, setVisibleModalUpdate, exercises }: infoExerciesProps) {
     return (
-        <div className="w-full h-full border-l border-gray-400">
-            <div className="flex justify-between px-4 py-1 font-poppins-Medium ">
+        <div className="w-full h-full border-l border-gray-400 overflow-y-hidden flex flex-col">
+            <div className="flex w-full items-center justify-between px-4 py-1 font-poppins-Medium ">
                 <h1 className="text-verde-200 font-medium text-2xl"> Exercícios </h1>
                 <button
                     onClick={() => setVisibleModalCreate(prev => !prev)}
@@ -21,19 +22,10 @@ export function InfoExercises({ setIsExercises, setVisibleModalDelete, setVisibl
                 </button>
             </div>
             {/* Exercicios */}
-            <div className="flex-1 flex-col flex items-center w-full overflow-y-auto mt-6 space-y-4">
-                {(exercises || []).length > 0 ? (
-                    (exercises || []).map((item, idx) => {
-                        const mappedItem = {
-                            ...item,
-                            name: item?.nome,
-                            reps: Number(item?.repeticoes),
-                            series: Number(item?.execucoes),
-                            description: item.descricao,
-                        };
-                        return (
+            <div className="flex flex-col h-full w-full gap-4 mt-6 overflow-x-hidden overflow-y-auto pb-20 px-4">
+                        {exercises?.map((item: exerciseDTO)=>(
+                            <div className="w-full">
                             <ExercicioComponent
-                                key={item.id ? item.id.toString() : idx}
                                 delete={() => {
                                     setIsExercises(item)
                                     setVisibleModalDelete(prev => !prev)
@@ -42,15 +34,11 @@ export function InfoExercises({ setIsExercises, setVisibleModalDelete, setVisibl
                                     setIsExercises(item)
                                     setVisibleModalUpdate(prev => !prev)
                                 }}
-                                dataExercise={mappedItem}
+                                dataExercise={item}
                                 foto={item.foto}
-                            />
-                        );
-                    })
-                ) : (
-                    <p className="text-gray-500 mt-4 font-poppins-Medium">Não há exercícios.</p>
-                )}
-
+                                     />
+                                     </div>
+                        ))}
             </div>
         </div>
     )
