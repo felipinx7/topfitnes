@@ -42,7 +42,7 @@ export function MeuPersonal({personal,setId}: props) {
           : (
             <div className="w-full h-full items-center flex justify-center flex-col">
               <img className="h-2/3" src={treinando.src} alt="" />
-              <h1 className="text-xl text-verde-200 font-Poppins-Medium ">Você ainda não contratou um personal</h1>
+              <h1 className="text-xl text-verde-200 font-Poppins-Medium text-center mb-3">Você ainda não contratou um personal</h1>
               <button onClick={()=> setId(4)} className="p-1 rounded-lg duration-300 cursor-pointer px-8 bg-verde-100 text-white text-xl font-Poppins-Bold hover:bg-verde-400">Contratar</button>
             </div>
             

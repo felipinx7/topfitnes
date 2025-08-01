@@ -33,10 +33,10 @@ export function Inicio( {date}: props) {
           <h1 className="text-sm max-md:text-xs text-verde-200 font-Poppins-Medium">
             TOP FITNESS
           </h1>
-          <h1 className="text-3xl text-verde-200 font-Poppins-Bold max-lg:text-2xl">
+          <h1 className="text-3xl text-verde-200 font-Poppins-Bold max-lg:text-xl">
             Ola, Bem Vindo(a)!
           </h1>
-          <h1 className="text-lg max-md:text-base text-verde-200 font-Poppins-Semibold mt-2">
+          <h1 className="text-lg max-md:text-sm text-verde-200 font-Poppins-Semibold mt-2">
             AO SISTEMA ONLINE DA TOPFITNESS!
           </h1>
         </div>
@@ -52,8 +52,8 @@ export function Inicio( {date}: props) {
         </div>
 
         <div className="w-2/5 h-full bg-neutras-200/10 p-4 pr-8 flex flex-row gap-8 items-center justify-end">
-          <img src={Running.src} alt="Homem Correndo" className="h-full max-xl:h-2/3 max-lg:h-2/3 m ax-md:h-2/3" />
-          <img src={Aparelho.src} alt=" Aparelho" className="h-full max-xl:h-2/3 max-lg:hidden max-md:h-2/3" />
+          <img src={Running.src} alt="Homem Correndo" className="h-full max-xl:h-2/3 max-lg:h-2/3 aspect-square " />
+          <img src={Aparelho.src} alt=" Aparelho" className="h-full max-xl:h-2/3  max-lg:hidden max-md:h-2/3" />
         </div>
       </div>
 
