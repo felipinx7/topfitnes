@@ -21,6 +21,7 @@ export function Alunos({ personal }: any) {
     useEffect(() => {
         async function getAllAlunos() {
             const alunos = await getAlunos();
+            console.log(alunos)
             setAlunos(alunos)
         }
 
@@ -38,6 +39,8 @@ export function Alunos({ personal }: any) {
                             setAlunoToEdit(item)
                             setVisibleModalSeeAluno(prev => !prev)
                         }}
+                        isVisibleView={true}
+
 
                         key={item.id ? item.id.toString() : idx}
                         nomeAluno={item.nome}

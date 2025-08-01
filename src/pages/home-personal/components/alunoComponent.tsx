@@ -5,11 +5,13 @@ import { IconeEnviarTreino } from "@/assets/icons/icone-enviar-treino";
 import { IconeVisualizarTreino } from "@/assets/icons/icone-visualiar-treino";
 import { BaseUrlFoto } from "@/utils/base-url-foto";
 import { useEffect, useState } from "react";
+import { InfoTreinoAluno } from "./infoTreinoAluno";
 
 type functionButtons = {
-        see?: () => void,
+    see?: () => void,
     nomeAluno?: string,
     foto?: File
+    isVisibleView?: boolean;
 }
 
 
@@ -17,17 +19,18 @@ export function AlunoComponent(data: functionButtons) {
     const [previewFoto, setPreviewFoto] = useState<string>("");
 
     useEffect(() => {
-    if (data.foto instanceof File) {
-      const objectUrl = URL.createObjectURL(data.foto);
-      setPreviewFoto(objectUrl);
+        if (data.foto instanceof File) {
+            const objectUrl = URL.createObjectURL(data.foto);
+            setPreviewFoto(objectUrl);
 
-      return () => URL.revokeObjectURL(objectUrl);
-    } else {
-      setPreviewFoto(BaseUrlFoto(String(data.foto)));
-    }
-  }, [data.foto]);
+            return () => URL.revokeObjectURL(objectUrl);
+        } else {
+            setPreviewFoto(BaseUrlFoto(String(data.foto)));
+        }
+    }, [data.foto]);
 
     return (
+        
         <div className="w-full bg-verde-600 p-3 flex items-center shadow shadow-black/30 rounded-lg justify-between border border-black/30">
             <div className="flex">
                 <div
@@ -42,17 +45,17 @@ export function AlunoComponent(data: functionButtons) {
                     <h1 className="text-lg font-Poppins-Bold ">{data.nomeAluno}</h1>
                 </div>
             </div>
+            
 
             {/* Icones*/}
             <div className="flex space-x-1 items-center justify-center">
-                                {/* Icone Visualizar*/}
-                                <button
-                                    onClick={data.see}
-                                    className="p-2 h-[2.1rem] w-[2.1rem] text-[#1C1B1F] rounded-lg bg-white flex items-center justify-center shadow shadow-black/20 cursor-pointer duration-500 hover:bg-[#3a382eee] hover:text-white">
-                                    <IconeVisualizarTreino />
-                                </button>
+                {/* Icone Visualizar*/}
+                <button
+                    onClick={data.see}
+                    className={`p-2 h-[2.1rem] w-[2.1rem] text-[#1C1B1F] rounded-lg bg-white flex items-center justify-center shadow shadow-black/20 cursor-pointer duration-500 hover:bg-[#3a382eee] hover:text-white ${data.isVisibleView ? 'visible' : 'invisible'}`}>
+                    <IconeVisualizarTreino />
+                </button>
 
- 
 
             </div>
         </div>
