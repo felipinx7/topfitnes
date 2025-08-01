@@ -17,7 +17,7 @@ export function ModalTreino({ treino, OpenModal, open }: TreinoModalComponent) {
       onClick={() => OpenModal(false)}
     >
       <div
-        className={` ${open ? "" : "invisible translate-y-20"} duration-200 w-3/5 h-4/5 min-h-[600px] min-w-[800px] bg-white rounded-2xl flex flex-col`}
+        className={` ${open ? "" : "invisible translate-y-20"} duration-200 w-3/5 h-4/5 min-h-[600px] min-w-[800px] max-md:min-w-0 max-md:min-h-0 max-md:w-full max-md:h-full bg-white rounded-2xl flex flex-col`}
         onClick={(e) => {
           e.stopPropagation();
         }}
@@ -36,9 +36,9 @@ export function ModalTreino({ treino, OpenModal, open }: TreinoModalComponent) {
           </div>
         </div>
         {/*Infos */}
-        <div className="w-full h-full p-3 flex flex-row">
+        <div className="w-full h-full max-md:flex-col p-3 flex flex-row overflow-scroll pb-20">
           {/* Informações: Decrição,foto,nome,partes afetadas */}
-          <div className="w-1/3 h-full p-5 pr-7 gap-2 border-r-2 border-neutras-200/10 flex flex-col items-center justify-start text-xl text-neutras-400">
+          <div className="w-1/3 h-full max-md:border-0 p-5 pr-7 gap-2 border-r-2 max-md:w-full border-neutras-200/10 flex flex-col items-center justify-start text-xl text-neutras-400">
             <div
               className="w-48  h-48 bg-verde-100 rounded-full"
               style={{ backgroundImage: `url(${treino?.foto})`, backgroundSize: "cover" }}
@@ -68,7 +68,7 @@ export function ModalTreino({ treino, OpenModal, open }: TreinoModalComponent) {
           </div>
 
           {/* Exercicios */}
-          <div className="w-2/3 h-full flex flex-col px-4">
+          <div className="w-2/3 h-full flex flex-col px-4 max-md:w-full">
             <div className="w-full border-b-2 border-neutras-200/10 pb-3">
               <h1 className="text-xl text-verde-200 font-Poppins-Medium">
                 Exercicios

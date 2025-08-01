@@ -14,6 +14,7 @@ export default function CardInformacaoPersonal(props: DataCadastroPersonal) {
   const [informacoesUsuario, setInformacoesUsuario] =
     useState<DataCadastroPersonal | null>(null);
   const [openModal, setOpenModal] = useState(false);
+  const [excluded, setExcluded] = useState(false);
   const [openModalConfirmation, setOpenModalConfirmation] = useState(false);
 
   function handleVisibilityModal() {
@@ -24,33 +25,39 @@ export default function CardInformacaoPersonal(props: DataCadastroPersonal) {
     setOpenModalConfirmation((prev) => !prev);
   }
 
-  async function handleConfirmDelete() {
+  function handleConfirmDelete() {
     if (!props.id) return;
 
     try {
-      // Pega os dados atualizados do aluno antes de excluir
+      DeletePersonalAdministrador(props.id);
+      setExcluded(true)
+    } catch {
+      console.log("mal paia");
+    }
+
+    /*  try {
+      // Pega os dados atualizados do Personal antes de excluir
       const alunoCompletoResponse = await GetUmPersonal(props.id);
       const alunoCompleto = alunoCompletoResponse?.data as
         | DataCadastroPersonal
         | undefined;
       setInformacoesUsuario(alunoCompleto ?? null);
 
-      // Exclui o aluno
+      // Exclui o Personal
       await DeletePersonalAdministrador(props.id);
       console.log("Personal excluído com sucesso!", props.id);
     } catch (error) {
       console.log(props.id);
-      console.log("O id completo do user", props.id);
-
+      console.log("KKKKK: O id completo do user", props.id);
       console.error("Erro ao excluir o Personal:", error);
     } finally {
       handleVisibilityModalConfirmation();
-    }
+    }*/
   }
 
   return (
     <article
-      className={`w-full ease-in-out h-auto rounded-2xl bg-[#d8ffe2] transition-all duration-500 p-4 flex flex-col gap-0 ${openModal ? "gap-4" : "gap-0"}`}
+      className={`${excluded ? "hidden h-0 w-0" : ""}w-full ease-in-out h-auto rounded-2xl bg-[#d8ffe2] transition-all duration-500 p-4 flex flex-col gap-0 ${openModal ? "gap-4" : "gap-0"}`}
     >
       {/* Linha principal */}
       <div className="w-full flex items-center justify-between">
@@ -64,7 +71,7 @@ export default function CardInformacaoPersonal(props: DataCadastroPersonal) {
           </div>
           <div className="flex flex-col">
             <h4 className="text-black font-Poppins-Semibold text-[1.2rem]">
-              {props.nome} {props.sobrenome} {props.id}
+              {props.nome} {props.sobrenome} {props.usuario_id}
             </h4>
             <p className="text-black">{props.email}</p>
           </div>

@@ -2,14 +2,16 @@
 import { IconeCloseModal } from "@/assets/icons/icone-closeModal-treino"
 import { PreviewImage } from "@/utils/previewImagem"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
 import { useForm } from "react-hook-form"
 import userProfile from "../../../../assets/image/userProfile.svg"
 import { ModalCreateExercicioProps } from "@/types/type-ModalExercise-Props"
 import { exerciseDTO, exerciseDTOInput, exerciseSchema } from "@/schemas/schema-exercicio"
+import { CreateExercise } from "@/services/routes/exercises/createExercise"
+import { toast } from "react-toastify"
 
-export function ModalCreateExercicio({ open, close, create }: ModalCreateExercicioProps) {
+export function ModalCreateExercicio({ open, close, create, treinoId }: ModalCreateExercicioProps) {
     const [previewImage, setPreviewImage] = useState<string | null>(null);
 
     const {
@@ -21,18 +23,22 @@ export function ModalCreateExercicio({ open, close, create }: ModalCreateExercic
         resolver: zodResolver(exerciseSchema)
     });
 
-    function onSubmit(data: exerciseDTO) {
+    async function onSubmit(data: exerciseDTO) {
         const file = data.foto?.[0];
         const finalData = {
             ...data,
             foto: file || null,
-            id: new Date()
         }
 
         create(finalData)
+        toast.success("Exercicio criado com sucesso!")
+
         reset()
         setPreviewImage(null)
         close()
+
+        const dataBack = { ...data, foto: file, treino_id: treinoId, intervalo_descanso: 30 }
+        await CreateExercise(dataBack)
     };
 
     return ReactDOM.createPortal(
@@ -41,12 +47,12 @@ export function ModalCreateExercicio({ open, close, create }: ModalCreateExercic
             className={`fixed inset-0 bg-black/40 flex items-center justify-center z-50 ${open ? 'visible' : 'invisible'}`}>
             <div
                 onClick={(e) => e.stopPropagation()}
-                className={`bg-white w-[38%] h-[95%] relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}>
+                className={`bg-white w-[38%] h-[95%]  max-md:w-[90%] max-md:max-w-[350px] max-md:max-h-[95%] max-md:max-h-[700px] relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}>
                 {/* Cabeçalho */}
                 <div className="w-full bg-[#F0F0F0] rounded-t-xl flex justify-between items-center px-2 py-3">
-                    <div className="flex flex-col text-neutras-100 pl-3 -space-y-1 ">
-                        <h1 className="font-Poppins-Medium text-xl">Criação do Exercício</h1>
-                        <h2 className="font-poppins font-light text-[12px]">Preencha as informações abaixo para criar um novo exercício</h2>
+                    <div className="flex flex-col max-md:w-4/5 text-neutras-100 pl-3 -space-y-1 max-md:pl-1">
+                        <h1 className="font-Poppins-Medium text-xl max-md:text-lg">Criação do Exercício</h1>
+                        <h2 className="font-poppins font-light text-[12px] max-md:text-[11px]">Preencha as informações abaixo para criar um novo exercício</h2>
                     </div>
                     <button
                         onClick={() => {
@@ -90,10 +96,10 @@ export function ModalCreateExercicio({ open, close, create }: ModalCreateExercic
                     </div>
 
                     {/* Campos*/}
-                    <div className="flex flex-col space-y-2 w-full items-center p-2">
+                    <div className="flex flex-col space-y-2 max-md:space-y-4 w-full items-center p-2">
 
                         {/* Nome */}
-                        <div className="w-4/5 border-1 border-neutras-100/40 flex items-center p-2 rounded-xl">
+                        <div className="w-4/5 max-md:w-[90%] border-1 border-neutras-100/40 flex items-center p-2 rounded-xl">
                             <label className="text-[#242424] font-Poppins-Semibold text-[14px]"> Nome: </label>
                             <input
                                 className="outline-none text-[#242424] w-full pl-2 placeholder:text-neutras-200/60 text-[15px]"
@@ -105,8 +111,8 @@ export function ModalCreateExercicio({ open, close, create }: ModalCreateExercic
                         </div>
 
                         {/* repetições e exercuções */}
-                        <div className="w-4/5 flex space-x-2">
-                            <div className="border border-neutras-100/40 flex items-center justify-between p-2 rounded-xl gap-4">
+                        <div className="w-4/5 max-md:w-[90%] flex md:space-x-2 max-md:flex-col max-md:space-y-4 max-md:items-center max-md:justify-center">
+                            <div className="border border-neutras-100/40 flex items-center justify-between p-2 rounded-xl gap-4 max-md:gap-2">
                                 <label className="text-[#242424] font-Poppins-Semibold text-[14px]">Repetições:</label>
                                 <input
                                     className="outline-none text-[#242424] w-full pl-2 placeholder:text-neutras-200/60 text-[15px]"
@@ -116,7 +122,7 @@ export function ModalCreateExercicio({ open, close, create }: ModalCreateExercic
                                 />
                             </div>
 
-                            <div className="border border-neutras-100/40 flex items-center justify-between p-2 rounded-xl gap-4">
+                            <div className="border border-neutras-100/40 flex items-center justify-between p-2 rounded-xl gap-4 max-md:gap-2">
                                 <label className="text-[#242424] font-Poppins-Semibold text-[14px]">Execuções:</label>
                                 <input
                                     className="outline-none text-[#242424] w-full pl-2 placeholder:text-neutras-200/60 text-[15px]"
@@ -128,7 +134,7 @@ export function ModalCreateExercicio({ open, close, create }: ModalCreateExercic
                         </div>
 
                         {/* Descrição */}
-                        <div className="w-4/5 border-1 border-neutras-100/40 flex p-2 rounded-xl">
+                        <div className="w-4/5 max-md:w-[90%] border-1 border-neutras-100/40 flex p-2 rounded-xl">
                             <label className="text-[#242424] font-Poppins-Semibold text-[14px]"> Descrição: </label>
                             <textarea
                                 className="outline-none resize-none h-20 w-full text-[#242424] pl-2 placeholder:text-neutras-200/60 text-[15px]"

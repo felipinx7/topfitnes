@@ -8,7 +8,7 @@ type infoTreino = {
 export function InfoTreino({previewFoto, data}: infoTreino ) {
     return (
 
-        <div className="flex flex-col space-y-2 w-[40%] p-2 rounded-bl-lg h-full">
+        <div className="flex flex-col space-y-2 w-[40%] p-2 rounded-bl-lg h-full overflow-y-hidden  max-md:hidden">
             {/* foto treino */}
             <div className="flex flex-col w-full space-y-2 items-center">
                 <h1 className="font-Poppins-Medium text-xl text-neutras-100">Treino</h1>

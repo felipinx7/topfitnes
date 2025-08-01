@@ -8,9 +8,15 @@ import { useForm } from "react-hook-form"
 import userProfile from "../../../../assets/image/userProfile.svg"
 import { ModalUpdateExercicioProps } from "@/types/type-ModalExercise-Props"
 import { exerciseDTO, exerciseDTOInput, exerciseSchema } from "@/schemas/schema-exercicio"
+import { UpdateExercise } from "@/services/routes/exercises/updateExercise"
+import { toast } from "react-toastify"
+import { BaseUrlFoto } from "@/utils/base-url-foto"
 
 export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExercise }: ModalUpdateExercicioProps) {
+    const photo = BaseUrlFoto(exerciseToEdit?.foto || "")
+
     const [previewImage, setPreviewImage] = useState<string | null>(null);
+    const previewFoto = exerciseToEdit?.foto ? photo : 'url(#)';
 
     const {
         register,
@@ -22,7 +28,7 @@ export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExerci
     });
 
     useEffect(() => {
-        if (exerciseToEdit && open){
+        if (exerciseToEdit && open) {
             reset({
                 nome: exerciseToEdit.nome,
                 repeticoes: exerciseToEdit.repeticoes,
@@ -35,16 +41,19 @@ export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExerci
         }
     }, [exerciseToEdit, open, reset])
 
-    function onSubmit(data: exerciseDTO) {
+    async function onSubmit(data: exerciseDTO) {
         const file = data.foto?.[0];
         const finalData = {
             ...data,
             foto: file || null,
-            id: new Date()
         }
 
-        if(updateExercise) updateExercise(finalData)
+        if (updateExercise) updateExercise(finalData)
+        toast.info("O Exercicio foi atualizado com sucesso!")
         close()
+
+        if (!exerciseToEdit?.id) return;
+        await UpdateExercise(finalData, exerciseToEdit.id);
     };
 
     return ReactDOM.createPortal(
@@ -53,12 +62,12 @@ export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExerci
             className={`fixed inset-0 bg-black/40 flex items-center justify-center z-50 ${open ? 'visible' : 'invisible'}`}>
             <div
                 onClick={(e) => e.stopPropagation()}
-                className={`bg-white w-[38%] h-[95%] relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}>
+                className={`bg-white w-[38%] h-[95%] max-md:w-[90%] max-md:max-w-[350px] max-md:max-h-[95%] max-md:max-h-[700px] relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}>
                 {/* Cabeçalho */}
                 <div className="w-full bg-[#F0F0F0] rounded-t-xl flex justify-between items-center px-2 py-3">
-                    <div className="flex flex-col text-neutras-100 pl-3 -space-y-1 ">
-                        <h1 className="font-Poppins-Medium text-xl">Atualização do Exercício</h1>
-                        <h2 className="font-poppins font-light text-[12px]">Preencha as informações abaixo para atualizar o exercício</h2>
+                    <div className="flex flex-col text-neutras-100 pl-3 -space-y-1 max-md:pl-1 max-md:w-4/5">
+                        <h1 className="font-Poppins-Medium text-xl max-md:text-lg">Atualização do Exercício</h1>
+                        <h2 className="font-poppins font-light text-[12px] max-md:text-[11px]">Preencha as informações abaixo para atualizar o exercício</h2>
                     </div>
                     <button
                         onClick={() => {
@@ -81,7 +90,7 @@ export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExerci
                     <div className="flex flex-col w-[70%] items-center justify-center">
                         <div className=" aspect-square rounded-full w-[50%] relative bg-[#131313] duration-500 ease-in-out transition-all hover:scale-105">
                             <img
-                                src={previewImage ?? userProfile}
+                                src={previewImage ?? previewFoto}
                                 alt="preview"
                                 className="aspect-square w-full object-cover rounded-full duration-500 hover:border-white hover:scale-105"
                             />
@@ -105,7 +114,7 @@ export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExerci
                     <div className="flex flex-col space-y-2 w-full items-center p-2">
 
                         {/* Nome */}
-                        <div className="w-4/5 border-1 border-neutras-100/40 flex items-center p-2 rounded-xl">
+                        <div className="w-4/5 max-md:w-[90%] border-1 border-neutras-100/40 flex items-center p-2 rounded-xl">
                             <label className="text-[#242424] font-Poppins-Semibold text-[14px]"> Nome: </label>
                             <input
                                 className="outline-none text-[#242424] w-full pl-2 placeholder:text-neutras-200/60 text-[15px]"
@@ -117,8 +126,8 @@ export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExerci
                         </div>
 
                         {/* repetições e exercuções */}
-                        <div className="w-4/5 flex space-x-2">
-                            <div className="border border-neutras-100/40 flex items-center justify-between p-2 rounded-xl gap-4">
+                        <div className="w-4/5 max-md:w-[90%] flex md:space-x-2 max-md:flex-col max-md:space-y-4 max-md:items-center max-md:justify-center">
+                            <div className="border border-neutras-100/40 flex items-center justify-between p-2 rounded-xl gap-4 max-md:gap-2">
                                 <label className="text-[#242424] font-Poppins-Semibold text-[14px]">Repetições:</label>
                                 <input
                                     className="outline-none text-[#242424] w-full pl-2 placeholder:text-neutras-200/60 text-[15px]"
@@ -128,7 +137,7 @@ export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExerci
                                 />
                             </div>
 
-                            <div className="border border-neutras-100/40 flex items-center justify-between p-2 rounded-xl gap-4">
+                            <div className="border border-neutras-100/40 flex items-center justify-between p-2 rounded-xl gap-4 max-md:gap-2">
                                 <label className="text-[#242424] font-Poppins-Semibold text-[14px]">Execuções:</label>
                                 <input
                                     className="outline-none text-[#242424] w-full pl-2 placeholder:text-neutras-200/60 text-[15px]"
@@ -140,7 +149,7 @@ export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExerci
                         </div>
 
                         {/* Descrição */}
-                        <div className="w-4/5 border-1 border-neutras-100/40 flex p-2 rounded-xl">
+                        <div className="w-4/5 max-md:w-[90%] border-1 border-neutras-100/40 flex p-2 rounded-xl">
                             <label className="text-[#242424] font-Poppins-Semibold text-[14px]"> Descrição: </label>
                             <textarea
                                 className="outline-none resize-none h-20 w-full text-[#242424] pl-2 placeholder:text-neutras-200/60 text-[15px]"

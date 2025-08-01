@@ -109,11 +109,11 @@ export function Login() {
                 <input
                   placeholder="Informe sua Senha"
                   name="password"
-                  type="password"
+                  type={visible ? "text" : "password"}
                   className="w-full h-10 pl-10 bg-white rounded text-neutras-100 text-base outline-0"
                 />
                 <div
-                  className="absolute bottom-1 right-1 text-neutras-200/50"
+                  className="absolute bottom-2 right-2 text-neutras-200/80"
                   onClick={() => setVisible((prev) => !prev)}
                 >
                   {visible ? <IconeOlhoAberto /> : <OlhoFechado />}

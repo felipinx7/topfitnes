@@ -20,7 +20,7 @@ export function SendTreinoComponent(data: functionButtons) {
 
     if (!data.dataAluno && !data.training) return
 
-    const rawData: studentTrainingDTO = { aluno_id: data.dataAluno?.id, treino_id: data.training?.id }
+    const rawData: studentTrainingDTO = { aluno_id: data.dataAluno?.id ?? "", treino_id: data.training?.id }
 
     async function sendTraining(data: any) {
         const response = await SendTreino(data);
@@ -47,10 +47,10 @@ export function SendTreinoComponent(data: functionButtons) {
                     }}
                     className="h-14 w-14 rounded-full bg-white-100 border-3 border-verde-100"
                 ></div>
-                <div className="flex-col flex  justify-center font-Poppins font-bold pl-3 text-verde-200 -space-y-1.5">
-                    <h1 className="text-lg font-Poppins-Bold ">{data?.dataAluno?.nome || "piroco"}</h1>
-                    <h2 className="font font-light text-[11px] pl-0.5">{data?.dataAluno?.email || data?.dataAluno?.telefone || "email@gmail.com"}</h2>
-                    <div className="px-2 py-0.5 translate-y-2 bg-verde-300 text-verde-200 font-poppins font-light text-center text-[10px] rounded-full w-2/3">
+                <div className="flex-col flex  justify-center font-Poppins font-bold pl-3 text-verde-200 md:-space-y-1.5 max-md:-space-y-1">
+                    <h1 className="text-lg font-Poppins-Bold max-md:text-[1rem]">{data?.dataAluno?.nome || "piroco"}</h1>
+                    <h2 className="font font-light text-[11px] pl-0.5 max-md:text-[0.6rem]">{data?.dataAluno?.email || data?.dataAluno?.telefone || "email@gmail.com"}</h2>
+                    <div className="px-2 py-0.5 translate-y-2 bg-verde-300 text-verde-200 font-poppins font-light text-center text-[10px] rounded-full w-16 max-md:max-w-16">
                         Iniciante
                     </div>
                 </div>

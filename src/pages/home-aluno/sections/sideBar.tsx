@@ -10,14 +10,10 @@ import { BaseUrlFoto } from "@/utils/base-url-foto";
 import { Logout } from "@/services/routes/login/logout";
 import { useRouter } from "next/navigation";
 
-
-
 export function SideBar({ id, setId, aluno }: SiderBarAluno) {
-
   const router = useRouter();
 
-  const foto = BaseUrlFoto(aluno?.foto)
-
+  const foto = BaseUrlFoto(aluno?.foto);
 
   const Botoes = [
     {
@@ -44,21 +40,26 @@ export function SideBar({ id, setId, aluno }: SiderBarAluno) {
   ];
 
   return (
-    <div className="w-full h-full flex flex-col min-w-[350px] justify-between bg-neutras-300 px-8 shadow-2xl shadow-neutras-100/25 font-Poppins py-8">
-      <div className="w-full flex">
+    <div className="w-full max-md:absolute max-md:bottom-0 max-md:gap-4 max-md:justify-center max-md:items-center h-full flex max-md:flex-row max-md:min-w-0 max-md:w-full max-md:h-20 flex-col min-w-[350px] justify-between bg-neutras-300 px-8 shadow-2xl shadow-neutras-100/25 font-Poppins py-8">
+      <div className="w-full flex max-md:w-12 max-md:h-10">
         <div
-          style={{ backgroundImage: `url(${foto ? foto : "#"})`, backgroundSize: "cover" }}
-          className="h-14 w-14 rounded-full bg-verde-100"
+          style={{
+            backgroundImage: `url(${foto ? foto : "#"})`,
+            backgroundSize: "cover",
+          }}
+          className="h-14 w-14 max-md:w-10 max-md:h-10 rounded-full bg-verde-100"
         ></div>
         <div className="flex flex-col justify-center items-start ml-2">
-          <h1 className="text-xl font-Poppins-Bold text-verde-200">
+          <h1 className="text-xl max-md:hidden font-Poppins-Bold text-verde-200">
             {aluno?.nome}
           </h1>
-          <h1 className="text-base font-Poppins text-neutras-100">Aluno</h1>
+          <h1 className="text-base max-md:hidden font-Poppins text-neutras-100">
+            Aluno
+          </h1>
         </div>
       </div>
 
-      <div className="flex flex-col justify-center items-start gap-1">
+      <div className="flex flex-col max-md:flex-row justify-center items-start gap-1">
         {Botoes.map((botao) => (
           <div
             key={botao.id}
@@ -70,15 +71,19 @@ export function SideBar({ id, setId, aluno }: SiderBarAluno) {
             } duration-300 rounded-xl w-full p-2 text-xl font-Poppins-Medium flex justify-start cursor-pointer `}
           >
             <div className="h-8 w-8">{botao.icon}</div>{" "}
-            <h1 className="ml-2">{botao.nome}</h1>
+            <h1 className="ml-2 max-md:hidden">{botao.nome}</h1>
           </div>
         ))}
       </div>
 
-      <button onClick={() =>{ Logout()
-        router.push("/")
-      }} className="text-verde-200 hover:bg-verde-100/60 duration-300 bg-verde-300 cursor-pointer shadow- shadow-neutras-100/50 rounded-xl flex items-center justify-center w-full p-1">
-        <div className="p-1 h-8">
+      <button
+        onClick={() => {
+          Logout();
+          router.push("/");
+        }}
+        className="text-verde-200 max-md:w-14 max-md:h-12 max-md:p-2 max-md:text-[0px] hover:bg-verde-100/60 duration-300 bg-verde-300 cursor-pointer shadow- shadow-neutras-100/50 rounded-xl flex items-center justify-center w-full p-1"
+      >
+        <div className="p-1 h-8 max-md:w-8 max-md:p-0 max-md:h-6">
           <IconeSair />{" "}
         </div>{" "}
         Sair

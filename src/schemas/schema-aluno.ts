@@ -17,7 +17,8 @@ export const schemaAluno = z.object({
   foco_corpo: z.string().optional(),
   plano: z.string().optional(),
   foto: z.string().optional(),
-  usuario_id: z.string()
+  usuario_id: z.string(),
+  data_validade_plano: z.string().optional(),
 });
 
 export type AlunoSchemaDTO = z.infer<typeof schemaAluno>;

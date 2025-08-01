@@ -9,7 +9,7 @@ import { Alunos } from "./sections/alunos";
 
 export function HomePersonal() {
     const [render, setRender] = useState(1);
-    const [personal, setPersonal] = useState({})
+    const [personal, setPersonal] = useState({});
 
     useEffect(() => {
         async function getPersonal() {
@@ -27,7 +27,7 @@ export function HomePersonal() {
             case 1:
                 return <Inicio data={personal} />
             case 2:
-                return <Treinos personal={personal}/>
+                return <Treinos/>
             case 3:
                 return <Alunos/>
             case 4:
@@ -38,8 +38,8 @@ export function HomePersonal() {
     }
 
     return (
-        <main className="w-screen h-screen bg-neutras-300 relative flex overflow-hidden">
-            <div className="w-1/5 min-w-[350px] h-full">
+        <main className="w-screen h-screen max-md:h-[100dvh] bg-neutras-300 relative flex overflow-hidden max-md:flex-col-reverse ">
+            <div className="w-1/5 min-w-[350px] h-full max-md:absolute max-md:w-full max-md:h-20 z-20 max-md:bottom-0">
                 {" "}
                 <SideBar setId={setRender} id={render} personal={personal}></SideBar>
             </div>

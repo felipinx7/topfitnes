@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { Search } from "../components/search"
 import { TreinoComponent } from "../components/treinoComponent"
 import { ModalCreateTreino } from "../modals/treinos/modalCreateTreino"
@@ -9,15 +9,17 @@ import { ModalDeleteTreino } from "../modals/treinos/modalDeleteTreino"
 import { ModalSendTreino } from "../modals/treinos/modalSendTreino"
 import { ModalSeeTreino } from "../modals/treinos/modalSeeTreino"
 import { getAllTreino } from "@/services/routes/treinos/getAllTreino"
+import { ModalMenuTreino } from "../modals/treinos/modalMenuTreino"
 
 
-export function Treinos({ personal }: any) {
+export function Treinos() {
     // visialização dos modals
     const [visibleModalCreate, setVisibleModalCreate] = useState(false)
     const [visibleModalUpdate, setVisibleModalUpdate] = useState(false)
     const [visibleModalDelete, setVisibleModalDelete] = useState(false)
     const [visibleModalSendTraining, setVisibleModalSendTraining] = useState(false)
     const [visibleModalSeeTraining, setVisibleModalSeeTraining] = useState(false)
+    const [visibleModalMenu, setVisibleModalMenu] = useState(false)
 
     // Array dos trainings
     const [trainings, setTrainings] = useState<TrainingSchemaDTO[]>([]);
@@ -54,7 +56,10 @@ export function Treinos({ personal }: any) {
             <div className="flex w-full h-fit justify-between mt-4 border-b-2 border-b-gray-200">
                 <h1 className="text-verde-200 font-Poppins text-xl mt-1.5"> Treinos Criados </h1>
                 <button
-                    onClick={() => setVisibleModalCreate(prev => !prev)}
+                    onClick={() => {
+                        (true)
+                        setVisibleModalCreate(prev => !prev)
+                    }}
                     className="rounded-xl flex items-center justify-center bg-verde-100 text-white hover:bg-verde-200 font-Poppins-Bold py-1 px-2 text-md duration-500 cursor-pointer mb-1.5">
                     + Novo Treino
                 </button>
@@ -65,42 +70,59 @@ export function Treinos({ personal }: any) {
                         key={item.id ? item.id.toString() : idx}
                         update={() => {
                             setTrainingToEdit(item)
+
                             setVisibleModalUpdate(prev => !prev)
                         }}
                         delete={() => {
                             setTrainingToEdit(item)
+
                             setVisibleModalDelete(prev => !prev)
                         }}
                         send={() => {
                             setTrainingToEdit(item)
+
                             setVisibleModalSendTraining(prev => !prev)
                         }}
                         see={() => {
                             setTrainingToEdit(item)
+
                             setVisibleModalSeeTraining(prev => !prev)
+                        }}
+                        menuTraining={() => {
+                            setTrainingToEdit(item)
+
+                            setVisibleModalMenu(prev => !prev)
                         }}
                         nomeTreino={item.nome}
                         descricaoTreino={item.descricao}
                         foto={item.foto} />
+
                 ))}
             </div>
 
             <ModalCreateTreino
                 open={visibleModalCreate}
-                close={() => setVisibleModalCreate(prev => !prev)}
+                close={() => {
+                    setVisibleModalCreate(prev => !prev)
+
+                }}
                 create={createTraining}
-                personal={personal}
             />
             <ModalUpdateTreino
                 open={visibleModalUpdate}
-                close={() => setVisibleModalUpdate(prev => !prev)}
+                close={() => {
+                    setVisibleModalUpdate(prev => !prev)
+
+                }}
                 trainingToEdit={trainingToEdit}
                 updateTreino={updateTraining}
             />
 
             <ModalDeleteTreino
                 open={visibleModalDelete}
-                close={() => setVisibleModalDelete(prev => !prev)}
+                close={() => {
+                    setVisibleModalDelete(prev => !prev)
+                }}
                 onDelete={deleteTraining}
                 texto="treino"
                 training={trainingToEdit}
@@ -109,14 +131,34 @@ export function Treinos({ personal }: any) {
 
             <ModalSendTreino
                 open={visibleModalSendTraining}
-                close={() => setVisibleModalSendTraining(prev => !prev)}
+                close={() => {
+                    setVisibleModalSendTraining(prev => !prev)
+
+                }}
                 trainingToEdit={trainingToEdit}
             />
 
             <ModalSeeTreino
                 open={visibleModalSeeTraining}
-                close={() => setVisibleModalSeeTraining(prev => !prev)}
+                close={() => {
+                    setVisibleModalSeeTraining(prev => !prev)
+
+                }}
                 dataTraining={trainingToEdit}
+            />
+
+            <ModalMenuTreino
+                open={visibleModalMenu}
+                close={(() => {
+                    setVisibleModalMenu(prev => !prev)
+
+                })}
+                dataTraining={trainingToEdit}
+                setTrainingEdit={setTrainingToEdit}
+                setVisibleModalDelete={setVisibleModalDelete}
+                setVisibleModalSeeTraining={setVisibleModalSeeTraining}
+                setVisibleModalSendTraining={setVisibleModalSendTraining}
+                setVisibleModalUpdateTraining={setVisibleModalUpdate}
             />
         </div>
     )
