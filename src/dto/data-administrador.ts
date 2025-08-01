@@ -5,5 +5,4 @@ export interface DataAdministrador{
     foto: string
     telefone: string
     email: string
-    senha: string
 }

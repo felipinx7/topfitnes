@@ -4,6 +4,5 @@ export interface DataAdministradorDTO {
   sobrenome: string;
   foto: string;
   telefone: string;
-  senha: string;
   email: string;
 }
