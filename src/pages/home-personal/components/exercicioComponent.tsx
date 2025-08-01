@@ -37,10 +37,10 @@ export function ExercicioComponent(data: functionButtons) {
                         backgroundSize: "cover",
                         backgroundPosition: 'center'
                     }}
-                    className="h-20 w-20  aspect-square rounded-full bg-white-100 border-3 mt-1 border-verde-100"
+                    className="h-20 w-20 max-md:h-16 max-md:w-16 aspect-square rounded-full bg-white-100 border-3 mt-1 border-verde-100"
                 ></div>
                 <div className="flex-col flex w-4/5 justify-center font-Poppins font-bold pl-3 text-verde-200 -space-y-1.5">
-                    <h1 className="text-lg font-Poppins-Bold ">{data.dataExercise.nome}</h1>
+                    <h1 className="text-lg font-Poppins-Bold max-md:text-[1rem]">{data.dataExercise.nome}</h1>
                     <h2 className="font font-light text-[11px] pl-0.5">{data.dataExercise.execucoes} Séries X {data.dataExercise.repeticoes} Repetições</h2>
                     <h1 className="font font-light text-[12px] break-words mt-3 pl-0.5 text-verde-200">
                         {data.dataExercise.descricao.length > 50
@@ -51,7 +51,7 @@ export function ExercicioComponent(data: functionButtons) {
             </div>
 
             {/* Icones*/}
-            <div className="flex space-x-2 items-center justify-center">
+            <div className="flex md:space-x-2 items-center justify-center max-md:flex-col max-md:space-y-2">
                 {/* Icone atualizar */}
                 <button
                     onClick={data.update}

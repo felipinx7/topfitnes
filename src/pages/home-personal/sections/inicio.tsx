@@ -59,6 +59,7 @@ export function Inicio({ data }: any) {
           ))}
         </div>
       </div>
+      <div className="h-20 md:hidden max-h-20 w-full"></div>
     </div>
   )
 }

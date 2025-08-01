@@ -56,7 +56,7 @@ export function ModalSeeTreino(data: ModalSeeTreinoProps) {
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className={`bg-white overflow-y-hidden w-4/5 h-[95%] max-h-[95%] relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${data.open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}>
+                className={`bg-white overflow-y-hidden w-4/5 max-md:w-[95%] h-[95%] max-h-[95%] max-md:max-h-[800px] relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${data.open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}>
                 {/* Cabeçalho */}
                 <div className="w-full bg-[#F0F0F0] rounded-t-xl flex justify-between items-center px-2 py-3">
                     <h1 className="font-Poppins-Medium text-xl text-neutras-100">Treino</h1>

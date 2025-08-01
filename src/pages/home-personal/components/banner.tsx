@@ -9,17 +9,17 @@ export function Banner(){
                   <h1 className="text-sm text-verde-200 font-Poppins-Medium">
                     TOP FITNESS
                   </h1>
-                  <h1 className="text-3xl text-verde-200 font-Poppins-Bold">
+                  <h1 className="text-3xl max-md:text-lg text-verde-200 font-Poppins-Bold">
                     Ola, Bem Vindo(a)!
                   </h1>
-                  <h1 className="lg text-verde-200 font-Poppins-Semibold mt-2">
+                  <h1 className="text-lg text-verde-200 max-md:text-sm font-Poppins-Semibold mt-2">
                     AO SISTEMA ONLINE DA TOPFITNESS!
                   </h1>
                 </div>
         
-                <div className="w-1/5 h-full bg-gradient-to-br from-50% to-50% from-verde-500 to-neutras-200/10 flex justify-center items-center">
+                <div className="w-1/5 max-md:w-1/4 h-full bg-gradient-to-br from-50% to-50% from-verde-500 to-neutras-200/10 flex justify-center items-center">
                   <div
-                    className="h-32 w-32 rounded-full border-8"
+                    className="h-32 w-32  max-md:h-20 max-md:w-20 rounded-full border-8"
                     style={{
                       backgroundImage: `url(${Logo.src})`,
                       backgroundSize: "cover",

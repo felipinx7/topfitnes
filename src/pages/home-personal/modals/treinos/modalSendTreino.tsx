@@ -12,15 +12,11 @@ export function ModalSendTreino(data: ModalSendTreinoProps) {
     useEffect(() => {
         async function getAllAlunos() {
             const response = await GetTodosClientes();
-            console.log(JSON.stringify(response.data, null, 2));
-
             if (response) setAlunos(response)
         }
 
         getAllAlunos();
     }, [])
-
-
 
     return ReactDOM.createPortal(
         <div
@@ -29,12 +25,12 @@ export function ModalSendTreino(data: ModalSendTreinoProps) {
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className={`bg-white w-[38%] h-[95%] relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${data.open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}>
+                className={`bg-white w-[38%] h-[95%] max-md:w-[90%] max-md:max-w-[350px] max-md:max-h-[95%] max-md:max-h-[700px] relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${data.open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}>
                 {/* Cabeçalho */}
                 <div className="w-full bg-[#F0F0F0] rounded-t-xl flex justify-between items-center px-2 py-3">
-                    <div className="flex flex-col text-neutras-100 pl-3 -space-y-1 ">
-                        <h1 className="font-Poppins-Medium text-xl">Enviar Treino</h1>
-                        <h2 className="font-poppins font-light text-[12px]">Selecione os alunos que você deseja que tenham acesso ao treino</h2>
+                    <div className="flex flex-col text-neutras-100 pl-3 -space-y-1 max-md:pl-1">
+                        <h1 className="font-Poppins-Medium text-xl max-md:text-lg">Enviar Treino</h1>
+                        <h2 className="font-poppins font-light text-[12px] max-md:text-[11px]">Selecione os alunos que você deseja que tenham acesso ao treino</h2>
                     </div>
                     <button
                         onClick={data.close}
@@ -44,7 +40,7 @@ export function ModalSendTreino(data: ModalSendTreinoProps) {
                 </div>
 
                 {/* Alunos */}
-                <div className="w-[95%] mt-2 h-full overflow-y-auto flex flex-col items-center space-y-2">
+                <div className="w-[95%] mt-2 h-full overflow-y-auto flex flex-col items-center space-y-2 max-md:space-y-4">
                     {alunos.map((item) => (
                         <SendTreinoComponent dataAluno={item} key={item.id} training={data.trainingToEdit} />
                     ))}

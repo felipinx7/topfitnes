@@ -23,6 +23,8 @@ export const schemaAlunoForm = z.object({
   foco_corpo: z.string(),
   planoId: z.string(),
   role: z.string().default("ALUNO"),
+  treinos_aluno: z.array(z.object()).optional()
+  id: z.string().optional()
 });
 
 export type AlunoSchemaDTO = z.infer<typeof schemaAlunoForm>;

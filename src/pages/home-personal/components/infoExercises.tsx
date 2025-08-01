@@ -23,7 +23,7 @@ export function InfoExercises({ setIsExercises, setVisibleModalDelete, setVisibl
             </div>
             {/* Exercicios */}
             <div className="flex flex-col h-full w-full gap-4 mt-6 overflow-x-hidden overflow-y-auto pb-20 px-4">
-                        {exercises?.map((item: exerciseDTO)=>(
+                        { exercises ? exercises?.map((item: exerciseDTO)=>(
                             <div className="w-full">
                             <ExercicioComponent
                                 delete={() => {
@@ -38,7 +38,7 @@ export function InfoExercises({ setIsExercises, setVisibleModalDelete, setVisibl
                                 foto={item.foto}
                                      />
                                      </div>
-                        ))}
+                        )) :<p>Não há exercícios cadastrados</p>}
             </div>
         </div>
     )
