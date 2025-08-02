@@ -1,4 +1,4 @@
-import z from "zod";
+import z, { optional } from "zod";
 
 export const schemaPersonal = z.object({
   id: z.string().optional(),
@@ -13,3 +13,16 @@ export const schemaPersonal = z.object({
   telefone: z.string().min(11, "numero inválido"),
   email: z.email(),
 });
+
+export const schemaPersonaPerfil = z.object({
+  id: z.string().optional(),
+  nome: z.string().min(1, "Nome muito curto").nullable(),
+  sobrenome: z.string().min(1, "Sobrenome muito curto").nullable(),
+  formacao: z.string().min(2, "Formação inválida").nullable(),
+  telefone: z.string().min(11, "numero inválido").nullable(),
+  email: z.email().nullable(),
+  foto: z.any().nullable()
+});
+
+export type schemaPersonaPerfilDTO = z.infer<typeof schemaPersonaPerfil>
+export type schemaPersonalDTO = z.infer<typeof schemaPersonal>
