@@ -399,7 +399,7 @@ export default function ModalFormularioCliente({
                 </label>
                 <select
                   id="plano_id"
-                  {...register("planoId")}
+                  {...register("plano_id")}
                   className="bg-[#DBDBDB] max-lg:mb-6 text-[#1E1E1E] font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
                 >
                   <option value="">Selecione um plano</option>

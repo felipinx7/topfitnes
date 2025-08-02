@@ -3,7 +3,6 @@ export const IconeSidebarAluno = () => {
     <svg
       className="w-full h-full"
 
-      className="w-full h-full"
 
       viewBox="0 0 25 29"
       fill="none"
@@ -13,9 +12,9 @@ export const IconeSidebarAluno = () => {
         d="M18.5 7.55556C18.5 9.02898 17.8679 10.4421 16.7426 11.4839C15.6174 12.5258 14.0913 13.1111 12.5 13.1111C10.9087 13.1111 9.38258 12.5258 8.25736 11.4839C7.13214 10.4421 6.5 9.02898 6.5 7.55556C6.5 6.08213 7.13214 4.66905 8.25736 3.62718C9.38258 2.58532 10.9087 2 12.5 2C14.0913 2 15.6174 2.58532 16.7426 3.62718C17.8679 4.66905 18.5 6.08213 18.5 7.55556ZM12.5 17.2778C9.71523 17.2778 7.04451 18.3021 5.07538 20.1254C3.10625 21.9486 2 24.4215 2 27H23C23 24.4215 21.8938 21.9486 19.9246 20.1254C17.9555 18.3021 15.2848 17.2778 12.5 17.2778Z"
 
         stroke="currentColor"
-        stroke-width="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

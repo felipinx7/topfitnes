@@ -13,5 +13,5 @@ export interface DataAlunoForm {
   senha: string;
   telefone: string;
   foco_corpo: string;
-  planoId: string;
+  plano_id: string;
 }

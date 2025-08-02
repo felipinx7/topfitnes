@@ -21,7 +21,7 @@ export const schemaAlunoForm = z.object({
   senha: z.string().min(8, "Senha deve ter no mínimo 8 caracteres"),
   telefone: z.string(),
   foco_corpo: z.string(),
-  planoId: z.string(),
+  plano_id: z.string(),
   role: z.string().default("ALUNO"),
   treinos_aluno: z.array(z.object()).optional(),
   id: z.string().optional(),

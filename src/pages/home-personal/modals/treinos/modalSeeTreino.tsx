@@ -51,7 +51,7 @@ export function ModalSeeTreino(data: ModalSeeTreinoProps) {
     return ReactDOM.createPortal(
         <div
             onClick={data.close}
-            className={`fixed inset-0 bg-black/40 flex items-center justify-center z-40 ${data.open ? 'visible' : 'invisible'}`}
+            className={`fixed inset-0 bg-black/40 flex items-center justify-center z-45 ${data.open ? 'visible' : 'invisible'}`}
         >
             <div
                 onClick={(e) => e.stopPropagation()}

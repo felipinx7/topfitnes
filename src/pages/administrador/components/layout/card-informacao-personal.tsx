@@ -107,7 +107,7 @@ export default function CardInformacaoPersonal(props: DataCadastroPersonal) {
           await handleConfirmDelete();
         }}
         handleCloseModal={handleVisibilityModalConfirmation}
-        text={`Você realmente deseja excluir o aluno ${props.nome}?`}
+        text={`Você realmente deseja excluir o Personal ${props.nome}?`}
       />
     </article>
   );

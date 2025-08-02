@@ -1,4 +1,5 @@
 export const IconeCamera = () => {
+
   return (
     <svg
       width="43"

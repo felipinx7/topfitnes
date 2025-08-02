@@ -18,21 +18,21 @@ export const IconeCalendario = () => {
         d="M11.8298 10.7832V6.5332M33.0798 10.7832V6.5332"
         stroke="currentColor"
         strokeWidth="4.25"
-        stroke-Linecap="round"
+        strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M11.8298 25.6582H33.0798"
         stroke="currentColor"
         strokeWidth="4.25"
-        stroke-Linecap="round"
+        strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M11.8298 34.1582H26.7048"
         stroke="currentColor"
         strokeWidth="4.25"
-        stroke-Linecap="round"
+        strokeLinecap="round"
         strokeLinejoin="round"
       />
     </svg>
