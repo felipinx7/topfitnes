@@ -5,6 +5,7 @@ import PutClienteAdministrador from "@/services/routes/administrador/put/put-cli
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { BaseUrlFoto } from "@/utils/base-url-foto";
+import { FormatarNumero } from "@/utils/formatar-numero-telefone";
 
 interface ModalFormularioCardClienteProps {
   OpenModal: boolean;
@@ -24,6 +25,9 @@ export default function ModalFormularioCardCliente({
   const baseUrl = BaseUrlFoto(data.foto || "");
 
   const [fotoArquivo, setFotoArquivo] = useState<File | null>(null);
+  const numeroFormatado = FormatarNumero(data.telefone || "");
+  const [telefone, setTelefone] = useState(data?.telefone || "");
+  const [foiEditado, setFoiEditado] = useState(false);
 
   function formatarDataISO(data: Date | string | undefined): string {
     if (!data) return "";
@@ -36,6 +40,7 @@ export default function ModalFormularioCardCliente({
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<AlunoSchemaDTO>({
     resolver: zodResolver(schemaAluno),
@@ -110,19 +115,29 @@ export default function ModalFormularioCardCliente({
   // Sempre reseta o form quando data muda
   useEffect(() => {
     if (data) {
-      console.log("Valor do plano no data:", data.plano_id); // importante para debug
+      setTelefone(data.telefone || "");
+      setValue("telefone", data.telefone || "");
+    }
+    if (data) {
+      const telefoneFormatado = FormatarNumero(data.telefone || "");
 
       reset({
         ...data,
-        plano_id: data.plano_id as Planos | undefined, // ← ESSA LINHA É CRUCIAL
+        telefone: telefoneFormatado,
+        plano_id: data.plano_id as Planos | undefined,
         data_matricula: formatarDataISO(data.data_matricula),
       });
+
+      // ⚠️ Isso força o valor no input visivelmente
+      setTimeout(() => {
+        setValue("telefone", telefoneFormatado);
+      }, 0);
     }
-  }, [data, reset]);
+  }, [data, reset, setValue]);
 
   return (
     <section
-      className={`overflow-hidden transition-all duration-500 ease-in-out w-full bg-transparent 
+      className={`overflow-hidde transition-all duration-500 ease-in-out w-full bg-transparent 
         ${OpenModal ? "max-h-[3000px] opacity-100 p-8" : "max-h-0 opacity-0 p-0"} 
       `}
     >
@@ -184,9 +199,19 @@ export default function ModalFormularioCardCliente({
                   Telefone:
                 </label>
                 <input
-                  {...register("telefone")}
-                  id="telefone"
                   type="tel"
+                  inputMode="numeric"
+                  id="telefone"
+                  value={foiEditado ? FormatarNumero(telefone) : telefone}
+                  maxLength={15}
+                  placeholder="(xx) xxxxx-xxxx"
+                  {...register("telefone")}
+                  onChange={(e) => {
+                    const valorDigitado = e.target.value.replace(/\D/g, ""); // remove tudo que não for número
+                    setTelefone(valorDigitado);
+                    setValue("telefone", valorDigitado);
+                    setFoiEditado(true);
+                  }}
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100 transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
                 />
               </div>

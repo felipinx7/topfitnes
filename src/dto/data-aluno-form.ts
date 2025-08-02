@@ -1,10 +1,30 @@
+export enum SexoEnumTS {
+  MASCULINO = "MASCULINO",
+  FEMININO = "FEMININO",
+  PREFIRO_NAO_DIZER = "PREFIRO_NAO_DIZER",
+}
+
+export enum FocoTreinoEnumTS {
+  PERDER_PESO = "PERDER_PESO",
+  GANHAR_MASSA = "GANHAR_MASSA",
+  MANTER_A_FORMA = "MANTER_A_FORMA",
+}
+
+export enum FocoCorpoEnumTS {
+  PEITO = "PEITO",
+  BRACOS = "BRACOS",
+  COSTAS = "COSTAS",
+  GLUTEOS = "GLUTEOS",
+  PERNAS = "PERNAS",
+}
+
 export interface DataAlunoForm {
   nome: string;
   treino_dias_por_semana: number;
   sobrenome: string;
-  sexo: string;
+  sexo: SexoEnumTS;
   foto?: File;
-  foco_treino: string;
+  foco_treino: FocoTreinoEnumTS;
   peso: number;
   altura: number;
   idade: number;
@@ -12,6 +32,6 @@ export interface DataAlunoForm {
   email: string;
   senha: string;
   telefone: string;
-  foco_corpo: string;
+  foco_corpo: FocoCorpoEnumTS;
   plano_id: string;
 }
