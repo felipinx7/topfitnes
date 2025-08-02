@@ -15,6 +15,7 @@ import { GetTodosPersonais } from "@/services/routes/administrador/get/get-todos
 
 import Cookies from "js-cookie";
 import { personalPesquisaDTO } from "@/dto/data-personal";
+import { PerfilSection } from "./sections/Perfil";
 
 export function HomeAluno() {
   const [section, setSection] = useState(1);
@@ -33,6 +34,8 @@ export function HomeAluno() {
         return <MeuPersonal personal={personal} setId={setSection}/>;
       case 4:
         return <PesquisaPersonais personais={personais} />;
+      case 5: 
+        return <PerfilSection aluno={aluno}/>
     }
   }
 

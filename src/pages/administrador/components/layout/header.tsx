@@ -12,6 +12,7 @@ import { DataAdministrador } from "@/dto/data-administrador";
 import { GetDadosAdministrador } from "@/services/routes/administrador/get/get-dados-administrador";
 import { LogoutSistema } from "@/services/routes/administrador/delete/logout-sistema";
 import { useRouter } from "next/navigation";
+import { BaseUrlFoto } from "@/utils/base-url-foto";
 
 interface HeaderAdministradorProps {
   sectionSelected: SectionType;
@@ -50,33 +51,31 @@ export default function HeaderAdministrador({
     router.push("/login");
   }
 
-  async function pegarUser(id: string) {
-    const response = await GetDadosAdministrador(id);
-    setInformacaoAdmin(response);
+  async function pegarUser() {
+    const response = await GetDadosAdministrador();
+
+    const dadosFormatados = {
+      id: response.administrador.id,
+      email: response.administrador.email,
+      foto: response.administrador.foto,
+      nome: response.administrador.nome,
+      sobrenome: response.administrador.sobrenome,
+      telefone: response.administrador.telefone,
+      senha: response.administrador.senha,
+    };
+
+    setInformacaoAdmin(dadosFormatados);
+
+    console.log("Dados do Aluno:", response);
   }
 
-  // Fallback para evitar erro de undefined no modal
-  const fallbackAdminData: DataAdministrador = {
-    id: "",
-    nome: "Administrador",
-    sobrenome: "",
-    email: "",
-    telefone: "",
-    senha: "",
-    foto: "",
-  };
+  const baseUrl = BaseUrlFoto(informacaoAdmin?.foto)
 
   useEffect(() => {
-    const allKeys = { ...localStorage };
-    console.log("Todas as chaves do localStorage:", allKeys);
+    pegarUser();
+  }, [adminData]);
 
-    const token = localStorage.getItem("token");
-    console.log("O token pegado é ", token);
-
-    if (token) {
-      pegarUser(token);
-    }
-  }, []);
+  console.log("Dados administrador", informacaoAdmin);
 
   return (
     <header className="max-lg:hidden">
@@ -92,7 +91,7 @@ export default function HeaderAdministrador({
       <ModalInformacoesAdministrador
         isOpenModalInformacoes={isOpenModalInformacoes}
         onceClose={closeModalInformacoes}
-        data={adminData || fallbackAdminData}
+        data={adminData || informacaoAdmin}
       />
 
       {/* Logo */}
@@ -108,8 +107,8 @@ export default function HeaderAdministrador({
             onClick={openModalInformacoes}
             className="flex items-center gap-4 cursor-pointer select-none"
           >
-            <Image
-              src={adminData?.foto || logo}
+            <img
+              src={baseUrl}
               alt="Foto do administrador"
               width={70}
               height={70}
@@ -126,7 +125,7 @@ export default function HeaderAdministrador({
             >
               Olá,{" "}
               <span className="font-Poppins-Bold">
-                {adminData?.nome || "Administrador"}!
+                {adminData?.nome || `${informacaoAdmin?.nome} ${informacaoAdmin?.sobrenome} ${informacaoAdmin?.id}`}!
               </span>
             </h1>
           </div>

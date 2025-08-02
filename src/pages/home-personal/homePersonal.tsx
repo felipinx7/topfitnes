@@ -5,6 +5,7 @@ import { SideBar } from "./sections/sideBar";
 import { Inicio } from "./sections/inicio";
 import { Treinos } from "./sections/treinos";
 import { GetPersonal } from "@/services/routes/personal/getPersonal";
+import { Alunos } from "./sections/alunos";
 
 export function HomePersonal() {
     const [render, setRender] = useState(1);
@@ -28,7 +29,7 @@ export function HomePersonal() {
             case 2:
                 return <Treinos/>
             case 3:
-                return <div> isso ai 3</div>
+                return <Alunos/>
             case 4:
                 return <div> isso ai 4</div>
             case 5:
