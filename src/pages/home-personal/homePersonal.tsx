@@ -6,6 +6,7 @@ import { Inicio } from "./sections/inicio";
 import { Treinos } from "./sections/treinos";
 import { GetPersonal } from "@/services/routes/personal/getPersonal";
 import { Alunos } from "./sections/alunos";
+import { PerfilSection } from "./sections/perfil";
 
 export function HomePersonal() {
     const [render, setRender] = useState(1);
@@ -19,7 +20,7 @@ export function HomePersonal() {
 
         getPersonal();
     }, []);
-
+    
     function renderSection(render: number) {
         if (!personal) return <div>Carregando dados do personal...</div>;
         
@@ -33,7 +34,9 @@ export function HomePersonal() {
             case 4:
                 return <div> isso ai 4</div>
             case 5:
-                return <div> isso ai 5</div>
+                return <div> falta coisa </div>
+            case 6:
+                return <PerfilSection />
         }
     }
 

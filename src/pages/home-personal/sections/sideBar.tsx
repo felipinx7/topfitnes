@@ -51,11 +51,13 @@ export function SideBar({ id, setId, personal }: sideBarPersonal) {
 
     const photo = BaseUrlFoto(personal.foto)
     return (
-        <div className={`w-full h-full flex flex-col min-w-[350px] justify-between bg-neutras-300 px-8 shadow-2xl shadow-neutras-100/25 font-Poppins py-8 max-lg:items-center max-lg:flex-row max-lg:min-w-0 max-lg:w-full max-lg:h-28 max-md:h-20 max-md:justify-center max-lg:duration-500 max-lg:ease-in-out z-10`}>
-            <div className="w-full flex max-lg:w-12 max-lg:h-14 max-md:w-12 max-md:h-10">
+        <div className={`w-full h-full flex flex-col min-w-[350px] justify-between bg-neutras-300 px-8 shadow-2xl shadow-neutras-100/25 font-Poppins py-8 max-lg:items-center max-lg:flex-row max-lg:min-w-0 max-lg:w-full max-md:h-20 max-md:justify-center`}>
+            <div
+            onClick={() => setId(6)} 
+            className={`w-full flex max-lg:w-12 max-lg:h-14 max-md:w-12 max-md:h-10 duration-500 cursor-pointer ${id === 6 ? "text-verde-200 lg:bg-verde-300 lg:px-2 lg:py-1 rounded-xl" : ""}`}>
                 <div
                     style={{ backgroundImage: `url(${photo})`, backgroundSize: "cover", backgroundPosition: 'center' }}
-                    className="h-14 w-14 max-lg:h-14 max-md:w-12 max-md:h-10 max-lg:aspect-square rounded-full bg-verde-100 max-lg:pb-1"
+                    className={`h-14 w-14 max-lg:h-14 max-md:w-12 max-md:h-10 max-lg:aspect-square rounded-full bg-verde-100 max-lg:pb-1${id === 6 ? "max-lg:border-verde-200 max-lg:border-2 duration-500" : ""} `}
                 ></div>
                 <div className="flex flex-col justify-center items-start ml-2">
                     <h1 className="text-xl max-lg:hidden font-Poppins-Bold text-verde-200">
