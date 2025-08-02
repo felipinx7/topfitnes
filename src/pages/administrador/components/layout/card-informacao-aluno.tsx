@@ -63,8 +63,8 @@ export default function CardInformacaoAluno(props: DataAluno) {
     <article
       className={`w-full ease-in-out h-auto rounded-2xl ${validadePlano ? "bg-[#f5b7b7]" : "bg-[#d8ffe2]"} transition-all duration-500 p-4 flex flex-col gap-0 ${openModal ? "gap-4" : "gap-0"}`}
     >
-      {/* Linha principal */}
-      <div className="w-full flex items-center justify-between">
+      {/* Cointeúdo principal */}
+      <div className="w-full flex max-sm:flex-col max-sm:space-y-8 max-sm:items-baseline items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-[69px] h-[60px] relative">
             <img
@@ -77,7 +77,7 @@ export default function CardInformacaoAluno(props: DataAluno) {
             <h4 className="text-black font-Poppins-Semibold text-[1.2rem]">
               {props.nome} {props.sobrenome}
             </h4>
-            <p className="text-black">{props.email}</p>
+            <p className="text-black max-sm:text-[1rem]">{props.email}</p>
           </div>
         </div>
 

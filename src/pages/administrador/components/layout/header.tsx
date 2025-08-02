@@ -125,7 +125,7 @@ export default function HeaderAdministrador({
             >
               Olá,{" "}
               <span className="font-Poppins-Bold">
-                {adminData?.nome || `${informacaoAdmin?.nome} ${informacaoAdmin?.sobrenome} ${informacaoAdmin?.id}`}!
+                {adminData?.nome || `${informacaoAdmin?.nome} ${informacaoAdmin?.sobrenome}`}!
               </span>
             </h1>
           </div>

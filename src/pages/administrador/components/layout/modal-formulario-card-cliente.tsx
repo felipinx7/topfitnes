@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { DataAluno } from "@/dto/data-aluno";
-import { AlunoSchemaDTO, schemaAluno } from "@/schemas/schema-aluno";
+import { AlunoSchemaDTO, Planos, schemaAluno } from "@/schemas/schema-aluno";
 import PutClienteAdministrador from "@/services/routes/administrador/put/put-cliente-administrador";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -54,17 +54,24 @@ export default function ModalFormularioCardCliente({
   }
 
   async function OnSubmit(formData: AlunoSchemaDTO) {
+    console.log("Dados enviados:", formData);
+
     try {
+      // Formata a data_matricula para ISO string
       const dataMatricula = formData.data_matricula
         ? new Date(formData.data_matricula + "T00:00:00.000Z")
         : undefined;
 
+      // Prepara o objeto para envio, convertendo data_matricula
       const dataToSend = {
         ...formData,
-        data_matricula: dataMatricula?.toISOString(), // <- CORREÇÃO AQUI
+        data_matricula: dataMatricula?.toISOString(), // corrigido para backend
       };
 
+      let response;
+
       if (fotoArquivo) {
+        // Se tem foto, usa FormData para enviar multipart/form-data
         const formDataToSend = new FormData();
         Object.entries(dataToSend).forEach(([key, value]) => {
           if (value === undefined || value === null) return;
@@ -72,15 +79,29 @@ export default function ModalFormularioCardCliente({
         });
 
         formDataToSend.append("foto", fotoArquivo);
-        const response = await PutClienteAdministrador(
-          formData.id,
-          formDataToSend
-        );
-        return response;
+
+        response = await PutClienteAdministrador(formData.id, formDataToSend);
       } else {
-        const response = await PutClienteAdministrador(formData.id, dataToSend);
-        return response;
+        // Se não tem foto, envia JSON normal
+        response = await PutClienteAdministrador(formData.id, dataToSend);
       }
+
+      console.log("Resposta do backend:", response.data);
+
+      if (response?.data?.student) {
+        // Atualiza o formulário com os dados recebidos para garantir que está tudo sincronizado
+        reset({
+          ...response.data.student,
+          plano_id: response.data.student.plano_id ?? "",
+          data_matricula: formatarDataISO(response.data.student.data_matricula),
+        });
+      }
+
+      // Se você quiser, pode também atualizar o estado local que armazena os dados do aluno,
+      // para refletir a atualização no UI geral (caso tenha)
+      // setData(response.data.student);
+
+      return response;
     } catch (error) {
       console.error("Erro ao enviar dados:", error);
     }
@@ -89,8 +110,11 @@ export default function ModalFormularioCardCliente({
   // Sempre reseta o form quando data muda
   useEffect(() => {
     if (data) {
+      console.log("Valor do plano no data:", data.plano_id); // importante para debug
+
       reset({
         ...data,
+        plano_id: data.plano_id as Planos | undefined, // ← ESSA LINHA É CRUCIAL
         data_matricula: formatarDataISO(data.data_matricula),
       });
     }
@@ -323,15 +347,16 @@ export default function ModalFormularioCardCliente({
                   Plano:
                 </label>
                 <select
-                  {...register("plano")}
+                  {...register("plano_id")}
                   id="plano"
                   className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100
-                  transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
+  transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
                 >
-                  <option value="plano-mensal-id">Mensal - 65,00R$</option>
-                  <option value="plano-trimestral-id">Trimestral</option>
-                  <option value="plano-semestral-id">Semestral</option>
-                  <option value="plano-anual-id">Anual</option>
+                  <option value="">Selecione um plano</option> {/* fallback */}
+                  <option value={Planos.MENSAL}>Mensal - R$ 65,00</option>
+                  <option value={Planos.TRIMESTRAL}>Trimestral</option>
+                  <option value={Planos.SEMESTRAL}>Semestral</option>
+                  <option value={Planos.ANUAL}>Anual</option>
                 </select>
               </div>
             </div>
@@ -340,7 +365,7 @@ export default function ModalFormularioCardCliente({
           <div className="w-full flex mt-4 items-center justify-center">
             <button
               type="submit"
-              className="bg-verde-100 p-3 w-[50%] rounded-2xl hover:bg-verde-400 cursor-pointer transition-all duration-500 ease-in-out"
+              className="bg-verde-100 p-3 w-[50%] max-sm:w-auto rounded-2xl hover:bg-verde-400 cursor-pointer transition-all duration-500 ease-in-out"
             >
               Atualizar dados
             </button>

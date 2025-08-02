@@ -34,7 +34,7 @@ export interface DataAluno {
   senha?: string;
   telefone?: string;
   foco_corpo?: string;
-  plano?: string;
+  plano_id?: string;
   dia_pagamento?: string;
   usuario_id: string;
   data_validade_plano?: string;

@@ -60,7 +60,7 @@ export default function CardInformacaoPersonal(props: DataCadastroPersonal) {
       className={`${excluded ? "hidden h-0 w-0" : ""}w-full ease-in-out h-auto rounded-2xl bg-[#d8ffe2] transition-all duration-500 p-4 flex flex-col gap-0 ${openModal ? "gap-4" : "gap-0"}`}
     >
       {/* Linha principal */}
-      <div className="w-full flex items-center justify-between">
+      <div className="w-full max-sm:flex-col max-sm:space-y-8 max-sm:items-baseline items-center flex justify-between">
         <div className="flex items-center gap-3">
           <div className="w-[69px] h-[60px] relative">
             <img
@@ -71,7 +71,7 @@ export default function CardInformacaoPersonal(props: DataCadastroPersonal) {
           </div>
           <div className="flex flex-col">
             <h4 className="text-black font-Poppins-Semibold text-[1.2rem]">
-              {props.nome} {props.sobrenome} {props.usuario_id}
+              {props.nome} {props.sobrenome}
             </h4>
             <p className="text-black">{props.email}</p>
           </div>
