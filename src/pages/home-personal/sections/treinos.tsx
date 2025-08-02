@@ -99,7 +99,7 @@ export function Treinos() {
 
                 ))}
             </div>
-
+                <div className="h-32 w-full lg:hidden"></div>
             <ModalCreateTreino
                 open={visibleModalCreate}
                 close={() => {

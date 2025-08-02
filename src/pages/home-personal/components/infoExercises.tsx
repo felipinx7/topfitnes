@@ -26,6 +26,7 @@ export function InfoExercises({ setIsExercises, setVisibleModalDelete, setVisibl
                         { exercises ? exercises?.map((item: exerciseDTO)=>(
                             <div className="w-full">
                             <ExercicioComponent
+                                key={item.id}
                                 delete={() => {
                                     setIsExercises(item)
                                     setVisibleModalDelete(prev => !prev)

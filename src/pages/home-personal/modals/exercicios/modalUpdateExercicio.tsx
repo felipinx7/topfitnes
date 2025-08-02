@@ -62,10 +62,10 @@ export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExerci
             className={`fixed inset-0 bg-black/40 flex items-center justify-center z-50 ${open ? 'visible' : 'invisible'}`}>
             <div
                 onClick={(e) => e.stopPropagation()}
-                className={`bg-white w-[38%] h-[95%] max-md:w-[90%] max-md:max-w-[350px] max-md:max-h-[95%] max-md:max-h-[700px] relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}>
+                className={`bg-white w-[38%] h-[95%] max-md:w-[90%] max-md:max-w-[350px] max-lg:max-h-[700px] max-lg:w-[75%] max-lg:max-w-[600px] max-xl:max-h-[800px] max-xl:w-2/3 max-xl:max-w-[200px] relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}>
                 {/* Cabeçalho */}
                 <div className="w-full bg-[#F0F0F0] rounded-t-xl flex justify-between items-center px-2 py-3">
-                    <div className="flex flex-col text-neutras-100 pl-3 -space-y-1 max-md:pl-1 max-md:w-4/5">
+                    <div className="flex flex-col text-neutras-100 pl-3 -space-y-1 max-lg:pl-1 max-lg:w-4/5">
                         <h1 className="font-Poppins-Medium text-xl max-md:text-lg">Atualização do Exercício</h1>
                         <h2 className="font-poppins font-light text-[12px] max-md:text-[11px]">Preencha as informações abaixo para atualizar o exercício</h2>
                     </div>
@@ -114,7 +114,7 @@ export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExerci
                     <div className="flex flex-col space-y-2 w-full items-center p-2">
 
                         {/* Nome */}
-                        <div className="w-4/5 max-md:w-[90%] border-1 border-neutras-100/40 flex items-center p-2 rounded-xl">
+                        <div className="w-4/5 max-lg:w-[90%] border-1 border-neutras-100/40 flex items-center p-2 rounded-xl">
                             <label className="text-[#242424] font-Poppins-Semibold text-[14px]"> Nome: </label>
                             <input
                                 className="outline-none text-[#242424] w-full pl-2 placeholder:text-neutras-200/60 text-[15px]"
@@ -126,8 +126,8 @@ export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExerci
                         </div>
 
                         {/* repetições e exercuções */}
-                        <div className="w-4/5 max-md:w-[90%] flex md:space-x-2 max-md:flex-col max-md:space-y-4 max-md:items-center max-md:justify-center">
-                            <div className="border border-neutras-100/40 flex items-center justify-between p-2 rounded-xl gap-4 max-md:gap-2">
+                        <div className="w-4/5 max-lg:w-[90%] flex lg:space-x-2 max-lg:flex-col max-lg:space-y-4 max-lg:items-center max-lg:justify-center">
+                            <div className="border border-neutras-100/40 flex items-center justify-between p-2 rounded-xl gap-4 max-lg:gap-2 max-lg:w-full">
                                 <label className="text-[#242424] font-Poppins-Semibold text-[14px]">Repetições:</label>
                                 <input
                                     className="outline-none text-[#242424] w-full pl-2 placeholder:text-neutras-200/60 text-[15px]"
@@ -137,7 +137,7 @@ export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExerci
                                 />
                             </div>
 
-                            <div className="border border-neutras-100/40 flex items-center justify-between p-2 rounded-xl gap-4 max-md:gap-2">
+                            <div className="border border-neutras-100/40 flex items-center justify-between p-2 rounded-xl gap-4 max-lg:gap-2 max-lg:w-full">
                                 <label className="text-[#242424] font-Poppins-Semibold text-[14px]">Execuções:</label>
                                 <input
                                     className="outline-none text-[#242424] w-full pl-2 placeholder:text-neutras-200/60 text-[15px]"
@@ -149,7 +149,7 @@ export function ModalUpdateExercicio({ open, close, exerciseToEdit, updateExerci
                         </div>
 
                         {/* Descrição */}
-                        <div className="w-4/5 max-md:w-[90%] border-1 border-neutras-100/40 flex p-2 rounded-xl">
+                        <div className="w-4/5 max-lg:w-[90%] border-1 border-neutras-100/40 flex p-2 rounded-xl">
                             <label className="text-[#242424] font-Poppins-Semibold text-[14px]"> Descrição: </label>
                             <textarea
                                 className="outline-none resize-none h-20 w-full text-[#242424] pl-2 placeholder:text-neutras-200/60 text-[15px]"

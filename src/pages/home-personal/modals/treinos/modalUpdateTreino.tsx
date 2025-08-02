@@ -75,10 +75,10 @@ export function ModalUpdateTreino({ open, close, trainingToEdit, updateTreino }:
             className={`fixed inset-0 bg-black/40 flex items-center justify-center z-50 ${open ? 'visible' : 'invisible'}`}>
             <div
                 onClick={(e) => e.stopPropagation()}
-                className={`bg-white w-[38%] h-[95%] max-md:w-[90%] max-md:max-w-[350px] max-md:max-h-[95%] max-md:max-h-[700px] relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}>
+                className={`bg-white w-[38%] h-[95%] max-md:w-[90%] max-md:max-w-[350px] max-lg:max-h-[700px] max-lg:w-[75%] max-lg:max-w-[600px] max-xl:max-h-[600px] max-xl:w-2/3 max-xl:max-w-[700px]  relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}>
                 {/* Cabeçalho */}
                 <div className="w-full bg-[#F0F0F0] rounded-t-xl flex justify-between items-center px-2 py-3">
-                    <div className="flex flex-col max-md:w-4/5 text-neutras-100 pl-3 -space-y-1 max-md:pl-1">
+                    <div className="flex flex-col max-lg:w-4/5 text-neutras-100 pl-3 -space-y-1 max-lg:pl-1">
                         <h1 className="font-Poppins-Medium text-xl max-md:text-lg">Edição do Treino</h1>
                         <h2 className="font-poppins font-light text-[12px] max-md:text-[11px]">Atualize as informações desejadas do treino</h2>
                     </div>
@@ -119,10 +119,10 @@ export function ModalUpdateTreino({ open, close, trainingToEdit, updateTreino }:
                     </div>
 
                     {/* Campos*/}
-                    <div className="flex flex-col space-y-2 w-full items-center p-2 max-md:space-y-4">
+                    <div className="flex flex-col space-y-2 w-full items-center p-2 max-lg:space-y-4">
 
                         {/* Nome */}
-                        <div className="w-4/5 max-md:w-[90%] border-1 border-neutras-100/40 flex items-center p-2 rounded-xl">
+                        <div className="w-4/5 max-lg:w-[90%] border-1 border-neutras-100/40 flex items-center p-2 rounded-xl">
                             <label className="text-[#242424] font-Poppins-Semibold text-[14px]"> Nome: </label>
                             <input
                                 className="outline-none text-[#242424] w-full pl-2 placeholder:text-neutras-200/60 text-[15px]"
@@ -133,7 +133,7 @@ export function ModalUpdateTreino({ open, close, trainingToEdit, updateTreino }:
                         </div>
 
                         {/* Parte Afetada */}
-                        <div className="w-4/5 max-md:w-[90%] border-1 border-neutras-100/40 flex items-center p-2 rounded-xl">
+                        <div className="w-4/5 max-lg:w-[90%] border-1 border-neutras-100/40 flex items-center p-2 rounded-xl">
                             <label className="text-[#242424] font-Poppins-Semibold whitespace-nowrap text-[14px]"> Parte Afetada: </label>
                             <select
                                 {...register("foco_corpo")}
@@ -147,7 +147,7 @@ export function ModalUpdateTreino({ open, close, trainingToEdit, updateTreino }:
                         </div>
 
                         {/* Descrição */}
-                        <div className="w-4/5 max-md:w-[90%] border-1 border-neutras-100/40 flex p-2 rounded-xl">
+                        <div className="w-4/5 max-lg:w-[90%] border-1 border-neutras-100/40 flex p-2 rounded-xl">
                             <label className="text-[#242424] font-Poppins-Semibold text-[14px]"> Descrição: </label>
                             <textarea
                                 className="outline-none resize-none h-20 w-full text-[#242424] pl-2 placeholder:text-neutras-200/60 text-[15px]"
@@ -157,7 +157,7 @@ export function ModalUpdateTreino({ open, close, trainingToEdit, updateTreino }:
                         </div>
                     </div>
                     {/* Button */}
-                    <button type="submit" className="w-[75%] bg-verde-100 text-white font-Poppins-Bold text-lg rounded-xl p-0.5 hover:bg-verde-200 duration-500 cursor-pointer max-md:h-10">
+                    <button type="submit" className="w-[75%] bg-verde-100 text-white font-Poppins-Bold text-lg rounded-xl p-0.5 hover:bg-verde-200 duration-500 cursor-pointer max-lg:h-10">
                         Atualizar informações
                     </button>
                 </form>

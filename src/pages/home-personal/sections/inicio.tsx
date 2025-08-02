@@ -41,7 +41,7 @@ export function Inicio({ data }: any) {
       <Banner />
 
       <div className="w-full p-2 pt-2.5 mt-8 flex flex-col overflow-hidden">
-        <h1 className="pl-2 w-full text-xl text-verde-200 font-Poppins-Semibold px-1"> Resumo Geral dos Alunos </h1>
+        <h1 className="pl-2 w-full text-xl text-verde-200 font-Poppins-Semibold px-1 text-center"> Resumo Geral dos Alunos </h1>
 
         <div className="flex flex-col items-center w-full space-y-2 justify-center border-verde-100 border-2 rounded-md p-3 mt-2">
           {infoDadosComponentAluno.map((valor, index) => (

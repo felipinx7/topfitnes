@@ -16,7 +16,7 @@ export function ModalMenuTreino(data: ModalMenuTreinoProps) {
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className={`bg-gray-200 flex flex-col items-center px-2 w-[80%] h-[60%] rounded-lg relative duration-300 ease-in-out md:hidden ${data.open ? 'scale-100 opacity-100' : 'scale-125 opacity-0'}`}>
+                className={`bg-gray-200 flex flex-col items-center px-2 w-[80%] h-[60%] max-h-[400px] rounded-lg relative duration-300 ease-in-out md:hidden ${data.open ? 'scale-100 opacity-100' : 'scale-125 opacity-0'}`}>
                 <h1 className="text-verde-200 font-poppins font-bold mt-4 text-xl">{data.dataTraining?.nome}</h1>
                 <h2 className="text-verde-200 font-poppins font-medium text-center text-sm">Escolha a ação que você gostaria de fazer</h2>
                 {/* Icones*/}
@@ -30,7 +30,7 @@ export function ModalMenuTreino(data: ModalMenuTreinoProps) {
                             data.close()
                             data.setVisibleModalUpdateTraining((prev) => !prev)
                         }}
-                        className="flex items-center justify-center font-poppins font-bold  space-x-4 p-2 w-full py-2 rounded-lg bg-[#FACC15] flex items-center justify-center shadow shadow-black/20 active:bg-yellow-300 cursor-pointer duration-500">
+                        className="flex items-center justify-center font-poppins font-bold  space-x-4 p-2 w-full py-2 rounded-lg bg-[#FACC15] shadow shadow-black/20 active:bg-yellow-300 cursor-pointer duration-500">
                         <IconeAtualizarTreino />
                         <h1 className="pt-0.5">Atualizar Treino</h1>
                     </button>
@@ -43,7 +43,7 @@ export function ModalMenuTreino(data: ModalMenuTreinoProps) {
                             data.close()
                             data.setVisibleModalSendTraining((prev) => !prev)
                         }}
-                        className="flex items-center justify-center font-poppins font-bold  space-x-4 p-2 w-full py-2 rounded-lg bg-[#FACC15] flex items-center justify-center shadow shadow-black/20 active:bg-yellow-300  cursor-pointer duration-500">
+                        className="flex items-center justify-center font-poppins font-bold  space-x-4 p-2 w-full py-2 rounded-lg bg-[#FACC15] shadow shadow-black/20 active:bg-yellow-300  cursor-pointer duration-500">
                         <IconeEnviarTreino />
                         <h1 className="pt-0.5">Enviar Treino</h1>
                     </button>
@@ -56,7 +56,7 @@ export function ModalMenuTreino(data: ModalMenuTreinoProps) {
                             data.close()
                             data.setVisibleModalSeeTraining((prev) => !prev)
                         }}
-                        className="flex items-center justify-center font-poppins font-bold  space-x-4 p-2 w-full py-2 text-white rounded-lg bg-black/80 flex items-center justify-center shadow shadow-black/20 cursor-pointer duration-500 active:bg-black active:text-white">
+                        className="flex items-center justify-center font-poppins font-bold  space-x-4 p-2 w-full py-2 text-white rounded-lg bg-black/80 shadow shadow-black/20 cursor-pointer duration-500 active:bg-black active:text-white">
                         <IconeVisualizarTreino />
                         <h1 className="pt-0.5">Visualizar Treino</h1>
                     </button>
@@ -69,7 +69,7 @@ export function ModalMenuTreino(data: ModalMenuTreinoProps) {
                             data.close()
                             data.setVisibleModalDelete((prev) => !prev)
                         }}
-                        className="flex items-center justify-center font-poppins font-bold  space-x-4 p-2 w-full py-2 rounded-lg bg-[#EF4444] flex items-center justify-center shadow shadow-black/20 active:bg-red-600 cursor-pointer duration-500">
+                        className="flex items-center justify-center font-poppins font-bold  space-x-4 p-2 w-full py-2 rounded-lg bg-[#EF4444] shadow shadow-black/20 active:bg-red-600 cursor-pointer duration-500">
                         <IconeExcluirTreino />
                         <h1 className="pt-0.5">Excluir Treino</h1>
                     </button>
