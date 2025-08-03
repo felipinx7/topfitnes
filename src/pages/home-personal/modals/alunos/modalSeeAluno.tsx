@@ -26,8 +26,6 @@ export function ModalSeeAluno(data: ModalSeeAlunoProps) {
     setVisibilityModalDelete((prev) => !prev);
   }
 
-  console.log("CUSCUZ:", data.dataAluno?.treinos_aluno);
-
   return ReactDOM.createPortal(
     <div
       onClick={data.close}

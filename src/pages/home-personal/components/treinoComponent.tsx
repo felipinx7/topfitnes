@@ -46,7 +46,7 @@ export function TreinoComponent(data: functionButtons) {
                 ></div>
                 <div className="flex-col flex justify-center font-Poppins font-bold pl-3 text-verde-200 md:-space-y-1.5 max-md:pl-1 max-md:w-3/5">
                     <h1 className="text-lg font-Poppins-Bold max-md:text-sm max-lg:text-xl">{data.nomeTreino}</h1>
-                    <h2 className="font font-light text-[11px] pl-0.5 md:text-sm">{data.descricaoTreino.length > 50 ? data.descricaoTreino.slice(0, 50) + '...' : data.descricaoTreino}</h2>
+                    <h2 className="font font-light text-[11px] md:text-sm">{data.descricaoTreino.length > 50 ? data.descricaoTreino.slice(0, 50) + '...' : data.descricaoTreino}</h2>
                 </div>
             </div>
 
