@@ -3,6 +3,7 @@ import type { ExercicioDTO, TreinoDTO } from "@/types/type-Treino";
 import { IconeFechar } from "@/assets/icons/icone-fechar";
 
 import { Exercicio } from "./Exercicio";
+import { BaseUrlFoto } from "@/utils/base-url-foto";
 
 type TreinoModalComponent = {
   treino: TreinoDTO | undefined;
@@ -40,8 +41,8 @@ export function ModalTreino({ treino, OpenModal, open }: TreinoModalComponent) {
           {/* Informações: Decrição,foto,nome,partes afetadas */}
           <div className="w-1/3 h-full max-md:border-0 p-5 pr-7 gap-2 border-r-2 max-md:w-full border-neutras-200/10 flex flex-col items-center justify-start text-xl text-neutras-400">
             <div
-              className="w-48  h-48 bg-verde-100 rounded-full"
-              style={{ backgroundImage: `url(${treino?.foto})`, backgroundSize: "cover" }}
+              className="w-48 h-48 min-h-48 min-w-48 border-2 border-neutras-100/20 bg-verde-100 rounded-full"
+          style={{ backgroundImage: `url(${BaseUrlFoto(treino?.foto)})`, backgroundSize: "cover" }}
             ></div>
             <div className="w-full flex flex-col justify-center items-center">
 

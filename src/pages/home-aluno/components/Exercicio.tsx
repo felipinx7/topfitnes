@@ -1,5 +1,6 @@
 import type { TreinoDTO } from "@/types/type-Treino";
 import type { ExercicioDTO } from "@/types/type-Treino";
+import { BaseUrlFoto } from "@/utils/base-url-foto";
 
 export function Exercicio(exercicio?: ExercicioDTO) {
   return (
@@ -10,7 +11,7 @@ export function Exercicio(exercicio?: ExercicioDTO) {
       <div className=" flex flex-row gap-2">
         <div
           className="h-16 w-16 rounded-full bg-verde-100"
-          style={{ backgroundImage: `url(${exercicio?.foto})` }}
+          style={{ backgroundImage: `url(${BaseUrlFoto(exercicio?.foto)})`, backgroundSize: "cover" }}
         ></div>
 
         <div className="flex flex-col h-16 items-start justify-center">

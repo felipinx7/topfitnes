@@ -1,4 +1,5 @@
 import type { TreinoDTO } from "@/types/type-Treino";
+import { BaseUrlFoto } from "@/utils/base-url-foto";
 
 type TreinoComponent = {
   treino: TreinoDTO;
@@ -15,7 +16,7 @@ export function Treino({ treino, OpenModal, SetTreino }: TreinoComponent) {
       <div className=" flex flex-row gap-2">
         <div
           className="h-16 w-16 rounded-full bg-verde-100"
-          style={{ backgroundImage: `url(#)` }}
+          style={{ backgroundImage: `url(${BaseUrlFoto(treino.foto)})`, backgroundSize: "cover" }}
         ></div>
 
         <div className="flex flex-col h-16 items-start justify-center">

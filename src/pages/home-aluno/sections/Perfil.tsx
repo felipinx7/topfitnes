@@ -82,6 +82,7 @@ export function PerfilSection({ aluno }: props) {
             <input
               placeholder={aluno?.email}
               type="text"
+              readOnly
               name="email"
               className="w-full px-2 flex items-end h-full text-base outline-0"
             />
@@ -93,6 +94,7 @@ export function PerfilSection({ aluno }: props) {
           >
             Telefone:
             <input
+            readOnly
               placeholder={aluno?.telefone}
               type="tel"
               pattern="\(\d{2}\)\s?\d{5}-\d{4}"
@@ -107,6 +109,7 @@ export function PerfilSection({ aluno }: props) {
           >
             Nome:
             <input
+            readOnly
               placeholder={aluno?.nome}
               type="tel"
               pattern="\(\d{2}\)\s?\d{5}-\d{4}"
@@ -121,6 +124,7 @@ export function PerfilSection({ aluno }: props) {
           >
             Sobrenome:
             <input
+            readOnly
               placeholder={aluno?.sobrenome}
               type="tel"
               pattern="\(\d{2}\)\s?\d{5}-\d{4}"
@@ -135,6 +139,7 @@ export function PerfilSection({ aluno }: props) {
           >
             Idade:
             <input
+            readOnly
               placeholder={aluno?.idade?.toString()}
               type="number"
               name="idade"
@@ -148,6 +153,7 @@ export function PerfilSection({ aluno }: props) {
           >
             Sexo:
             <select
+            disabled
               name="sexo"
               className="w-full relative px-2 flex items-start appearance-none text-neutras-200 h-full text-base outline-0 border-0 rounded-2xl bg-white"
               defaultValue={aluno?.sexo || ""}
@@ -171,6 +177,7 @@ export function PerfilSection({ aluno }: props) {
                 Prefiro não dizer
               </option>
             </select>
+            
             <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-neutras-300">
               <svg
                 className="w-8 h-8"
@@ -202,6 +209,7 @@ export function PerfilSection({ aluno }: props) {
           >
             Grupo Muscular Alvo:
             <select
+            disabled
               name="foco_corpo"
               className="w-full relative px-2 flex items-start max-lg:col-span-2 appearance-none text-neutras-200 h-full text-base outline-0 border-0 rounded-2xl bg-white"
               defaultValue={aluno?.foco_corpo}
@@ -264,6 +272,7 @@ export function PerfilSection({ aluno }: props) {
           >
             Altura(cm):
             <input
+            readOnly
               placeholder={aluno?.altura?.toString()}
               type="number"
               name="altura"
@@ -277,6 +286,7 @@ export function PerfilSection({ aluno }: props) {
           >
             Peso(kg):
             <input
+            readOnly
               placeholder={aluno?.peso?.toString() + "kg"}
               type="number"
               name="peso"
@@ -290,6 +300,7 @@ export function PerfilSection({ aluno }: props) {
           >
             Foco do Treino:
             <select
+            disabled
               name="foco_treino"
               className="w-full relative px-2 flex items-start appearance-none text-neutras-200 h-full text-base outline-0 border-0 rounded-2xl bg-white"
               defaultValue={aluno?.foco_treino }
@@ -307,6 +318,7 @@ export function PerfilSection({ aluno }: props) {
           >
             Meta Semanal:
             <input
+            readOnly
               placeholder={aluno?.treino_dias_por_semana?.toString() + "Dias"}
               type="number"
               name="treino_dias_por_semana"
@@ -320,16 +332,17 @@ export function PerfilSection({ aluno }: props) {
           >
             Observações:
             <textarea
+            readOnly
               placeholder={aluno?.observacao}
               name="observacao"
               className="w-full px-2 flex items-end h-full text-base outline-0"
             />
           </label>
         </div>
-        <div className="w-full items-center justify-center flex">
+ {/*     <div className="w-full items-center justify-center flex">
                   <button type="submit" className="p-2 px-8 rounded-xl bg-verde-100 h-12 text-xl text-white font-Poppins-Semibold min-w-fit">Salvar Alterações</button>
 
-        </div>
+        </div>*/}
 
 
 

@@ -9,6 +9,7 @@ import { useState } from "react";
 import { personalPesquisaDTO } from "@/dto/data-personal";
 
 import treinando from "../../../assets/image/exercitando-aluno-home.png"
+import { MeuPersonalComponent } from "../components/MeuPersonalComponent";
 
 type props ={
   personal: personalPesquisaDTO | undefined,
@@ -36,9 +37,9 @@ export function MeuPersonal({personal,setId}: props) {
       </div>
       {/*Treinos */}
       <div className="w-full h-full overflow-y-auto overflow-x-hidden grid pb-40 grid-cols-1 gap-4 relative place-content-start pt-4 place-items-center">
-         {personal ?( <PersonalPesquisa
+         {personal ?( <MeuPersonalComponent
                {...personal}
-          ></PersonalPesquisa>) 
+          ></MeuPersonalComponent>) 
           : (
             <div className="w-full h-full items-center flex justify-center flex-col">
               <img className="h-2/3" src={treinando.src} alt="" />

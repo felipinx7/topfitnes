@@ -1,4 +1,5 @@
 import { TreinoDTO } from "@/types/type-Treino";
+import { personalPesquisaDTO } from "./data-personal";
 
 export interface DataAlunoHome {
   id: string;
@@ -25,7 +26,7 @@ export interface DataAlunoHome {
   personal_id?: string;
   usuario_id?: string;
   treinos_aluno?: AlunoTreino[]; 
-
+  personal?: personalPesquisaDTO;
 }
 
 export interface AlunoTreino {

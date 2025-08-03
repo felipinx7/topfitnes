@@ -17,6 +17,8 @@ import { useRouter } from "next/navigation";
 
 export function Login() {
 
+  const [error,setError] = useState(false)
+
     const router = useRouter();
 
 
@@ -37,13 +39,26 @@ export function Login() {
     const response = await Auth(data);
     console.log(response);
 
-        if(response.userRole == "ADMINISTRADOR"){
+    
+
+    if(!response.userRole){
+           setError(true)
+      setTimeout(()=>{
+        setError(false)
+      },4000)
+
+    }
+    else if(response.userRole == "ADMINISTRADOR"){
       router.push("/administrador")
     }else if(response.userRole == "ALUNO"){
       router.push("/home-aluno")
     } else if(response.userRole == "PERSONAL"){
       router.push("/home-personal")
-    }
+    } 
+
+
+
+
 
     }
 
@@ -66,7 +81,9 @@ export function Login() {
           <div className="bg-gradient-to-tl  from-verde-100/20 absolute bottom-0 right-0 to-transparent to-50% w-2/3 h-2/3"></div>
         </div>{" "}
         <form
-          onSubmit={LoginSubmit}
+          onSubmit={(e)=> {LoginSubmit(e)
+             e.currentTarget.reset();
+          }}
           action=""
           method="POST"
           className="w-full h-full flex-col flex items-center max-md:justify-start pt-4 justify-center "
@@ -85,7 +102,7 @@ export function Login() {
             <div className="w-full px-20 max-md:px-10 text-lg max-md:mt-6 mt-16 font-Poppins-Medium z-40 ">
               <label
                 className="text-base flex mb-4 max-md:mb-2 flex-col relative"
-                htmlFor="Email"
+                htmlFor="emailTel"
               >
                 E-mail{" "}
                 <div className="absolute bottom-1 left-1">
@@ -93,24 +110,24 @@ export function Login() {
                 </div>
                 <input
                   name="emailTel"
-                  placeholder="Informe seu E-mail"
+                  placeholder={error ? "Credenciais Inválidas" : "Informe-nos seu E-mail"}
                   type="text"
-                  className="w-full h-10 pl-10 bg-white rounded text-neutras-100 text-base outline-0"
+                  className={`w-full h-10 pl-10 bg-white rounded text-neutras-100 text-base outline-0 ${error ? "placeholder:text-red-400 font-Poppins-Semibold" : ""}`}
                 />
               </label>
               <label
                 className="text-base flex flex-col relative"
-                htmlFor="Senha"
+                htmlFor="password"
               >
                 Senha{" "}
                 <div className="absolute bottom-1 left-1">
                   <IconeCadeado></IconeCadeado>{" "}
                 </div>{" "}
                 <input
-                  placeholder="Informe sua Senha"
+                  placeholder={error ? "Credenciais Inválidas" : "Informe-nos sua senha"}
                   name="password"
                   type={visible ? "text" : "password"}
-                  className="w-full h-10 pl-10 bg-white rounded text-neutras-100 text-base outline-0"
+                  className={`w-full h-10 pl-10 bg-white rounded text-neutras-100 text-base outline-0 ${error ? "placeholder:text-red-400 font-Poppins-Semibold" : ""}`}
                 />
                 <div
                   className="absolute bottom-2 right-2 text-neutras-200/80"
@@ -148,6 +165,8 @@ export function Login() {
           backgroundSize: "cover",
         }}
       ></div>
+
+
     </main>
   );
 }

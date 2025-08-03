@@ -22,7 +22,9 @@ export function HomeAluno() {
   const token = Cookies.get("token");
   const [aluno, setAluno] = useState<DataAlunoHome | undefined>();
   const [personal, setPersonal] = useState<personalPesquisaDTO | undefined>();
-  const [personais, setPersonais] = useState<personalPesquisaDTO[] | undefined>();
+  const [personais, setPersonais] = useState<
+    personalPesquisaDTO[] | undefined
+  >();
 
   function RenderSection(section: number) {
     switch (section) {
@@ -31,11 +33,11 @@ export function HomeAluno() {
       case 2:
         return <Treinos treinos={aluno?.treinos_aluno} />;
       case 3:
-        return <MeuPersonal personal={personal} setId={setSection}/>;
+        return <MeuPersonal personal={aluno?.personal} setId={setSection} />;
       case 4:
         return <PesquisaPersonais personais={personais} />;
-      case 5: 
-        return <PerfilSection aluno={aluno}/>
+      case 5:
+        return <PerfilSection aluno={aluno} />;
     }
   }
 
@@ -57,8 +59,8 @@ export function HomeAluno() {
   }, [token]);
 
   return (
-    <main className="w-screen h-screen bg-neutras-300 relative flex max-md:flex-col-reverse overflow-hidden">
-      <div className="w-1/5 min-w-[350px] h-full max-md:absolute max-md:w-full max-md:h-20 z-100 max-md:bottom-0 ">
+    <main className="w-screen h-screen bg-neutras-300 relative flex max-lg:flex-col-reverse overflow-hidden">
+      <div className="w-1/5 min-w-[350px] h-full max-lg:absolute max-lg:w-full max-lg:h-20 z-100 max-lg:bottom-0 ">
         {" "}
         <SideBar setId={setSection} id={section} aluno={aluno}></SideBar>
       </div>
