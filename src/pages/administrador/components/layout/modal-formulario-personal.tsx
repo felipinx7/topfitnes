@@ -7,6 +7,7 @@ import { schemaPersonal } from "@/schemas/schema-personal";
 import { PostCadastrarPersonal } from "@/services/routes/administrador/post/post-cadastrar-personal";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { FormatarNumero } from "@/utils/formatar-numero-telefone";
 
 interface ModalFormularioClienteProps {
   OpenModal: boolean | undefined;
@@ -17,6 +18,7 @@ export default function ModalFormularioPersonal({
   OpenModal,
   handleOpenFormulario,
 }: ModalFormularioClienteProps) {
+  const [telefone, setTelefone] = useState("");
   const [fotoFile, setFotoFile] = useState<File | null>(null);
   const [fotoPreview, setFotoPreview] = useState<string>("");
 
@@ -34,6 +36,7 @@ export default function ModalFormularioPersonal({
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
     reset,
   } = useForm<DataCadastroPersonal>({
@@ -42,22 +45,29 @@ export default function ModalFormularioPersonal({
 
   async function OnSubmit(data: DataCadastroPersonal) {
     const formData = new FormData();
+
     Object.entries(data).forEach(([key, value]) => {
-      formData.append(key, value);
+      // Aplica formatação apenas no campo telefone
+      if (key === "telefone") {
+        formData.append("telefone", FormatarNumero(telefone));
+      } else {
+        formData.append(key, value);
+      }
     });
+
     if (fotoFile) formData.append("foto", fotoFile);
 
     try {
       await PostCadastrarPersonal(formData);
       alert("Personal cadastrado com sucesso!");
       reset();
+      setTelefone(""); // limpa o telefone após envio
       setFotoFile(null);
     } catch (error) {
       console.error("Erro ao cadastrar personal:", error);
       alert("Erro ao cadastrar personal.");
     }
   }
-
   return (
     <section
       className={`${OpenModal ? "absolute" : "hidden"} w-full min-h-[calc(100vh-187.29px)] max-lg:min-h-[calc(100vh-158px)] z-20 max-lg:top-0 bg-[#F1F1F1] top-[187.29px] flex justify-center`}
@@ -161,11 +171,25 @@ export default function ModalFormularioPersonal({
                 <input
                   id="telefone"
                   type="tel"
-                  {...register("telefone")}
+                  maxLength={15}
+                  value={FormatarNumero(telefone)}
                   placeholder="(00) 00000-0000"
+                  onChange={(e) => {
+                    const numeroApenasDigitos = e.target.value.replace(
+                      /\D/g,
+                      ""
+                    );
+                    setTelefone(numeroApenasDigitos);
+                    setValue("telefone", numeroApenasDigitos); // sincroniza com o RHF
+                  }}
                   className="w-full bg-[#DBDBDB] px-4 py-2 rounded font-Poppins-Medium text-[#1E1E1E]"
                   required
                 />
+                {errors.telefone && (
+                  <p className="text-red-500 text-sm">
+                    {errors.telefone.message}
+                  </p>
+                )}
               </div>
 
               {/* Email */}
@@ -184,6 +208,9 @@ export default function ModalFormularioPersonal({
                   className="w-full bg-[#DBDBDB] px-4 py-2 rounded font-Poppins-Medium text-[#1E1E1E]"
                   required
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-sm">{errors.email.message}</p>
+                )}
               </div>
 
               {/* Senha */}
@@ -202,6 +229,9 @@ export default function ModalFormularioPersonal({
                   className="w-full bg-[#DBDBDB] px-4 py-2 rounded font-Poppins-Medium text-[#1E1E1E]"
                   required
                 />
+                {errors.senha && (
+                  <p className="text-red-500 text-sm">{errors.senha.message}</p>
+                )}
               </div>
             </div>
 
@@ -224,6 +254,11 @@ export default function ModalFormularioPersonal({
                   required
                 />
               </div>
+              {errors.formacao && (
+                <p className="text-red-500 text-sm">
+                  {errors.formacao.message}
+                </p>
+              )}
 
               {/* Registro Profissional */}
               <div>
@@ -241,6 +276,11 @@ export default function ModalFormularioPersonal({
                   className="w-full bg-[#DBDBDB] px-4 py-2 rounded font-Poppins-Medium text-[#1E1E1E]"
                   required
                 />
+                {errors.registro_profissional && (
+                  <p className="text-red-500 text-sm">
+                    {errors.registro_profissional.message}
+                  </p>
+                )}
               </div>
 
               {/* Especialidade */}
@@ -259,6 +299,11 @@ export default function ModalFormularioPersonal({
                   className="w-full bg-[#DBDBDB] px-4 py-2 rounded font-Poppins-Medium text-[#1E1E1E]"
                   required
                 />
+                {errors.especialidade && (
+                  <p className="text-red-500 text-sm">
+                    {errors.especialidade.message}
+                  </p>
+                )}
               </div>
 
               {/* Disponibilidade */}
@@ -277,6 +322,11 @@ export default function ModalFormularioPersonal({
                   className="w-full bg-[#DBDBDB] px-4 py-2 rounded font-Poppins-Medium text-[#1E1E1E]"
                   required
                 />
+                {errors.disponibilidade && (
+                  <p className="text-red-500 text-sm">
+                    {errors.disponibilidade.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -290,8 +340,6 @@ export default function ModalFormularioPersonal({
             </button>
           </div>
         </form>
-
-        <pre className="text-red-500">{JSON.stringify(errors, null, 2)}</pre>
       </div>
     </section>
   );

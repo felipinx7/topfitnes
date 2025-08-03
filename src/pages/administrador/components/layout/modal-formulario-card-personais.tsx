@@ -8,6 +8,7 @@ import {
   SchemaPersonal,
 } from "@/schemas/schema-personais";
 import PutPersonalAdministrador from "@/services/routes/administrador/put/put-personal-administrador";
+import { FormatarNumero } from "@/utils/formatar-numero-telefone";
 
 interface ModalFormularioCardClienteProps {
   OpenModal: boolean;
@@ -31,6 +32,7 @@ export default function ModalFormularioCardPersonais({
   });
 
   const [fotoFile, setFotoFile] = useState<File | null>(null);
+  const [telefone, setTelefone] = useState("");
   const [fotoPreview, setFotoPreview] = useState<string>("");
 
   // Preenche formulário ao abrir
@@ -43,6 +45,20 @@ export default function ModalFormularioCardPersonais({
       }
     }
   }, [data, reset]);
+
+  useEffect(() => {
+    if (data) {
+      reset(data);
+      if (data.foto) {
+        const baseUrl = BaseUrlFoto(data.foto);
+        setFotoPreview(baseUrl);
+      }
+      if (data.telefone) {
+        setTelefone(FormatarNumero(data.telefone));
+        setValue("telefone", FormatarNumero(data.telefone));
+      }
+    }
+  }, [data, reset, setValue]);
 
   // Atualiza preview ao escolher novo arquivo
   useEffect(() => {
@@ -159,9 +175,16 @@ export default function ModalFormularioCardPersonais({
                   Telefone:
                 </label>
                 <input
-                  {...register("telefone")}
                   id="telefone"
                   type="tel"
+                  value={telefone}
+                  onChange={(e) => {
+                    const somenteNumeros = e.target.value.replace(/\D/g, "");
+                    const formatado = FormatarNumero(somenteNumeros);
+                    setTelefone(formatado);
+                    setValue("telefone", formatado);
+                  }}
+                  maxLength={15}
                   className="input-padrao"
                 />
               </div>

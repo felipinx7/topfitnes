@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { DataAlunoForm } from "@/dto/data-aluno-form";
 import { schemaAlunoForm } from "@/schemas/schema-aluno-form";
+import { FormatarNumero } from "@/utils/formatar-numero-telefone";
 
 interface ModalFormularioClienteProps {
   OpenModal: boolean | undefined;
@@ -18,31 +19,33 @@ export default function ModalFormularioCliente({
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
     reset,
   } = useForm<DataAlunoForm>({
     resolver: zodResolver(schemaAlunoForm),
   });
 
+  // Estado para armazenar o arquivo da foto selecionada
   const [fotoArquivo, setFotoArquivo] = useState<File | null>(null);
+  // Estado para telefone que será formatado ao digitar e sincronizado com react-hook-form
+  const [telefone, setTelefone] = useState("");
 
   function onFotoChange(file: File) {
     setFotoArquivo(file);
   }
 
   async function onSubmit(data: DataAlunoForm) {
-    // Validar se foto foi selecionada
     if (!fotoArquivo) {
       alert("Foto obrigatória");
       return;
     }
 
-    // Converter data_matricula para Date válido
     const dataMatriculaValida = new Date(data.data_matricula ?? "");
 
     if (
-      isNaN(dataMatriculaValida.getTime()) || // data inválida
-      dataMatriculaValida.getFullYear() < 1900 // ano inválido (antes de 1900)
+      isNaN(dataMatriculaValida.getTime()) ||
+      dataMatriculaValida.getFullYear() < 1900
     ) {
       alert(
         "Data de matrícula inválida! Informe uma data válida a partir de 1900."
@@ -50,21 +53,22 @@ export default function ModalFormularioCliente({
       return;
     }
 
-    // Criar FormData para envio multipart/form-data
     const formData = new FormData();
 
-    // Adicionar os dados ao FormData (convertendo data_matricula para ISO string)
     for (const [key, value] of Object.entries(data)) {
       if (value !== undefined && value !== null) {
         if (key === "data_matricula") {
           formData.append(key, dataMatriculaValida.toISOString());
+        } else if (key === "telefone") {
+          // Aqui envia o telefone já formatado
+          const telefoneFormatado = FormatarNumero(String(value));
+          formData.append(key, telefoneFormatado);
         } else {
           formData.append(key, String(value));
         }
       }
     }
 
-    // Adicionar foto ao FormData
     formData.append("foto", fotoArquivo);
 
     try {
@@ -73,6 +77,7 @@ export default function ModalFormularioCliente({
       alert("Aluno cadastrado com sucesso!");
       reset();
       setFotoArquivo(null);
+      setTelefone("");
     } catch (error) {
       console.error("Erro ao enviar dados:", error);
       alert("Erro ao cadastrar aluno");
@@ -89,7 +94,7 @@ export default function ModalFormularioCliente({
         <div className="w-full flex items-center gap-3">
           <div
             onClick={handleOpenFormulario}
-            className="w-[35px] rounded-[5.97px] items-center justify-center flex h-[50px] bg-[#4F4F4F]"
+            className="w-[35px] rounded-[5.97px] items-center justify-center flex h-[50px] bg-[#4F4F4F] cursor-pointer"
           >
             <IconeSetaEsquerda />
           </div>
@@ -102,6 +107,7 @@ export default function ModalFormularioCliente({
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col items-start max-lg:flex-col gap-8 justify-between"
           encType="multipart/form-data"
+          noValidate
         >
           <div className="flex w-full gap-10 max-lg:flex-col">
             <div className="flex flex-col w-full items-center gap-4">
@@ -123,7 +129,7 @@ export default function ModalFormularioCliente({
                 </label>
 
                 <input
-                  required
+                  required={!fotoArquivo}
                   id="fotoInput"
                   type="file"
                   accept="image/*"
@@ -134,6 +140,11 @@ export default function ModalFormularioCliente({
                   }}
                   className="hidden"
                 />
+                {errors.foto && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.foto.message}
+                  </p>
+                )}
               </div>
 
               {/* Nome */}
@@ -152,6 +163,11 @@ export default function ModalFormularioCliente({
                   placeholder="Digite o nome"
                   className="bg-[#DBDBDB] text-[#1E1E1E] placeholder:text-[#1e1e1e7d] font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
                 />
+                {errors.nome && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.nome.message}
+                  </p>
+                )}
               </div>
 
               {/* Sobrenome */}
@@ -170,6 +186,11 @@ export default function ModalFormularioCliente({
                   placeholder="Digite o sobrenome"
                   className="bg-[#DBDBDB] text-[#1E1E1E] placeholder:text-[#1e1e1e7d] font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
                 />
+                {errors.sobrenome && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.sobrenome.message}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -185,12 +206,26 @@ export default function ModalFormularioCliente({
                 </label>
                 <input
                   required
-                  {...register("telefone")}
                   id="telefone"
                   type="tel"
                   placeholder="(00) 00000-0000"
+                  maxLength={15}
+                  value={FormatarNumero(telefone)} // formatado no input
+                  onChange={(e) => {
+                    const valorDigitado = e.target.value.replace(/\D/g, ""); // só números
+                    setTelefone(valorDigitado);
+                    setValue("telefone", valorDigitado, {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    }); // atualiza react-hook-form e dispara validação
+                  }}
                   className="bg-[#DBDBDB] text-[#1E1E1E] placeholder:text-[#1e1e1e7d] font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
                 />
+                {errors.telefone && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.telefone.message}
+                  </p>
+                )}
               </div>
 
               {/* Email */}
@@ -209,6 +244,11 @@ export default function ModalFormularioCliente({
                   placeholder="exemplo@email.com"
                   className="bg-[#DBDBDB] text-[#1E1E1E] placeholder:text-[#1e1e1e7d] font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
                 />
+                {errors.email && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
 
               {/* Senha */}
@@ -227,6 +267,11 @@ export default function ModalFormularioCliente({
                   placeholder="Digite a senha"
                   className="bg-[#DBDBDB] text-[#1E1E1E] placeholder:text-[#1e1e1e7d] font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
                 />
+                {errors.senha && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.senha.message}
+                  </p>
+                )}
               </div>
 
               {/* Sexo */}
@@ -247,6 +292,11 @@ export default function ModalFormularioCliente({
                   <option value="FEMININO">Feminino</option>
                   <option value="PREFIRO_NAO_DIZER">Prefiro não dizer</option>
                 </select>
+                {errors.sexo && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.sexo.message}
+                  </p>
+                )}
               </div>
 
               {/* Peso */}
@@ -266,6 +316,11 @@ export default function ModalFormularioCliente({
                   step="0.1"
                   className="bg-[#DBDBDB] text-[#1E1E1E] placeholder:text-[#1e1e1e7d] font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
                 />
+                {errors.peso && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.peso.message}
+                  </p>
+                )}
               </div>
 
               {/* Altura */}
@@ -284,6 +339,11 @@ export default function ModalFormularioCliente({
                   placeholder="Ex: 170"
                   className="bg-[#DBDBDB] text-[#1E1E1E] placeholder:text-[#1e1e1e7d] font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
                 />
+                {errors.altura && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.altura.message}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -306,6 +366,11 @@ export default function ModalFormularioCliente({
                   min={0}
                   className="bg-[#DBDBDB] text-[#1E1E1E] placeholder:text-[#1e1e1e7d] font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
                 />
+                {errors.idade && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.idade.message}
+                  </p>
+                )}
               </div>
 
               {/* Data de Matrícula */}
@@ -323,6 +388,11 @@ export default function ModalFormularioCliente({
                   {...register("data_matricula")}
                   className="bg-[#DBDBDB] text-[#1E1E1E] w-full font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
                 />
+                {errors.data_matricula && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.data_matricula.message}
+                  </p>
+                )}
               </div>
 
               {/* Treinos por Semana */}
@@ -345,6 +415,11 @@ export default function ModalFormularioCliente({
                   max={7}
                   className="bg-[#DBDBDB] text-[#1E1E1E] placeholder:text-[#1e1e1e7d] font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
                 />
+                {errors.treino_dias_por_semana && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.treino_dias_por_semana.message}
+                  </p>
+                )}
               </div>
 
               {/* Foco do Treino */}
@@ -365,6 +440,11 @@ export default function ModalFormularioCliente({
                   <option value="GANHAR_MASSA">Ganhar massa</option>
                   <option value="MANTER_A_FORMA">Manter a forma</option>
                 </select>
+                {errors.foco_treino && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.foco_treino.message}
+                  </p>
+                )}
               </div>
 
               {/* Foco no Corpo */}
@@ -387,6 +467,11 @@ export default function ModalFormularioCliente({
                   <option value="GLUTEOS">Glúteos</option>
                   <option value="PERNAS">Pernas</option>
                 </select>
+                {errors.foco_corpo && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.foco_corpo.message}
+                  </p>
+                )}
               </div>
 
               {/* Plano (Plano ID) */}
@@ -416,6 +501,11 @@ export default function ModalFormularioCliente({
                     Anual - 660R$
                   </option>
                 </select>
+                {errors.plano_id && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {errors.plano_id.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -423,15 +513,13 @@ export default function ModalFormularioCliente({
           <div className="w-full flex items-center justify-center">
             <button
               type="submit"
-              onClick={() => console.log("Clicou no botão")}
-              className="bg-green-500 text-white px-4 py-2"
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
             >
               CADASTRAR
             </button>
           </div>
         </form>
       </div>
-      <pre className="text-black">{JSON.stringify(errors, null, 2)}</pre>
     </section>
   );
 }
