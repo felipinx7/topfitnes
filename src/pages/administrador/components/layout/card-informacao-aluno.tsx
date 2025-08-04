@@ -62,7 +62,7 @@ export default function CardInformacaoAluno(props: DataAluno) {
 
   return (
     <article
-      className={`w-full ease-in-out h-auto rounded-2xl ${validadePlano ? "bg-[#f5b7b7]" : "bg-[#d8ffe2]"} transition-all duration-500 p-4 flex flex-col gap-0 ${openModal ? "gap-4" : "gap-0"}`}
+      className={`w-full ease-in-out h-auto rounded-2xl ${validadePlano ? "bg-[#f5b7b7]" : "bg-[#d8ffe2]"} transition-all duration-500 p-4 flex z-10 flex-col gap-0 ${openModal ? "gap-4" : "gap-0"}`}
     >
       {/* Cointeúdo principal */}
       <div className="w-full flex max-sm:flex-col max-sm:space-y-8 max-sm:items-baseline items-center justify-between">

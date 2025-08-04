@@ -137,7 +137,7 @@ export default function ModalFormularioCardCliente({
 
   return (
     <section
-      className={`overflow-hidde transition-all duration-500 ease-in-out w-full bg-transparent 
+      className={`overflow-hidde transition-all duration-500 z-0 ease-in-out w-full bg-transparent 
         ${OpenModal ? "max-h-[3000px] opacity-100 p-8" : "max-h-0 opacity-0 p-0"} 
       `}
     >
