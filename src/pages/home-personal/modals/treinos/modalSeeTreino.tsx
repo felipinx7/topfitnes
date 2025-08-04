@@ -22,7 +22,6 @@ export function ModalSeeTreino(data: ModalSeeTreinoProps) {
     // Exercises
     const [exercises, setExercises] = useState<exerciseDTO[]>([]);
     const [isExercises, setIsExercises] = useState<exerciseDTO | null>(null)
-    console.log("ver state: ", visibleModalUpdate)
     // functions
     function createExercise(data: exerciseDTO) {
         setExercises((prev) => [...prev, data])

@@ -30,19 +30,16 @@ export async function Auth({ emailTel, password }: loginDTO) {
   try{
 
   const json = JSON.stringify(userLogin)
-  console.log("JSON",json)
   const res = await api.post('/login', json, { withCredentials: true,
     headers: {
       "Content-Type": "application/json"
     }
   });
-  
-  console.log(res);
+
   return res.data;
 
   }
-  catch(error){
-    console.log("deu erro:" , error)
-    return error
+  catch(error: any){
+    throw error.response?.data || {message: "Erro ao logar"}
   }
 }
