@@ -30,13 +30,13 @@ export const schemaAlunoFormPersonal = z.object({
 export const schemaAlunoUpdateFormPersonal = z.object({
   nome: z.string().min(1, "Nome é obrigatório"),
   sobrenome: z.string().min(1, "Sobrenome é obrigatório"),
-  treino_dias_por_semana: z.string().optional(),
+  treino_dias_por_semana: z.number().optional(),
   sexo: z.enum(["MASCULINO", "FEMININO", "PREFIRO_NAO_DIZER"]),
   foco_treino: z.enum(["PERDER_PESO", "GANHAR_MASSA", "MANTER_A_FORMA"]),
   foto: z.any().optional(),
-  peso: z.string().optional(),
-  altura: z.string().optional(),
-  idade: z.string().optional(),
+  peso: z.number().optional(),
+  altura: z.number().optional(),
+  idade: z.any().optional(),
   data_matricula: z
     .string()
     .optional()
@@ -46,7 +46,7 @@ export const schemaAlunoUpdateFormPersonal = z.object({
   email: z.email("E-mail inválido").optional(),
   telefone: z.string().optional(),
   foco_corpo: z.enum(["PEITO", "BRACOS", "COSTAS", "GLUTEOS", "PERNAS"]),
-  plano_id: z.uuid(),
+  plano_id: z.uuid().optional(),
   treinos_aluno: z.array(z.object()).optional(),
   id: z.string().optional(),
   observacao: z.string()

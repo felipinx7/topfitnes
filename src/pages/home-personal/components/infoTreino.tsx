@@ -38,7 +38,7 @@ export function InfoTreino({previewFoto, data}: infoTreino ) {
                 <div className="flex flex-col space-y-2 w-4/5 font-poppins font-bold text-black/90 text-sm">
                     <h1>Descrição:</h1>
                     <div className="w-full h-20 px-3 py-1 text-center font-poppins font-bold text-gray-500 rounded-sm border border-black/20 shadow shadow-black/20 text-sm break-words">
-                        {data.dataTraining?.descricao.length > 50 ? data.dataTraining.descricao.slice(0,50) + '...' : data.dataTraining.descricao}
+                        {data.dataTraining?.descricao?.length > 50 ? data.dataTraining.descricao.slice(0,50) + '...' : data?.dataTraining?.descricao}
                     </div>
                 </div>
             </div>

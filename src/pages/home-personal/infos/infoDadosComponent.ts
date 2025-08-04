@@ -33,11 +33,6 @@ export function InfoDadosComponentTreinos(treinosCadastrados: number) {
             icon: IconeDadosPersonal,
             value: treinosCadastrados
         },
-        {
-            titulo: "Treinos Realizados por Alunos esse Mês",
-            icon: IconeDadosPersonal,
-            value: 3
-        },
     ]
 
     return infoDadosComponentTreinos

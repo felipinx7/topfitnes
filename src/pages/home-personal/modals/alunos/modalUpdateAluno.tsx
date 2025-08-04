@@ -11,7 +11,6 @@ import { IconeCloseModal } from "@/assets/icons/icone-closeModal-treino";
 import { infoFocoTreino, infoGrupoMuscularAlvo, infoPlanoId, infoSexoStudent } from "@/constants/infoSexoStudent";
 import { FormatarNumero } from "@/utils/formatar-numero-telefone";
 import { toast } from "react-toastify";
-import { CreateAluno } from "@/services/routes/aluno/createAluno";
 import { BaseUrlFoto } from "@/utils/base-url-foto";
 import { UpdateAluno } from "@/services/routes/aluno/updateAluno";
 
@@ -23,30 +22,28 @@ type modalUpdateAlunoProps = {
 };
 
 export function ModalUpdateAluno(data: modalUpdateAlunoProps) {
-    const photo = BaseUrlFoto(data.aluno.foto);
+    const photo = BaseUrlFoto(data?.aluno?.foto);
     const [previewImage, setPreviewImage] = useState<string | null>(null);
-    const photoPreview = data.aluno.foto ? photo : "url"
+    const [alunoId, setAlunoId] = useState<string | null>(null);
+    const photoPreview = data?.aluno?.foto ? photo : "url"
 
     const {
         register,
         handleSubmit,
-        formState: { dirtyFields },
+        formState: { dirtyFields, errors },
         reset } = useForm<AlunoSchemaUpdateFormPersonalDTO>({
             resolver: zodResolver(schemaAlunoUpdateFormPersonal),
         })
 
     async function onSubmit(rawData: AlunoSchemaUpdateFormPersonalDTO) {
         const file = rawData?.foto?.[0]
-        console.log(rawData)
         if (file && file.size > 2 * 1024 * 1024) {
             toast.error("A imagem é muito grande. Envie uma com até 2MB.");
             return;
         }
 
         const camposAlterados = Object.keys(dirtyFields).reduce((acc, key) => {
-            if (key === "foto") {
-                acc[key] = file || null;
-            } else if (key === "telefone") {
+            if (key === "telefone") {
                 acc[key] = FormatarNumero(rawData.telefone || "");
             } else {
                 acc[key] = rawData[key as keyof typeof rawData];
@@ -54,10 +51,15 @@ export function ModalUpdateAluno(data: modalUpdateAlunoProps) {
             return acc;
         }, {} as Record<string, any>);
 
+        if (rawData.foto && rawData.foto.length > 0) {
+            camposAlterados.foto = rawData.foto[0];
+        }
+        
         try {
-            await UpdateAluno(camposAlterados, data?.aluno?.id || "")
+            await UpdateAluno(camposAlterados, alunoId || "")
             toast.success("Aluno atualizado com sucesso!");
 
+            setAlunoId(alunoId);
             data.update(rawData)
             data.close()
         } catch (err: any) {
@@ -68,6 +70,7 @@ export function ModalUpdateAluno(data: modalUpdateAlunoProps) {
 
     useEffect(() => {
         if (data.aluno && data.open) {
+            setAlunoId(data.aluno.id)
             reset({
                 nome: data.aluno.nome,
                 sobrenome: data.aluno.sobrenome,
@@ -84,8 +87,7 @@ export function ModalUpdateAluno(data: modalUpdateAlunoProps) {
                 observacao: data.aluno.observacao,
             });
         }
-
-        if (typeof data.aluno.foto === "string") setPreviewImage(photo);
+        if (typeof data?.aluno?.foto === "string") setPreviewImage(photo);
     }, [data.aluno, data.open]);
 
     return ReactDOM.createPortal(
@@ -95,12 +97,12 @@ export function ModalUpdateAluno(data: modalUpdateAlunoProps) {
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className={`bg-white overflow-y-hidden w-4/5 max-md:w-[95%] h-[95%] max-h-[95%] max-md:max-h-[800px] max-xl:max-h-[800px] relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${data.open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}>
+                className={`bg-white overflow-y-hidden w-4/5 max-lg:w-[95%] h-[95%] max-h-[95%] max-md:max-h-[850px] max-xl:h-[98%] max-xl:max-h-[880px] relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${data.open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}>
                 {/* Cabeçalho */}
                 <div className="w-full bg-[#F0F0F0] rounded-t-xl flex justify-between items-center px-2 py-3">
                     <div className="flex flex-col max-lg:w-4/5 text-neutras-100 pl-3 -space-y-1 max-lg:pl-1 ">
-                        <h1 className="font-Poppins-Medium text-xl max-md:text-lg">Cadastro do Aluno</h1>
-                        <h2 className="font-poppins font-light text-[12px] max-md:text-[11px] max-lg:pl-0.5 max-md:pl-0">Preencha as informações abaixo e realize o cadastro de um aluno</h2>
+                        <h1 className="font-Poppins-Medium text-xl max-lg:text-lg">Edição do Aluno</h1>
+                        <h2 className="font-poppins font-light text-[12px] max-lg:text-[11px] max-lg:pl-0">Atualize as informações desejadas</h2>
                     </div>
                     <button
                         onClick={() => {
@@ -114,9 +116,9 @@ export function ModalUpdateAluno(data: modalUpdateAlunoProps) {
                 </div>
 
                 {/* Formulário */}
-                <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex">
+                <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex max-lg:flex-col max-lg:items-center max-lg:overflow-y-scroll max-lg:space-y-4">
                     {/* Section 1 */}
-                    <div className="h-full w-[35%] flex flex-col items-center p-2 border-r border-black/20 ">
+                    <div className="h-full w-[35%] flex flex-col items-center p-2 lg:border-r border-black/20 max-lg:w-full max-lg:py-0">
                         {/* Foto */}
                         <div className="flex flex-col w-[70%] items-center justify-center mt-4">
                             <div className=" aspect-square rounded-full w-2/3 relative duration-500 ease-in-out transition-all hover:scale-105">
@@ -142,7 +144,7 @@ export function ModalUpdateAluno(data: modalUpdateAlunoProps) {
                         </div>
 
                         {/* Campos 1 */}
-                        <div className="w-full h-[70%] flex items-center justify-center space-y-4 flex-col">
+                        <div className="w-full h-[70%] flex items-center justify-center space-y-4 flex-col mt-8">
                             {/* Nome */}
                             <div className="w-4/5 max-lg:w-[90%] border-1 border-neutras-100/40 flex items-center p-2 rounded-xl">
                                 <label className="text-[#242424] font-Poppins-Semibold text-[14px]"> Nome: </label>
@@ -194,7 +196,7 @@ export function ModalUpdateAluno(data: modalUpdateAlunoProps) {
                     </div>
 
                     {/* Section 2 */}
-                    <div className="flex flex-col justify-between items-center w-[65%] h-full py-5 px-2">
+                    <div className="flex flex-col justify-between items-center w-[65%] h-full py-5 px-2 max-lg:w-full max-lg:py-0">
 
                         {/* Campos 2 */}
                         <div className="flex flex-col w-full items-center space-y-4">
@@ -238,7 +240,7 @@ export function ModalUpdateAluno(data: modalUpdateAlunoProps) {
                             </div>
 
                             {/* Campos duplos */}
-                            <div className="w-[95%] grid grid-cols-2 gap-x-8 gap-y-4">
+                            <div className="w-[95%] grid grid-cols-2 lg:gap-x-8 lg:gap-y-4 max-lg:flex max-lg:flex-col max-lg:space-y-4 max-lg:items-center">
 
                                 {/* Telefone */}
                                 <div className="w-full max-lg:w-[95%] border-1 border-neutras-100/40 flex items-center p-2 rounded-xl">
@@ -278,6 +280,7 @@ export function ModalUpdateAluno(data: modalUpdateAlunoProps) {
                                         placeholder="Digite aqui:"
                                         type="password"
                                         value="proteção á criptografia"
+                                        readOnly
                                     />
                                 </div>
 
@@ -328,7 +331,7 @@ export function ModalUpdateAluno(data: modalUpdateAlunoProps) {
                             </div>
                         </div>
                         {/* Button */}
-                        <button type="submit" className="w-[75%] bg-verde-100 text-white font-Poppins-Bold text-lg rounded-xl p-0.5 hover:bg-verde-200 duration-500 cursor-pointer max-lg:h-10">
+                        <button type="submit" className="w-[75%] bg-verde-100 text-white font-Poppins-Bold text-lg rounded-xl p-0.5 hover:bg-verde-200 duration-500 cursor-pointer max-lg:h-10 max-lg:mt-8 max-xl:mt-4">
                             Criar Aluno
                         </button>
                     </div>

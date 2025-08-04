@@ -36,7 +36,7 @@ export type ModalSeeTreinoProps = {
     open: boolean,
     close: () => void,
     openModalCreateExercise?: boolean,
-    dataTraining: TrainingSchemaDTO | null
+    dataTraining: TrainingSchemaDTO | null,
 }
 
 export type ModalMenuTreinoProps = {

@@ -7,13 +7,12 @@ import { BaseUrlFoto } from "@/utils/base-url-foto";
 import { useEffect, useState } from "react";
 
 type functionButtons = {
-  update: () => void;
   delete: () => void;
   dataExercise: exerciseDTO;
   foto?: File;
 };
 
-export function ExercicioComponent(data: functionButtons) {
+export function ExercicioAlunoComponent(data: functionButtons) {
   const [previewFoto, setPreviewFoto] = useState<string>("");
 
   useEffect(() => {
@@ -56,18 +55,12 @@ export function ExercicioComponent(data: functionButtons) {
 
       {/* Icones*/}
       <div className="flex md:space-x-2 items-center justify-center max-md:flex-col max-md:space-y-2">
-        {/* Icone Visualizar */}
-        <button
-          onClick={data.update}
-          className="p-2 h-[2.1rem] w-[2.1rem] max-lg:h-[2.5rem] max-lg:w-[2.5rem] max-md:h-[2.1rem] max-md:w-[2.1rem] rounded-lg bg-[#FACC15] flex items-center justify-center shadow shadow-black/20 hover:bg-yellow-300 cursor-pointer duration-500 max-md:hidden"
-        >
-          <IconeAtualizarTreino />
-        </button>
         {/* Icone Excluir */}
         <button
           onClick={data.delete}
-          className="p-2 h-[2.1rem] w-[2.1rem]  max-lg:h-[2.5rem] max-lg:w-[2.5rem] max-md:h-[2.1rem] max-md:w-[2.1rem] rounded-lg bg-[#EF4444] flex items-center justify-center shadow shadow-black/20 hover:bg-red-600 cursor-pointer duration-500"
+          className="p-2 px-2 py-1.5 space-x-3 font-poppins font-bold rounded-lg bg-[#EF4444] flex items-center justify-center shadow shadow-black/20 hover:bg-red-600 cursor-pointer duration-500"
         >
+            <h1>Excluir exercício</h1>
           <IconeExcluirTreino />
         </button>
       </div>

@@ -1,26 +1,23 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Search } from "../components/search";
-import { getAlunos } from "@/services/routes/personal/getAlunos";
-import { AlunoComponent } from "../components/alunoComponent";
 import { AlunoPersonalDTO } from "@/schemas/schema-aluno-personal";
 import { ModalSeeAluno } from "../modals/alunos/modalSeeAluno";
-import { ModalCreateAluno } from "../modals/alunos/modalCreateAluno";
 import { ModalUpdateAluno } from "../modals/alunos/modalUpdateAluno";
 import { ModalDeleteAluno } from "../modals/alunos/modalDeleteAluno";
-import { ModalConnectTreinoAluno } from "../modals/alunos/modalConnectAluno";
-import { ModalMenuAluno } from "../modals/alunos/modalMenuAluno";
+import { MeusAlunosComponent } from "../components/alunoMeusTreinosComponent";
+import { ModalDisconnectTreinoAluno } from "../modals/alunos/modalDisconnectAluno";
+import { ModalMenuMeuAluno } from "../modals/alunos/modalMenuMeuAluno";
+import { GetPersonal } from "@/services/routes/personal/getPersonal";
 
-export function Alunos() {
+export function MeusAlunos(personal: any) {
   // Array dos alunos
-  const [alunos, setAlunos] = useState<AlunoPersonalDTO[]>([]);
+  const [alunos, setAlunos] = useState<AlunoPersonalDTO[]>();
   const [alunoToEdit, setAlunoToEdit] = useState<AlunoPersonalDTO | null>(null);
 
   const [visibleModalSeeAluno, setVisibleModalSeeAluno] = useState(false);
-  const [visibleModalCreate, setVisibleModalCreate] = useState(false)
   const [visibleModalUpdate, setVisibleModalUpdate] = useState(false)
-  const [visibleModalDelete, setVisibleModalDelete] = useState(false)
-  const [visibleModalConnect, setVisibleModalConnect] = useState(false)
+  const [visibleModalDisconnect, setVisibleModalDisconnect] = useState(false)
   const [visibleModalMenu, setVisibleModalMenu] = useState(false)
 
   // SearchTerm
@@ -29,13 +26,9 @@ export function Alunos() {
     t.nome?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  function createStudent(newStudent: any) {
-    setAlunos((prev: any[]) => [...prev, newStudent])
-  }
-
   function updateStudent(updateStudent: any) {
     setAlunos(prev =>
-      prev.map(t =>
+      prev?.map(t =>
         t.id === alunoToEdit?.id
           ? { ...t, ...updateStudent }
           : t
@@ -45,44 +38,34 @@ export function Alunos() {
 
 
   function deleteStudent() {
-    setAlunos(prev => prev.filter(t => t.usuario_id !== alunoToEdit?.usuario_id))
+    setAlunos(prev => prev?.filter(t => t.usuario_id !== alunoToEdit?.usuario_id))
   }
 
   useEffect(() => {
-    async function getAllAlunos() {
-      const alunos = await getAlunos();
-      setAlunos(alunos);
-    }
-    getAllAlunos();
-  }, []);
+          async function getPersonal() {
+              const data = await GetPersonal();
+              if (data) setAlunos(data.alunos);
+          }
+  
+          getPersonal();
+      }, []);
 
   return (
     // Container main
     <div className="w-full h-full flex-col p-8 flex items-center">
       <Search onChange={setSearchTerm} value={searchTerm} />
-      <div className="flex w-full h-fit justify-between mt-4 border-b-2 border-b-gray-200">
-        <h1 className="text-verde-200 font-Poppins text-xl mt-1.5"> Alunos </h1>
-        <button
-          onClick={() => {
-            setVisibleModalCreate(prev => !prev)
-          }}
-          className="rounded-xl flex items-center justify-center bg-verde-100 text-white hover:bg-verde-200 font-Poppins-Bold py-1 px-2 text-md duration-500 cursor-pointer mb-1.5">
-          + Novo Alunos
-        </button>
-      </div>
       {/* container of renderization cards */}
       <div className="flex w-full flex-col space-y-3 mt-3 overflow-y-auto">
         {filteredAlunos?.map((item, idx) => (
           // Card aluno
-          <AlunoComponent
+          <MeusAlunosComponent
             see={() => {
               setAlunoToEdit(item);
               setVisibleModalSeeAluno((prev) => !prev);
             }}
-            delete={() => {
-
-              setAlunoToEdit(item)
-              setVisibleModalDelete(prev => !prev)
+            disconnect={() => {
+              setAlunoToEdit(item);
+              setVisibleModalDisconnect(prev => !prev)
             }}
             update={() => {
               setAlunoToEdit(item);
@@ -91,10 +74,6 @@ export function Alunos() {
             menuTraining={() => {
               setAlunoToEdit(item);
               setVisibleModalMenu(prev => !prev)
-            }}
-            connect={() => {
-              setAlunoToEdit(item);
-              setVisibleModalConnect(prev => !prev)
             }}
             emailAluno={item.email}
             telefoneAluno={item.telefone}
@@ -113,12 +92,6 @@ export function Alunos() {
         dataAluno={alunoToEdit}
       />
 
-      <ModalCreateAluno
-        open={visibleModalCreate}
-        close={() => setVisibleModalCreate(prev => !prev)}
-        create={createStudent}
-      />
-
       <ModalUpdateAluno
         open={visibleModalUpdate}
         close={() => setVisibleModalUpdate(prev => !prev)}
@@ -126,26 +99,19 @@ export function Alunos() {
         aluno={alunoToEdit}
       />
 
-      <ModalDeleteAluno
-        open={visibleModalDelete}
-        close={() => setVisibleModalDelete(prev => !prev)}
-        onDelete={deleteStudent}
+      <ModalDisconnectTreinoAluno
+        open={visibleModalDisconnect}
+        close={() => setVisibleModalDisconnect(prev => !prev)}
         aluno={alunoToEdit}
+        disconnect={deleteStudent}
       />
 
-      <ModalConnectTreinoAluno
-        open={visibleModalConnect}
-        close={() => setVisibleModalConnect(prev => !prev)}
-        aluno={alunoToEdit}
-      />
-
-      <ModalMenuAluno 
+      <ModalMenuMeuAluno
         open={visibleModalMenu}
         close={() => setVisibleModalMenu(prev => !prev)}
         setAlunoEdit={setAlunoToEdit}
         dataAluno={alunoToEdit}
-        setVisibleModalConectarAluno={() => setVisibleModalConnect(prev => !prev)}
-        setVisibleModalDelete={() => setVisibleModalDelete(prev => !prev)}
+        setVisibleModalDesconectarAluno={() => setVisibleModalDisconnect(prev => !prev)}
         setVisibleModalSeeAluno={() => setVisibleModalSeeAluno((prev) => !prev)}
         setVisibleModalUpdateAluno={() => setVisibleModalUpdate(prev => !prev)}
       />

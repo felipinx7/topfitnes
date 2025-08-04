@@ -3,37 +3,26 @@ import { IconeCloseModal } from "@/assets/icons/icone-closeModal-treino";
 import { ModalSeeTreinoProps } from "@/types/type-ModalTreino-Props";
 import ReactDOM from "react-dom"
 import { InfoTreino } from "../../components/infoTreino";
-import { ExercicioComponent } from "../../components/exercicioComponent";
 import { useEffect, useState } from "react";
-import { ModalDeleteTreino } from "./modalDeleteTreino";
 import { exerciseDTO } from "@/schemas/schema-exercicio";
-import { ModalCreateExercicio } from "../exercicios/modalCreateExercicio";
-import { InfoExercises } from "../../components/infoExercises";
-import { ModalUpdateExercicio } from "../exercicios/modalUpdateExercicio";
 import { BaseUrlFoto } from "@/utils/base-url-foto";
 import { getAllExercise } from "@/services/routes/exercises/getAllExercise";
+import { InfoExercisesAluno } from "../../components/infoExerciseAlunoTraining";
+import { ModalDeleteTreino } from "../treinos/modalDeleteTreino";
 
-export function ModalSeeTreino(data: ModalSeeTreinoProps) {
+export function ModalSeeTreinoAluno(data: ModalSeeTreinoProps) {
     // Visible modals
     const [visibleModalDelete, setVisibleModalDelete] = useState(false)
-    const [visibleModalCreate, setVisibleModalCreate] = useState(false)
-    const [visibleModalUpdate, setVisibleModalUpdate] = useState(false)
 
     // Exercises
     const [exercises, setExercises] = useState<exerciseDTO[]>([]);
     const [isExercises, setIsExercises] = useState<exerciseDTO | null>(null)
-    // functions
-    function createExercise(data: exerciseDTO) {
-        setExercises((prev) => [...prev, data])
-    }
+
+    console.log("data: ", data)
 
     function deleteExercise() {
         setExercises(prev => prev.filter(e => e.id !== isExercises?.id))
     };
-
-    function updateExercise(updateExercise: exerciseDTO) {
-        setExercises(prev => prev.map(e => e.id === isExercises?.id ? updateExercise : e))
-    }
 
     const photo = BaseUrlFoto(data?.dataTraining?.foto || "")
     const previewFoto = data?.dataTraining?.foto ? photo : 'url(#)';
@@ -73,11 +62,9 @@ export function ModalSeeTreino(data: ModalSeeTreinoProps) {
                     )}
 
                     {/* Exercises */}
-                    <InfoExercises
+                    <InfoExercisesAluno
                         setIsExercises={setIsExercises}
-                        setVisibleModalCreate={setVisibleModalCreate}
                         setVisibleModalDelete={setVisibleModalDelete}
-                        setVisibleModalUpdate={setVisibleModalUpdate}
                         exercises={exercises}
                     />
                 </div>
@@ -91,22 +78,7 @@ export function ModalSeeTreino(data: ModalSeeTreinoProps) {
                 isPersonal={false}
                 exercicio={isExercises}
             />
-
-            {data.dataTraining?.id && (
-                <ModalCreateExercicio
-                    open={visibleModalCreate}
-                    close={() => setVisibleModalCreate(prev => !prev)}
-                    create={createExercise}
-                    treinoId={data.dataTraining.id}
-                />
-            )}
-
-            <ModalUpdateExercicio
-                open={visibleModalUpdate}
-                close={() => setVisibleModalUpdate(prev => !prev)}
-                updateExercise={updateExercise}
-                exerciseToEdit={isExercises}
-            />
+            
         </div>,
         document.body
     )

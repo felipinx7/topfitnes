@@ -25,6 +25,7 @@ export function Treinos() {
     const [trainings, setTrainings] = useState<TrainingSchemaDTO[]>([]);
     const [trainingToEdit, setTrainingToEdit] = useState<TrainingSchemaDTO | null>(null);
 
+    if (!trainings) return
     // SearchTerm
     const [searchTerm, setSearchTerm] = useState("");
     const filteredTranings = trainings.filter(t => t.nome.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -34,11 +35,18 @@ export function Treinos() {
     }
 
     function updateTraining(updateTraining: TrainingSchemaDTO) {
-        setTrainings(prev => prev.map(t => t.id === trainingToEdit?.id ? updateTraining : t))
+        setTrainings(prev =>
+            prev.map(t =>
+                t.id === trainingToEdit?.id
+                    ? { ...t, ...updateTraining }
+                    : t
+            )
+        );
     }
 
+
     function deleteTraining() {
-        setTrainings(prev => prev.filter(t => t.id !== trainingToEdit?.id))
+        setTrainings(prev => prev?.filter(t => t.id !== trainingToEdit?.id))
     }
 
     useEffect(() => {

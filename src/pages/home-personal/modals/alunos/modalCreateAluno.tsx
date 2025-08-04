@@ -59,7 +59,7 @@ export function ModalCreateAluno(data: modalCreateAlunoProps) {
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className={`bg-white overflow-y-hidden w-4/5 max-md:w-[95%] h-[95%] max-h-[95%] max-md:max-h-[800px] max-xl:max-h-[800px] relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${data.open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}>
+                className={`bg-white overflow-y-hidden w-4/5 max-md:w-[95%] h-[95%] max-h-[95%] max-md:max-h-[850px] max-xl:max-h-[800px] relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${data.open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}>
                 {/* Cabeçalho */}
                 <div className="w-full bg-[#F0F0F0] rounded-t-xl flex justify-between items-center px-2 py-3">
                     <div className="flex flex-col max-lg:w-4/5 text-neutras-100 pl-3 -space-y-1 max-lg:pl-1 ">
@@ -78,9 +78,9 @@ export function ModalCreateAluno(data: modalCreateAlunoProps) {
                 </div>
 
                 {/* Formulário */}
-                <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex">
+                <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex max-md:flex-col max-md:items-center max-md:overflow-y-scroll max-md:space-y-4">
                     {/* Section 1 */}
-                    <div className="h-full w-[35%] flex flex-col items-center p-2 border-r border-black/20 ">
+                    <div className="h-full w-[35%] flex flex-col items-center p-2 md:border-r border-black/20 max-md:w-full max-md:py-0 ">
                         {/* Foto */}
                         <div className="flex flex-col w-[70%] items-center justify-center mt-4">
                             <div className=" aspect-square rounded-full w-2/3 relative duration-500 ease-in-out transition-all hover:scale-105">
@@ -158,7 +158,7 @@ export function ModalCreateAluno(data: modalCreateAlunoProps) {
                     </div>
 
                     {/* Section 2 */}
-                    <div className="flex flex-col justify-between items-center w-[65%] h-full py-5 px-2">
+                    <div className="flex flex-col justify-between items-center w-[65%] h-full py-5 px-2 max-md:w-full max-md:py-0">
 
                         {/* Campos 2 */}
                         <div className="flex flex-col w-full items-center space-y-4">
@@ -202,7 +202,7 @@ export function ModalCreateAluno(data: modalCreateAlunoProps) {
                             </div>
 
                             {/* Campos duplos */}
-                            <div className="w-[95%] grid grid-cols-2 gap-x-8 gap-y-4">
+                            <div className="w-[95%] grid grid-cols-2 md:gap-x-8 md:gap-y-4 max-md:flex max-md:flex-col max-md:space-y-4 max-md:items-center">
 
                                 {/* Telefone */}
                                 <div className="w-full max-lg:w-[95%] border-1 border-neutras-100/40 flex items-center p-2 rounded-xl">
@@ -292,7 +292,7 @@ export function ModalCreateAluno(data: modalCreateAlunoProps) {
                             </div>
                         </div>
                         {/* Button */}
-                        <button type="submit" className="w-[75%] bg-verde-100 text-white font-Poppins-Bold text-lg rounded-xl p-0.5 hover:bg-verde-200 duration-500 cursor-pointer max-lg:h-10">
+                        <button type="submit" className="w-[75%] bg-verde-100 text-white font-Poppins-Bold text-lg rounded-xl p-0.5 hover:bg-verde-200 duration-500 cursor-pointer max-lg:h-10 max-md:mt-8">
                             Criar Aluno
                         </button>
                     </div>

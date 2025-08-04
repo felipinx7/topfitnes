@@ -14,18 +14,19 @@ import { loginDTO } from "@/dto/loginDTO";
 
 import { Auth } from "@/services/routes/login/auth";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export function Login() {
 
-  const [error,setError] = useState(false)
+  const [error, setError] = useState(false)
 
-    const router = useRouter();
+  const router = useRouter();
 
 
 
   const [visible, setVisible] = useState(false);
 
- async function LoginSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function LoginSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
@@ -33,37 +34,30 @@ export function Login() {
     const emailTel = (formData.get("emailTel") ?? "").toString();
     const password = (formData.get("password") ?? "").toString();
 
-    const data : loginDTO = { emailTel, password };
-    console.log("data:",  data)
+    const data: loginDTO = { emailTel, password };
 
-    const response = await Auth(data);
-    console.log(response);
+    try {
+      const response = await Auth(data);
+      toast.success("Login realizado com sucesso!");
 
-    
-
-    if(!response.userRole){
-           setError(true)
-      setTimeout(()=>{
-        setError(false)
-      },4000)
-
+      if (!response.userRole) {
+        setError(true)
+        setTimeout(() => {
+          setError(false)
+        }, 4000)
+      }
+      else if (response.userRole == "ADMINISTRADOR") {
+        router.push("/administrador")
+      } else if (response.userRole == "ALUNO") {
+        router.push("/home-aluno")
+      } else if (response.userRole == "PERSONAL") {
+        router.push("/home-personal")
+      }
+    } catch (err: any) {
+      const msg = err.message;
+      toast.error(msg)
     }
-    else if(response.userRole == "ADMINISTRADOR"){
-      router.push("/administrador")
-    }else if(response.userRole == "ALUNO"){
-      router.push("/home-aluno")
-    } else if(response.userRole == "PERSONAL"){
-      router.push("/home-personal")
-    } 
-
-
-
-
-
-    }
-
-
-  
+  }
 
   return (
     <main className="w-screen h-screen flex flex-row max-md:flex-col-reverse">
@@ -81,8 +75,9 @@ export function Login() {
           <div className="bg-gradient-to-tl  from-verde-100/20 absolute bottom-0 right-0 to-transparent to-50% w-2/3 h-2/3"></div>
         </div>{" "}
         <form
-          onSubmit={(e)=> {LoginSubmit(e)
-             e.currentTarget.reset();
+          onSubmit={(e) => {
+            LoginSubmit(e)
+            e.currentTarget.reset();
           }}
           action=""
           method="POST"
