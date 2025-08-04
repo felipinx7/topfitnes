@@ -1,5 +1,6 @@
 'use client'
 import { IconConnectAlunoToPersonal } from "@/assets/icons/icon-connect-aluno-to-personal";
+import { IconDisconnectAlunoToPersonal } from "@/assets/icons/icon-disconnect-aluno-to-personal";
 import { IconeExcluirTreino } from "@/assets/icons/icon-excluir-treino";
 import { IconeMenuTreino } from "@/assets/icons/icon-menu-treino";
 import { IconeAtualizarTreino } from "@/assets/icons/icone-atualizar-treino";
@@ -10,10 +11,9 @@ import { useEffect, useState } from "react";
 
 export type functionButtons = {
     update: () => void,
-    delete: () => void,
     see?: () => void,
     menuTraining: () => void,
-    connect: () => void,
+    disconnect: () => void,
     nomeAluno: string,
     emailAluno?: string,
     telefoneAluno?: string,
@@ -22,7 +22,7 @@ export type functionButtons = {
 }
 
 
-export function AlunoComponent(data: functionButtons) {
+export function MeusAlunosComponent(data: functionButtons) {
     const [previewFoto, setPreviewFoto] = useState<string>("");
     const dataSexo = (data.sexoAluno || "").toLowerCase();
     const SexoFormat = dataSexo
@@ -54,7 +54,7 @@ export function AlunoComponent(data: functionButtons) {
                 <div className="flex-col flex justify-center font-Poppins font-bold pl-3 text-verde-200 md:-space-y-1.5 max-md:pl-1 max-md:w-3/5">
                     <h1 className="text-lg font-Poppins-Bold max-md:text-sm max-lg:text-xl">{data.nomeAluno}</h1>
                     <h2 className="font font-light text-[11px] md:text-sm">{data.emailAluno || data.telefoneAluno || "não tem nada"}</h2>
-                    <div className="px-2 py-0.5 bg-verde-500 text-verde-200 rounded-2xl mt-2 text-[10px] text-center font-Poppins font-light translate-y-1 pr-1 w-20 max-xl:max-w-3/5 max-xl:min-w-20">{data.sexoAluno === "PREFIRO_NAO_DIZER" ? "Sem informação" : SexoFormat}</div>
+                    <div className="px-2 py-0.5 bg-verde-500 text-verde-200 rounded-2xl mt-2 text-[10px] text-center font-Poppins font-light translate-y-1 pr-1 w-20 max-xl:max-w-20 max-xl:min-w-20">{data.sexoAluno === "PREFIRO_NAO_DIZER" ? "Sem informação" : SexoFormat}</div>
                 </div>
             </div>
 
@@ -72,17 +72,11 @@ export function AlunoComponent(data: functionButtons) {
                     className="p-2 h-[2.1rem] w-[2.1rem] max-lg:h-[2.5rem] max-lg:w-[2.5rem] max-md:h-[2.1rem] max-md:w-[2.1rem] text-[#1C1B1F] rounded-lg bg-white flex items-center justify-center shadow shadow-black/20 cursor-pointer duration-500 hover:bg-[#3a382eee] hover:text-white max-md:hidden">
                     <IconeVisualizarTreino />
                 </button>
-                {/* Icone conectar Aluno ao personal */}
-                <button
-                    onClick={data.connect}
-                    className="p-2 h-[2.1rem] w-[2.1rem] max-lg:h-[2.5rem] max-lg:w-[2.5rem] max-md:h-[2.1rem] max-md:w-[2.1rem] text-[#1C1B1F] rounded-lg bg-white flex items-center justify-center shadow shadow-black/20 cursor-pointer duration-500 hover:bg-[#3a382eee] hover:text-white max-md:hidden">
-                    <IconConnectAlunoToPersonal />
-                </button>
                 {/* Icone Excluir */}
                 <button
-                    onClick={data.delete}
+                    onClick={data.disconnect}
                     className="p-2 h-[2.1rem] w-[2.1rem] max-lg:h-[2.5rem] max-lg:w-[2.5rem] max-md:h-[2.1rem] max-md:w-[2.1rem] rounded-lg bg-[#EF4444] flex items-center justify-center shadow shadow-black/20 hover:bg-red-600 cursor-pointer duration-500 max-md:hidden">
-                    <IconeExcluirTreino />
+                    <IconDisconnectAlunoToPersonal />
                 </button>
                 {/* Icone Menu (apenas celular) */}
                 <button

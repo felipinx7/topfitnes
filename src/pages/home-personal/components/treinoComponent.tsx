@@ -21,17 +21,21 @@ export type functionButtons = {
 
 export function TreinoComponent(data: functionButtons) {
     const [previewFoto, setPreviewFoto] = useState<string>("");
+    console.log("TreinoComponent renderizou, foto:", data.foto);
 
     useEffect(() => {
-    if (data.foto instanceof File) {
-      const objectUrl = URL.createObjectURL(data.foto);
-      setPreviewFoto(objectUrl);
+        console.log("useEffect rodou, foto recebida:", data.foto);
 
-      return () => URL.revokeObjectURL(objectUrl);
-    } else {
-      setPreviewFoto(BaseUrlFoto(String(data.foto)));
-    }
-  }, [data.foto]);
+        if (data.foto instanceof File) {
+            const objectUrl = URL.createObjectURL(data.foto);
+            setPreviewFoto(objectUrl);
+
+            return () => URL.revokeObjectURL(objectUrl);
+        } else {
+            setPreviewFoto(BaseUrlFoto(String(data.foto)));
+        }
+    }, [data.foto]);
+
 
     return (
         <div className="w-full bg-verde-600 p-3 flex items-center shadow shadow-black/30 rounded-lg justify-between border border-black/30 max-lg:h-28 max-lg:max-h-28 max-md:h-fit">

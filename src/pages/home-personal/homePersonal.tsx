@@ -7,6 +7,7 @@ import { Treinos } from "./sections/treinos";
 import { GetPersonal } from "@/services/routes/personal/getPersonal";
 import { Alunos } from "./sections/alunos";
 import { PerfilSection } from "./sections/perfil";
+import { MeusAlunos } from "./sections/meusAlunos";
 
 export function HomePersonal() {
     const [render, setRender] = useState(1);
@@ -15,6 +16,7 @@ export function HomePersonal() {
     useEffect(() => {
         async function getPersonal() {
             const data = await GetPersonal();
+            console.log(data)
             if (data) setPersonal(data);
         }
 
@@ -32,7 +34,7 @@ export function HomePersonal() {
             case 3:
                 return <Alunos/>
             case 4:
-                return <div> isso ai 4</div>
+                return <MeusAlunos personal={personal} />
             case 5:
                 return <div> falta coisa </div>
             case 6:
@@ -44,7 +46,7 @@ export function HomePersonal() {
         <main className="w-screen h-screen max-lg:h-[100dvh] bg-neutras-300 relative flex overflow-hidden max-md:flex-col-reverse ">
             <div className="w-1/5 min-w-[350px] h-full max-lg:absolute max-lg:w-full max-lg:h-28 max-md:h-20 z-20 max-lg:bottom-0">
                 {" "}
-                <SideBar open setId={setRender} id={render} personal={personal}></SideBar>
+                <SideBar setId={setRender} id={render} personal={personal}></SideBar>
             </div>
             <div className="w-full h-full"> {renderSection(render)}</div>
         </main>

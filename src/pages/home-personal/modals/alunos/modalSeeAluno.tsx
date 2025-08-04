@@ -8,16 +8,29 @@ import { InfoAluno } from "../../components/infoAluno";
 import { TrainingSchemaDTO } from "@/schemas/schema-treino";
 import { ModalSeeTreino } from "../treinos/modalSeeTreino";
 import { AlunoTreinoComponent } from "../../components/alunoTreinoComponent ";
+import { ModalSeeTreinoAluno } from "./modalSeeTrainingAluno";
+import { ModalDeleteTreino } from "../treinos/modalDeleteTreino";
+import { ModalDeleteAluno } from "./modalDeleteAluno";
+import { ModalDeleteTreinoAluno } from "./modalDeleteTreinoAluno";
 
 export function ModalSeeAluno(data: ModalSeeAlunoProps) {
   // Exercises
-  const [training, setTraining] = useState<TrainingSchemaDTO[]>([]);
-  const [isTraining, setIsTraining] = useState<TrainingSchemaDTO | null>(null);
+  const [training, setTraining] = useState<any[]>(
+    data.dataAluno?.treinos_aluno?.map((item) => item.treino) || []
+  );
+  const [isTraining, setIsTraining] = useState<any | null>(null);
   const [visibilityModalSee, setVisibilityModalSee] = useState(false);
   const [visibilityModalDelete, setVisibilityModalDelete] = useState(false);
 
   const photo = BaseUrlFoto(data?.dataAluno?.foto || "");
   const previewFoto = data?.dataAluno?.foto ? photo : "url(#)";
+
+  function deleteTrainingStudent() {
+    setTraining((item) => item.map((i: any) => {
+      console.log(i)
+      console.log("treino: ", isTraining)
+      i.id !== isTraining.treino_id}))
+  }
 
   function handleVisibilityModalSee() {
     setVisibilityModalSee((prev) => !prev);
@@ -64,59 +77,23 @@ export function ModalSeeAluno(data: ModalSeeAlunoProps) {
               Treinos
             </h1>
 
-            <ModalSeeTreino
-              close={handleVisibilityModalSee}
-              open={visibilityModalSee}
-              dataTraining={
-                data.dataAluno?.treinos_aluno?.[0]?.treino
-                  ? {
-                      id: data.dataAluno.treinos_aluno[0].treino.id,
-                      nome: data.dataAluno.treinos_aluno[0].treino.nome,
-                      descricao:
-                        data.dataAluno.treinos_aluno[0].treino.descricao,
-                      foco_corpo: data.dataAluno.treinos_aluno[0].treino
-                        .foco_corpo as
-                        | "PEITO"
-                        | "COSTAS"
-                        | "PERNAS"
-                        | "BRACOS"
-                        | "GLUTEOS",
-                      foto: data.dataAluno.treinos_aluno[0].treino.foto,
-                    }
-                  : null
-              }
-            />
-
             {/* container dos cards */}
             <div className="w-full flex flex-col gap-4">
               {data.dataAluno?.treinos_aluno &&
-              data.dataAluno.treinos_aluno.length > 0 ? (
-                data.dataAluno.treinos_aluno
-                  .filter((card) => card.treino)
-                  .map((card, index) => (
-                    <AlunoTreinoComponent
-                      key={card.treino!.id || index}
-                      see={handleVisibilityModalSee}
-                      delete={() => handleVisibilityModalDelete}
-                      dataExercise={{
-                        id: card.treino!.id,
-                        nome: card.treino!.nome,
-                        descricao: card.treino!.descricao,
-                        execucoes: "3", // exemplo
-                        repeticoes: "10", // exemplo
-                      }}
-                      foto={card.treino!.foto}
-                      treino={{
-                        ...card.treino!,
-                        foco_corpo: card.treino!.foco_corpo as
-                          | "PEITO"
-                          | "COSTAS"
-                          | "PERNAS"
-                          | "BRACOS"
-                          | "GLUTEOS",
-                      }}
-                    />
-                  ))
+                data.dataAluno.treinos_aluno.length > 0 ? (
+                data.dataAluno.treinos_aluno.map((item) => (
+                  <AlunoTreinoComponent key={item.id} foto={item?.treino?.foto}
+                    treino={item.treino}
+                    see={() => {
+                      setIsTraining(item);
+                      setVisibilityModalSee(prev => !prev)
+                    }}
+                    delete={() => {
+                      setIsTraining(item)
+                      setVisibilityModalDelete(prev => !prev)
+                    }}
+                  />
+                ))
               ) : (
                 <div className="w-full h-[80vh] flex items-center justify-center">
                   <h1 className="text-lg text-[#262626]">
@@ -128,6 +105,17 @@ export function ModalSeeAluno(data: ModalSeeAlunoProps) {
           </div>
         </div>
       </div>
+
+      <ModalDeleteTreinoAluno
+        open={visibilityModalDelete}
+        close={() => {
+          setVisibilityModalDelete(prev => !prev)
+        }}
+        onDelete={() => {
+          deleteTrainingStudent
+        }}
+        aluno={isTraining}
+      />
     </div>,
     document.body
   );
