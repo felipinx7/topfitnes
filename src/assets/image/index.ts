@@ -14,6 +14,7 @@ import texturalinhas from "./Textura-quadrados.png";
 import imagemfundosectionpassos from "./imagem-fundo-section-passos.svg";
 import imagemfundosectionformulario from "./imagem-fundo-section-formulario.svg";
 import avatarneutroanimado from "./foto-avatar-notificação.svg";
+import exercitandoalunohome from "./exercitando-aluno-home.png";
 
 export {
   banner,
@@ -32,4 +33,5 @@ export {
   imagemfundosectionpassos,
   imagemfundosectionformulario,
   avatarneutroanimado,
+  exercitandoalunohome,
 };
