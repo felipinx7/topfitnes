@@ -42,13 +42,13 @@ export function MeusAlunos(personal: any) {
   }
 
   useEffect(() => {
-          async function getPersonal() {
-              const data = await GetPersonal();
-              if (data) setAlunos(data.alunos);
-          }
-  
-          getPersonal();
-      }, []);
+    async function getPersonal() {
+      const data = await GetPersonal();
+      if (data) setAlunos(data.alunos);
+    }
+
+    getPersonal();
+  }, []);
 
   return (
     // Container main
@@ -56,34 +56,40 @@ export function MeusAlunos(personal: any) {
       <Search onChange={setSearchTerm} value={searchTerm} />
       {/* container of renderization cards */}
       <div className="flex w-full flex-col space-y-3 mt-3 overflow-y-auto">
-        {filteredAlunos?.map((item, idx) => (
-          // Card aluno
-          <MeusAlunosComponent
-            see={() => {
-              setAlunoToEdit(item);
-              setVisibleModalSeeAluno((prev) => !prev);
-            }}
-            disconnect={() => {
-              setAlunoToEdit(item);
-              setVisibleModalDisconnect(prev => !prev)
-            }}
-            update={() => {
-              setAlunoToEdit(item);
-              setVisibleModalUpdate(prev => !prev)
-            }}
-            menuTraining={() => {
-              setAlunoToEdit(item);
-              setVisibleModalMenu(prev => !prev)
-            }}
-            emailAluno={item.email}
-            telefoneAluno={item.telefone}
-            sexoAluno={item.sexo || ""}
-            key={item.id ? item.id.toString() : idx}
-            nomeAluno={item.nome || ""}
-            foto={item.foto}
-          />
-        ))}
+        {filteredAlunos && filteredAlunos.length > 0 ? (
+          filteredAlunos.map((item, idx) => (
+            <MeusAlunosComponent
+              key={item.id ? item.id.toString() : idx}
+              see={() => {
+                setAlunoToEdit(item);
+                setVisibleModalSeeAluno((prev) => !prev);
+              }}
+              disconnect={() => {
+                setAlunoToEdit(item);
+                setVisibleModalDisconnect(prev => !prev);
+              }}
+              update={() => {
+                setAlunoToEdit(item);
+                setVisibleModalUpdate(prev => !prev);
+              }}
+              menuTraining={() => {
+                setAlunoToEdit(item);
+                setVisibleModalMenu(prev => !prev);
+              }}
+              emailAluno={item.email}
+              telefoneAluno={item.telefone}
+              sexoAluno={item.sexo || ""}
+              nomeAluno={item.nome || ""}
+              foto={item.foto}
+            />
+          ))
+        ) : (
+          <p className="text-center text-gray-500 font-Poppins mt-4">
+            Você ainda não possui alunos vinculados.
+          </p>
+        )}
       </div>
+
       <div className="h-32 w-full lg:hidden"></div>
       {/* Modal information of alunos  */}
       <ModalSeeAluno
