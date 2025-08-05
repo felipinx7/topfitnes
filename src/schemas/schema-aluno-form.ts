@@ -47,7 +47,7 @@ export const schemaAlunoForm = z.object({
     }),
   email: z.email("E-mail inválido"),
   senha: z.string().min(8, "Senha deve ter no mínimo 8 caracteres"),
-  telefone: z.string().min(15, "Telefone inválido"),
+  telefone: z.string().regex(/^\d{10,11}$/, "Telefone inválido"),
   plano_id: z.string().min(1, "Selecione um plano"),
   role: z.string().default("ALUNO"),
   treinos_aluno: z.array(z.any()).optional(),

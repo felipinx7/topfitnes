@@ -13,7 +13,7 @@ import { FormatarNumero } from "@/utils/formatar-numero-telefone";
 import { toast } from "react-toastify";
 import { CreateAluno } from "@/services/routes/aluno/createAluno";
 
-type modalCreateAlunoProps = {
+type    modalCreateAlunoProps = {
     open: boolean,
     close: () => void,
     create: (data: AlunoSchemaFormPersonalDTO) => void

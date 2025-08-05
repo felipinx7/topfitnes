@@ -35,54 +35,54 @@ export default function ModalFormularioCliente({
     setFotoArquivo(file);
   }
 
-  async function onSubmit(data: DataAlunoForm) {
-    if (!fotoArquivo) {
-      alert("Foto obrigatória");
-      return;
-    }
+async function onSubmit(data: DataAlunoForm) {
+  if (!fotoArquivo) {
+    alert("Foto obrigatória");
+    return;
+  }
 
-    const dataMatriculaValida = new Date(data.data_matricula ?? "");
+  const dataMatriculaValida = new Date(data.data_matricula ?? "");
 
-    if (
-      isNaN(dataMatriculaValida.getTime()) ||
-      dataMatriculaValida.getFullYear() < 1900
-    ) {
-      alert(
-        "Data de matrícula inválida! Informe uma data válida a partir de 1900."
-      );
-      return;
-    }
+  if (
+    isNaN(dataMatriculaValida.getTime()) ||
+    dataMatriculaValida.getFullYear() < 1900
+  ) {
+    alert("Data de matrícula inválida! Informe uma data válida a partir de 1900.");
+    return;
+  }
 
-    const formData = new FormData();
+  const formData = new FormData();
 
-    for (const [key, value] of Object.entries(data)) {
-      if (value !== undefined && value !== null) {
-        if (key === "data_matricula") {
-          formData.append(key, dataMatriculaValida.toISOString());
-        } else if (key === "telefone") {
-          // Aqui envia o telefone já formatado
-          const telefoneFormatado = FormatarNumero(String(value));
-          formData.append(key, telefoneFormatado);
-        } else {
-          formData.append(key, String(value));
-        }
+  for (const [key, value] of Object.entries(data)) {
+    if (value !== undefined && value !== null) {
+      if (key === "data_matricula") {
+        formData.append(key, dataMatriculaValida.toISOString());
+      } else if (key === "telefone") {
+        // Formata o telefone antes de enviar
+        const telefoneFormatado = FormatarNumero(String(value));
+        formData.append(key, telefoneFormatado);
+      } else {
+        formData.append(key, String(value));
       }
     }
-
-    formData.append("foto", fotoArquivo);
-
-    try {
-      console.log("Enviando dados para backend...");
-      await PostCadastrarAluno(formData);
-      alert("Aluno cadastrado com sucesso!");
-      reset();
-      setFotoArquivo(null);
-      setTelefone("");
-    } catch (error) {
-      console.error("Erro ao enviar dados:", error);
-      alert("Erro ao cadastrar aluno");
-    }
   }
+
+  // Adiciona a foto ao formData
+  formData.append("foto", fotoArquivo);
+
+  try {
+    console.log("Enviando dados para backend...");
+    await PostCadastrarAluno(formData);
+    alert("Aluno cadastrado com sucesso!");
+    reset();
+    setFotoArquivo(null);
+    setTelefone("");
+  } catch (error) {
+    console.error("Erro ao enviar dados:", error);
+    alert("Erro ao cadastrar aluno");
+  }
+}
+
 
   return (
     <section
@@ -210,14 +210,14 @@ export default function ModalFormularioCliente({
                   type="tel"
                   placeholder="(00) 00000-0000"
                   maxLength={15}
-                  value={FormatarNumero(telefone)} // formatado no input
+                  value={FormatarNumero(telefone)}
                   onChange={(e) => {
-                    const valorDigitado = e.target.value.replace(/\D/g, ""); // só números
+                    const valorDigitado = e.target.value.replace(/\D/g, "");
                     setTelefone(valorDigitado);
                     setValue("telefone", valorDigitado, {
                       shouldValidate: true,
                       shouldDirty: true,
-                    }); // atualiza react-hook-form e dispara validação
+                    });
                   }}
                   className="bg-[#DBDBDB] text-[#1E1E1E] placeholder:text-[#1e1e1e7d] font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
                 />

@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { BaseUrlFoto } from "@/utils/base-url-foto";
 import { FormatarNumero } from "@/utils/formatar-numero-telefone";
+import { infoPlanoId } from "@/constants/infoSexoStudent";
 
 interface ModalFormularioCardClienteProps {
   OpenModal: boolean;
@@ -70,7 +71,7 @@ export default function ModalFormularioCardCliente({
       // Prepara o objeto para envio, convertendo data_matricula
       const dataToSend = {
         ...formData,
-        data_matricula: dataMatricula?.toISOString(), // corrigido para backend
+        data_matricula: dataMatricula?.toISOString(),
       };
 
       let response;
@@ -103,9 +104,6 @@ export default function ModalFormularioCardCliente({
       }
 
       // Se você quiser, pode também atualizar o estado local que armazena os dados do aluno,
-      // para refletir a atualização no UI geral (caso tenha)
-      // setData(response.data.student);
-
       return response;
     } catch (error) {
       console.error("Erro ao enviar dados:", error);
@@ -372,16 +370,18 @@ export default function ModalFormularioCardCliente({
                   Plano:
                 </label>
                 <select
-                  {...register("plano_id")}
                   id="plano"
-                  className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100
-  transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
+                  {...register("plano_id")}
+                  className="outline-none w-full text-sm text-[#242424] pl-2 placeholder:text-neutras-200/60 max-lg:text-[14px]"
                 >
-                  <option value="">Selecione um plano</option> {/* fallback */}
-                  <option value={Planos.MENSAL}>Mensal - R$ 65,00</option>
-                  <option value={Planos.TRIMESTRAL}>Trimestral</option>
-                  <option value={Planos.SEMESTRAL}>Semestral</option>
-                  <option value={Planos.ANUAL}>Anual</option>
+                  <option className="text-neutras-200/60" value="">
+                    Selecione o plano
+                  </option>
+                  {infoPlanoId.map((item, index) => (
+                    <option value={item.valueBack} key={index}>
+                      {item.valueFront}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
