@@ -45,6 +45,7 @@ export default function CardInformacaoAluno(props: DataAluno) {
     }
   }
 
+
   function planoVencido() {
     if (!props.data_validade_plano) return false;
 
