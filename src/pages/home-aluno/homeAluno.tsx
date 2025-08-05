@@ -60,7 +60,7 @@ export function HomeAluno() {
 
   return (
     <main className="w-screen h-screen bg-neutras-300 relative flex max-lg:flex-col-reverse overflow-hidden">
-      <div className="w-1/5 min-w-[350px] h-full max-lg:absolute max-lg:w-full max-lg:h-20 z-100 max-lg:bottom-0 ">
+      <div className="w-1/5 min-w-[350px] h-full max-lg:fixed max-lg:w-full max-lg:h-20 z-100 max-lg:bottom-0 ">
         {" "}
         <SideBar setId={setSection} id={section} aluno={aluno}></SideBar>
       </div>

@@ -8,9 +8,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+import { useRouter } from "next/navigation";
+
 export default function HeaderMobile() {
   // Estado para controlar o menu toggle
   const [isMenuOpen, setisMenuOpen] = useState(false);
+
+  const router = useRouter();
 
   // Função responsavel para alternar o menu
   const handleToggleMenu = () => {
@@ -54,6 +58,7 @@ export default function HeaderMobile() {
         {/* Botões de Ação */}
         <div className="flex flex-col w-[70%] max-sm:w-full items-center gap-4">
           <button
+            onClick={() => router.push("/login")}
             aria-label="Botão de Acessar o sistema"
             className="border p-4 cursor-pointer w-full rounded-[0.5rem] text-[1rem] ease-in duration-[0.3s] hover:bg-[var(--color-verde-100)] font-[600] px-8 border-[var(--color-verde-100)]"
           >

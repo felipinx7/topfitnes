@@ -49,8 +49,12 @@ export function SideBar({ id, setId, aluno }: SiderBarAluno) {
     <div className="w-full max-lg:absolute max-lg:bottom-0 max-lg:gap-4 max-lg:justify-center max-lg:items-center h-full flex max-lg:flex-row max-lg:min-w-0 max-lg:w-full max-lg:h-20 flex-col min-w-[350px] justify-between bg-neutras-300 px-8 shadow-2xl shadow-neutras-100/25 font-Poppins py-8">
       <div className="w-full flex max-lg:w-12 max-lg:h-10 relative">
         <div
+          
           className="w-full flex flex-row cursor-pointer items-center"
-          onClick={() => setOptions((prev) => !prev)}
+          onClick={() => {if(screen.width > 1024){setOptions((prev) => !prev)
+          }else{
+            setId(5)
+          }}}
         >
           <div className="w-full flex flex-row">
           <div
