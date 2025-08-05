@@ -1,23 +1,3 @@
-// enum sexo {
-//   MASCULINO = "MASCULINO",
-//   FEMININO = "FEMININO",
-//   PREFIRO_NAO_DIZER = "PREFIRO_NAO_DIZER",
-// }
-
-// enum FocoTreino {
-//   PERDER_PESO = "PERDER_PESO",
-//   GANHAR_MASSA = "GANHAR_MASSA",
-//   MANTER_A_FORMA = "MANTER_A_FORMA",
-// }
-
-// enum FocoCorpo {
-//   PEITO = "PEITO",
-//   BRACOS = "BRACOS",
-//   COSTAS = "COSTAS",
-//   GLUTEOS = "GLUTEOS",
-//   PERNAS = "PERNAS",
-// }
-
 export interface DataAlunoRelatorio {
   id: string;
   nome?: string;
@@ -38,8 +18,9 @@ export interface DataAlunoRelatorio {
   dia_pagamento?: string;
   usuario_id: string;
   data_validade_plano?: string;
-  treinos: {
-    data: string,
-    nome_exercicio: string,
-  }
+  treinos?: {
+    data: string;
+    tipo_treino: string;
+    nome_exercicio: string;
+  }[];
 }

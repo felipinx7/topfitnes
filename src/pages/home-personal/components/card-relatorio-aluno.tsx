@@ -17,6 +17,7 @@ export function CardRelatorioAluno(data: DataAlunoRelatorio) {
     <>
       {/* Modal do Relatorio */}
       <ModalRelatorio
+        data={data}
         openModal={openModal}
         handleClosedModal={handleVisibildadeModal}
       />
@@ -47,7 +48,10 @@ export function CardRelatorioAluno(data: DataAlunoRelatorio) {
 
         {/* container botões de visualização  */}
         <div className="max-sm:w-full">
-          <button onClick={handleVisibildadeModal} className="bg-verde-100 rounded-[0.6rem] w-auto max-sm:w-full px-4 py-1 duration-500 ease-in-out transition-all hover:bg-verde-400 cursor-pointer text-white font-[600]">
+          <button
+            onClick={handleVisibildadeModal}
+            className="bg-verde-100 rounded-[0.6rem] w-auto max-sm:w-full px-4 py-1 duration-500 ease-in-out transition-all hover:bg-verde-400 cursor-pointer text-white font-[600]"
+          >
             ACESSAR
           </button>
         </div>

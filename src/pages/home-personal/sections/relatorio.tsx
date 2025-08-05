@@ -49,10 +49,10 @@ export function Relatorio() {
             <CardRelatorioAluno key={card.nome} {...card} />
           ))
         ) : (
-          <div className="w-full flex-col flex items-center justify-center">
+          <div className="w-full h-full flex-col flex items-center justify-center">
             <img
               src={exercitandoalunohome.src}
-              width={300}
+              width={400}
               className="max-md:w-[200px]"
               alt="Foto de um homem exercitando"
             />
