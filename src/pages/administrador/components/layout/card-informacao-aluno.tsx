@@ -67,7 +67,7 @@ export default function CardInformacaoAluno(props: DataAluno) {
       {/* Cointeúdo principal */}
       <div className="w-full flex max-sm:flex-col max-sm:space-y-8 max-sm:items-baseline items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-[69px] -hidden rounded-full h-[69px] relative">
+          <div className="w-[69px] overflow-hidden rounded-full h-[69px] relative">
             <img
               src={foto}
               className="rounded-full w-[100%] h-[100%] object-cover"
