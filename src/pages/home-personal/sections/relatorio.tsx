@@ -6,11 +6,12 @@ import { DataAluno } from "@/dto/data-aluno";
 import { CardRelatorioAluno } from "../components/card-relatorio-aluno";
 import { exercitandoalunohome } from "@/assets/image";
 import { GetTodosClientes } from "@/services/routes/administrador/get/get-todos-clientes";
+import { DataAlunoRelatorio } from "@/dto/data-aluno-relatorio";
 
 export function Relatorio() {
   // Estados Utilizados no componente
   const [valorInput, setValorInput] = useState("");
-  const [alunos, setAlunos] = useState<DataAluno[]>([]);
+  const [alunos, setAlunos] = useState<DataAlunoRelatorio[]>([]);
 
   // Funções utilizadas no sistema
   const alunosFiltrados = alunos?.filter(
@@ -42,7 +43,7 @@ export function Relatorio() {
       </div>
 
       {/* container visualização alunos */}
-      <div className="w-full h-full overflow-y-auto flex flex-col items-center justify-start gap-4">
+      <div className="w-full h-full overflow-y-auto flex flex-col items-center max-md:pb-14 justify-start gap-4">
         {alunosFiltrados && alunosFiltrados.length > 0 ? (
           alunosFiltrados?.map((card) => (
             <CardRelatorioAluno key={card.nome} {...card} />
