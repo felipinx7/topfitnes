@@ -36,9 +36,8 @@ export default function SectionFormulario() {
     try {
       setIsSubmiting(true);
 
-      // Importante: telefone no "data" deve estar limpo, sem formatação
       // Se quiser garantir, aqui pode limpar antes de enviar:
-      data.telefone = telefone.replace(/\D/g, "");
+      data.telefone = FormatarNumero(telefone);
 
       const response = await RegisterFormLadingPage(data);
       setIsVisible(true);
@@ -55,6 +54,7 @@ export default function SectionFormulario() {
   // Atualiza telefone no estado e no react-hook-form sempre que muda
   function handleTelefoneChange(e: React.ChangeEvent<HTMLInputElement>) {
     const somenteNumeros = e.target.value.replace(/\D/g, "");
+
     setTelefone(somenteNumeros);
     setValue("telefone", somenteNumeros, { shouldValidate: true });
   }
@@ -65,7 +65,7 @@ export default function SectionFormulario() {
       <div
         className={`${
           isVisible ? "flex" : "hidden"
-        } transition-all backdrop-blur-[5px] z-50 absolute w-full min-h-[100vh] items-center justify-center`}
+        } transition-all inset-0 backdrop-blur-[5px] z-50 absolute w-full min-h-[100vh] items-center justify-center`}
       >
         <article className="bg-verde-100 w-[30%] h-[50%] rounded-4xl flex items-center justify-center flex-col gap-4 p-6 max-md:w-[90%]">
           <div className="h-[7rem] w-[7rem] bg-white flex items-center justify-center rounded-full">

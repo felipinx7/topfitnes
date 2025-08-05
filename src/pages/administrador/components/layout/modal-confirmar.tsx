@@ -10,7 +10,7 @@ interface ModalSairProps {
 export default function ModalConfirmar({ isOppen, text, handleCloseModal, handleActionComponente }: ModalSairProps) {
   return (
     <div
-      className={`${isOppen ? "flex" : "hidden"} ${isOppen ?'opacity-100 visible' : 'opacity-0 invisible'} bg-[rgba(0,0,0,0.5)] shadow-lg px-8 backdrop-blur-sm fixed top-0 left-0 transition-all duration-300 ease-in-out right-0 bottom-0 z-50 justify-center items-start py-[6rem]`}
+      className={`${isOppen ? "flex" : "hidden"} ${isOppen ?'opacity-100 visible' : 'opacity-0 invisible'} bg-[rgba(0,0,0,0.5)] shadow-lg px-8 backdrop-blur-sm fixed top-0 left-0 transition-all duration-300 ease-in-out right-0 bottom-0 z-[999] justify-center items-start py-[6rem]`}
     >
       {/* modal de sair  */}
       <article className="bg-verde-100 w-[400px] text-center h-[200px] p-4 rounded-3xl flex-col flex items-center justify-center">

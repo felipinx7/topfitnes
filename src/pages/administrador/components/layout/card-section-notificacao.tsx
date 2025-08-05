@@ -8,9 +8,11 @@ export default function CardSectionNotificacao(props: DataCardNotificao) {
   const mensagem =
     "Olá! Aqui é o Jailson da academia. Vi que você teve interesse em treinar na nossa academia pelo site e quero te dar as boas-vindas. Se quiser mais informações sobre, pode perguntar — fico à disposição!";
 
+  console.log("Numero sem caracteres", telefone);
+
   return (
     // container card section Notificação
-    <article className="w-full flex items-center justify-between bg-[#D8FFE2] p-3 rounded-[0.4rem]">
+    <article className="w-full flex max-md:flex-col max-md:items-start max-md:gap-4 items-center justify-between bg-[#D8FFE2] p-3 rounded-[0.4rem]">
       {/* container informações foto e email  */}
       <div className="flex items-start justify-start gap-4">
         {/* container Foto  */}
@@ -32,12 +34,17 @@ export default function CardSectionNotificacao(props: DataCardNotificao) {
       </div>
 
       {/* container botão chamar no zap  */}
-      <div className="">
+      <div className="max-md:w-full">
         <button
           type="button"
-          className="bg-verde-100 cursor-pointer hover:bg-verde-400 ease-in-out duration-500 transition-all hover:scale-105  p-2 text-white font-Poppins-Semibold rounded-[10px]"
+          className="bg-verde-100 max-md:w-full cursor-pointer hover:bg-verde-400 ease-in-out duration-500 transition-all hover:scale-105  p-2 text-white font-Poppins-Semibold rounded-[10px]"
         >
-          <a target="_blank" href={`https://wa.me/${telefone}?text=${mensagem}`}>conversar</a>
+          <a
+            target="_blank"
+            href={`https://wa.me/55${telefone}?text=${encodeURIComponent(mensagem)}`}
+          >
+            conversar
+          </a>
         </button>
       </div>
     </article>
