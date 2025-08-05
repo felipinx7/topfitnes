@@ -6,11 +6,11 @@ export function Exercicio(exercicio?: ExercicioDTO) {
   return (
     <div
       className="w-full shadow-xl shadow-verde-200/5
-     rounded-xl h-36 p-2 px-4 border border-neutras-200/20 bg-verde-600 flex flex-row items-center justify-between"
+     rounded-xl h-36 max-lg:h-48 p-2 px-4 border border-neutras-200/20 bg-verde-600 flex flex-row items-center justify-between"
     >
       <div className=" flex flex-row gap-2">
         <div
-          className="h-16 w-16 rounded-full bg-verde-100"
+          className="h-16 w-16 min-w-16 min-h-16 rounded-full bg-verde-100"
           style={{ backgroundImage: `url(${BaseUrlFoto(exercicio?.foto)})`, backgroundSize: "cover" }}
         ></div>
 

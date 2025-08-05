@@ -35,7 +35,7 @@ export function PerfilSection({ aluno }: props) {
     <div className="w-full h-full flex flex-col  overflow-x-hidden ">
       <form
       // onSubmit={(e)=> Submitando(e, aluno?.id)}
-        className="w-full h-full flex flex-col gap-8 overflow-y-scroll  text-xl p-8 px-12 text-neutras-100"
+        className="w-full mb-20 h-full flex flex-col gap-8 overflow-y-scroll  text-xl p-8 px-12 text-neutras-100"
         method="POST"
       >
         <h1 className="font-Poppins-Bold">Meu perfil</h1>

@@ -12,7 +12,11 @@
     "@hookform/resolvers": "^5.1.1",
     "axios": "^1.10.0",
     "cleave.js": "^1.6.0",
+<<<<<<< HEAD
     "html2canvas": "^1.4.1",
+=======
+    "date-fns": "^4.1.0",
+>>>>>>> 67e5fc78bc21c785bf420373ec0b5a6aa0e98a5e
     "js-cookie": "^3.0.5",
     "jspdf": "^3.0.1",
     "next": "15.4.1",

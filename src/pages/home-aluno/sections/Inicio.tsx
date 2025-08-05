@@ -8,6 +8,9 @@ import { IconePerigo } from "@/assets/icons/icone-perigo";
 import { DadosComponent } from "../components/Dados";
 import { formatarDataISO } from "@/utils/formatar-data";
 
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+
 
 type props = {
   date?: string
@@ -15,14 +18,18 @@ type props = {
 
 export function Inicio( {date}: props) {
 
-  const vencimento = formatarDataISO(date)
-
-  const hojeString = new Date().toISOString();
-
   const data = date ? new Date(date) : new Date()
-  const hoje = new Date(hojeString)
+  const hoje = new Date()
 
-  const faltamDias = Math.ceil(data.getTime() - hoje.getTime() / (1000 * 60 * 60 * 24))
+  // Formata a data para o padrão brasileiro
+  const vencimento = format(data, 'dd/MM/yyyy', { locale: ptBR })
+
+  // Corrige o cálculo da diferença em dias
+  const diffEmMs = data.getTime() - hoje.getTime()
+  const faltamDias = Math.ceil(diffEmMs / (1000 * 60 * 60 * 24))
+
+  console.log(`Vencimento: ${vencimento}`)
+  console.log(`Faltam ${faltamDias} dias`)
 
 
   return (
@@ -71,7 +78,7 @@ export function Inicio( {date}: props) {
 
          { faltamDias < 8 ?( <DadosComponent
           icon={<IconePerigo/>}
-          titulo={`Faltam ${faltamDias}} dias para seu plano expirar`}
+          titulo={`Faltam ${faltamDias} dias para seu plano expirar`}
           valor="">
 
           </DadosComponent>) : ""
