@@ -332,7 +332,7 @@ export function ModalUpdateAluno(data: modalUpdateAlunoProps) {
                         </div>
                         {/* Button */}
                         <button type="submit" className="w-[75%] bg-verde-100 text-white font-Poppins-Bold text-lg rounded-xl p-0.5 hover:bg-verde-200 duration-500 cursor-pointer max-lg:h-10 max-lg:mt-8 max-xl:mt-4">
-                            Criar Aluno
+                            Atualizar Aluno
                         </button>
                     </div>
                 </form>

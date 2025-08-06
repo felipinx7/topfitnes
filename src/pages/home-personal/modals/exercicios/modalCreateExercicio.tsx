@@ -30,15 +30,15 @@ export function ModalCreateExercicio({ open, close, create, treinoId }: ModalCre
             foto: file || null,
         }
 
+        const dataBack = { ...data, foto: file, treino_id: treinoId, intervalo_descanso: 30 }
+        await CreateExercise(dataBack)
+
         create(finalData)
         toast.success("Exercicio criado com sucesso!")
 
         reset()
         setPreviewImage(null)
         close()
-
-        const dataBack = { ...data, foto: file, treino_id: treinoId, intervalo_descanso: 30 }
-        await CreateExercise(dataBack)
     };
 
     return ReactDOM.createPortal(
@@ -117,7 +117,7 @@ export function ModalCreateExercicio({ open, close, create, treinoId }: ModalCre
                                 <input
                                     className="outline-none text-[#242424] w-full pl-2 placeholder:text-neutras-200/60 text-[15px]"
                                     placeholder="ex. 12"
-                                    type="text"
+                                    type="number"
                                     {...register("repeticoes")}
                                 />
                             </div>
@@ -127,7 +127,7 @@ export function ModalCreateExercicio({ open, close, create, treinoId }: ModalCre
                                 <input
                                     className="outline-none text-[#242424] w-full pl-2 placeholder:text-neutras-200/60 text-[15px]"
                                     placeholder="ex. 3"
-                                    type="text"
+                                    type="number"
                                     {...register("execucoes")}
                                 />
                             </div>

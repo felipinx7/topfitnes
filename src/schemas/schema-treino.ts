@@ -15,6 +15,7 @@ export const trainingSchema = z.object({
   descricao: z.string(),
   foco_corpo: focoCorpoEnum,
   foto: z.any().optional(), 
+  exercicios: z.array(z.object()).optional()
 });
 
 export type TrainingSchemaDTO = z.infer<typeof trainingSchema>;

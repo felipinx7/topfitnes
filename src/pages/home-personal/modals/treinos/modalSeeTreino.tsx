@@ -20,7 +20,7 @@ export function ModalSeeTreino(data: ModalSeeTreinoProps) {
     const [visibleModalUpdate, setVisibleModalUpdate] = useState(false)
 
     // Exercises
-    const [exercises, setExercises] = useState<exerciseDTO[]>([]);
+    const [exercises, setExercises] = useState<any[]>([]);
     const [isExercises, setIsExercises] = useState<exerciseDTO | null>(null)
     // functions
     function createExercise(data: exerciseDTO) {
@@ -32,21 +32,19 @@ export function ModalSeeTreino(data: ModalSeeTreinoProps) {
     };
 
     function updateExercise(updateExercise: exerciseDTO) {
-        setExercises(prev => prev.map(e => e.id === isExercises?.id ? updateExercise : e))
+        setExercises(prev => prev.map(e => e.id === isExercises?.id ? { ...e, ...isExercises } : e))
     }
 
     const photo = BaseUrlFoto(data?.dataTraining?.foto || "")
     const previewFoto = data?.dataTraining?.foto ? photo : 'url(#)';
 
     useEffect(() => {
-        async function getAllExercicio(){
-            const { exercises } = await getAllExercise();
-            setExercises(exercises)
+        if (data.dataTraining?.exercicios) {
+            setExercises(data.dataTraining.exercicios);
         }
+    }, [data.dataTraining?.exercicios]);
 
-        getAllExercicio()
-    }, []
-)
+
     return ReactDOM.createPortal(
         <div
             onClick={data.close}

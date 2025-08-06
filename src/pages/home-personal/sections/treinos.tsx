@@ -52,6 +52,7 @@ export function Treinos() {
     useEffect(() => {
         async function getAllTraining() {
             const trainings = await getAllTreino();
+            console.log("treinos: ", trainings)
             setTrainings(trainings)
         }
 
@@ -93,7 +94,7 @@ export function Treinos() {
                         }}
                         see={() => {
                             setTrainingToEdit(item)
-
+                            console.log(item);
                             setVisibleModalSeeTraining(prev => !prev)
                         }}
                         menuTraining={() => {
