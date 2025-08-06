@@ -3,7 +3,7 @@ import CardPlanoAcademia from "../components/card-plano-academia";
 
 export default function SectionPlanosAcademia() {
   return (
-    <section className="bg-neutras-400 w-full min-h-[100vh] flex flex-col items-center justify-center">
+    <section id="planos" className="bg-neutras-400 w-full min-h-[100vh] flex flex-col items-center justify-center">
       {/* container informações principais  */}
       <div className="max-w-[1280px] w-[100%] px-4 m-0 flex flex-col justify-center gap-12 items-center">
 

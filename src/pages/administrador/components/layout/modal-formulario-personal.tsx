@@ -61,7 +61,7 @@ export default function ModalFormularioPersonal({
       await PostCadastrarPersonal(formData);
       alert("Personal cadastrado com sucesso!");
       reset();
-      setTelefone(""); // limpa o telefone após envio
+      setTelefone("");
       setFotoFile(null);
     } catch (error) {
       console.error("Erro ao cadastrar personal:", error);
@@ -114,48 +114,47 @@ export default function ModalFormularioPersonal({
                   }}
                 />
               </label>
+            </div>
+            <div className="w-full">
+              <label
+                htmlFor="nome"
+                className="text-[#646464] font-Poppins-Bold mb-1 block"
+              >
+                Nome:
+              </label>
+              <input
+                id="nome"
+                {...register("nome")}
+                type="text"
+                placeholder="Digite o nome"
+                className="w-full bg-[#DBDBDB] px-4 py-2 rounded font-Poppins-Medium text-[#1E1E1E]"
+                required
+              />
+              {errors.nome && (
+                <p className="text-red-500 text-sm">{errors.nome.message}</p>
+              )}
+            </div>
 
-              <div className="w-full">
-                <label
-                  htmlFor="nome"
-                  className="text-[#646464] font-Poppins-Bold mb-1 block"
-                >
-                  Nome:
-                </label>
-                <input
-                  id="nome"
-                  {...register("nome")}
-                  type="text"
-                  placeholder="Digite o nome"
-                  className="w-full bg-[#DBDBDB] px-4 py-2 rounded font-Poppins-Medium text-[#1E1E1E]"
-                  required
-                />
-                {errors.nome && (
-                  <p className="text-red-500 text-sm">{errors.nome.message}</p>
-                )}
-              </div>
-
-              <div className="w-full">
-                <label
-                  htmlFor="sobrenome"
-                  className="text-[#646464] font-Poppins-Bold mb-1 block"
-                >
-                  Sobrenome:
-                </label>
-                <input
-                  id="sobrenome"
-                  {...register("sobrenome")}
-                  type="text"
-                  placeholder="Digite o sobrenome"
-                  className="w-full bg-[#DBDBDB] px-4 py-2 rounded font-Poppins-Medium text-[#1E1E1E]"
-                  required
-                />
-                {errors.sobrenome && (
-                  <p className="text-red-500 text-sm">
-                    {errors.sobrenome.message}
-                  </p>
-                )}
-              </div>
+            <div className="w-full">
+              <label
+                htmlFor="sobrenome"
+                className="text-[#646464] font-Poppins-Bold mb-1 block"
+              >
+                Sobrenome:
+              </label>
+              <input
+                id="sobrenome"
+                {...register("sobrenome")}
+                type="text"
+                placeholder="Digite o sobrenome"
+                className="w-full bg-[#DBDBDB] px-4 py-2 rounded font-Poppins-Medium text-[#1E1E1E]"
+                required
+              />
+              {errors.sobrenome && (
+                <p className="text-red-500 text-sm">
+                  {errors.sobrenome.message}
+                </p>
+              )}
             </div>
 
             {/* Bloco 2: Contato */}

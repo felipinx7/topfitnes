@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { DataAlunoForm } from "@/dto/data-aluno-form";
 import { schemaAlunoForm } from "@/schemas/schema-aluno-form";
 import { FormatarNumero } from "@/utils/formatar-numero-telefone";
+import { infoPlanoId } from "@/constants/infoSexoStudent";
 
 interface ModalFormularioClienteProps {
   OpenModal: boolean | undefined;
@@ -35,54 +36,55 @@ export default function ModalFormularioCliente({
     setFotoArquivo(file);
   }
 
-async function onSubmit(data: DataAlunoForm) {
-  if (!fotoArquivo) {
-    alert("Foto obrigatória");
-    return;
-  }
+  async function onSubmit(data: DataAlunoForm) {
+    if (!fotoArquivo) {
+      alert("Foto obrigatória");
+      return;
+    }
 
-  const dataMatriculaValida = new Date(data.data_matricula ?? "");
+    const dataMatriculaValida = new Date(data.data_matricula ?? "");
 
-  if (
-    isNaN(dataMatriculaValida.getTime()) ||
-    dataMatriculaValida.getFullYear() < 1900
-  ) {
-    alert("Data de matrícula inválida! Informe uma data válida a partir de 1900.");
-    return;
-  }
+    if (
+      isNaN(dataMatriculaValida.getTime()) ||
+      dataMatriculaValida.getFullYear() < 1900
+    ) {
+      alert(
+        "Data de matrícula inválida! Informe uma data válida a partir de 1900."
+      );
+      return;
+    }
 
-  const formData = new FormData();
+    const formData = new FormData();
 
-  for (const [key, value] of Object.entries(data)) {
-    if (value !== undefined && value !== null) {
-      if (key === "data_matricula") {
-        formData.append(key, dataMatriculaValida.toISOString());
-      } else if (key === "telefone") {
-        // Formata o telefone antes de enviar
-        const telefoneFormatado = FormatarNumero(String(value));
-        formData.append(key, telefoneFormatado);
-      } else {
-        formData.append(key, String(value));
+    for (const [key, value] of Object.entries(data)) {
+      if (value !== undefined && value !== null) {
+        if (key === "data_matricula") {
+          formData.append(key, dataMatriculaValida.toISOString());
+        } else if (key === "telefone") {
+          // Formata o telefone antes de enviar
+          const telefoneFormatado = FormatarNumero(String(value));
+          formData.append(key, telefoneFormatado);
+        } else {
+          formData.append(key, String(value));
+        }
       }
     }
+
+    // Adiciona a foto ao formData
+    formData.append("foto", fotoArquivo);
+
+    try {
+      console.log("Enviando dados para backend...");
+      await PostCadastrarAluno(formData);
+      alert("Aluno cadastrado com sucesso!");
+      reset();
+      setFotoArquivo(null);
+      setTelefone("");
+    } catch (error) {
+      console.error("Erro ao enviar dados:", error);
+      alert("Erro ao cadastrar aluno");
+    }
   }
-
-  // Adiciona a foto ao formData
-  formData.append("foto", fotoArquivo);
-
-  try {
-    console.log("Enviando dados para backend...");
-    await PostCadastrarAluno(formData);
-    alert("Aluno cadastrado com sucesso!");
-    reset();
-    setFotoArquivo(null);
-    setTelefone("");
-  } catch (error) {
-    console.error("Erro ao enviar dados:", error);
-    alert("Erro ao cadastrar aluno");
-  }
-}
-
 
   return (
     <section
@@ -483,23 +485,18 @@ async function onSubmit(data: DataAlunoForm) {
                   Plano:
                 </label>
                 <select
-                  id="plano_id"
+                  id="plano"
                   {...register("plano_id")}
-                  className="bg-[#DBDBDB] max-lg:mb-6 text-[#1E1E1E] font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
+                  className="bg-[#DBDBDB] text-[#1E1E1E] font-Poppins-Medium px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-verde-100 transition-all"
                 >
-                  <option value="">Selecione um plano</option>
-                  <option value="69621913-2577-4f02-976c-c705914df714">
-                    Mensal - 65,00R$
+                  <option className="text-neutras-200/60" value="">
+                    Selecione o plano
                   </option>
-                  <option value="f0d784c4-df5c-46a8-abe8-c01e17cf7848">
-                    Trimestral
-                  </option>
-                  <option value="01ba1832-9a3d-4585-a68b-7285e7949d65">
-                    Semestral - 355R$
-                  </option>
-                  <option value="ffb8e1b3-5fef-40ac-8cd4-23667e99811a">
-                    Anual - 660R$
-                  </option>
+                  {infoPlanoId.map((item, index) => (
+                    <option value={item.valueBack} key={index}>
+                      {item.valueFront}
+                    </option>
+                  ))}
                 </select>
                 {errors.plano_id && (
                   <p className="text-red-600 text-sm mt-1">

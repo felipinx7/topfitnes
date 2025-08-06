@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function SectionFooter() {
   return (
-    <footer className="bg-[#141313] w-full px-6 py-12">
+    <footer id="horarios" className="bg-[#141313] w-full px-6 py-12">
       <div className="max-w-[1280px] mx-auto flex items-center justify-between max-md:flex-col gap-4 max-md:items-start text-white">
         {/* Sobre a Academia */}
         <div className="w-[33.33%]  max-md:w-full flex flex-col gap-4">

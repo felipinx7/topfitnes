@@ -372,7 +372,7 @@ export default function ModalFormularioCardCliente({
                 <select
                   id="plano"
                   {...register("plano_id")}
-                  className="outline-none w-full text-sm text-[#242424] pl-2 placeholder:text-neutras-200/60 max-lg:text-[14px]"
+                  className="bg-white text-[#1E1E1E] rounded-full outline-none focus:border-verde-100 transition-all ease-in-out duration-500 focus:scale-105 focus:border-2 font-Poppins-Medium px-4 py-3"
                 >
                   <option className="text-neutras-200/60" value="">
                     Selecione o plano
