@@ -1,23 +1,16 @@
 "use client";
 import { IconeCloseModal } from "@/assets/icons/icone-closeModal-treino";
 import ReactDOM from "react-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BaseUrlFoto } from "@/utils/base-url-foto";
 import { ModalSeeAlunoProps } from "@/types/type-modalAluno-Props";
 import { InfoAluno } from "../../components/infoAluno";
-import { TrainingSchemaDTO } from "@/schemas/schema-treino";
-import { ModalSeeTreino } from "../treinos/modalSeeTreino";
 import { AlunoTreinoComponent } from "../../components/alunoTreinoComponent ";
-import { ModalSeeTreinoAluno } from "./modalSeeTrainingAluno";
-import { ModalDeleteTreino } from "../treinos/modalDeleteTreino";
-import { ModalDeleteAluno } from "./modalDeleteAluno";
 import { ModalDeleteTreinoAluno } from "./modalDeleteTreinoAluno";
 
 export function ModalSeeAluno(data: ModalSeeAlunoProps) {
   // Exercises
-  const [training, setTraining] = useState<any[]>(
-    data.dataAluno?.treinos_aluno?.map((item) => item.treino) || []
-  );
+  const [training, setTraining] = useState<any[]>();
   const [isTraining, setIsTraining] = useState<any | null>(null);
   const [visibilityModalSee, setVisibilityModalSee] = useState(false);
   const [visibilityModalDelete, setVisibilityModalDelete] = useState(false);
@@ -26,19 +19,13 @@ export function ModalSeeAluno(data: ModalSeeAlunoProps) {
   const previewFoto = data?.dataAluno?.foto ? photo : "url(#)";
 
   function deleteTrainingStudent() {
-    setTraining((item) => item.map((i: any) => {
-      console.log(i)
-      console.log("treino: ", isTraining)
+    setTraining((item) => item?.map((i: any) => {
       i.id !== isTraining.treino_id}))
   }
-
-  function handleVisibilityModalSee() {
-    setVisibilityModalSee((prev) => !prev);
-  }
-  function handleVisibilityModalDelete() {
-    setVisibilityModalDelete((prev) => !prev);
-  }
-
+  
+  useEffect(() => {
+    setTraining(data.dataAluno?.treinos_aluno?.map((item) => item.treino) || [])
+  }, [data.dataAluno?.treinos_aluno])
   return ReactDOM.createPortal(
     <div
       onClick={data.close}
@@ -81,8 +68,9 @@ export function ModalSeeAluno(data: ModalSeeAlunoProps) {
             <div className="w-full flex flex-col gap-4">
               {data.dataAluno?.treinos_aluno &&
                 data.dataAluno.treinos_aluno.length > 0 ? (
-                data.dataAluno.treinos_aluno.map((item) => (
-                  <AlunoTreinoComponent key={item.id} foto={item?.treino?.foto}
+                data.dataAluno.treinos_aluno.map((item) => {
+                  return (
+                  <AlunoTreinoComponent key={item?.treino?.id} foto={(item?.treino?.foto)}
                     treino={item.treino}
                     see={() => {
                       setIsTraining(item);
@@ -93,8 +81,8 @@ export function ModalSeeAluno(data: ModalSeeAlunoProps) {
                       setVisibilityModalDelete(prev => !prev)
                     }}
                   />
-                ))
-              ) : (
+                )}
+              )) : (
                 <div className="w-full h-[80vh] flex items-center justify-center">
                   <h1 className="text-lg text-[#262626]">
                     Nenhum Treino Encontrado

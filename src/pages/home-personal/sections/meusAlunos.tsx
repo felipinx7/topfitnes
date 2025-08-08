@@ -46,7 +46,6 @@ export function MeusAlunos(personal: any) {
       const data = await GetPersonal();
       if (data) setAlunos(data.alunos);
     }
-
     getPersonal();
   }, []);
 

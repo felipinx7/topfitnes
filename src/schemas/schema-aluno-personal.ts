@@ -52,7 +52,7 @@ const schemaAlunoPersonal = z
     foto: z.any().optional(),
     usuario_id: z.string(),
     personal: personalSchema.optional(),
-    treinos_aluno: z.array(treinoAlunoSchema).optional(),
+    treinos_aluno: z.array(z.object({treino: treinoAlunoSchema})).optional(),
   })
   .passthrough();
 
