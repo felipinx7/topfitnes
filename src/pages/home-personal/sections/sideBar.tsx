@@ -67,7 +67,7 @@ export function SideBar({ id, setId, personal }: sideBarPersonal) {
                 </div>
             </div>
 
-            <div className="flex flex-col max-lg:flex-row justify-center items-start gap-1">
+            <div className="flex max-lg mx-3 flex-col max-lg:flex-row justify-center items-start gap-1">
                 {Botoes.map((botao) => (
                     <div
                         key={botao.id}

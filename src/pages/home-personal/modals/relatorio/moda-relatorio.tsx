@@ -25,10 +25,12 @@ export default function ModalRelatorio({
 
   return (
     <section
+    onClick={handleClosedModal}
       className={`${openModal ? "visible" : "invisible"} absolute z-[9999] flex items-center justify-center inset-0 top-0 bg-black/40`}
     >
       {/* Modal */}
       <div
+      onClick={(e)=> e.stopPropagation()}
         className={`w-[60%] max-md:w-[90%] p-8 ${openModal ? "opacity-100 scale-100" : "opacity-0 scale-125"} ease-in-out duration-500 flex items-center flex-col transition-all h-[80%] bg-white rounded-2xl`}
       >
         {/* header */}
@@ -37,7 +39,7 @@ export default function ModalRelatorio({
             Dados do Aluno
           </h1>
           <div onClick={handleClosedModal}>
-            <IconeFechar className="w-[40px] text-verde-100 hover:text-verde-400 ease-in-out duration-100 cursor-pointer" />
+            <IconeFechar className="w-10 h-10 text-neutras-200 hover:text-verde-400 ease-in-out duration-100 cursor-pointer" />
           </div>
         </div>
 

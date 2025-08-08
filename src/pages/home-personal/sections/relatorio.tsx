@@ -36,10 +36,10 @@ export function Relatorio() {
 
       {/* containers informações principais */}
       <div className="flex flex-col gap-1 w-full">
-        <h1 className="text-verde-100 font-Poppins-Medium text-[1.2rem]">
+        <h1 className="text-verde-200 font-Poppins-Medium text-[1.2rem]">
           Todos os alunos
         </h1>
-        <hr className="bg-verde-100 border-[0.2px] w-full border-verde-100" />
+        <hr className="bg-neutras-200/20 border-[0.2px] w-full " />
       </div>
 
       {/* container visualização alunos */}

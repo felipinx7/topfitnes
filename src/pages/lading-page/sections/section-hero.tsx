@@ -47,9 +47,9 @@ export default function SectionHero() {
             Estás pronto para começar a ver resultados <br /> reais no treino?
           </p>
           <div className="w-full flex items-center justify-start max-md:justify-center">
-            <div className="w-[40%] max-md:w-[80%]">
+            <a href="/login" className="w-[40%] max-md:w-[80%]" >
               <ComponentBotaoProps text="QUERO TREINAR AGORA"/>
-            </div>
+            </a>
           </div>
         </div>
       </div>
