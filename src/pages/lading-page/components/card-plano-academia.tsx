@@ -30,7 +30,7 @@ export default function CardPlanoAcademia(props: DataCardsLadingPage) {
         ))}
       </div>
       <div className="relative w-full">
-        <ComponentBotaoProps text="QUERO TREINAR AGORA" />
+        <ComponentBotaoProps linkWhtsapp text="QUERO TREINAR AGORA" />
       </div>
     </article>
   );
