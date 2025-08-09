@@ -48,7 +48,7 @@ export default function HeaderMobile() {
           {linksHeader.map((link) => (
             <Link
               key={link.titulo}
-              href="#"
+              href={link.id}
               className="relative text-white text-[1.3rem] font-[600] hover:text-[var(--color-verde-100)] transition-colors"
             >
               {link.titulo}
