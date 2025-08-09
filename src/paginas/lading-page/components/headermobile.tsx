@@ -47,6 +47,7 @@ export default function HeaderMobile() {
         <div className="flex flex-col items-center gap-8 mb-8">
           {linksHeader.map((link) => (
             <Link
+            onClick={handleToggleMenu}
               key={link.titulo}
               href={link.id}
               className="relative text-white text-[1.3rem] font-[600] hover:text-[var(--color-verde-100)] transition-colors"
