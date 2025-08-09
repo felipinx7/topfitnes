@@ -48,7 +48,7 @@ export default function SectionHero() {
           </p>
           <div className="w-full flex items-center justify-start max-md:justify-center">
             <a href="/login" className="w-[40%] max-md:w-[80%]" >
-              <ComponentBotaoProps text="QUERO TREINAR AGORA"/>
+              <ComponentBotaoProps linkWhtsapp text="QUERO TREINAR AGORA"/>
             </a>
           </div>
         </div>
