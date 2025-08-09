@@ -9,7 +9,6 @@ import ComponentBotaoProps from "../components/componente-button";
 export default function SectionHero() {
   return (
     <section className="w-full min-h-[100vh] pb-8 flex items-start justify-center relative overflow-hidden">
-      
       {/*Sombras da hero */}
       <div className="w-full absolute h-40 top-0 bg-gradient-to-b from-30% from-neutras-400/80 to-transparent z-5"></div>
       <div className="w-full absolute h-40 bottom-0 bg-gradient-to-t from-30% from-neutras-400/80 to-transparent z-5 "></div>
@@ -38,18 +37,16 @@ export default function SectionHero() {
         <div className="w-[100%] h-[100%] py-46 max-md:p-0 max-md:px-1 gap-4 px-6 flex flex-col items-start max-md:justify-end max-md:text-center justify-center">
           <h1 className="font-GoldMan-Bold leading-12 text-[2.3rem] max-md:text-[2.0rem] w-[80%] max-md:w-full">
             LIBERTA O TEU POTENCIAL! <br />
-            <span className="text-verde-100">
-              JUNTA-SE A NÓS{" "}
-            </span>
+            <span className="text-verde-100">JUNTA-SE A NÓS </span>
             <br />E SENTE A DIFERENÇA.
           </h1>
           <p className="text-[1.2rem] max-md:text-[1rem] w-full">
             Estás pronto para começar a ver resultados <br /> reais no treino?
           </p>
           <div className="w-full flex items-center justify-start max-md:justify-center">
-            <a href="/login" className="w-[40%] max-md:w-[80%]" >
-              <ComponentBotaoProps linkWhtsapp text="QUERO TREINAR AGORA"/>
-            </a>
+            <div className="w-[40%] max-md:w-[80%]">
+              <ComponentBotaoProps linkWhtsapp text="QUERO TREINAR AGORA" />
+            </div>
           </div>
         </div>
       </div>
