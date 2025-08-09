@@ -1,4 +1,4 @@
-import Adimistrativo from "@/pages/administrador/adimistrativo";
+import Adimistrativo from "@/paginas/administrador/adimistrativo";
 
 export default function PageAdministrador() {
   return <Adimistrativo />;

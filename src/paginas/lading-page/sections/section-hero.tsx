@@ -2,8 +2,8 @@ import {
   imagebackgroundsectionhero,
   imagebackgroundsectionheromobile,
 } from "@/assets/image";
-import Header from "@/pages/lading-page/components/header";
-import HeaderMobile from "@/pages/lading-page/components/headermobile";
+import Header from "@/paginas/lading-page/components/header";
+import HeaderMobile from "@/paginas/lading-page/components/headermobile";
 import ComponentBotaoProps from "../components/componente-button";
 
 export default function SectionHero() {

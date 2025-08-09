@@ -1,4 +1,4 @@
-import { HomePersonal } from "@/pages/home-personal/homePersonal"
+import { HomePersonal } from "@/paginas/home-personal/homePersonal"
 import { ToastContainer } from "react-toastify"
 
 export default function PersonalPage() {

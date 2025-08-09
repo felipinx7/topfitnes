@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-
-
 export const metadata: Metadata = {
   title: "TOPFITNES | ACADEMIA",
   description:
@@ -32,12 +30,16 @@ export const metadata: Metadata = {
     siteName: "TOPFITNES",
     images: [
       {
-        url: "/opengraph-image.png", // imagem que será mostrada ao compartilhar
+        url: "/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Imagem de destaque da TOPFITNES Academia",
       },
     ],
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
   },
 };
 
@@ -48,9 +50,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className={` antialiased`}>
-        {children}
-      </body>
+      <body className={` antialiased`}>{children}</body>
     </html>
   );
 }

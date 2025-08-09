@@ -1,4 +1,4 @@
-import { HomeAluno } from "@/pages/home-aluno/homeAluno";
+import { HomeAluno } from "@/paginas/home-aluno/homeAluno";
 
 export default function HomeAlunoPage(){
 

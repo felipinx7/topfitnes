@@ -1,4 +1,4 @@
-import { Login } from "@/pages/login/login";
+import { Login } from "@/paginas/login/login";
 import { ToastContainer } from "react-toastify";
 export default function LoginPage(){
   return (
