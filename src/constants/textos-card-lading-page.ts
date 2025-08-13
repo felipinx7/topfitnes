@@ -47,14 +47,6 @@ export const TextCardIdeal: DataCardsLadingPage[] = [
     icone: IconeOk,
     titulo: "SUA LIBERDADE, SEU TREINO, SUA EVOLUÇÃO",
   },
-  {
-    icone: IconeOk,
-    titulo: "TREINE COMO QUISER, COM QUEM QUISER.",
-  },
-  {
-    icone: IconeOk,
-    titulo: "SEJA VOCÊ NO TREINO, SUPERE SEUS LIMITES!",
-  },
 ];
 
 export const TextosCardPassos: DataCardsLadingPage[] = [

@@ -54,7 +54,7 @@ export default function SectionFooter() {
         <div className="w-[33.33%]  max-md:w-full flex flex-col gap-2 font-GoldMan">
           <h2 className="text-lg font-bold mb-2">HORÁRIOS</h2>
           <p>Segunda à Sexta: 05:30 às 20:00</p>
-          <p>Sábados: 05:30 às 20:00</p>
+          <p>Sábados: 08:00 às 11:00</p>
         </div>
 
         {/* Localização */}
