@@ -9,18 +9,18 @@ export const infoGrupoMuscularAlvo = formatEnumList(["PEITO", "BRACOS", "COSTAS"
 export const infoPlanoId = [
     {
         valueFront: "Mensal",
-        valueBack: "69621913-2577-4f02-976c-c705914df714"
+        valueBack: "af25b640-15e2-4bf6-85ec-85c9326130f8"
     },
     {
         valueFront: "Trimestral",
-        valueBack: "5befa264-9c62-4e87-95ec-e6d8e5886b6c"
+        valueBack: "5019bae2-bd6b-4cef-9506-48fb8f777463"
     },
     {
         valueFront: "Semestral",
-        valueBack: "01ba1832-9a3d-4585-a68b-7285e7949d65"
+        valueBack: "e29c95a1-99eb-4848-a906-4f5a3d81fe50"
     },
     {
         valueFront: "Anual",
-        valueBack: "ffb8e1b3-5fef-40ac-8cd4-23667e99811a"
+        valueBack: "7000eaa1-c754-4c65-a2bb-bbcd8be7f770"
     }
 ]
