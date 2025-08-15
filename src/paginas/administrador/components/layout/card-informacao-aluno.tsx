@@ -70,7 +70,7 @@ export default function CardInformacaoAluno(props: DataAluno) {
           <div className="w-[69px] overflow-hidden rounded-full h-[69px] relative">
             <img
               src={foto}
-              className="rounded-full w-[100%] h-[100%] object-cover"
+              className="rounded-full w-full  h-full object-cover"
               alt={`Foto do usuário ${props.nome}`}
             />
           </div>

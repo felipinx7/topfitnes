@@ -153,10 +153,10 @@ export default function ModalFormularioCardCliente({
             {/* Coluna 1 */}
             <div className="flex flex-col w-full items-center gap-4">
               {/* container imagem  */}
-              <div className="w-65 h-65 rounded-full">
+              <div className="w-65 h-65 relative rounded-full">
                 <img
                   src={baseUrl}
-                  className="rounded-full"
+                  className="rounded-full w-full h-full"
                   alt={`Foto do aluno(a) ${data.nome}`}
                 />
               </div>

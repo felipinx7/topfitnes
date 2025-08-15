@@ -106,7 +106,7 @@ export default function ModalFormularioCardPersonais({
           <div className="flex items-start max-lg:flex-col gap-8 justify-between">
             {/* Coluna 1 */}
             <div className="flex flex-col w-full items-center gap-4">
-              <div className="w-40 h-40 rounded-full overflow-hidden border">
+              <div className="w-40 h-40 relative rounded-full overflow-hidden border">
                 {fotoPreview ? (
                   <img
                     src={fotoPreview}
@@ -116,16 +116,16 @@ export default function ModalFormularioCardPersonais({
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gray-200 text-sm text-gray-500">
                     Sem foto
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      className="text-sm mt-2"
+                    />
                   </div>
                 )}
-              </div>
 
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-                className="text-sm mt-2"
-              />
+              </div>
 
               <div className="flex mt-4 flex-col w-full">
                 <label

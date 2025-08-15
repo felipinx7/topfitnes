@@ -67,7 +67,7 @@ export default function CardInformacaoPersonal(props: DataCadastroPersonal) {
           <div className="w-[69px] h-[60px] relative">
             <img
               src={foto}
-              className="rounded-full"
+              className="rounded-full w-full h-full object-cover"
               alt={`Foto do usuário ${props.nome}`}
             />
           </div>
