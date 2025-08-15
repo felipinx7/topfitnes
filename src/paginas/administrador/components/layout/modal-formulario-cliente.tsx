@@ -111,42 +111,35 @@ export default function ModalFormularioCliente({
           encType="multipart/form-data"
           noValidate
         >
-          <div className="flex w-full gap-10 max-lg:flex-col">
+          <div className="flex flex-col items-center w-full gap-4">
             <div className="flex flex-col w-full items-center gap-4">
               {/* Foto de Perfil */}
-              <div className="w-full flex flex-col items-center gap-2 mt-4">
-                {fotoArquivo && (
-                  <img
-                    src={URL.createObjectURL(fotoArquivo)}
-                    alt="Pré-visualização"
-                    className="w-60 h-60 rounded-full object-cover border"
-                  />
-                )}
+              <div className="flex w-full flex-col lg:flex-row lg:gap-10 items-center lg:items-start">
+                <div className="flex flex-col items-center gap-4">
+                  {fotoArquivo && (
+                    <img
+                      src={URL.createObjectURL(fotoArquivo)}
+                      alt="Pré-visualização"
+                      className="w-40 h-40 sm:w-60 sm:h-60 rounded-full object-cover border"
+                    />
+                  )}
 
-                <label
-                  htmlFor="fotoInput"
-                  className="cursor-pointer bg-[#DBDBDB] hover:bg-[#cfcfcf] text-[#1E1E1E] font-Poppins-Medium px-4 py-2 rounded transition-all"
-                >
-                  {fotoArquivo ? "Trocar Foto" : "Selecionar Foto"}
-                </label>
+                  <label className="cursor-pointerrelative cursor-pointer bg-[#DBDBDB] hover:bg-[#cfcfcf] text-[#333] font-Poppins-Medium px-4 py-2 rounded">
+                    {fotoArquivo
+                      ? "Trocar foto"
+                      : "Selecione uma foto"}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) =>
+                        setFotoArquivo(e.target.files?.[0] || null)
+                      }
+                    />
+                  </label>
+                </div>
 
-                <input
-                  required={!fotoArquivo}
-                  id="fotoInput"
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => {
-                    if (e.target.files && e.target.files[0]) {
-                      onFotoChange(e.target.files[0]);
-                    }
-                  }}
-                  className="hidden"
-                />
-                {errors.foto && (
-                  <p className="text-red-600 text-sm mt-1">
-                    {errors.foto.message}
-                  </p>
-                )}
+                <div className="flex-1">{/* resto do formulário */}</div>
               </div>
 
               {/* Nome */}
