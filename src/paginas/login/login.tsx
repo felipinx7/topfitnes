@@ -139,13 +139,13 @@ export function Login() {
                 Acessar
               </button>
               <h1 className="w-full text-xs text-white z-90 mt-2 relative">
-                <h1>
+                <h2>
                   Ainda não tem uma conta?
                   <strong className="text-verde-100 cursor-pointer hover:text-verde-400 duration-500">
                     {" "}
                     Entrar em Contato
                   </strong>{" "}
-                </h1>
+                </h2>
               </h1>
             </div>
           </div>

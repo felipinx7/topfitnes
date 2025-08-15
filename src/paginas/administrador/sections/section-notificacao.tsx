@@ -30,7 +30,7 @@ export default function SectionNotificacao() {
     <section className="bg-white w-full flex flex-col items-center px-4 py-8 min-h-[calc(100vh-187.29px)]">
       <div className="max-w-[1280px] w-[100%] gap-3 flex flex-col m-0 items-start">
         <h1 className="text-[#575757] font-Poppins-Bold text-3xl">
-          Aréa de Notificações
+          Área de Notificações
         </h1>
 
         {/* container linha  */}

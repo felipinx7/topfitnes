@@ -1,4 +1,4 @@
-"use client";
+"use client"; 
 
 import { SectionType } from "@/types/type-section-header-administrativo";
 import ModalFormularioCliente from "./modal-formulario-cliente";

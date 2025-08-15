@@ -9,12 +9,12 @@ import { useState } from "react";
 import { GetUmAluno } from "@/services/routes/administrador/get/get-apenas-um-aluno";
 
 export default function CardInformacaoAluno(props: DataAluno) {
-  const foto = BaseUrlFoto(props.foto || "");
 
-  const [informacoesUsuario, setInformacoesUsuario] =
-    useState<DataAluno | null>(null);
+  const [informacoesUsuario, setInformacoesUsuario] = useState<DataAluno | null>(null);
   const [openModal, setOpenModal] = useState(false);
   const [openModalConfirmation, setOpenModalConfirmation] = useState(false);
+
+   const foto = BaseUrlFoto(props.foto || "");
 
   function handleVisibilityModal() {
     setOpenModal((prev) => !prev);

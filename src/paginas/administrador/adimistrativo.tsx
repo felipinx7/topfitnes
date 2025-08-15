@@ -1,8 +1,9 @@
 "use client";
 
+import { ReactNode, useState } from "react";
 import { SectionType } from "@/types/type-section-header-administrativo";
 import HeaderAdministrador from "./components/layout/header";
-import { ReactNode, useState } from "react";
+
 import SectionPersonal from "./sections/section-personal";
 import SectionCliente from "./sections/section-cliente";
 import SectionNotificacao from "./sections/section-notificacao";
@@ -17,8 +18,7 @@ export const sectionHeaderAdministrativo: Record<SectionType, ReactNode> = {
 
 export default function Adimistrativo() {
   //Estado para controlar a seção selecionada
-  const [sectionSelected, setSectionSelected] =
-    useState<SectionType>("personal");
+  const [sectionSelected, setSectionSelected] = useState<SectionType>("personal");
 
   return (
     <main className="bg-white w-full min-h-[100vh]">

@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { DataAluno } from "@/dto/data-aluno";
 import { AlunoSchemaDTO, Planos, schemaAluno } from "@/schemas/schema-aluno";

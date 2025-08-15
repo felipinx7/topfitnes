@@ -32,7 +32,7 @@ export default function SectionPersonal() {
       {/* Barra de navegação desktop e mobile */}
       <BarraDeNavegacaoAdministrador
         Icone={IconePersonal}
-        nomeSection="Personal"
+        nomeSection="Personais"
         handleVisibilityModalFormularioPersonal={
           handleVisibilityModalFormularioPersonal
         }

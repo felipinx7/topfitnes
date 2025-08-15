@@ -1,4 +1,4 @@
-"use client";
+"use client"; 
 
 import { useEffect, useState } from "react";
 import BarraDeNavegacaoAdministrador from "../components/layout/barra-de-navegacao-administrador";
@@ -37,7 +37,7 @@ export default function SectionCliente() {
         }
         openModalFormularioCliente={openModalFormularioCliente}
         Icone={IconeAlunos}
-        nomeSection="Cliente"
+        nomeSection="Clientes"
       />
       <BarraDeNavagacaoAdministradorMobile
         handleVisibilityModalFormularioCliente={

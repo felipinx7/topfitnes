@@ -54,7 +54,7 @@ export default function BarraDeNavegacaoAdministrador({
         <div className="max-sm:w-full">
           <button
             onClick={
-              nomeSection === "Personal"
+              nomeSection === "Personais"
                 ? handleVisibilityModalFormularioPersonal
                 : handleVisibilityModalFormularioCliente
             }

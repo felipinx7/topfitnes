@@ -1,3 +1,5 @@
+"use client"; // obrigatoriamente no topo
+
 import { useState } from "react";
 import { IconeSetaEsquerda } from "@/assets/icons/icone-seta-esquerda";
 import { PostCadastrarAluno } from "@/services/routes/administrador/post/post-cadastrar-aluno";

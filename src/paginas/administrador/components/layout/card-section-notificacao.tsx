@@ -1,3 +1,5 @@
+"use client"; // obrigatoriamente no topo
+
 import { avatarneutroanimado, imagefotoinput, logo } from "@/assets/image";
 import { DataCardNotificao } from "@/dto/data-card-notificacao-DTO";
 import Image from "next/image";
@@ -43,7 +45,7 @@ export default function CardSectionNotificacao(props: DataCardNotificao) {
             target="_blank"
             href={`https://wa.me/55${telefone}?text=${encodeURIComponent(mensagem)}`}
           >
-            conversar
+            Conversar
           </a>
         </button>
       </div>

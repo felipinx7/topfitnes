@@ -1,10 +1,10 @@
 import { string, z } from "zod";
 
 export enum Planos {
-  MENSAL = "69621913-2577-4f02-976c-c705914df714",
-  TRIMESTRAL = "PLANO_TRIMESTRAL_PLACEHOLDER", // Coloque o ID real quando tiver
-  SEMESTRAL = "01ba1832-9a3d-4585-a68b-7285e7949d65",
-  ANUAL = "ffb8e1b3-5fef-40ac-8cd4-23667e99811a",
+  MENSAL = "af25b640-15e2-4bf6-85ec-85c9326130f8",
+  TRIMESTRAL = "5019bae2-bd6b-4cef-9506-48fb8f777463",
+  SEMESTRAL = "e29c95a1-99eb-4848-a906-4f5a3d81fe50",
+  ANUAL = "7000eaa1-c754-4c65-a2bb-bbcd8be7f770",
 }
 
 export const schemaAluno = z.object({

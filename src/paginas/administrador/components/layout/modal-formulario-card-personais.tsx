@@ -1,3 +1,5 @@
+"use client"; // obrigatoriamente no topo
+
 import { useEffect, useState } from "react";
 import { BaseUrlFoto } from "@/utils/base-url-foto";
 import { zodResolver } from "@hookform/resolvers/zod";

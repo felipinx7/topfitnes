@@ -1,3 +1,5 @@
+"use client"; // obrigatoriamente no topo
+
 import { IconeLapis } from "@/assets/icons/icone-lapis";
 import { IconeLiixeira } from "@/assets/icons/icone-lixeira";
 import { BaseUrlFoto } from "@/utils/base-url-foto";

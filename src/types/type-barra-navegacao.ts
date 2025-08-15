@@ -1,1 +1,1 @@
-export type TypeBarraNavegacao = "Personal" | "Cliente"
+export type TypeBarraNavegacao = "Personais" | "Clientes"

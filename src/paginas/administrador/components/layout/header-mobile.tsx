@@ -1,3 +1,5 @@
+"use client"; // obrigatoriamente no topo
+
 import { logo } from "@/assets/image";
 import { linksHeaderAdministrador } from "@/constants/links-header-adiministrador";
 import { SectionType } from "@/types/type-section-header-administrativo";
