@@ -39,10 +39,6 @@ export default function ModalFormularioCliente({
   }
 
   async function onSubmit(data: DataAlunoForm) {
-    if (!fotoArquivo) {
-      alert("Foto obrigatória");
-      return;
-    }
 
     const dataMatriculaValida = new Date(data.data_matricula ?? "");
 
@@ -73,7 +69,7 @@ export default function ModalFormularioCliente({
     }
 
     // Adiciona a foto ao formData
-    formData.append("foto", fotoArquivo);
+    formData.append("foto", fotoArquivo ?? "");
 
     try {
       console.log("Enviando dados para backend...");
@@ -127,9 +123,7 @@ export default function ModalFormularioCliente({
                   )}
 
                   <label className="cursor-pointerrelative cursor-pointer bg-[#DBDBDB] hover:bg-[#cfcfcf] text-[#333] font-Poppins-Medium px-4 py-2 rounded">
-                    {fotoArquivo
-                      ? "Trocar foto"
-                      : "Selecione uma foto"}
+                    {fotoArquivo ? "Trocar foto" : "Selecione uma foto"}
                     <input
                       type="file"
                       accept="image/*"
