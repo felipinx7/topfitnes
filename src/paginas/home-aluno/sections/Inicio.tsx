@@ -10,6 +10,8 @@ import { formatarDataISO } from "@/utils/formatar-data";
 
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import Image from "next/image";
+import { qrcode } from "@/assets/image";
 
 
 type props = {
@@ -84,6 +86,10 @@ export function Inicio( {date}: props) {
           </DadosComponent>) : ""
           }
         </div>
+      </div>
+      <div className="flex flex-col mt-4 gap-3">
+        <h1 className="w-full text-xl text-verde-200 font-Poppins-Medium px-1">Qrcode para o pagamento do seu plano</h1>
+        <Image src={qrcode} width={150} alt="qrcode de pagameto"/>
       </div>
     </div>
   );

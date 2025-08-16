@@ -60,7 +60,7 @@ export default function SectionFormulario() {
   }
 
   return (
-    <section className="w-full relative flex items-center justify-between min-h-[100vh]">
+    <section id="formulario" className="w-full relative flex items-center justify-between min-h-[100vh]">
       {/* Modal de sucesso */}
       <div
         className={`${

@@ -15,10 +15,12 @@ import imagemfundosectionpassos from "./imagem-fundo-section-passos.svg";
 import imagemfundosectionformulario from "./imagem-fundo-section-formulario.svg";
 import avatarneutroanimado from "./foto-avatar-notificação.svg";
 import exercitandoalunohome from "./exercitando-aluno-home.png";
+import qrcode from "./qrcode-pagamento.png"
 
 export {
   banner,
   logo,
+  qrcode,
   equipamento01,
   equipamento02,
   equipamento03,

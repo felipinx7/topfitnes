@@ -1,7 +1,7 @@
 import { IconeInstagram } from "@/assets/icons/icone-instagram";
 import { IconeLocalizacao } from "@/assets/icons/icone-localizacao";
 import { IconeWhatsapp } from "@/assets/icons/icone-whatsapp";
-import { logo } from "@/assets/image";
+import { logo, qrcode } from "@/assets/image";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -63,6 +63,10 @@ export default function SectionFooter() {
           <div className="flex items-center gap-2">
             <IconeLocalizacao />
             <span>Ipaguaçu Mirim</span>
+          </div>
+          <div className="flex flex-col">
+            <h3 className="text-lg font-bold mb-2">QRCODE DE PAGAMENTO</h3>
+          <Image src={qrcode} width={100} alt="Qrcode de pagamento" />
           </div>
         </div>
       </div>
