@@ -185,10 +185,12 @@ export default function SectionFormulario() {
 
           {/* Botão */}
           <div className="w-[100%] flex items-center justify-center max-md:w-full mt-4">
-            <ComponentBotao
-              text="ENVIAR INFORMAÇÕES"
-              isSubmiting={isSubmiting}
-            />
+            <button
+              type="submit"
+              className="w-full cursor-pointer font-GoldMan rounded-[0.5rem] shadow-[0px_-3px_26.5px_#00D939] hover:shadow-[0px_-3px_40px_#00D939] ease-in-out duration-500 hover:bg-verde-400 p-3 bg-verde-100"
+            >
+              {isSubmiting ? "ENVIANDO..." : "ENVIAR INFORMAÇÕES"}
+            </button>
           </div>
         </form>
       </div>
