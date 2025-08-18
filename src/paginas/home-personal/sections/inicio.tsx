@@ -7,6 +7,7 @@ import { InfoDadosComponentAlunos, InfoDadosComponentTreinos } from "../infos/in
 import { GetAlunosAtrasadosPorPersonal } from "@/services/routes/personal/getAlunosAtrasadosPorPersonal";
 import { GetAlunosNovosDesteMes } from "@/services/routes/personal/getAlunosDesteMes";
 import { GetTodosClientes } from "@/services/routes/administrador/get/get-todos-clientes";
+import { GetAlunosAtrasados } from "@/services/routes/personal/getAlunoAtrasados";
 
 
 export function Inicio({ data }: any) {
@@ -19,10 +20,10 @@ export function Inicio({ data }: any) {
     if (!dataPersonal || !dataPersonal.usuario_id) return;
     const alunos = await GetTodosClientes();
     setAlunos(alunos);
-    
+
     setTreinos(dataPersonal.treinos_criados);
 
-    const dataAlunosAtrasados = await GetAlunosAtrasadosPorPersonal(dataPersonal.usuario_id);
+    const dataAlunosAtrasados = await GetAlunosAtrasados()
     if (dataAlunosAtrasados) setAlunosAtrasados(dataAlunosAtrasados);
 
     const dataAlunosNovosDesteMes = await GetAlunosNovosDesteMes(dataPersonal.usuario_id);
