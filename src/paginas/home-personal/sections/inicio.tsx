@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { InfoDadosComponentAlunos, InfoDadosComponentTreinos } from "../infos/infoDadosComponent";
 import { GetAlunosAtrasadosPorPersonal } from "@/services/routes/personal/getAlunosAtrasadosPorPersonal";
 import { GetAlunosNovosDesteMes } from "@/services/routes/personal/getAlunosDesteMes";
+import { GetTodosClientes } from "@/services/routes/administrador/get/get-todos-clientes";
 
 
 export function Inicio({ data }: any) {
@@ -16,7 +17,9 @@ export function Inicio({ data }: any) {
 
   async function getPersonal(dataPersonal: any) {
     if (!dataPersonal || !dataPersonal.usuario_id) return;
-    setAlunos(dataPersonal.alunos);
+    const alunos = await GetTodosClientes();
+    setAlunos(alunos);
+    
     setTreinos(dataPersonal.treinos_criados);
 
     const dataAlunosAtrasados = await GetAlunosAtrasadosPorPersonal(dataPersonal.usuario_id);
