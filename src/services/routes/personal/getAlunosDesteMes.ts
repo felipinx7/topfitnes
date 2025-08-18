@@ -13,7 +13,7 @@ export async function GetAlunosNovosDesteMes(id: string) {
 
 export async function getAlunosNovosDesteMes() {
   try {
-    const { data } = await api.get(`/personal/newStudentsOfTheMonth`, {
+    const { data } = await api.get(`/personal/newStudentsOfTheMont`, {
         withCredentials: true
     });
     return data;
