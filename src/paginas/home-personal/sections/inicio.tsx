@@ -5,7 +5,7 @@ import { Banner } from "../components/banner";
 import { useEffect, useState } from "react";
 import { InfoDadosComponentAlunos, InfoDadosComponentTreinos } from "../infos/infoDadosComponent";
 import { GetAlunosAtrasadosPorPersonal } from "@/services/routes/personal/getAlunosAtrasadosPorPersonal";
-import { GetAlunosNovosDesteMes } from "@/services/routes/personal/getAlunosDesteMes";
+import { getAlunosNovosDesteMes, GetAlunosNovosDesteMes } from "@/services/routes/personal/getAlunosDesteMes";
 import { GetTodosClientes } from "@/services/routes/administrador/get/get-todos-clientes";
 import { GetAlunosAtrasados } from "@/services/routes/personal/getAlunoAtrasados";
 
@@ -26,7 +26,7 @@ export function Inicio({ data }: any) {
     const dataAlunosAtrasados = await GetAlunosAtrasados()
     if (dataAlunosAtrasados) setAlunosAtrasados(dataAlunosAtrasados);
 
-    const dataAlunosNovosDesteMes = await GetAlunosNovosDesteMes(dataPersonal.usuario_id);
+    const dataAlunosNovosDesteMes = await getAlunosNovosDesteMes();
     if (dataAlunosNovosDesteMes) setAlunosNovosDesteMes(dataAlunosNovosDesteMes);
   }
 

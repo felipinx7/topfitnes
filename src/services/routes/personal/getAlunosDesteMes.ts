@@ -10,3 +10,14 @@ export async function GetAlunosNovosDesteMes(id: string) {
     console.log("Personal não econtrado");
   }
 }
+
+export async function getAlunosNovosDesteMes() {
+  try {
+    const { data } = await api.get(`/personal/newStudentsOfTheMonth`, {
+        withCredentials: true
+    });
+    return data;
+  } catch (error) {
+    console.log("Personal não econtrado");
+  }
+}
