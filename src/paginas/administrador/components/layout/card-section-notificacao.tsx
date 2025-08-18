@@ -8,7 +8,7 @@ export default function CardSectionNotificacao(props: DataCardNotificao) {
   // Tratamento do numero
   const telefone = props.telefone.replace(/\D/g, "");
   const mensagem =
-    "Olá! Aqui é o Jailson da academia. Vi que você teve interesse em treinar na nossa academia pelo site e quero te dar as boas-vindas. Se quiser mais informações sobre, pode perguntar — fico à disposição!";
+    "Olá! Aqui é da equipe da Top Fitnes. Vi que você teve interesse em treinar junto conosco, queremos te dar as boas-vindas. Se quiser mais informações sobre, pode perguntar — fico à disposição!";
 
   console.log("Numero sem caracteres", telefone);
 
