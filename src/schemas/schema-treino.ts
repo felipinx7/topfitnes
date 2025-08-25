@@ -6,7 +6,11 @@ export const focoCorpoEnum = z.enum([
   "PERNAS",
   "BRACOS",
   "GLUTEOS",
-
+  "PANTURRILHA",
+  "OMBROS",
+  "TRICEPS",
+  "BICEPS",
+  "ABDOMEN",
 ]);
 
 export const trainingSchema = z.object({
@@ -14,8 +18,8 @@ export const trainingSchema = z.object({
   nome: z.string().min(1, "O nome é obrigatório"),
   descricao: z.string(),
   foco_corpo: focoCorpoEnum,
-  foto: z.any().optional(), 
-  exercicios: z.array(z.object()).optional()
+  foto: z.any().optional(),
+  exercicios: z.array(z.object()).optional(),
 });
 
 export type TrainingSchemaDTO = z.infer<typeof trainingSchema>;
