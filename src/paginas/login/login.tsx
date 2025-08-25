@@ -63,7 +63,7 @@ export function Login() {
     <main className="w-screen h-screen flex flex-row max-md:flex-col-reverse">
       {/*Principal */}
 
-      <div className="w-2/5 max-md:shadow-2xl max-md:shadow-white/90 h-full md:min-w-xl max-md:w-full max-md:absolute max-md:bottom-0 z-100 max-md:h-3/5 max-md:rounded-t-[60px] overflow-hidden bg-neutras-400 relative">
+      <div className="w-2/5 max-md:shadow-2xl h-screen max-md:shadow-white/90  md:min-w-xl max-md:w-full max-md:absolute max-md:bottom-0 z-100 max-md:h-3/5 max-md:rounded-t-[60px] overflow-hidden bg-neutras-400 relative">
         {/* Tetura do fundo */}
         <div
           style={{
