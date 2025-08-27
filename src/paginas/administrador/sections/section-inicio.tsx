@@ -27,13 +27,21 @@ export default function SectionInicio({ data }: SectionInicioProps) {
     const alunos = (await GetTodosClientes()) ?? [];
     setAlunos(Array.isArray(alunos) ? alunos : []);
 
-    setTreinos(Array.isArray(dataPersonal.treinos_criados) ? dataPersonal.treinos_criados : []);
+    setTreinos(
+      Array.isArray(dataPersonal.treinos_criados)
+        ? dataPersonal.treinos_criados
+        : []
+    );
 
     const dataAlunosAtrasados = (await GetAlunosAtrasados()) ?? [];
-    setAlunosAtrasados(Array.isArray(dataAlunosAtrasados) ? dataAlunosAtrasados : []);
+    setAlunosAtrasados(
+      Array.isArray(dataAlunosAtrasados) ? dataAlunosAtrasados : []
+    );
 
     const dataAlunosNovosDesteMes = (await getAlunosNovosDesteMes()) ?? [];
-    setAlunosNovosDesteMes(Array.isArray(dataAlunosNovosDesteMes) ? dataAlunosNovosDesteMes : []);
+    setAlunosNovosDesteMes(
+      Array.isArray(dataAlunosNovosDesteMes) ? dataAlunosNovosDesteMes : []
+    );
   }
 
   useEffect(() => {
@@ -61,8 +69,8 @@ export default function SectionInicio({ data }: SectionInicioProps) {
 
         {/* container linha */}
         <div className="w-full gap-3">
-          <div className="w-full flex text-[#575757] font-Poppins-Medium flex-col items-center justify-between">
-            
+          <div className="w-full flex text-[#575757] font-Poppins-Medium flex-col items-center gap-4">
+            <hr className="w-full border-1 border-[#575757]" />
             {/* Alunos */}
             <div className="w-full p-2 pt-2.5 mt-8 flex flex-col overflow-hidden">
               <div className="flex flex-col items-center w-full space-y-2 justify-center border-verde-100 border-2 rounded-md p-3 mt-2">
@@ -94,7 +102,6 @@ export default function SectionInicio({ data }: SectionInicioProps) {
               </div>
             </div>
           </div>
-          <hr className="w-full border-1 border-[#575757]" />
         </div>
       </div>
     </section>
