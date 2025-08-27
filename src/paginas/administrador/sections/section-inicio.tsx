@@ -61,13 +61,10 @@ export default function SectionInicio({ data }: SectionInicioProps) {
 
         {/* container linha */}
         <div className="w-full gap-3">
-          <div className="w-full flex text-[#575757] font-Poppins-Medium items-center justify-between">
+          <div className="w-full flex text-[#575757] font-Poppins-Medium flex-col items-center justify-between">
             
             {/* Alunos */}
             <div className="w-full p-2 pt-2.5 mt-8 flex flex-col overflow-hidden">
-              <h1 className="pl-2 w-full text-xl text-verde-200 font-Poppins-Semibold px-1">
-                Resumo Geral dos Alunos
-              </h1>
               <div className="flex flex-col items-center w-full space-y-2 justify-center border-verde-100 border-2 rounded-md p-3 mt-2">
                 {infoDadosComponentAluno?.map((valor, index) => (
                   <DadosComponent
