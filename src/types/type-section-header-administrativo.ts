@@ -1,1 +1,1 @@
-export type SectionType = | "personal" | "clientes" | "notificacao";
+export type SectionType = | "personal" | "clientes" | "notificacao" | "inicio";

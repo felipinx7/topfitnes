@@ -8,17 +8,20 @@ import SectionPersonal from "./sections/section-personal";
 import SectionCliente from "./sections/section-cliente";
 import SectionNotificacao from "./sections/section-notificacao";
 import HeaderMobileAdministrador from "./components/layout/header-mobile";
+import SectionInicio from "./sections/section-inicio";
 
 // Define as sections do administrador
 export const sectionHeaderAdministrativo: Record<SectionType, ReactNode> = {
   personal: <SectionPersonal />,
   clientes: <SectionCliente />,
   notificacao: <SectionNotificacao />,
+  inicio: <SectionInicio />,
 };
 
 export default function Adimistrativo() {
   //Estado para controlar a seção selecionada
-  const [sectionSelected, setSectionSelected] = useState<SectionType>("personal");
+  const [sectionSelected, setSectionSelected] =
+    useState<SectionType>("inicio");
 
   return (
     <main className="bg-white w-full min-h-[100vh]">
