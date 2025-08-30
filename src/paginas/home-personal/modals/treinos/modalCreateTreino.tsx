@@ -26,24 +26,24 @@ export function ModalCreateTreino({ open, close, create }: ModalCreateTreinoProp
 
     async function onSubmit(data: TrainingSchemaDTO) {
         const file = data.foto?.[0];
-        const finalData = {
-            ...data,
-            foto: file || null,
-        }
 
         const dataToBack = {
             ...data,
             foto: file
         }
-
+        const response = await createTreino(dataToBack)
+        const finalData = {
+            ...data,
+            id: response?.data.trainingId,
+            foto: file || null,
+        }
+        
         toast.success("O treino foi criado com sucesso!")
         create(finalData)
         reset()
 
         setPreviewImage(null)
         close()
-
-        await createTreino(dataToBack)
     };
 
     useEffect(() => {
