@@ -9,29 +9,18 @@ import { getAlunosNovosDesteMes } from "@/services/routes/personal/getAlunosDest
 import { useEffect, useState } from "react";
 
 interface SectionInicioProps {
-  data?: {
-    usuario_id?: string | number;
-    treinos_criados?: any[];
-  };
+  treinos_criados?: any[];
 }
 
-export default function SectionInicio({ data }: SectionInicioProps) {
+export default function SectionInicio({ treinos_criados }: SectionInicioProps) {
   const [alunos, setAlunos] = useState<any[]>([]);
   const [alunosAtrasados, setAlunosAtrasados] = useState<any[]>([]);
   const [alunosNovosDesteMes, setAlunosNovosDesteMes] = useState<any[]>([]);
   const [treinos, setTreinos] = useState<any[]>([]);
 
-  async function getPersonal(dataPersonal: SectionInicioProps["data"]) {
-    if (!dataPersonal?.usuario_id) return;
-
+  async function carregarDados() {
     const alunos = (await GetTodosClientes()) ?? [];
     setAlunos(Array.isArray(alunos) ? alunos : []);
-
-    setTreinos(
-      Array.isArray(dataPersonal.treinos_criados)
-        ? dataPersonal.treinos_criados
-        : []
-    );
 
     const dataAlunosAtrasados = (await GetAlunosAtrasados()) ?? [];
     setAlunosAtrasados(
@@ -42,13 +31,13 @@ export default function SectionInicio({ data }: SectionInicioProps) {
     setAlunosNovosDesteMes(
       Array.isArray(dataAlunosNovosDesteMes) ? dataAlunosNovosDesteMes : []
     );
+
+    setTreinos(Array.isArray(treinos_criados) ? treinos_criados : []);
   }
 
   useEffect(() => {
-    if (data?.usuario_id) {
-      getPersonal(data);
-    }
-  }, [data?.usuario_id]);
+    carregarDados();
+  }, [treinos_criados]);
 
   const infoDadosComponentAluno = InfoDadosComponentAlunos(
     alunos?.length ?? 0,
@@ -71,27 +60,11 @@ export default function SectionInicio({ data }: SectionInicioProps) {
         <div className="w-full gap-3">
           <div className="w-full flex text-[#575757] font-Poppins-Medium flex-col items-center gap-4">
             <hr className="w-full border-1 border-[#575757]" />
+
             {/* Alunos */}
             <div className="w-full p-2 pt-2.5 mt-8 flex flex-col overflow-hidden">
               <div className="flex flex-col items-center w-full space-y-2 justify-center border-verde-100 border-2 rounded-md p-3 mt-2">
                 {infoDadosComponentAluno?.map((valor, index) => (
-                  <DadosComponent
-                    key={index}
-                    titulo={valor?.titulo ?? "Sem título"}
-                    icon={valor?.icon ? valor.icon() : <></>}
-                    valor={String(valor?.value ?? 0)}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Treinos */}
-            <div className="w-full p-2 pt-2.5 mt-8 flex flex-col overflow-hidden">
-              <h1 className="pl-2 w-full text-xl text-verde-200 font-Poppins-Semibold px-1">
-                Resumo Geral dos Treinos
-              </h1>
-              <div className="flex flex-col items-center w-full space-y-2 justify-center border-verde-100 border-2 rounded-md p-3 mt-2">
-                {infoDadosComponentTreinos?.map((valor, index) => (
                   <DadosComponent
                     key={index}
                     titulo={valor?.titulo ?? "Sem título"}
