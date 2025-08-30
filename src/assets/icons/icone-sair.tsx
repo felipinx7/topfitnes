@@ -7,7 +7,7 @@ export const IconeSair = ({ className }: IconeSairProps) => {
     <svg
       width={35}
       height={35}
-      className={`w-full h-full ${className || ""}`}
+      className={`${className || ""}`}
       viewBox="0 0 27 27"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

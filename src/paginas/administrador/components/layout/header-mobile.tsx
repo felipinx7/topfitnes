@@ -1,9 +1,12 @@
 "use client"; // obrigatoriamente no topo
 
+import { IconeSair } from "@/assets/icons/icone-sair";
 import { logo } from "@/assets/image";
 import { linksHeaderAdministrador } from "@/constants/links-header-adiministrador";
+import { LogoutSistema } from "@/services/routes/administrador/delete/logout-sistema";
 import { SectionType } from "@/types/type-section-header-administrativo";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface HeaderMobileAdministradorProps {
   sectionSelected: SectionType;
@@ -18,6 +21,13 @@ export default function HeaderMobileAdministrador({
   function handleSelectedButton(id: SectionType) {
     onSelectedSection(id);
   }
+  const router = useRouter();
+
+  async function DeslogarSistema() {
+    const response = await LogoutSistema();
+    router.push("/login");
+  }
+
   return (
     <header className="hidden max-lg:flex fixed bottom-0 w-full items-center bg-[#e3dfdf] z-[4] justify-center">
       {/* Container Global  */}
@@ -29,9 +39,19 @@ export default function HeaderMobileAdministrador({
             key={link.id}
             className={`${sectionSelected === link.id ? "bg-verde-100" : "bg-transparent"} flex w-[70%] group px-4 flex-col items-center hover:translate-x-1 justify-center gap-2 hover:bg-verde-100 p-2 rounded transition-all`}
           >
-            <link.Icone className={`${sectionSelected === link.id ? "text-white" : ""} text-[#4F4F4F] group-hover:text-white hover:translate-x-1.5 transition-all`} />
+            <link.Icone
+              className={`${sectionSelected === link.id ? "text-white" : ""} text-[#4F4F4F] group-hover:text-white hover:translate-x-1.5 transition-all`}
+            />
           </button>
         ))}
+        <button
+          onClick={() => DeslogarSistema()}
+          className={`bg-transparent cursor-pointer flex w-[70%] group px-4 flex-col items-center hover:translate-x-1 justify-center gap-2 hover:bg-verde-100 p-2 rounded transition-all`}
+        >
+          <IconeSair
+            className={` size-10 text-[#4F4F4F] group-hover:text-white hover:translate-x-1.5 transition-all`}
+          />
+        </button>
       </nav>
     </header>
   );
