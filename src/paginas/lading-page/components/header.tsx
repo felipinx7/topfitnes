@@ -11,18 +11,22 @@ export default function Header() {
   const router = useRouter();
 
   async function handleAutoLogin() {
-    const response: any = await autoLogin();
-    if (!response) router.push('/login')
+    try {
+      const response: any = await autoLogin();
+      if (!response) router.push('/login')
 
-    const { role } = response.user
-    const routes: Record<string, string> = {
-      ADMINISTRADOR: '/administrador',
-      PERSONAL: '/home-personal',
-      ALUNO: '/home-aluno',
+      const { role } = response.user
+      const routes: Record<string, string> = {
+        ADMINISTRADOR: '/administrador',
+        PERSONAL: '/home-personal',
+        ALUNO: '/home-aluno',
+      }
+
+      const route = routes[role]
+      router.push(route)
+    } catch (err) {
+      router.push('/login')
     }
-
-    const route = routes[role] 
-    router.push(route)
   }
 
   return (
