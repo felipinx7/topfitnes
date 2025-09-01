@@ -3,8 +3,6 @@
 import { ButtonClose } from "@/assets/icons/icon-button-close"
 import { IconDelete } from "@/assets/icons/icon-excluir-treinoModal"
 import DeleteClienteAdministrador from "@/services/routes/administrador/delete/delete-cliente-administrador"
-import { DeleteExercise } from "@/services/routes/exercises/deleteExercise"
-import { deleteTreino } from "@/services/routes/treinos/deleteTreino"
 import ReactDOM from "react-dom"
 import { toast } from "react-toastify"
 
