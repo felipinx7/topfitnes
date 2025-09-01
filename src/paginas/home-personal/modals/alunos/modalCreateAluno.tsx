@@ -44,6 +44,7 @@ export function ModalCreateAluno(data: modalCreateAlunoProps) {
             const dataBack = {
                 ...rawData,
                 id: response.student.id,
+                usuario_id: response.student.usuario_id,
                 foto: file || null,
                 telefone: FormatarNumero(rawData.telefone || "")
             }

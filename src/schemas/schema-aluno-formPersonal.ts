@@ -49,7 +49,8 @@ export const schemaAlunoUpdateFormPersonal = z.object({
   plano_id: z.uuid().optional(),
   treinos_aluno: z.array(z.object()).optional(),
   id: z.string().optional(),
-  observacao: z.string()
+  observacao: z.string(),
+  usuario_id: z.string().optional()
 });
 
 export type AlunoSchemaUpdateFormPersonalDTO = z.infer<typeof schemaAlunoUpdateFormPersonal>
