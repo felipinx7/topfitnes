@@ -140,16 +140,16 @@ export default function CardInformacaoAluno(props: DataAluno) {
             </article>
           </div>
 
-          <button className="px-3 py-2 bg-verde-200 text-white hover:bg-verde-400">
+          <button onClick={() => handleVisibilityModalConfirmation1M()} className="px-3 py-2 bg-verde-200 text-white hover:bg-verde-400">
             Liberar 1 mês
           </button>
-          <button className="px-3 py-2 bg-verde-200 text-white hover:bg-verde-400">
+          <button onClick={() => handleVisibilityModalConfirmation3M()} className="px-3 py-2 bg-verde-200 text-white hover:bg-verde-400">
             Liberar 3 mês
           </button>
-          <button className="px-3 py-2 bg-verde-200 text-white hover:bg-verde-400">
+          <button onClick={() => handleVisibilityModalConfirmation6M()} className="px-3 py-2 bg-verde-200 text-white hover:bg-verde-400">
             Liberar 6 mês
           </button>
-          <button className="px-3 py-2 bg-verde-200 text-white hover:bg-verde-400">
+          <button onClick={() => handleVisibilityModalConfirmation1Y()} className="px-3 py-2 bg-verde-200 text-white hover:bg-verde-400">
             Liberar 1 ano
           </button>
 
