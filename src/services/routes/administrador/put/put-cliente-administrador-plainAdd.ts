@@ -2,11 +2,17 @@ import { api } from "@/config/axios.config";
 
 export default async function PutClientPlainADD(
   id: string,
-  numberOfDays: number
+  numberOfDays: number,
+  data_validade_plano: string
 ) {
   try {
     const formData = new FormData();
-    const NewDate = new Date();
+    let NewDate = new Date();
+
+    if(NewDate < new Date(data_validade_plano)){
+      NewDate = new Date(data_validade_plano);
+    }
+
     if (numberOfDays === 30) {
       NewDate.setMonth(NewDate.getMonth() + 1);
     } else if (numberOfDays === 90) {

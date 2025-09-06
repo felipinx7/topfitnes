@@ -74,7 +74,7 @@ export default function CardInformacaoAluno(props: DataAluno) {
     try {
 
 
-      await PutClientPlainADD(props.id, days);
+      await PutClientPlainADD(props.id, days, props.data_validade_plano);
       console.log(`Aluno tem mais ${days} dias de academia!`);
 
     } catch (error) {
