@@ -135,8 +135,6 @@ export default function CardInformacaoAluno(props: DataAluno) {
             </article>
           </div>
           {validadePlano ? (
-            <div></div>
-          ) : (
             <div className="flex max-lg:flex-col gap-2 max-lg:px-2">
               <button
                 onClick={() => handleVisibilityModalConfirmation1M()}
@@ -163,6 +161,8 @@ export default function CardInformacaoAluno(props: DataAluno) {
                 Liberar 1 ano
               </button>
             </div>
+          ) : (
+            ""
           )}
 
           <button
