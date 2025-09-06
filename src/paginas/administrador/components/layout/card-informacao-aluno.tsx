@@ -7,14 +7,21 @@ import { BaseUrlFoto } from "@/utils/base-url-foto";
 import ModalConfirmar from "./modal-confirmar";
 import { useState } from "react";
 import { GetUmAluno } from "@/services/routes/administrador/get/get-apenas-um-aluno";
+import PutClientPlainADD from "@/services/routes/administrador/put/put-cliente-administrador-plainAdd";
 
 export default function CardInformacaoAluno(props: DataAluno) {
-
-  const [informacoesUsuario, setInformacoesUsuario] = useState<DataAluno | null>(null);
+  const [informacoesUsuario, setInformacoesUsuario] =
+    useState<DataAluno | null>(null);
   const [openModal, setOpenModal] = useState(false);
-  const [openModalConfirmation, setOpenModalConfirmation] = useState(false);
 
-   const foto = BaseUrlFoto(props.foto || "");
+
+  const [openModalConfirmation, setOpenModalConfirmation] = useState(false);
+  const [openModalConfirmation1M, setOpenModalConfirmation1M] = useState(false);
+  const [openModalConfirmation3M, setOpenModalConfirmation3M] = useState(false);
+  const [openModalConfirmation6M, setOpenModalConfirmation6M] = useState(false);
+  const [openModalConfirmation1Y, setOpenModalConfirmation1Y] = useState(false);
+
+  const foto = BaseUrlFoto(props.foto || "");
 
   function handleVisibilityModal() {
     setOpenModal((prev) => !prev);
@@ -22,6 +29,22 @@ export default function CardInformacaoAluno(props: DataAluno) {
 
   function handleVisibilityModalConfirmation() {
     setOpenModalConfirmation((prev) => !prev);
+  }
+
+  function handleVisibilityModalConfirmation1M() {
+    setOpenModalConfirmation1M((prev) => !prev);
+  }
+
+  function handleVisibilityModalConfirmation3M() {
+    setOpenModalConfirmation3M((prev) => !prev);
+  }
+
+  function handleVisibilityModalConfirmation6M() {
+    setOpenModalConfirmation6M((prev) => !prev);
+  }
+
+  function handleVisibilityModalConfirmation1Y() {
+    setOpenModalConfirmation1Y((prev) => !prev);
   }
 
   async function handleConfirmDelete() {
@@ -45,6 +68,26 @@ export default function CardInformacaoAluno(props: DataAluno) {
     }
   }
 
+  async function handleConfirmPlainAddition(days : number) {
+    if (!props.id) return;
+
+    try {
+      // Pega os dados atualizados do aluno antes de excluir
+      const alunoCompletoResponse = await GetUmAluno(props.id);
+      const alunoCompleto = alunoCompletoResponse?.data as
+        | DataAluno
+        | undefined;
+      setInformacoesUsuario(alunoCompleto ?? null);
+
+      // Exclui o aluno
+      await PutClientPlainADD(props.usuario_id, days);
+      console.log("Aluno tem um mês de academia!");
+    } catch (error) {
+      console.error("Erro ao acrescentar 30 dias o aluno:", error);
+    } finally {
+      handleVisibilityModalConfirmation();
+    }
+  }
 
   function planoVencido() {
     if (!props.data_validade_plano) return false;
@@ -62,7 +105,11 @@ export default function CardInformacaoAluno(props: DataAluno) {
 
   return (
     <article
-      className={`w-full ease-in-out h-auto rounded-2xl ${validadePlano ? "bg-[#f5b7b7]" : "bg-[#d8ffe2]"} z-0 transition-all duration-500 p-4 flex flex-col gap-0 ${openModal ? "gap-4" : "gap-0"}`}
+      className={`w-full ease-in-out h-auto rounded-2xl ${
+        validadePlano ? "bg-[#f5b7b7]" : "bg-[#d8ffe2]"
+      } z-0 transition-all duration-500 p-4 flex flex-col gap-0 ${
+        openModal ? "gap-4" : "gap-0"
+      }`}
     >
       {/* Cointeúdo principal */}
       <div className="w-full flex max-sm:flex-col max-sm:space-y-8 max-sm:items-baseline items-center justify-between">
@@ -85,20 +132,44 @@ export default function CardInformacaoAluno(props: DataAluno) {
         <div className="flex items-center justify-between gap-2">
           <div className="pr-3">
             <article
-              className={`${validadePlano ? "bg-[rgba(255,76,70,0.39)]" : "bg-verde-500"} font-Poppins-Bold p-2 px-5 rounded-2xl text-[1rem]`}
+              className={`${
+                validadePlano ? "bg-[rgba(255,76,70,0.39)]" : "bg-verde-500"
+              } font-Poppins-Bold p-2 px-5 rounded-2xl text-[1rem]`}
             >
               {validadePlano ? "Inativo" : "Ativo"}
             </article>
           </div>
+
+          <button className="px-3 py-2 bg-verde-200 text-white hover:bg-verde-400">
+            Liberar 1 mês
+          </button>
+          <button className="px-3 py-2 bg-verde-200 text-white hover:bg-verde-400">
+            Liberar 3 mês
+          </button>
+          <button className="px-3 py-2 bg-verde-200 text-white hover:bg-verde-400">
+            Liberar 6 mês
+          </button>
+          <button className="px-3 py-2 bg-verde-200 text-white hover:bg-verde-400">
+            Liberar 1 ano
+          </button>
+
           <button
             onClick={handleVisibilityModal}
-            className={`group cursor-pointer ${validadePlano ? "hover:bg-[rgba(255,76,70,0.39)]" : "hover:bg-verde-100"} transition-all duration-300 rounded-[5.97px] p-2 flex items-center justify-center`}
+            className={`group cursor-pointer ${
+              validadePlano
+                ? "hover:bg-[rgba(255,76,70,0.39)]"
+                : "hover:bg-verde-100"
+            } transition-all duration-300 rounded-[5.97px] p-2 flex items-center justify-center`}
           >
             <IconeLapis className="text-black group-hover:text-white" />
           </button>
           <button
             onClick={handleVisibilityModalConfirmation}
-            className={`group cursor-pointer ${validadePlano ? "hover:bg-[rgba(255,76,70,0.39)]" : "hover:bg-verde-100"} transition-all duration-300 rounded-[5.97px] p-2 flex items-center justify-center`}
+            className={`group cursor-pointer ${
+              validadePlano
+                ? "hover:bg-[rgba(255,76,70,0.39)]"
+                : "hover:bg-verde-100"
+            } transition-all duration-300 rounded-[5.97px] p-2 flex items-center justify-center`}
           >
             <IconeLiixeira className="text-black group-hover:text-white" />
           </button>
@@ -110,6 +181,42 @@ export default function CardInformacaoAluno(props: DataAluno) {
         data={props}
         OpenModal={openModal}
         handleVisibilityModal={handleVisibilityModal}
+      />
+
+      <ModalConfirmar
+        isOppen={openModalConfirmation1M}
+        handleActionComponente={async () => {
+          await handleConfirmPlainAddition(30);
+        }}
+        handleCloseModal={handleVisibilityModalConfirmation1M}
+        text={`Você realmente deseja liberar a 1 mês de academia para o aluno ${props.nome}?`}
+      />
+
+      <ModalConfirmar
+        isOppen={openModalConfirmation}
+        handleActionComponente={async () => {
+          await handleConfirmPlainAddition(90);
+        }}
+        handleCloseModal={handleVisibilityModalConfirmation3M}
+        text={`Você realmente deseja liberar a 3 mêses de academia para o aluno ${props.nome}?`}
+      />
+
+      <ModalConfirmar
+        isOppen={openModalConfirmation}
+        handleActionComponente={async () => {
+          await handleConfirmPlainAddition(180);
+        }}
+        handleCloseModal={handleVisibilityModalConfirmation6M}
+        text={`Você realmente deseja liberar a 6 mêses de academia para o aluno ${props.nome}?`}
+      />
+
+      <ModalConfirmar
+        isOppen={openModalConfirmation}
+        handleActionComponente={async () => {
+          await handleConfirmPlainAddition(365);
+        }}
+        handleCloseModal={handleVisibilityModalConfirmation1Y}
+        text={`Você realmente deseja liberar 1 ano de academia para o aluno ${props.nome}?`}
       />
 
       {/* Modal de confirmação da exclusão */}
