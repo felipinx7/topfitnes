@@ -72,20 +72,19 @@ export default function CardInformacaoAluno(props: DataAluno) {
     if (!props.id) return;
 
     try {
-      // Pega os dados atualizados do aluno antes de excluir
-      const alunoCompletoResponse = await GetUmAluno(props.id);
-      const alunoCompleto = alunoCompletoResponse?.data as
-        | DataAluno
-        | undefined;
-      setInformacoesUsuario(alunoCompleto ?? null);
 
-      // Exclui o aluno
+
       await PutClientPlainADD(props.usuario_id, days);
-      console.log("Aluno tem um mês de academia!");
+      console.log(`Aluno tem mais ${days} dias de academia!`);
+
     } catch (error) {
-      console.error("Erro ao acrescentar 30 dias o aluno:", error);
+      console.error("Erro ao acrescentar dias ao aluno:", error);
     } finally {
-      handleVisibilityModalConfirmation();
+      if(days === 30) handleVisibilityModalConfirmation1M();
+      if(days === 90) handleVisibilityModalConfirmation3M();
+      if(days === 180) handleVisibilityModalConfirmation6M();
+      if(days === 365) handleVisibilityModalConfirmation1Y();
+      //
     }
   }
 
@@ -140,16 +139,16 @@ export default function CardInformacaoAluno(props: DataAluno) {
             </article>
           </div>
 
-          <button onClick={() => handleVisibilityModalConfirmation1M()} className="px-3 py-2 bg-verde-200 text-white hover:bg-verde-400">
+          <button onClick={() => handleVisibilityModalConfirmation1M()} className="px-3 py-2 rounded-2xl text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400">
             Liberar 1 mês
           </button>
-          <button onClick={() => handleVisibilityModalConfirmation3M()} className="px-3 py-2 bg-verde-200 text-white hover:bg-verde-400">
+          <button onClick={() => handleVisibilityModalConfirmation3M()} className="px-3 py-2 rounded-2xl text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400">
             Liberar 3 mês
           </button>
-          <button onClick={() => handleVisibilityModalConfirmation6M()} className="px-3 py-2 bg-verde-200 text-white hover:bg-verde-400">
+          <button onClick={() => handleVisibilityModalConfirmation6M()} className="px-3 py-2 rounded-2xl text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400">
             Liberar 6 mês
           </button>
-          <button onClick={() => handleVisibilityModalConfirmation1Y()} className="px-3 py-2 bg-verde-200 text-white hover:bg-verde-400">
+          <button onClick={() => handleVisibilityModalConfirmation1Y()} className="px-3 py-2 rounded-2xl text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400">
             Liberar 1 ano
           </button>
 
@@ -193,7 +192,7 @@ export default function CardInformacaoAluno(props: DataAluno) {
       />
 
       <ModalConfirmar
-        isOppen={openModalConfirmation}
+        isOppen={openModalConfirmation3M}
         handleActionComponente={async () => {
           await handleConfirmPlainAddition(90);
         }}
@@ -202,7 +201,7 @@ export default function CardInformacaoAluno(props: DataAluno) {
       />
 
       <ModalConfirmar
-        isOppen={openModalConfirmation}
+        isOppen={openModalConfirmation6M}
         handleActionComponente={async () => {
           await handleConfirmPlainAddition(180);
         }}
@@ -211,7 +210,7 @@ export default function CardInformacaoAluno(props: DataAluno) {
       />
 
       <ModalConfirmar
-        isOppen={openModalConfirmation}
+        isOppen={openModalConfirmation1Y}
         handleActionComponente={async () => {
           await handleConfirmPlainAddition(365);
         }}
