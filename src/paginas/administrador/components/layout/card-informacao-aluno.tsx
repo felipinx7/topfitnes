@@ -138,7 +138,8 @@ export default function CardInformacaoAluno(props: DataAluno) {
               {validadePlano ? "Inativo" : "Ativo"}
             </article>
           </div>
-
+          {validadePlano ? <div></div> : (
+            <div className="flex lg:flex-col gap-2">
           <button onClick={() => handleVisibilityModalConfirmation1M()} className="px-3 py-2 rounded-2xl text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400">
             Liberar 1 mês
           </button>
@@ -151,6 +152,8 @@ export default function CardInformacaoAluno(props: DataAluno) {
           <button onClick={() => handleVisibilityModalConfirmation1Y()} className="px-3 py-2 rounded-2xl text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400">
             Liberar 1 ano
           </button>
+          </div>
+          )}
 
           <button
             onClick={handleVisibilityModal}
