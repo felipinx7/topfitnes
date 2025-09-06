@@ -14,7 +14,6 @@ export default function CardInformacaoAluno(props: DataAluno) {
     useState<DataAluno | null>(null);
   const [openModal, setOpenModal] = useState(false);
 
-
   const [openModalConfirmation, setOpenModalConfirmation] = useState(false);
   const [openModalConfirmation1M, setOpenModalConfirmation1M] = useState(false);
   const [openModalConfirmation3M, setOpenModalConfirmation3M] = useState(false);
@@ -68,22 +67,19 @@ export default function CardInformacaoAluno(props: DataAluno) {
     }
   }
 
-  async function handleConfirmPlainAddition(days : number) {
+  async function handleConfirmPlainAddition(days: number) {
     if (!props.id) return;
 
     try {
-
-
       await PutClientPlainADD(props.id, days, props.data_validade_plano);
       console.log(`Aluno tem mais ${days} dias de academia!`);
-
     } catch (error) {
       console.error("Erro ao acrescentar dias ao aluno:", error);
     } finally {
-      if(days === 30) handleVisibilityModalConfirmation1M();
-      if(days === 90) handleVisibilityModalConfirmation3M();
-      if(days === 180) handleVisibilityModalConfirmation6M();
-      if(days === 365) handleVisibilityModalConfirmation1Y();
+      if (days === 30) handleVisibilityModalConfirmation1M();
+      if (days === 90) handleVisibilityModalConfirmation3M();
+      if (days === 180) handleVisibilityModalConfirmation6M();
+      if (days === 365) handleVisibilityModalConfirmation1Y();
       //
     }
   }
@@ -138,21 +134,35 @@ export default function CardInformacaoAluno(props: DataAluno) {
               {validadePlano ? "Inativo" : "Ativo"}
             </article>
           </div>
-          {validadePlano ? <div></div> : (
-            <div className="flex lg:flex-col gap-2">
-          <button onClick={() => handleVisibilityModalConfirmation1M()} className="px-3 py-2 rounded-2xl text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400">
-            Liberar 1 mês
-          </button>
-          <button onClick={() => handleVisibilityModalConfirmation3M()} className="px-3 py-2 rounded-2xl text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400">
-            Liberar 3 mês
-          </button>
-          <button onClick={() => handleVisibilityModalConfirmation6M()} className="px-3 py-2 rounded-2xl text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400">
-            Liberar 6 mês
-          </button>
-          <button onClick={() => handleVisibilityModalConfirmation1Y()} className="px-3 py-2 rounded-2xl text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400">
-            Liberar 1 ano
-          </button>
-          </div>
+          {validadePlano ? (
+            <div></div>
+          ) : (
+            <div className="flex max-lg:flex-col gap-2 max-lg:px-2">
+              <button
+                onClick={() => handleVisibilityModalConfirmation1M()}
+                className="px-3 py-2 rounded-2xl max-lg:w-full text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400"
+              >
+                Liberar 1 mês
+              </button>
+              <button
+                onClick={() => handleVisibilityModalConfirmation3M()}
+                className="px-3 py-2 rounded-2xl max-lg:w-full text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400"
+              >
+                Liberar 3 mês
+              </button>
+              <button
+                onClick={() => handleVisibilityModalConfirmation6M()}
+                className="px-3 py-2 rounded-2xl max-lg:w-full text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400"
+              >
+                Liberar 6 mês
+              </button>
+              <button
+                onClick={() => handleVisibilityModalConfirmation1Y()}
+                className="px-3 py-2 rounded-2xl max-lg:w-full text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400"
+              >
+                Liberar 1 ano
+              </button>
+            </div>
           )}
 
           <button
