@@ -121,8 +121,8 @@ export default function CardInformacaoAluno(props: DataAluno) {
             <h4 className="text-black font-Poppins-Semibold text-[1.2rem]">
               {props.nome} {props.sobrenome}
             </h4>
-            <p className="text-black max-sm:text-[1rem]">{props.email}</p>
-            <p className="text-black text-sm max-sm:text-[0.5rem]">Vencimento do Plano: {formatarDataISO( props.data_validade_plano)}</p>
+            <p className="text-black max-sm:text-[0.7rem]">{props.email}</p>
+            <p className="text-black text-sm max-sm:text-[1rem]">Vencimento do Plano: {formatarDataISO( props.data_validade_plano)}</p>
 
           </div>
         </div>
@@ -138,7 +138,7 @@ export default function CardInformacaoAluno(props: DataAluno) {
             </article>
           </div>
           {validadePlano ? (
-            <div className="flex max-lg:flex-col gap-2 max-lg:px-2">
+            <div className="flex gap-2 max-lg:px-2 max-lg:hidden">
               <button
                 onClick={() => handleVisibilityModalConfirmation1M()}
                 className="px-3 py-2 rounded-2xl max-lg:w-full text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400"
@@ -189,6 +189,37 @@ export default function CardInformacaoAluno(props: DataAluno) {
             <IconeLiixeira className="text-black group-hover:text-white" />
           </button>
         </div>
+
+                  {validadePlano ? (
+            <div className="flex gap-2 max-lg:px-2 lg:hidden">
+              <button
+                onClick={() => handleVisibilityModalConfirmation1M()}
+                className="px-3 py-2 rounded-2xl max-lg:w-full text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400"
+              >
+                Liberar 1 mês
+              </button>
+              <button
+                onClick={() => handleVisibilityModalConfirmation3M()}
+                className="px-3 py-2 rounded-2xl max-lg:w-full text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400"
+              >
+                Liberar 3 mês
+              </button>
+              <button
+                onClick={() => handleVisibilityModalConfirmation6M()}
+                className="px-3 py-2 rounded-2xl max-lg:w-full text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400"
+              >
+                Liberar 6 mês
+              </button>
+              <button
+                onClick={() => handleVisibilityModalConfirmation1Y()}
+                className="px-3 py-2 rounded-2xl max-lg:w-full text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400"
+              >
+                Liberar 1 ano
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
       </div>
 
       {/* Modal de edição */}
