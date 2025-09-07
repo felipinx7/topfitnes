@@ -48,6 +48,7 @@ export function HomePersonal() {
                 {" "}
                 <SideBar setId={setRender} id={render} personal={personal}></SideBar>
             </div>
+            <div className="bg-neutral-50 h-20 w-20 max-md:h-12 max-md:w-12 max-xl:hidden"></div>
             <div className="w-full h-full"> {renderSection(render)}</div>
         </main>
     )

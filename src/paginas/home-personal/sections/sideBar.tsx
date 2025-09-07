@@ -89,7 +89,7 @@ export function SideBar({ id, setId, personal }: sideBarPersonal) {
                     await Logout();
                 }}
                 className="text-verde-200 max-lg:w-14 max-lg:h-12 max-lg:p-2 max-lg:text-[0px] hover:bg-verde-100/60 duration-300 bg-verde-300 cursor-pointer shadow- shadow-neutras-100/50 rounded-xl flex items-center justify-center w-full p-1">
-                <div className="p-1 h-8  max-lg:w-8 max-lg:p-0 max-lg:h-6">
+                <div className="p-1 h-8 flex items-center justify-center max-lg:w-8 max-lg:p-0 max-lg:h-6">
                     <IconeSair />{" "}
                 </div>{" "}
                 Sair
