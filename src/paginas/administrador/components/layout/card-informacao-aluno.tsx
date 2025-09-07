@@ -122,7 +122,7 @@ export default function CardInformacaoAluno(props: DataAluno) {
               {props.nome} {props.sobrenome}
             </h4>
             <p className="text-black max-sm:text-[1rem]">{props.email}</p>
-            <p className="text-black text-sm max-sm:text-[0.5rem]">{formatarDataISO( props.data_validade_plano)}</p>
+            <p className="text-black text-sm max-sm:text-[0.5rem]">Data de Vencimento:{formatarDataISO( props.data_validade_plano)}</p>
 
           </div>
         </div>
