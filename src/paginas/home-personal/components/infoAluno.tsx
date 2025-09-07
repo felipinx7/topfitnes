@@ -17,7 +17,7 @@ export function InfoAluno({ previewFoto, data }: infoAluno) {
 
     return (
 
-        <div className="flex  flex-col space-y-2 w-2/5 p-2 rounded-bl-lg h-full border-black/30 border-r">
+        <div className="flex overflow-y-hidden max-lg:hidden max-md:hidden flex-col space-y-2 w-2/5 p-2 rounded-bl-lg h-full border-black/30 border-r">
             {/* foto do aluno */}
             <div className="flex flex-col w-full pl-3 space-y-2 items-center">
                 <h1 className="font-Poppins-Medium text-xl text-[#646464]">Aluno</h1>
