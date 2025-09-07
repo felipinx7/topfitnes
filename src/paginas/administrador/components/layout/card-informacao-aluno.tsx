@@ -191,7 +191,7 @@ export default function CardInformacaoAluno(props: DataAluno) {
         </div>
 
                   {validadePlano ? (
-            <div className="flex gap-2 max-lg:px-2 lg:hidden">
+            <div className="grid grid-cols-2 gap-2 max-lg:px-2 lg:hidden ">
               <button
                 onClick={() => handleVisibilityModalConfirmation1M()}
                 className="px-3 py-2 rounded-2xl max-lg:w-full text-sm font-Poppins-Medium bg-verde-200 text-white hover:bg-verde-400"
