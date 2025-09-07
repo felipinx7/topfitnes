@@ -120,6 +120,7 @@ export function MeusAlunos(personal: any) {
         setVisibleModalSeeAluno={() => setVisibleModalSeeAluno((prev) => !prev)}
         setVisibleModalUpdateAluno={() => setVisibleModalUpdate(prev => !prev)}
       />
+      <div className="bg-neutral-50 h-20 w-20 max-md:h-12 max-md:w-12 max-xl:hidden"></div>
     </div>
   );
 }
