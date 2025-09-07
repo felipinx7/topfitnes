@@ -8,6 +8,7 @@ import ModalConfirmar from "./modal-confirmar";
 import { useState } from "react";
 import { GetUmAluno } from "@/services/routes/administrador/get/get-apenas-um-aluno";
 import PutClientPlainADD from "@/services/routes/administrador/put/put-cliente-administrador-plainAdd";
+import { formatarDataISO } from "@/utils/formatar-data";
 
 export default function CardInformacaoAluno(props: DataAluno) {
   const [informacoesUsuario, setInformacoesUsuario] =
@@ -121,6 +122,8 @@ export default function CardInformacaoAluno(props: DataAluno) {
               {props.nome} {props.sobrenome}
             </h4>
             <p className="text-black max-sm:text-[1rem]">{props.email}</p>
+            <p className="text-black text-sm max-sm:text-[0.5rem]">{formatarDataISO( props.data_validade_plano)}</p>
+
           </div>
         </div>
 
