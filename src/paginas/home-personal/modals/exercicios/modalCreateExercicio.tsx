@@ -28,13 +28,12 @@ export function ModalCreateExercicio({ open, close, create, treinoId }: ModalCre
 
         const dataBack = { ...data, foto: file, treino_id: treinoId, intervalo_descanso: 30 }
         const response = await CreateExercise(dataBack)
-        console.log("response: ", response)
+        
         const finalData = {
             ...data,
             id: response.exercise.id,
             foto: file || null,
         }
-        console.log("finalData:", finalData)
         create(finalData)
         toast.success("Exercicio criado com sucesso!")
 
