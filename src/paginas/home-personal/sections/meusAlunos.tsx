@@ -79,7 +79,7 @@ export function MeusAlunos(personal: any) {
               telefoneAluno={item.telefone}
               sexoAluno={item.sexo || ""}
               nomeAluno={item.nome || ""}
-              foto={item.foto}
+              foto={item?.foto || ""}
             />
           ))
         ) : (
