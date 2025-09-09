@@ -38,7 +38,6 @@ export function ModalCreateAluno(data: modalCreateAlunoProps) {
 
         try {
             const response = await CreateAluno(finalData)
-            console.log("response: ", response)
             toast.success("Aluno cadastrado com sucesso!");
 
             const dataBack = {
@@ -48,7 +47,6 @@ export function ModalCreateAluno(data: modalCreateAlunoProps) {
                 foto: file || null,
                 telefone: FormatarNumero(rawData.telefone || "")
             }
-            console.log("dataBack: ", dataBack)
             data.create(dataBack)
             data.close()
             reset()

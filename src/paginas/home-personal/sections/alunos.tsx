@@ -46,6 +46,7 @@ export function Alunos() {
 
   function deleteStudent() {
     setAlunos(prev => prev.filter(t => t.usuario_id !== alunoToEdit?.usuario_id))
+    setAlunoToEdit(null)
   }
 
   useEffect(() => {
