@@ -1,8 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 import { IconeFechar } from "@/assets/icons/icone-fechar";
 import { DataAlunoRelatorio } from "@/dto/data-aluno-relatorio";
 import { BaseUrlFoto } from "@/utils/base-url-foto";

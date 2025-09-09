@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Search } from "../components/search";
-import { DataAluno } from "@/dto/data-aluno";
 import { CardRelatorioAluno } from "../components/card-relatorio-aluno";
 import { exercitandoalunohome } from "@/assets/image";
 import { GetTodosClientes } from "@/services/routes/administrador/get/get-todos-clientes";

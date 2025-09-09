@@ -60,7 +60,7 @@ export function handleGerarPDF(data: DataAlunoRelatorio, observacao: string) {
   posY += 8;
 
   doc.setTextColor(0);
-  doc.setDrawColor("#057333");
+  doc.setDrawColor("");
   doc.setLineWidth(0.5);
   doc.rect(marginX, posY, 170, 30);
   const linhasObservacao = doc.splitTextToSize(observacao || "-", 165);
