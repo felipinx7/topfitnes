@@ -102,7 +102,6 @@ export function Alunos() {
             sexoAluno={item.sexo || ""}
             key={item.id ? item.id.toString() : idx}
             nomeAluno={item.nome || ""}
-            foto={item.foto || ""}
           />
         ))}
       </div>
