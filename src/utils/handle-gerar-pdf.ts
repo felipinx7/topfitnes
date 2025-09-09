@@ -66,7 +66,7 @@ export function handleGerarPDF(data: DataAlunoRelatorio, observacao: string) {
   const linhasObservacao = doc.splitTextToSize(observacao || "-", 165);
   doc.text(linhasObservacao, marginX + 2, posY + 6);
 
-  posY += 120;
+  posY += 150;
 
   doc.setFontSize(10);
   doc.setTextColor(150);
