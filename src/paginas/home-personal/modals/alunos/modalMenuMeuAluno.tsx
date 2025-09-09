@@ -51,7 +51,7 @@ export function ModalMenuMeuAluno(data: ModalMenuMeuAlunoProps) {
                         onClick={() => {
                             if (!data.dataAluno) return;
 
-                            data.dataAluno(data.dataAluno);
+                            data.setAlunoEdit(data.dataAluno);
                             data.close()
                             data.setVisibleModalSeeAluno((prev) => !prev)
                         }}
@@ -64,7 +64,7 @@ export function ModalMenuMeuAluno(data: ModalMenuMeuAlunoProps) {
                         onClick={() => {
                             if (!data.dataAluno) return;
 
-                            data.dataAluno(data.dataAluno);
+                            data.setAlunoEdit(data.dataAluno);
                             data.close()
                             data.setVisibleModalDesconectarAluno((prev) => !prev)
                         }}

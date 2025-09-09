@@ -40,6 +40,9 @@ export function AlunoComponent(data: functionButtons) {
         }
     }, [data.foto]);
 
+     const valor = data.emailAluno || data.telefoneAluno || "não tem nada";
+    const valorTruncado = valor.length > 25 ? valor.slice(0, 25) + "..." : valor;
+
     return (
         <div className="w-full bg-verde-600 p-3 flex items-center shadow shadow-black/30 rounded-lg justify-between border border-black/30 max-lg:h-28 max-lg:max-h-28 max-md:h-fit">
             <div className="flex">
@@ -53,7 +56,7 @@ export function AlunoComponent(data: functionButtons) {
                 ></div>
                 <div className="flex-col flex justify-center font-Poppins font-bold pl-3 text-verde-200 md:-space-y-1.5 max-md:pl-1 max-md:w-3/5">
                     <h1 className="text-lg font-Poppins-Bold max-md:text-sm max-lg:text-xl">{data.nomeAluno}</h1>
-                    <h2 className="font font-light text-[11px] md:text-sm">{data.emailAluno || data.telefoneAluno || "não tem nada"}</h2>
+                    <h2 className="font font-light text-[11px] md:text-sm">{valorTruncado}</h2>
                     <div className="px-2 py-0.5 bg-verde-500 text-verde-200 rounded-2xl mt-2 text-[10px] text-center font-Poppins font-light translate-y-1 pr-1 w-20 max-xl:max-w-3/5 max-xl:min-w-20">{data.sexoAluno === "PREFIRO_NAO_DIZER" ? "Sem informação" : SexoFormat}</div>
                 </div>
             </div>

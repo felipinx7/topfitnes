@@ -33,7 +33,7 @@ export function ModalSeeAluno(data: ModalSeeAlunoProps) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`bg-white w-4/5 h-[95%] relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${data.open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}
+        className={`bg-white w-4/5 h-[95%] max-md:w-[95%] max-h-[95%] max-md:max-h-[800px] max-xl:max-h-[800px] relative rounded-xl flex flex-col items-center space-y-1 transition-all duration-500 ${data.open ? "opacity-100 scale-100" : "opacity-0 scale-125"}`}
       >
         {/* Cabeçalho */}
         <div className="w-full bg-[#F0F0F0] rounded-t-xl flex justify-between items-center px-2 py-3">
@@ -70,7 +70,7 @@ export function ModalSeeAluno(data: ModalSeeAlunoProps) {
                 data.dataAluno.treinos_aluno.length > 0 ? (
                 data.dataAluno.treinos_aluno.map((item) => {
                   return (
-                  <AlunoTreinoComponent key={item?.treino?.id} foto={(item?.treino?.foto)}
+                  <AlunoTreinoComponent key={item?.treino?.id} foto={(item?.treino.foto)}
                     treino={item.treino}
                     see={() => {
                       setIsTraining(item);
@@ -100,7 +100,7 @@ export function ModalSeeAluno(data: ModalSeeAlunoProps) {
           setVisibilityModalDelete(prev => !prev)
         }}
         onDelete={() => {
-          deleteTrainingStudent
+          deleteTrainingStudent()
         }}
         aluno={isTraining}
       />

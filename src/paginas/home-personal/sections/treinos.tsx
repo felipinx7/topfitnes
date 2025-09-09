@@ -167,6 +167,7 @@ export function Treinos() {
                 setVisibleModalSendTraining={setVisibleModalSendTraining}
                 setVisibleModalUpdateTraining={setVisibleModalUpdate}
             />
+            <div className="bg-neutral-50 h-20 w-20 max-md:h-12 max-md:w-12 max-xl:hidden"></div>
         </div>
     )
 }

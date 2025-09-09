@@ -13,7 +13,7 @@ import { FormatarNumero } from "@/utils/formatar-numero-telefone";
 import { toast } from "react-toastify";
 import { CreateAluno } from "@/services/routes/aluno/createAluno";
 
-type    modalCreateAlunoProps = {
+type modalCreateAlunoProps = {
     open: boolean,
     close: () => void,
     create: (data: AlunoSchemaFormPersonalDTO) => void
@@ -31,18 +31,23 @@ export function ModalCreateAluno(data: modalCreateAlunoProps) {
             foto: file || null,
             telefone: FormatarNumero(rawData.telefone || "")
         }
-
         if (file && file.size > 2 * 1024 * 1024) {
             toast.error("A imagem é muito grande. Envie uma com até 2MB.");
             return;
         }
 
         try {
-
-            await CreateAluno(finalData)
+            const response = await CreateAluno(finalData)
             toast.success("Aluno cadastrado com sucesso!");
-            data.create(rawData)
 
+            const dataBack = {
+                ...rawData,
+                id: response.student.id,
+                usuario_id: response.student.usuario_id,
+                foto: file || null,
+                telefone: FormatarNumero(rawData.telefone || "")
+            }
+            data.create(dataBack)
             data.close()
             reset()
             setPreviewImage(null)
@@ -51,7 +56,7 @@ export function ModalCreateAluno(data: modalCreateAlunoProps) {
             toast.error(msg);
         }
     }
-    
+
     return ReactDOM.createPortal(
         <div
             onClick={data.close}

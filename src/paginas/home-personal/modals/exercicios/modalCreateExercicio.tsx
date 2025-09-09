@@ -25,14 +25,15 @@ export function ModalCreateExercicio({ open, close, create, treinoId }: ModalCre
 
     async function onSubmit(data: exerciseDTO) {
         const file = data.foto?.[0];
-        const finalData = {
-            ...data,
-            foto: file || null,
-        }
 
         const dataBack = { ...data, foto: file, treino_id: treinoId, intervalo_descanso: 30 }
-        await CreateExercise(dataBack)
-
+        const response = await CreateExercise(dataBack)
+        
+        const finalData = {
+            ...data,
+            id: response.exercise.id,
+            foto: file || null,
+        }
         create(finalData)
         toast.success("Exercicio criado com sucesso!")
 

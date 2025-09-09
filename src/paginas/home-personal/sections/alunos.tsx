@@ -46,6 +46,7 @@ export function Alunos() {
 
   function deleteStudent() {
     setAlunos(prev => prev.filter(t => t.usuario_id !== alunoToEdit?.usuario_id))
+    setAlunoToEdit(null)
   }
 
   useEffect(() => {
@@ -80,7 +81,6 @@ export function Alunos() {
               setVisibleModalSeeAluno((prev) => !prev);
             }}
             delete={() => {
-
               setAlunoToEdit(item)
               setVisibleModalDelete(prev => !prev)
             }}
@@ -101,7 +101,7 @@ export function Alunos() {
             sexoAluno={item.sexo || ""}
             key={item.id ? item.id.toString() : idx}
             nomeAluno={item.nome || ""}
-            foto={item.foto}
+            foto={item.foto ?? ""}
           />
         ))}
       </div>
@@ -149,6 +149,7 @@ export function Alunos() {
         setVisibleModalSeeAluno={() => setVisibleModalSeeAluno((prev) => !prev)}
         setVisibleModalUpdateAluno={() => setVisibleModalUpdate(prev => !prev)}
       />
+     <div className="bg-neutral-50 h-20 w-20 max-md:h-12 max-md:w-12 max-xl:hidden"></div>
     </div>
   );
 }

@@ -5,9 +5,29 @@ import { linksHeader } from "@/constants/links-header";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { autoLogin } from "@/services/routes/auto-login/autoLogin";
 
 export default function Header() {
   const router = useRouter();
+
+  async function handleAutoLogin() {
+    try {
+      const response: any = await autoLogin();
+      if (!response) router.push('/login')
+
+      const { role } = response.user
+      const routes: Record<string, string> = {
+        ADMINISTRADOR: '/administrador',
+        PERSONAL: '/home-personal',
+        ALUNO: '/home-aluno',
+      }
+
+      const route = routes[role]
+      router.push(route)
+    } catch (err) {
+      router.push('/login')
+    }
+  }
 
   return (
     <header className="w-full cursor-pointer p-4 z-20 h-[80px] flex items-center   justify-between mt-4 max-lg:hidden">
@@ -28,7 +48,7 @@ export default function Header() {
       {/* Botões de Ação */}
       <div className="flex items-center gap-4">
         <button
-          onClick={() => router.push("/login")}
+          onClick={() => handleAutoLogin()}
           aria-label="Botão de Acessar o sistema"
           className="border-1 p-2 cursor-pointer w-auto rounded-[0.5rem] text-[1rem] ease-in duration-[0.3s] hover:bg-[var(--color-verde-100)] font-[600] px-8 border-[var(--color-verde-100)]"
         >

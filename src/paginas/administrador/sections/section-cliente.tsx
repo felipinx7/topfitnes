@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import BarraDeNavegacaoAdministrador from "../components/layout/barra-de-navegacao-administrador";
 import { IconeAlunos } from "@/assets/icons/icone-alunos";
 import BarraDeNavagacaoAdministradorMobile from "../components/layout/barra-de-navegacao-administrador-mobile";
-import CardInformacaoAluno from "../components/layout/card-informacao-aluno";
+import 
+CardInformacaoAluno from "../components/layout/card-informacao-aluno";
 import { DataAluno } from "@/dto/data-aluno";
 import { GetTodosClientes } from "@/services/routes/administrador/get/get-todos-clientes";
 
