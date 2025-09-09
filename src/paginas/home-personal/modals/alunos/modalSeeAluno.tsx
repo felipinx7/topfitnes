@@ -70,7 +70,7 @@ export function ModalSeeAluno(data: ModalSeeAlunoProps) {
                 data.dataAluno.treinos_aluno.length > 0 ? (
                 data.dataAluno.treinos_aluno.map((item) => {
                   return (
-                  <AlunoTreinoComponent key={item?.treino?.id} foto={(item?.treino.treino.foto)}
+                  <AlunoTreinoComponent key={item?.treino?.id} foto={(item?.treino.foto)}
                     treino={item.treino}
                     see={() => {
                       setIsTraining(item);
